@@ -9,6 +9,7 @@
     - Joint limits and default positions
     - Controller board assignments
     - Pin configurations
+    - Direction configuration
 -->
 
 <!-- =============================================== -->
@@ -24,10 +25,10 @@
             <board name="${board}"/>
             <pin value="${pin}"/>
             <type value="${type}"/>
-            <range_degrees value="${type}"/>
             <limit_lower value="${min_limit}"/>
             <limit_upper value="${max_limit}"/>
             <default_position value="${default_pos}"/>
+            <inverted value="${inverted}"/>
         </hardware>
     </actuator>
 </xacro:macro>
@@ -47,6 +48,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 <!-- Torso yaw servo - Controls yaw of the upper body -->
@@ -58,6 +60,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 <!-- Neck movement -->
@@ -71,6 +74,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 <!-- Neck yaw servo - Controls yaw of the neck -->
@@ -84,6 +88,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 <!-- Shoulder movement -->
@@ -108,6 +113,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 <!-- =============================================== -->
@@ -136,6 +142,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 <!-- Left elbow servo - Controls elbow flexion/extension -->
@@ -147,6 +154,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 <!-- Wrist -->
@@ -160,6 +168,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 <!-- Fingers -->
@@ -173,6 +182,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 <!-- Left index finger servo - Controls index finger flexion/extension -->
@@ -184,6 +194,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 <!-- Left middle finger servo - Controls middle finger flexion/extension -->
@@ -195,6 +206,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 <!-- Left ring finger servo - Controls ring finger flexion/extension -->
@@ -206,6 +218,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 <!-- Left pinky finger servo - Controls pinky finger flexion/extension -->
@@ -217,6 +230,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 
@@ -235,6 +249,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 <!-- Right shoulder roll servo - Controls internal/external rotation of the shoulder -->
@@ -246,6 +261,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 <!-- Right elbow servo - Controls elbow flexion/extension -->
@@ -257,6 +273,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 <!-- Wrist -->
@@ -270,6 +287,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 <!-- Fingers -->
@@ -283,6 +301,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 <!-- Right index finger servo - Controls index finger flexion/extension -->
@@ -294,6 +313,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 <!-- Right middle finger servo - Controls middle finger flexion/extension -->
@@ -305,6 +325,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 <!-- Right ring finger servo - Controls ring finger flexion/extension -->
@@ -316,6 +337,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 <!-- Right pinky finger servo - Controls pinky finger flexion/extension -->
@@ -327,6 +349,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 <!-- =============================================== -->
@@ -345,6 +368,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 <!-- Jaw movement -->
@@ -359,6 +383,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 <!-- Cheek movement servos -->
@@ -373,6 +398,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 <!-- Right cheek puller servo - Controls right cheek movement for expressions -->
@@ -385,6 +411,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 <!-- Lip movement servo -->
@@ -399,6 +426,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 <!-- Eyelid servos -->
@@ -413,6 +441,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 <!-- Upper right eyelid servo - Controls blinking and expressions for right eye -->
@@ -425,6 +454,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 <!-- Lower left eyelid servo - Controls lower eyelid for expressions -->
@@ -437,6 +467,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 <!-- Lower right eyelid servo - Controls lower eyelid for expressions -->
@@ -449,6 +480,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 <!-- Eye movement servos -->
@@ -463,6 +495,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 <!-- Left eye vertical servo - Controls left eye vertical movement -->
@@ -475,6 +508,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 <!-- Right eye horizontal servo - Controls right eye horizontal movement -->
@@ -487,6 +521,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 <!-- Right eye vertical servo - Controls right eye vertical movement -->
@@ -513,6 +548,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 <!-- Right eyebrow servo - Controls right eyebrow movement for expressions -->
@@ -525,6 +561,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 <!-- Forehead servos -->
@@ -539,6 +576,7 @@
                    min_limit="null"
                    max_limit="null"
                    default_pos="null"
+                   inverted="false"
                    enabled="false"/>
 
 <!-- Right forehead servo - Controls right forehead movement for expressions -->
