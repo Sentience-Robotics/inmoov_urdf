@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<robot name="inmoov-i2" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <ros2_control name="LucyHardwareInterface" type="system">
+        <hardware>
+            <plugin>mock_components/GenericSystem</plugin>
+            <param name="calculate_dynamics">true</param>
+        </hardware>
+
+        <joint name="left_thumb_joint">
+            <command_interface name="position"/>
+            <state_interface name="position" />
+        </joint>
+    </ros2_control>
+
+</robot>

@@ -21,6 +21,9 @@
     <!-- Import Actuators Configuration -->
     <xacro:include filename="inmoov_actuators_config.xacro"/>
 
+    <!-- Import ROS2 Control Configuration -->
+    <xacro:include filename="inmoov_actuators_config_ros2_control.xacro"/>
+
     <!-- Import Sensors Configuration -->
     <xacro:include filename="inmoov_sensors_config.xacro"/>
 
