@@ -1,4 +1,6 @@
-<robot name="InMoov" version="1.0">
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="InMoov" version="1.0">
+
   <joint name="Empty.001_link_joint" type="fixed">
     <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00394 0.00025 -0.19163"/>
     <parent link="base_node"/>
@@ -2743,4 +2745,5 @@
   <material name="[0131_Silver].001">
     <color rgba="0.74902 0.74902 0.74902 1.00000"/>
   </material>
+
 </robot>

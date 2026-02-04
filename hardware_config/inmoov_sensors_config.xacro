@@ -17,6 +17,7 @@
 
 <!-- Pressure Sensor Configuration Macro -->
 <!-- Defines a standard template for pressure sensors with parameters for name, associated finger, board, pin, and resistance range -->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 <xacro:macro name="pressure_sensor" params="name finger_name board pin min_resistance max_resistance enabled:=false">
     <sensor name="${name}" enabled="${enabled}">
         <finger name="${finger_name}"/>
@@ -126,4 +127,5 @@
                       pin="20"
                       min_resistance="null"
                       max_resistance="null"
-                      enabled="false"/> 
+                      enabled="false"/>
+</robot>
