@@ -2,9 +2,9 @@
 <robot xmlns:xacro="http://wiki.ros.org/xacro" name="r6bot">
 
   <!-- Import inmoov physical description (urdf) macro -->
-  <xacro:include filename="/home/dev/thais_urdf/inmoov/urdf/robot_description.urdf.xacro"/>
+  <xacro:include filename="/home/samuel/sentience/local_ws/src/thais_urdf/inmoov/3dmodel/robot_description.urdf.xacro"/>
 
   <!-- Import inmoov ros2_control description -->
-  <xacro:include filename="/home/dev/thais_urdf/inmoov/ros2_control/inmoov_ros2_control.xacro" />
+  <xacro:include filename="/home/samuel/sentience/local_ws/src/thais_urdf/inmoov/ros2_control/inmoov_ros2_control.xacro" />
 
 </robot>
