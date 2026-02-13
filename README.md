@@ -37,7 +37,9 @@ For more details on **creation processes**, **troubleshooting**, and other guida
 
 ## Adapt Phobos Export to Xacro
 The current URDF export is in a standard format. To adapt it for use with **Xacro** (XML Macros), you can follow these steps:
-Rename inmoov/urdf/inmoov.urdf to inmoov/3dmodel/robot_description.urdf.xacro
+Rename *inmoov/urdf/inmoov.urdf* to *inmoov/3dmodel/robot_description.urdf.xacro*
+Add `<xacro:property name="mesh_dir" value="/home/dev/thais_urdf/inmoov/meshes/dae"/>` to *inmoov/3dmodel/robot_description.urdf.xacro*
+Replace "../meshes/dae" with "${mesh_dir}"
 
 ---
 
