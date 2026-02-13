@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="InMoov" version="1.0">
+
+<ros2_control name="LucyHardwareLeftArm" type="system">
+      <hardware>
+          <plugin>lucy_ros2_control/LucySystemHardware</plugin>
+          <!-- <plugin>mock_components/GenericSystem</plugin> -->
+          <param name="publisher_topic">joints/left_arm</param>
+          <param name="node_name">lucy_hardware_interface_left_arm</param>
+      </hardware>
+
+
+      <joint name="left_shoulder_yaw">
+          <command_interface name="position">
+          </command_interface>
+          <state_interface name="position" />
+      </joint>
+      <joint name="left_shoulder_roll">
+          <command_interface name="position" />
+          <state_interface name="position" />
+      </joint>
+      <joint name="left_elbow">
+          <command_interface name="position" />
+          <state_interface name="position" />
+      </joint>
+      <joint name="left_wrist">
+          <command_interface name="position" />
+          <state_interface name="position" />
+      </joint>
+      <joint name="left_thumb">
+          <command_interface name="position" />
+          <state_interface name="position" />
+      </joint>
+      <joint name="left_index">
+          <command_interface name="position">
+          <param name="min">0</param>
+          <param name="max">1</param>
+          </command_interface>
+          <state_interface name="position" />
+      </joint>
+      <joint name="left_middle">
+          <command_interface name="position" />
+          <state_interface name="position" />
+      </joint>
+      <joint name="left_ring">
+          <command_interface name="position" />
+          <state_interface name="position" />
+      </joint>
+      <joint name="left_pinky">
+          <command_interface name="position" />
+          <state_interface name="position" />
+      </joint>
+  </ros2_control>
+  <ros2_control name="LucyHardwareRightArm" type="system">
+      <hardware>
+          <plugin>lucy_ros2_control/LucySystemHardware</plugin>
+          <!-- <plugin>mock_components/GenericSystem</plugin> -->
+          <param name="publisher_topic">joints/right_arm</param>
+          <param name="node_name">lucy_hardware_interface_right_arm</param>
+      </hardware>
+
+      <joint name="right_shoulder_yaw">
+          <command_interface name="position">
+          </command_interface>
+          <state_interface name="position" />
+      </joint>
+      <joint name="right_shoulder_roll">
+          <command_interface name="position" />
+          <state_interface name="position" />
+      </joint>
+      <joint name="right_elbow">
+          <command_interface name="position" />
+          <state_interface name="position" />
+      </joint>
+      <joint name="right_wrist">
+          <command_interface name="position" />
+          <state_interface name="position" />
+      </joint>
+      <joint name="right_thumb">
+          <command_interface name="position" />
+          <state_interface name="position" />
+      </joint>
+      <joint name="right_index">
+          <command_interface name="position">
+          <param name="min">0</param>
+          <param name="max">1</param>
+          </command_interface>
+          <state_interface name="position" />
+      </joint>
+      <joint name="right_middle">
+          <command_interface name="position" />
+          <state_interface name="position" />
+      </joint>
+      <joint name="right_ring">
+          <command_interface name="position" />
+          <state_interface name="position" />
+      </joint>
+      <joint name="right_pinky">
+          <command_interface name="position" />
+          <state_interface name="position" />
+      </joint>
+  </ros2_control>
+
+</robot>

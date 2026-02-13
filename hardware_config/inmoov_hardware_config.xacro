@@ -1,25 +1,11 @@
 <?xml version="1.0"?>
 <robot name="inmoov-i2" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-    <!-- =============================================== -->
-    <!-- Inmoov Humanoid Robot Hardware Configuration    -->
-    <!-- =============================================== -->
-
-    <!--
-        This file contains the complete hardware specifications for the Inmoov robot:
-        - Servo motors (through inmoov_actuators_config.xacro)
-        - Pressure sensors (through inmoov_sensors_config.xacro)
-
-        This is the main entry point for hardware configuration that imports
-        the separated configuration files.
-    -->
-
-    <!-- =============================================== -->
-    <!-- Import Configuration Files                      -->
-    <!-- =============================================== -->
-
-    <!-- Import Actuators Configuration -->
+    
     <xacro:include filename="inmoov_actuators_config.xacro"/>
+
+    <!-- Import ROS2 Control Configuration -->
+    <xacro:include filename="inmoov_actuators_config_ros2_control.xacro"/>
 
     <!-- Import Sensors Configuration -->
     <xacro:include filename="inmoov_sensors_config.xacro"/>

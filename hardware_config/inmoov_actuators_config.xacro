@@ -17,8 +17,9 @@
 
 <!-- Servo Motor Configuration Macro -->
 <!-- Defines a standard template for servo motor configuration with parameters for name, joint, board, pin, type, limits, and default position -->
-<xacro:macro name="servo_motor"params="name joint_name board pin type min_limit max_limit default_pos enabled:=false">
-    <actuator name="${name}"enabled="${enabled}">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+<xacro:macro name="servo_motor" params="name joint_name board pin type min_limit max_limit default_pos enabled:=false">
+    <actuator name="${name}" enabled="${enabled}">
         <joint name="${joint_name}"/>
         <hardware>
             <board name="${board}"/>
@@ -552,3 +553,4 @@
                    max_limit="null"
                    default_pos="null"
                    enabled="false"/> 
+</robot>
