@@ -35,6 +35,12 @@ For more details on **creation processes**, **troubleshooting**, and other guida
 
 ---
 
+## Adapt Phobos Export to Xacro
+The current URDF export is in a standard format. To adapt it for use with **Xacro** (XML Macros), you can follow these steps:
+Rename inmoov/urdf/inmoov.urdf to inmoov/3dmodel/robot_description.urdf.xacro
+
+---
+
 ## 🔍 Help Us Improve the InMoov URDF
 
 We currently include **handsI1** and **headI1**, but we aim to integrate the latest **headI2** and **handsI2** models.

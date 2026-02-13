@@ -1,4 +1,4 @@
-<robot name="InMoov" version="1.0">
+<robot name="inmoov" version="1.0">
   <joint name="Empty.001_link_joint" type="fixed">
     <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00394 0.00025 -0.19163"/>
     <parent link="base_node"/>
