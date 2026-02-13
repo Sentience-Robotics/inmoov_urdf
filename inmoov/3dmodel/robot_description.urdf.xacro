@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="inmoov" version="1.0">
-
-  <xacro:property name="mesh_dir" value="file:///home/samuel/sentience/local_ws/src/thais_urdf/inmoov/meshes/dae"/>
+  <!-- mesh_dir set by parent (inmoov.urdf.xacro) from base_path -->
 
   <joint name="Empty.001_link_joint" type="fixed">
     <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00394 0.00025 -0.19163"/>
@@ -409,14 +408,31 @@
   </joint>
   <link name="base_node">
     <visual name="stand">
-      <material name="None"/>
+      <material name="Gazebo/Grey"/>
       <origin rpy="3.14159 -0.00000 3.14159" xyz="-0.00394 -0.00730 9.35280"/>
       <geometry>
         <mesh filename="${mesh_dir}/stand.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <!-- Minimal collision and inertial so sdformat/urdf2sdf includes this root link in Gazebo -->
+    <collision name="base_node_collision">
+      <geometry><box size="0.01 0.01 0.01"/></geometry>
+    </collision>
+    <inertial>
+      <mass value="0.001"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
   </link>
-  <link name="stand_link"/>
+  <link name="stand_link">
+    <!-- Minimal geometry so urdf2sdf does not drop this link in Gazebo -->
+    <collision name="stand_link_collision">
+      <geometry><box size="0.01 0.01 0.01"/></geometry>
+    </collision>
+    <inertial>
+      <mass value="0.001"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
+  </link>
   <link name="i01.head.eyeRight.001_link"/>
   <link name="i01.head.eyeRight_link">
     <visual name="i01.head.eyeRight.full">

@@ -8,45 +8,44 @@
           <param name="publisher_topic">joints/left_arm</param>
           <param name="node_name">lucy_hardware_interface_left_arm</param>
       </hardware>
-
-
-      <joint name="left_shoulder_yaw">
+      <!-- Joint names must match URDF exactly for correct TF tree in RViz/Gazebo -->
+      <joint name="left_shoulder_y_link_joint">
           <command_interface name="position">
           </command_interface>
           <state_interface name="position" />
       </joint>
-      <joint name="left_shoulder_roll">
+      <joint name="left_shoulder_x_link_joint">
           <command_interface name="position" />
           <state_interface name="position" />
       </joint>
-      <joint name="left_elbow">
+      <joint name="left_elbow_x_link_joint">
           <command_interface name="position" />
           <state_interface name="position" />
       </joint>
-      <joint name="left_wrist">
+      <joint name="left_wrist_z_link_joint">
           <command_interface name="position" />
           <state_interface name="position" />
       </joint>
-      <joint name="left_thumb">
+      <joint name="i01.leftHand.thumb_link_joint">
           <command_interface name="position" />
           <state_interface name="position" />
       </joint>
-      <joint name="left_index">
+      <joint name="i01.leftHand.index_link_joint">
           <command_interface name="position">
           <param name="min">0</param>
           <param name="max">1</param>
           </command_interface>
           <state_interface name="position" />
       </joint>
-      <joint name="left_middle">
+      <joint name="i01.leftHand.majeure_link_joint">
           <command_interface name="position" />
           <state_interface name="position" />
       </joint>
-      <joint name="left_ring">
+      <joint name="i01.leftHand.ringFinger_link_joint">
           <command_interface name="position" />
           <state_interface name="position" />
       </joint>
-      <joint name="left_pinky">
+      <joint name="i01.leftHand.pinky_link_joint">
           <command_interface name="position" />
           <state_interface name="position" />
       </joint>
@@ -58,13 +57,13 @@
           <param name="publisher_topic">joints/right_arm</param>
           <param name="node_name">lucy_hardware_interface_right_arm</param>
       </hardware>
-
-      <joint name="right_shoulder_yaw">
+      <!-- Joint names must match URDF exactly (URDF has right_elbow without _link_joint) -->
+      <joint name="right_shoulder_y_link_joint">
           <command_interface name="position">
           </command_interface>
           <state_interface name="position" />
       </joint>
-      <joint name="right_shoulder_roll">
+      <joint name="right_shoulder_x_link_joint">
           <command_interface name="position" />
           <state_interface name="position" />
       </joint>
@@ -72,30 +71,30 @@
           <command_interface name="position" />
           <state_interface name="position" />
       </joint>
-      <joint name="right_wrist">
+      <joint name="right_wrist_z_link_joint">
           <command_interface name="position" />
           <state_interface name="position" />
       </joint>
-      <joint name="right_thumb">
+      <joint name="i01.rightHand.thumb_link_joint">
           <command_interface name="position" />
           <state_interface name="position" />
       </joint>
-      <joint name="right_index">
+      <joint name="i01.rightHand.index_link_joint">
           <command_interface name="position">
           <param name="min">0</param>
           <param name="max">1</param>
           </command_interface>
           <state_interface name="position" />
       </joint>
-      <joint name="right_middle">
+      <joint name="i01.rightHand.majeure_link_joint">
           <command_interface name="position" />
           <state_interface name="position" />
       </joint>
-      <joint name="right_ring">
+      <joint name="i01.rightHand.ringFinger_link_joint">
           <command_interface name="position" />
           <state_interface name="position" />
       </joint>
-      <joint name="right_pinky">
+      <joint name="i01.rightHand.pinky_link_joint">
           <command_interface name="position" />
           <state_interface name="position" />
       </joint>

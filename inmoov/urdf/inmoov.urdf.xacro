@@ -1,10 +1,13 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://wiki.ros.org/xacro" name="r6bot">
+  <!-- base_path: set by launch file (host-independent). When running xacro standalone, use . or pass base_path. -->
+  <xacro:arg name="base_path" default="."/>
+  <xacro:property name="mesh_dir" value="file://$(arg base_path)/meshes/dae"/>
 
   <!-- Import inmoov physical description (urdf) macro -->
-  <xacro:include filename="/home/samuel/sentience/local_ws/src/thais_urdf/inmoov/3dmodel/robot_description.urdf.xacro"/>
+  <xacro:include filename="../3dmodel/robot_description.urdf.xacro"/>
 
   <!-- Import inmoov ros2_control description -->
-  <xacro:include filename="/home/samuel/sentience/local_ws/src/thais_urdf/inmoov/ros2_control/inmoov_ros2_control.xacro" />
+  <xacro:include filename="../ros2_control/inmoov_ros2_control.xacro" />
 
 </robot>
