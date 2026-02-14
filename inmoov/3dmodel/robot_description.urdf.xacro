@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="inmoov" version="1.0">
-  <!-- mesh_dir set by parent (inmoov.urdf.xacro) from base_path -->
+  <!-- mesh_dir and use_gazebo_sim set by parent (inmoov.urdf.xacro) -->
 
   <joint name="Empty.001_link_joint" type="fixed">
     <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00394 0.00025 -0.19163"/>
@@ -419,8 +419,14 @@
       <geometry><box size="0.01 0.01 0.01"/></geometry>
     </collision>
     <inertial>
-      <mass value="0.001"/>
-      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+      <xacro:if value="${use_gazebo_sim}">
+        <mass value="10000"/>
+        <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100"/>
+      </xacro:if>
+      <xacro:unless value="${use_gazebo_sim}">
+        <mass value="0.001"/>
+        <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+      </xacro:unless>
     </inertial>
   </link>
   <link name="stand_link">
@@ -429,11 +435,19 @@
       <geometry><box size="0.01 0.01 0.01"/></geometry>
     </collision>
     <inertial>
-      <mass value="0.001"/>
-      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+      <xacro:if value="${use_gazebo_sim}">
+        <mass value="10000"/>
+        <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100"/>
+      </xacro:if>
+      <xacro:unless value="${use_gazebo_sim}">
+        <mass value="0.001"/>
+        <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+      </xacro:unless>
     </inertial>
   </link>
-  <link name="i01.head.eyeRight.001_link"/>
+  <link name="i01.head.eyeRight.001_link">
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
+  </link>
   <link name="i01.head.eyeRight_link">
     <visual name="i01.head.eyeRight.full">
       <material name="Material.038"/>
@@ -442,6 +456,7 @@
         <mesh filename="${mesh_dir}/Texture.012.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="i01.head.jaw_link">
     <visual name="i01.head.mouth">
@@ -465,6 +480,7 @@
         <mesh filename="${mesh_dir}/Texture.087.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="left_shoulder_y_link">
     <visual name="i01.leftArm.omoplate.full">
@@ -516,6 +532,7 @@
         <mesh filename="${mesh_dir}/Texture.253.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="left_shoulder_x_link">
     <visual name="i01..leftArm.shoulder.full">
@@ -602,20 +619,6 @@
         <mesh filename="${mesh_dir}/Texture.264.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
-    <visual name="i01..leftArm.shoulder.full.012">
-      <material name="Material.390"/>
-      <origin rpy="0.06568 0.00000 0.00000" xyz="-1.46578 1.11459 -13.51522"/>
-      <geometry>
-        <mesh filename="${mesh_dir}/Texture.265.dae" scale="1.00000 1.00000 1.00000"/>
-      </geometry>
-    </visual>
-    <visual name="i01..leftArm.shoulder.full.013">
-      <material name="Material.390"/>
-      <origin rpy="0.06568 0.00000 0.00000" xyz="-1.46578 1.11459 -13.51522"/>
-      <geometry>
-        <mesh filename="${mesh_dir}/Texture.266.dae" scale="1.00000 1.00000 1.00000"/>
-      </geometry>
-    </visual>
     <visual name="i01..leftArm.shoulder.full.014">
       <material name="Material.390"/>
       <origin rpy="0.06568 0.00000 0.00000" xyz="-1.46578 1.11459 -13.51522"/>
@@ -644,6 +647,7 @@
         <mesh filename="${mesh_dir}/Texture.270.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="left_shoulder_z_link">
     <visual name="i01.leftArm.rotate.full">
@@ -793,6 +797,7 @@
         <mesh filename="${mesh_dir}/G-__564753.020.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="left_elbow_x_link">
     <visual name="i01.left.bicep.full">
@@ -886,6 +891,7 @@
         <mesh filename="${mesh_dir}/Texture.247.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="left_wrist_z_link">
     <visual name="i01.leftHand.Wristlarge">
@@ -895,6 +901,7 @@
         <mesh filename="${mesh_dir}/Texture.039.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="i01.leftHand.wrist.001_link">
     <visual name="i01.leftHand.Wristlarge.001">
@@ -904,6 +911,7 @@
         <mesh filename="${mesh_dir}/Texture.235.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="i01.leftHand.index_link">
     <visual name="i01.leftHand.indexPhal1">
@@ -913,6 +921,7 @@
         <mesh filename="${mesh_dir}/Texture.018.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="torso_bottom_link">
     <visual name="i01.torso.midstom.full">
@@ -985,6 +994,11 @@
         <mesh filename="${mesh_dir}/Texture.203.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <!-- Minimal inertial so urdf2sdf includes this link in Gazebo (required for child links/joints) -->
+    <inertial>
+      <mass value="0.001"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
   </link>
   <link name="i01.leftHand.index2_link">
     <visual name="i01.leftHand.indexPhal2">
@@ -994,6 +1008,7 @@
         <mesh filename="${mesh_dir}/Texture.019.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="i01.leftHand.index3_link">
     <visual name="i01.leftHand.indexPhal3">
@@ -1003,6 +1018,7 @@
         <mesh filename="${mesh_dir}/Texture.020.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="i01.leftHand.majeure_link">
     <visual name="i01.leftHand.majeurePhal1">
@@ -1012,6 +1028,7 @@
         <mesh filename="${mesh_dir}/Texture.022.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="i01.leftHand.majeure2_link">
     <visual name="i01.leftHand.majeurePhal2">
@@ -1021,6 +1038,7 @@
         <mesh filename="${mesh_dir}/Texture.023.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="i01.leftHand.majeure3_link">
     <visual name="i01.leftHand.majeurePhal3">
@@ -1030,6 +1048,7 @@
         <mesh filename="${mesh_dir}/Texture.024.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="i01.leftHand.pinky0_link">
     <visual name="i01.leftHand.WristSmall2">
@@ -1039,6 +1058,7 @@
         <mesh filename="${mesh_dir}/Texture.041.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="i01.leftHand.pinky_link">
     <visual name="i01.leftHand.pinkyPhal1">
@@ -1048,6 +1068,7 @@
         <mesh filename="${mesh_dir}/Texture.027.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="i01.leftHand.pinky2_link">
     <visual name="i01.leftHand.pinkyPhal2">
@@ -1057,6 +1078,7 @@
         <mesh filename="${mesh_dir}/Texture.028.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="i01.leftHand.pinky3_link">
     <visual name="i01.leftHand.pinkyPhal3">
@@ -1066,6 +1088,7 @@
         <mesh filename="${mesh_dir}/Texture.029.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="i01.leftHand.ringfinger0_link">
     <visual name="i01.leftHand.WristSmall">
@@ -1075,6 +1098,7 @@
         <mesh filename="${mesh_dir}/Texture.040.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="torso_z_link">
     <visual name="i01.torso.topStom.full">
@@ -1280,6 +1304,11 @@
         <mesh filename="${mesh_dir}/Texture.194.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <!-- Minimal inertial so urdf2sdf includes this link in Gazebo -->
+    <inertial>
+      <mass value="0.001"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
   </link>
   <link name="i01.leftHand.ringFinger_link">
     <visual name="i01.leftHand.ringFingerPhal1">
@@ -1289,6 +1318,7 @@
         <mesh filename="${mesh_dir}/Texture.032.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="i01.leftHand.ringfinger2_link">
     <visual name="i01.leftHand.ringFingerPhal2">
@@ -1298,6 +1328,7 @@
         <mesh filename="${mesh_dir}/Texture.033.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="i01.leftHand.ringfinger3_link">
     <visual name="i01.leftHand.ringFingerPhal3">
@@ -1307,6 +1338,7 @@
         <mesh filename="${mesh_dir}/Texture.034.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="i01.leftHand.thumb1_link">
     <visual name="i01.leftHand.ThumbBase">
@@ -1316,6 +1348,7 @@
         <mesh filename="${mesh_dir}/Texture.035.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="i01.leftHand.thumb_link">
     <visual name="i01.leftHand.ThumbMid">
@@ -1325,6 +1358,7 @@
         <mesh filename="${mesh_dir}/Texture.037.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="i01.leftHand.thumb3_link">
     <visual name="i01.leftHand.ThumbTip">
@@ -1334,6 +1368,7 @@
         <mesh filename="${mesh_dir}/Texture.038.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="right_shoulder_y_link">
     <visual name="i01.rightArm.omoplate.full">
@@ -1385,6 +1420,7 @@
         <mesh filename="${mesh_dir}/Texture.222.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="right_shoulder_x_link">
     <visual name="i01.rightArm.shoulder.full">
@@ -1471,6 +1507,7 @@
         <mesh filename="${mesh_dir}/Texture.234.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="right_shoulder_z_link">
     <visual name="i01.rightArm.rotate.full">
@@ -1613,13 +1650,7 @@
         <mesh filename="${mesh_dir}/G-__566220.019.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
-    <visual name="i01.rightArm.rotate.full.020">
-      <material name="[0131_Silver]"/>
-      <origin rpy="3.13367 0.00000 0.00000" xyz="2.08983 1.12392 -12.92101"/>
-      <geometry>
-        <mesh filename="${mesh_dir}/G-__566220.020.dae" scale="1.00000 1.00000 1.00000"/>
-      </geometry>
-    </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="right_elbow_x_link">
     <visual name="i01.right.bicep.full">
@@ -1713,6 +1744,7 @@
         <mesh filename="${mesh_dir}/Texture.216.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="torso_y_link">
     <visual name="i01.torso.full">
@@ -2275,6 +2307,11 @@
         <mesh filename="${mesh_dir}/Texture.166.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <!-- Minimal inertial so urdf2sdf includes this link in Gazebo -->
+    <inertial>
+      <mass value="0.001"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
   </link>
   <link name="right_wrist_z_link">
     <visual name="i01.rightHand.Wristlarge">
@@ -2284,6 +2321,7 @@
         <mesh filename="${mesh_dir}/Texture.065.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="i01.rightHand.wrist.001_link">
     <visual name="i01.rightHand.Wristlarge.001">
@@ -2293,6 +2331,7 @@
         <mesh filename="${mesh_dir}/Texture.204.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="i01.rightHand.index_link">
     <visual name="i01.rightHand.indexPhal1">
@@ -2302,6 +2341,7 @@
         <mesh filename="${mesh_dir}/Texture.044.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="i01.rightHand.index2_link">
     <visual name="i01.rightHand.indexPhal2">
@@ -2311,6 +2351,7 @@
         <mesh filename="${mesh_dir}/Texture.045.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="i01.rightHand.index3_link">
     <visual name="i01.rightHand.indexPhal3">
@@ -2320,6 +2361,7 @@
         <mesh filename="${mesh_dir}/Texture.046.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="i01.rightHand.majeure_link">
     <visual name="i01.rightHand.majeurePhal1">
@@ -2329,6 +2371,7 @@
         <mesh filename="${mesh_dir}/Texture.048.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="i01.rightHand.majeure2_link">
     <visual name="i01.rightHand.majeurePhal2">
@@ -2338,6 +2381,7 @@
         <mesh filename="${mesh_dir}/Texture.049.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="i01.rightHand.majeure3_link">
     <visual name="i01.rightHand.majeurePhal3">
@@ -2347,6 +2391,7 @@
         <mesh filename="${mesh_dir}/Texture.050.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="i01.rightHand.pinky0_link">
     <visual name="i01.rightHand.WristSmall2">
@@ -2356,6 +2401,7 @@
         <mesh filename="${mesh_dir}/Texture.067.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="i01.rightHand.pinky_link">
     <visual name="i01.rightHand.pinkyPhal1">
@@ -2365,8 +2411,11 @@
         <mesh filename="${mesh_dir}/Texture.053.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
-  <link name="i01.head.neck.001_link"/>
+  <link name="i01.head.neck.001_link">
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
+  </link>
   <link name="i01.rightHand.pinky2_link">
     <visual name="i01.rightHand.pinkyPhal2">
       <material name="Material.639"/>
@@ -2375,6 +2424,7 @@
         <mesh filename="${mesh_dir}/Texture.054.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="i01.rightHand.pinky3_link">
     <visual name="i01.rightHand.pinkyPhal3">
@@ -2384,6 +2434,7 @@
         <mesh filename="${mesh_dir}/Texture.055.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="i01.rightHand.ringfinger0_link">
     <visual name="i01.rightHand.WristSmall">
@@ -2393,6 +2444,7 @@
         <mesh filename="${mesh_dir}/Texture.066.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="i01.rightHand.ringFinger_link">
     <visual name="i01.rightHand.ringFingerPhal1">
@@ -2402,6 +2454,7 @@
         <mesh filename="${mesh_dir}/Texture.058.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="i01.rightHand.ringfinger2_link">
     <visual name="i01.rightHand.ringFingerPhal2">
@@ -2411,6 +2464,7 @@
         <mesh filename="${mesh_dir}/Texture.059.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="i01.rightHand.ringfinger3_link">
     <visual name="i01.rightHand.ringFingerPhal3">
@@ -2420,6 +2474,7 @@
         <mesh filename="${mesh_dir}/Texture.060.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="i01.rightHand.thumb1_link">
     <visual name="i01.rightHand.ThumbBase">
@@ -2429,6 +2484,7 @@
         <mesh filename="${mesh_dir}/Texture.063.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="i01.rightHand.thumb_link">
     <visual name="i01.rightHand.ThumbMid">
@@ -2438,6 +2494,7 @@
         <mesh filename="${mesh_dir}/Texture.061.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="i01.rightHand.thumb3_link">
     <visual name="i01.rightHand.ThumbTip">
@@ -2447,6 +2504,7 @@
         <mesh filename="${mesh_dir}/Texture.062.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="neck_link">
     <visual name="i01.head.nekHinge">
@@ -2477,6 +2535,7 @@
         <mesh filename="${mesh_dir}/Texture.085.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <link name="i01.head.rothead_link">
     <visual name="i01.head.full">
@@ -2591,8 +2650,11 @@
         <mesh filename="${mesh_dir}/Texture.082.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
-  <link name="i01.head.eyeLeft.001_link"/>
+  <link name="i01.head.eyeLeft.001_link">
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
+  </link>
   <link name="i01.head.eyeLeft_link">
     <visual name="i01.head.eyeLeft.full">
       <material name="Material.035"/>
@@ -2601,6 +2663,7 @@
         <mesh filename="${mesh_dir}/Texture.011.dae" scale="1.00000 1.00000 1.00000"/>
       </geometry>
     </visual>
+    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
   </link>
   <material name="Material.007">
     <color rgba="0.46275 0.28235 0.10588 1.00000"/>
