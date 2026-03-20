@@ -19,6 +19,11 @@
           </command_interface>
           <state_interface name="position" />
       </joint>
+      <joint name="left_shoulder_z_link_joint">
+          <command_interface name="position">
+          </command_interface>
+          <state_interface name="position" />
+      </joint>
       <joint name="left_shoulder_x_link_joint">
           <command_interface name="position" />
           <state_interface name="position" />
@@ -68,6 +73,11 @@
       </hardware>
       <!-- Joint names must match URDF exactly (URDF has right_elbow without _link_joint) -->
       <joint name="right_shoulder_y_link_joint">
+          <command_interface name="position">
+          </command_interface>
+          <state_interface name="position" />
+      </joint>
+      <joint name="right_shoulder_z_link_joint">
           <command_interface name="position">
           </command_interface>
           <state_interface name="position" />
