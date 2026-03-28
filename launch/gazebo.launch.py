@@ -1,26 +1,42 @@
 #!/usr/bin/env python3
-# Gazebo sim + RViz + ros2_control (sim spawners) + rosbridge. Control panel at ws://localhost:9090.
+# Copyright 2025 Sentience Robotics Team
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+# Gazebo sim + RViz + ros2_control (sim spawners) + rosbridge.
+# Control panel at ws://localhost:9090.
 
 import os
 
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, ExecuteProcess, IncludeLaunchDescription, SetEnvironmentVariable, TimerAction
+from launch.actions import (
+    DeclareLaunchArgument,
+    ExecuteProcess,
+    IncludeLaunchDescription,
+    SetEnvironmentVariable,
+    TimerAction,
+)
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import Command, LaunchConfiguration, PathJoinSubstitution, TextSubstitution
+from launch.substitutions import (
+    Command,
+    LaunchConfiguration,
+    PathJoinSubstitution,
+    TextSubstitution,
+)
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
-
-
-def _get_default_urdf_base(launch_file_path):
-    launch_dir = os.path.dirname(os.path.abspath(launch_file_path))
-    if os.path.sep + "install" + os.path.sep in launch_dir or launch_dir.endswith(os.path.sep + "install"):
-        workspace = os.path.normpath(os.path.join(launch_dir, "..", "..", "..", "..", ".."))
-    else:
-        workspace = os.path.normpath(os.path.join(launch_dir, "..", "..", ".."))
-    urdf_path = os.path.join(workspace, "src", "thais_urdf", "inmoov", "urdf", "inmoov.urdf.xacro")
-    base_path = os.path.join(workspace, "src", "thais_urdf", "inmoov")
-    return urdf_path, base_path
 
 
 def _gz_ros2_control_plugin_path():
@@ -32,12 +48,22 @@ def _gz_ros2_control_plugin_path():
 
 
 def generate_launch_description():
-    default_urdf, default_base = _get_default_urdf_base(__file__)
+    share = get_package_share_directory("thais_urdf")
+    default_base = os.path.join(share, "inmoov")
+    default_urdf = os.path.join(default_base, "urdf", "inmoov.urdf.xacro")
     lucy_share = get_package_share_directory("lucy_ros2_control")
     controller_config_path = os.path.join(lucy_share, "config", "lucy_controllers.yaml")
 
-    urdf_path_arg = DeclareLaunchArgument("urdf_path", default_value=default_urdf, description="Path to inmoov.urdf.xacro")
-    base_path_arg = DeclareLaunchArgument("base_path", default_value=default_base, description="Base path for xacro (mesh_dir)")
+    urdf_path_arg = DeclareLaunchArgument(
+        "urdf_path",
+        default_value=default_urdf,
+        description="Path to inmoov.urdf.xacro",
+    )
+    base_path_arg = DeclareLaunchArgument(
+        "base_path",
+        default_value=default_base,
+        description="Base path for xacro (mesh_dir)",
+    )
 
     rosbridge = ExecuteProcess(
         cmd=["ros2", "launch", "rosbridge_server", "rosbridge_websocket_launch.xml"],

@@ -1,4 +1,19 @@
 #!/usr/bin/env python3
+# Copyright 2025 Sentience Robotics Team
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 # Real robot + RViz + rosbridge. Control panel at ws://localhost:9090.
 
 import os
@@ -11,22 +26,20 @@ from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 
 
-def _get_default_urdf_base(launch_file_path):
-    launch_dir = os.path.dirname(os.path.abspath(launch_file_path))
-    # From install: .../install/thais_urdf/share/thais_urdf/launch -> 5 levels up to workspace
-    if os.path.sep + "install" + os.path.sep in launch_dir or launch_dir.endswith(os.path.sep + "install"):
-        workspace = os.path.normpath(os.path.join(launch_dir, "..", "..", "..", "..", ".."))
-    else:
-        workspace = os.path.normpath(os.path.join(launch_dir, "..", "..", ".."))
-    urdf_path = os.path.join(workspace, "src", "thais_urdf", "inmoov", "urdf", "inmoov.urdf.xacro")
-    base_path = os.path.join(workspace, "src", "thais_urdf", "inmoov")
-    return urdf_path, base_path
-
-
 def generate_launch_description():
-    default_urdf, default_base = _get_default_urdf_base(__file__)
-    urdf_path_arg = DeclareLaunchArgument("urdf_path", default_value=default_urdf, description="Path to inmoov.urdf.xacro")
-    base_path_arg = DeclareLaunchArgument("base_path", default_value=default_base, description="Base path for xacro (mesh_dir)")
+    share = get_package_share_directory("thais_urdf")
+    default_base = os.path.join(share, "inmoov")
+    default_urdf = os.path.join(default_base, "urdf", "inmoov.urdf.xacro")
+    urdf_path_arg = DeclareLaunchArgument(
+        "urdf_path",
+        default_value=default_urdf,
+        description="Path to inmoov.urdf.xacro",
+    )
+    base_path_arg = DeclareLaunchArgument(
+        "base_path",
+        default_value=default_base,
+        description="Base path for xacro (mesh_dir)",
+    )
     urdf_path = LaunchConfiguration("urdf_path")
     base_path = LaunchConfiguration("base_path")
 
@@ -59,13 +72,22 @@ def generate_launch_description():
         ],
     )
     spawn_joint_state = Node(
-        package="controller_manager", executable="spawner", arguments=["joint_state_broadcaster"], output="screen",
+        package="controller_manager",
+        executable="spawner",
+        arguments=["joint_state_broadcaster"],
+        output="screen",
     )
     spawn_left = Node(
-        package="controller_manager", executable="spawner", arguments=["left_arm_controller"], output="screen",
+        package="controller_manager",
+        executable="spawner",
+        arguments=["left_arm_controller"],
+        output="screen",
     )
     spawn_right = Node(
-        package="controller_manager", executable="spawner", arguments=["right_arm_controller"], output="screen",
+        package="controller_manager",
+        executable="spawner",
+        arguments=["right_arm_controller"],
+        output="screen",
     )
 
     rviz_config = PathJoinSubstitution([

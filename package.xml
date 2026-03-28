@@ -16,9 +16,15 @@
   <exec_depend>ros_gz_bridge</exec_depend>
   <exec_depend>robot_state_publisher</exec_depend>
   <exec_depend>gz_ros2_control</exec_depend>
-  <exec_depend>lucy_ros2_control</exec_depend>
+  <!-- No exec_depend on lucy_ros2_control: would cycle (lucy_ros2_control depends on thais_urdf for default URDF share). Combo launches still need lucy_ros2_control installed at runtime for default controller YAML path. -->
   <exec_depend>rosbridge_server</exec_depend>
   <exec_depend>controller_manager</exec_depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+  <test_depend>ament_cmake_pytest</test_depend>
+  <test_depend>python3-pytest</test_depend>
+  <test_depend>xacro</test_depend>
 
   <export>
     <build_type>ament_cmake</build_type>

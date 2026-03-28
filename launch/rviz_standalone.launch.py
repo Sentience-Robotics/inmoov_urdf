@@ -1,8 +1,19 @@
 #!/usr/bin/env python3
 # Copyright 2025 Sentience Robotics Team
 #
-# SPDX-License-Identifier: GPL-3.0-or-later
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
 #
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 """
 RViz2 only — no robot_state_publisher, no ros2_control, no Gazebo.
 
@@ -40,7 +51,10 @@ def generate_launch_description():
             DeclareLaunchArgument(
                 "rviz_config",
                 default_value=default_rviz,
-                description="Display config .rviz path (default: inmoov_rviz.rviz in this package)",
+                description=(
+                    "Display config .rviz path "
+                    "(default: inmoov_rviz.rviz in this package)"
+                ),
             ),
             Node(
                 package="rviz2",
