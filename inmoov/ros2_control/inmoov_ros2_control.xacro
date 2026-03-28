@@ -9,7 +9,7 @@
           </xacro:if>
           <xacro:unless value="$(arg use_gazebo_sim)">
             <plugin>lucy_ros2_control/LucySystemHardware</plugin>
-            <param name="publisher_topic">joints/left_arm</param>
+            <param name="publisher_topic">actuators/left_arm</param>
             <param name="node_name">lucy_hardware_interface_left_arm</param>
           </xacro:unless>
       </hardware>
@@ -67,7 +67,7 @@
           </xacro:if>
           <xacro:unless value="$(arg use_gazebo_sim)">
             <plugin>lucy_ros2_control/LucySystemHardware</plugin>
-            <param name="publisher_topic">joints/right_arm</param>
+            <param name="publisher_topic">actuators/right_arm</param>
             <param name="node_name">lucy_hardware_interface_right_arm</param>
           </xacro:unless>
       </hardware>
