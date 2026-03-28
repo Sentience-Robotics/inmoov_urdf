@@ -61,6 +61,8 @@ colcon build --symlink-install --packages-select thais_urdf lucy_ros2_control
 
 ## Quick start
 
+### All-in-one (single machine)
+
 ```bash
 # Real robot + RViz + rosbridge (websocket for control panel, default ws://localhost:9090)
 ros2 launch thais_urdf rviz.launch.py
@@ -69,10 +71,30 @@ ros2 launch thais_urdf rviz.launch.py
 ros2 launch thais_urdf gazebo.launch.py
 ```
 
-Optional launch arguments (both main launches):
+Optional arguments for **`rviz.launch.py`** and **`gazebo.launch.py`** only:
 
 - `urdf_path:=<path>` — default: `$(ros2 pkg prefix thais_urdf)/share/thais_urdf/inmoov/urdf/inmoov.urdf.xacro`
 - `base_path:=<path>` — default: `.../share/thais_urdf/inmoov` (mesh and xacro include root)
+
+### RViz in a second terminal (bringup already running)
+
+Use **`rviz_standalone.launch.py`** when another stack already publishes **`/robot_description`** and **`/joint_states`** — for example **[`lucy_bringup`](https://github.com/Sentience-Robotics/lucy_ros_packages)** has started the full Jetson launch. This avoids a duplicate `robot_state_publisher`, `ros2_control` node, and combo RViz from `rviz.launch.py`.
+
+**Terminal 1** (from **`lucy_ros_packages`**, workspace sourced):
+
+```bash
+ros2 launch lucy_bringup lucy.launch.py
+```
+
+**Terminal 2** (same machine; `source install/setup.bash` from your colcon workspace):
+
+```bash
+ros2 launch thais_urdf rviz_standalone.launch.py
+```
+
+Optional: `rviz_config:=<path>` — default packaged **`config/inmoov_rviz.rviz`**.
+
+If you run **`lucy_ros2_control`** alone (e.g. `control.launch.py`) instead of full bringup, you can still use the same **`rviz_standalone.launch.py`** as long as `/robot_description` and `/joint_states` are available.
 
 ## Tests and coverage (local)
 
