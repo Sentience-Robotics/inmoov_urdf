@@ -1,103 +1,151 @@
-# InMoov URDF Project
+# thais_urdf
 
-This repository provides a fully functional **Unified Robot Description Format (URDF)** model for the **InMoov** robot platform.
+ROS 2 **Humble** repository for the **InMoov-derived** robot description used by Lucy: **URDF/xacro**, **meshes**, **ros2_control** xacro blocks, **RViz** configuration, and **combo launch files** that tie together RViz, Gazebo (GZ Sim), `ros2_control`, and `rosbridge` for the web control panel.
 
-## 📌 Overview
+The **`package.xml` name is `thais_urdf`** (historical name; content is the InMoov-style model and tooling).
 
-**InMoov** is an open-source, 3D-printed, life-size humanoid robot created by **Gael Langevin**. This project aims to deliver a comprehensive and precise **URDF description** of the InMoov robot for use in **simulation** and **robotics development** environments.
+## Repository layout
 
-The URDF file was created using **[Blender](https://www.blender.org/)** (version **4.3.2**) with the **[Phobos](https://github.com/dfki-ric/phobos)** add-on.  
-Currently, the export uses **STL** files, but you can export in other formats directly from Blender using **Phobos**.
+```text
+thais_urdf/
+├── package.xml              # ROS package: thais_urdf
+├── CMakeLists.txt           # Installs launch/, config/, inmoov/ into share/thais_urdf
+├── launch/
+│   ├── rviz.launch.py      # Real stack + RViz + rosbridge + ros2_control node + spawners
+│   ├── gazebo.launch.py    # Gazebo + clock bridge + spawn + gz_ros2_control + RViz + rosbridge
+│   └── rviz_standalone.launch.py
+├── config/
+│   └── inmoov_rviz.rviz
+└── inmoov/
+    ├── urdf/inmoov.urdf.xacro           # Top-level xacro (base_path, use_gazebo_sim, controller_config)
+    ├── 3dmodel/robot_description.urdf.xacro
+    ├── ros2_control/
+    │   ├── inmoov_ros2_control.xacro    # Real vs sim ros2_control systems
+    │   └── inmoov_gazebo.xacro
+    └── meshes/                          # Collision/visual assets (e.g. dae)
+```
 
----
+**Install:** `launch/`, `config/`, and **`inmoov/`** (URDF, meshes) install to **`share/thais_urdf`**. Default `urdf_path` / `base_path` in the combo launches use **`ros2 pkg prefix thais_urdf`**; override only for custom trees.
 
-## 🚀 Features
+## Relationship to lucy_ros_packages
 
-✔️ **Complete URDF model** of the InMoov robot  
-✔️ **Accurate joint configurations** and limits  
-✔️ **ROS-compatible** (Robot Operating System)  
-✔️ **Ready for simulation** in **Gazebo**, **RViz**, and other robotics environments
+| Repo | Role |
+|------|------|
+| **thais_urdf** (this repo) | Canonical **robot description** and **sim/visualization/rosbridge** entry launches. |
+| **[lucy_ros_packages](https://github.com/Sentience-Robotics/lucy_ros_packages)** | **Jetson bringup**, **`LucySystemHardware`**, **camera_ros**, RealSense. `lucy_ros2_control` consumes this URDF when using default layout (both repos in one `lucy_ws/src`). |
 
----
+Default combo launches resolve controller YAML from the **`lucy_ros2_control`** package share (`get_package_share_directory`). Install **`lucy_ros2_control`** in the same workspace/underlay (there is **no** `package.xml` dependency to avoid a build cycle with this package). Keep YAML, xacro joint lists, and teleop/UI config in sync.
 
-## 📖 Documentation
+## Requirements
 
-For more details on **creation processes**, **troubleshooting**, and other guidance, visit the **[Sentience Robotics documentation](https://docs.sentience-robotics.tech/s/master/p/urdf-NyIKx8PezV)**.
+- ROS 2 **Humble**
+- Packages used by default combo launches: `robot_state_publisher`, `controller_manager`, `rviz2`, `ros_gz_sim`, `ros_gz_bridge`, `gz_ros2_control`, `rosbridge_server`, `launch_ros`, and **`lucy_ros2_control`** (controller YAML + real-hardware plugin name in xacro). **`lucy_ros2_control`** is not listed in this package’s `package.xml` on purpose (avoids a **`colcon` cycle** with `lucy_ros2_control` → `thais_urdf`); keep both packages in the workspace.
 
----
+Install other dependencies with `rosdep` from your workspace root when a `ros_distribution` is sourced.
 
-## 📂 Files & Folder Structure
+## Building
 
-📦 InMoov-URDF-Project<br>
-├── 📄 URDF.blend # Blender file with Phobos configurations<br>
-├── 📄 Stand.blend # Blender file containing a stand for the upper body<br>
-├── 📂 InMoov # Folder containing the URDF export and STL meshes<br>
+```bash
+# In a colcon workspace that contains this repo under src/
+source /opt/ros/humble/setup.bash
+cd lucy_ws
+colcon build --packages-select thais_urdf
+source install/setup.bash
+```
 
----
+For full stack development, build together with `lucy_ros2_control` at minimum:
 
-## 🔍 Help Us Improve the InMoov URDF
+```bash
+colcon build --symlink-install --packages-select thais_urdf lucy_ros2_control
+```
 
-We currently include **handsI1** and **headI1**, but we aim to integrate the latest **headI2** and **handsI2** models.
+## Quick start
 
-📢 **We need your help!**  
-If you have access to **headI2** and **handsI2** Blender files or related resources, please contribute to this open-source effort.
+### All-in-one (single machine)
 
-Let's **enhance** the accuracy and usability of the **InMoov simulation** together! 🚀
+```bash
+# Real robot + RViz + rosbridge (websocket for control panel, default ws://localhost:9090)
+ros2 launch thais_urdf rviz.launch.py
 
-Feel free to share any leads or files with us.
+# Gazebo sim + RViz + ros2_control (sim) + rosbridge
+ros2 launch thais_urdf gazebo.launch.py
+```
 
----
+Optional arguments for **`rviz.launch.py`** and **`gazebo.launch.py`** only:
 
-## 📜 Code of Conduct
+- `urdf_path:=<path>` — default: `$(ros2 pkg prefix thais_urdf)/share/thais_urdf/inmoov/urdf/inmoov.urdf.xacro`
+- `base_path:=<path>` — default: `.../share/thais_urdf/inmoov` (mesh and xacro include root)
 
-We value the participation of each member of our community and are committed to ensuring that every interaction is respectful and productive. To foster a positive environment, we ask you to read and adhere to our [Code of Conduct](CODE_OF_CONDUCT.md).
+### RViz in a second terminal (bringup already running)
 
-By participating in this project, you agree to uphold this code in all your interactions, both online and offline. Let's work together to maintain a welcoming and inclusive community for everyone.
+Use **`rviz_standalone.launch.py`** when another stack already publishes **`/robot_description`** and **`/joint_states`** — for example **[`lucy_bringup`](https://github.com/Sentience-Robotics/lucy_ros_packages)** has started the full Jetson launch. This avoids a duplicate `robot_state_publisher`, `ros2_control` node, and combo RViz from `rviz.launch.py`.
 
-If you encounter any issues or have questions regarding the Code of Conduct, please contact us at [contact@sentience-robotics.fr](mailto:contact@sentience-robotics.fr).
+**Terminal 1** (from **`lucy_ros_packages`**, workspace sourced):
 
-Thank you for being a part of our community!
+```bash
+ros2 launch lucy_bringup lucy.launch.py
+```
 
----
+**Terminal 2** (same machine; `source install/setup.bash` from your colcon workspace):
 
-## 🤝 Contributing
+```bash
+ros2 launch thais_urdf rviz_standalone.launch.py
+```
 
-To find out more on how you can contribute to the project, please check our [CONTRIBUTING.md](CONTRIBUTING.md)
+Optional: `rviz_config:=<path>` — default packaged **`config/inmoov_rviz.rviz`**.
 
----
+If you run **`lucy_ros2_control`** alone (e.g. `control.launch.py`) instead of full bringup, you can still use the same **`rviz_standalone.launch.py`** as long as `/robot_description` and `/joint_states` are available.
 
-## 📜 License and Attribution
+## Tests and coverage (local)
 
-### Project License
+**Dependencies:** `python3-pytest-cov` (e.g. `sudo apt install python3-pytest-cov`).
 
-- **Original project code/files:** GNU GPL V3 License
-- **InMoov-derived files:** CC BY-NC 4.0 (as specified below)
- 
-See the [LICENSE](LICENSE) file for details.
+From your **workspace root**, with `src/thais_urdf` and `src/lucy_ros2_control` (same layout as CI):
 
-### InMoov-Derived Components
+```bash
+source /opt/ros/humble/setup.bash
+colcon build --symlink-install \
+  --packages-select thais_urdf lucy_ros2_control \
+  --cmake-args -DBUILD_TESTING=ON
+source install/setup.bash
 
-Parts of this project that are derived from InMoov files (including Blender models, CAD files, and STL files) are based on the original work by **Gael Langevin**.
+colcon test --packages-select thais_urdf lucy_ros2_control --event-handlers console_direct+
+colcon test-result --verbose
+```
 
-**Original Work:** InMoov by Gael Langevin  
-**License:** [Creative Commons Attribution-NonCommercial (CC BY-NC)](https://creativecommons.org/licenses/by-nc/4.0/)  
-**Source:** http://inmoov.fr/  
-**Applies to:** Blender files, CAD files, STL files, and other 3D models derived from InMoov
+**Coverage** for this repo’s pytest suite (xacro smoke + launch/test tree):
 
----
+```bash
+mkdir -p build/coverage_reports build/coverage_html
+python3 -m pytest src/thais_urdf/test/ \
+  --cov=src/thais_urdf/launch \
+  --cov=src/thais_urdf/test \
+  --cov-report=term-missing \
+  --cov-report=xml:build/coverage_reports/thais_urdf.xml \
+  --cov-report=html:build/coverage_html/thais_urdf
+```
 
-## 🙌 Acknowledgments
+Tests call **`xacro`** on the URDF; coverage mainly reflects **test + launch** Python lines, not meshes or C++.
 
-- 🎉 [InMoov Project](https://inmoov.fr/) – Original design by Gael Langevin<br>
-- 🎉 **All contributors** to the InMoov community<br>
+## CI
 
----
+**GitHub Actions** (`.github/workflows/ci.yml`) builds `thais_urdf` and `lucy_ros2_control`, runs **`colcon test`**, then **`pytest-cov`** for `src/thais_urdf/test/`. Cobertura XML and HTML are uploaded to [**Codecov**](https://codecov.io) (flag `thais_urdf`) when **`CODECOV_TOKEN`** is set, and stored as artifact `coverage-thais_urdf`.
 
-## 📬 Contact
+## Documentation map
 
-- 📧 Email: [contact@sentience-robotics.tech](mailto:contact@sentience-robotics.tech)<br>
-- 🌍 GitHub Organization: [Sentience Robotics](https://github.com/sentience-robotics)<br>---
+| Doc | Content |
+|-----|---------|
+| This file | Repository scope and integration |
+| [**doc/DEVELOPER.md**](doc/DEVELOPER.md) | **Contributors** — URDF/xacro, launches, install layout, extension checklist |
+| **lucy_ros_packages** repo README | Bringup, hardware control, cameras |
+| Workspace **`lucy_ws/docs/developer_lucy_packages.md`** | Index pointing to each repo’s `doc/DEVELOPER.md` |
+| Workspace **`lucy_ws/docs/simulation_and_visualization.md`** | Control panel ↔ ROS pipeline, sim time, gaps |
 
----
+## License and assets
 
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.0-4baaaa.svg)](code_of_conduct.md)
+- **InMoov-derived** meshes and model lineage: see project **LICENSE** and attribution (e.g. **CC BY-NC 4.0**, Gael Langevin / InMoov project, where applicable).
+- **Package code** (launch files, xacro, CMake): **GPL-3.0** per `package.xml` unless stated otherwise.
+
+## Maintainer
+
+Sentience Robotics Team — `contact@sentience-robotics.fr`.

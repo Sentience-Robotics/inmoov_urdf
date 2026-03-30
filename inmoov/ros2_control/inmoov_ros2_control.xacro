@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="inmoov" version="1.0">
+  <xacro:arg name="use_gazebo_sim" default="false" />
+
+<ros2_control name="LucyHardwareLeftArm" type="system">
+      <hardware>
+          <xacro:if value="$(arg use_gazebo_sim)">
+            <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+          </xacro:if>
+          <xacro:unless value="$(arg use_gazebo_sim)">
+            <plugin>lucy_ros2_control/LucySystemHardware</plugin>
+            <param name="publisher_topic">actuators/left_arm</param>
+            <param name="node_name">lucy_hardware_interface_left_arm</param>
+          </xacro:unless>
+      </hardware>
+      <!-- Joint names must match URDF exactly for correct TF tree in RViz/Gazebo -->
+      <joint name="left_shoulder_y_link_joint">
+          <command_interface name="position">
+          </command_interface>
+          <state_interface name="position" />
+      </joint>
+      <joint name="left_shoulder_z_link_joint">
+          <command_interface name="position">
+          </command_interface>
+          <state_interface name="position" />
+      </joint>
+      <joint name="left_shoulder_x_link_joint">
+          <command_interface name="position" />
+          <state_interface name="position" />
+      </joint>
+      <joint name="left_elbow_x_link_joint">
+          <command_interface name="position" />
+          <state_interface name="position" />
+      </joint>
+      <joint name="left_wrist_z_link_joint">
+          <command_interface name="position" />
+          <state_interface name="position" />
+      </joint>
+      <joint name="i01.leftHand.thumb_link_joint">
+          <command_interface name="position" />
+          <state_interface name="position" />
+      </joint>
+      <joint name="i01.leftHand.index_link_joint">
+          <command_interface name="position">
+          <param name="min">0</param>
+          <param name="max">1</param>
+          </command_interface>
+          <state_interface name="position" />
+      </joint>
+      <joint name="i01.leftHand.majeure_link_joint">
+          <command_interface name="position" />
+          <state_interface name="position" />
+      </joint>
+      <joint name="i01.leftHand.ringFinger_link_joint">
+          <command_interface name="position" />
+          <state_interface name="position" />
+      </joint>
+      <joint name="i01.leftHand.pinky_link_joint">
+          <command_interface name="position" />
+          <state_interface name="position" />
+      </joint>
+  </ros2_control>
+  <ros2_control name="LucyHardwareRightArm" type="system">
+      <hardware>
+          <xacro:if value="$(arg use_gazebo_sim)">
+            <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+          </xacro:if>
+          <xacro:unless value="$(arg use_gazebo_sim)">
+            <plugin>lucy_ros2_control/LucySystemHardware</plugin>
+            <param name="publisher_topic">actuators/right_arm</param>
+            <param name="node_name">lucy_hardware_interface_right_arm</param>
+          </xacro:unless>
+      </hardware>
+      <!-- Joint names must match URDF exactly (URDF has right_elbow without _link_joint) -->
+      <joint name="right_shoulder_y_link_joint">
+          <command_interface name="position">
+          </command_interface>
+          <state_interface name="position" />
+      </joint>
+      <joint name="right_shoulder_z_link_joint">
+          <command_interface name="position">
+          </command_interface>
+          <state_interface name="position" />
+      </joint>
+      <joint name="right_shoulder_x_link_joint">
+          <command_interface name="position" />
+          <state_interface name="position" />
+      </joint>
+      <joint name="right_elbow">
+          <command_interface name="position" />
+          <state_interface name="position" />
+      </joint>
+      <joint name="right_wrist_z_link_joint">
+          <command_interface name="position" />
+          <state_interface name="position" />
+      </joint>
+      <joint name="i01.rightHand.thumb_link_joint">
+          <command_interface name="position" />
+          <state_interface name="position" />
+      </joint>
+      <joint name="i01.rightHand.index_link_joint">
+          <command_interface name="position">
+          <param name="min">0</param>
+          <param name="max">1</param>
+          </command_interface>
+          <state_interface name="position" />
+      </joint>
+      <joint name="i01.rightHand.majeure_link_joint">
+          <command_interface name="position" />
+          <state_interface name="position" />
+      </joint>
+      <joint name="i01.rightHand.ringFinger_link_joint">
+          <command_interface name="position" />
+          <state_interface name="position" />
+      </joint>
+      <joint name="i01.rightHand.pinky_link_joint">
+          <command_interface name="position" />
+          <state_interface name="position" />
+      </joint>
+  </ros2_control>
+
+</robot>

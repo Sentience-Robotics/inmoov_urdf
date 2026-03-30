@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>thais_urdf</name>
+  <version>1.0.0</version>
+  <description>InMoov robot description, Gazebo/RViz combo launches (rviz_control_bridge, gazebo_rviz_control_bridge).</description>
+  <maintainer email="contact@sentience-robotics.fr">Sentience Robotics Team</maintainer>
+  <license>GPL-3.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <exec_depend>ament_index_python</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>rviz2</exec_depend>
+  <exec_depend>ros_gz_sim</exec_depend>
+  <exec_depend>ros_gz_bridge</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>gz_ros2_control</exec_depend>
+  <!-- No exec_depend on lucy_ros2_control: would cycle (lucy_ros2_control depends on thais_urdf for default URDF share). Combo launches still need lucy_ros2_control installed at runtime for default controller YAML path. -->
+  <exec_depend>rosbridge_server</exec_depend>
+  <exec_depend>controller_manager</exec_depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+  <test_depend>ament_cmake_pytest</test_depend>
+  <test_depend>python3-pytest</test_depend>
+  <test_depend>xacro</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
