@@ -25,16 +25,16 @@ def _inmoov_paths():
     try:
         from ament_index_python.packages import get_package_share_directory
         share = Path(get_package_share_directory("thais_urdf"))
-        inmoov = share / "inmoov"
-        urdf = inmoov / "urdf" / "inmoov.urdf.xacro"
+        description = share / "description"
+        urdf = description / "urdf" / "inmoov.urdf.xacro"
         if urdf.is_file():
-            return urdf, inmoov
+            return urdf, description
     except Exception:
         pass
     root = Path(__file__).resolve().parents[1]
-    inmoov = root / "inmoov"
-    urdf = inmoov / "urdf" / "inmoov.urdf.xacro"
-    return urdf, inmoov
+    description = root / "description"
+    urdf = description / "urdf" / "inmoov.urdf.xacro"
+    return urdf, description
 
 
 def _controller_yaml() -> Path:
@@ -68,7 +68,7 @@ def test_xacro_real_mode(controller_config: Path):
     xacro = shutil.which("xacro")
     assert xacro, "xacro not on PATH (install ros-humble-xacro)"
     urdf, base = _inmoov_paths()
-    assert urdf.is_file(), f"missing {urdf} — colcon build thais_urdf to install inmoov/"
+    assert urdf.is_file(), f"missing {urdf} — colcon build thais_urdf to install description/"
     cmd = [
         xacro,
         str(urdf),
@@ -85,7 +85,7 @@ def test_xacro_gazebo_mode(controller_config: Path):
     xacro = shutil.which("xacro")
     assert xacro, "xacro not on PATH (install ros-humble-xacro)"
     urdf, base = _inmoov_paths()
-    assert urdf.is_file(), f"missing {urdf} — colcon build thais_urdf to install inmoov/"
+    assert urdf.is_file(), f"missing {urdf} — colcon build thais_urdf to install description/"
     cmd = [
         xacro,
         str(urdf),

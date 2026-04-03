@@ -49,7 +49,7 @@ def _gz_ros2_control_plugin_path():
 
 def generate_launch_description():
     share = get_package_share_directory("thais_urdf")
-    default_base = os.path.join(share, "inmoov")
+    default_base = os.path.join(share, "description")
     default_urdf = os.path.join(default_base, "urdf", "inmoov.urdf.xacro")
     lucy_share = get_package_share_directory("lucy_ros2_control")
     controller_config_path = os.path.join(lucy_share, "config", "lucy_controllers.yaml")
@@ -73,7 +73,7 @@ def generate_launch_description():
 
     urdf_path = LaunchConfiguration("urdf_path")
     base_path = LaunchConfiguration("base_path")
-    mesh_dae = PathJoinSubstitution([base_path, "meshes", "dae"])
+    mesh_dae = PathJoinSubstitution([base_path, "robot_description", "meshes", "dae"])
     gz_resource_path = [mesh_dae, TextSubstitution(text=os.pathsep), base_path]
 
     robot_description = Command([
