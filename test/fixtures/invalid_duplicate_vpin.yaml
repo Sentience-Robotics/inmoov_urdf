@@ -1,0 +1,41 @@
+version: 1
+robot_name: test
+firmware: {source_dir: ".", build_dir: "build"}
+controller_manager: {update_rate: 100}
+boards:
+  rp2040_left_arm:
+    serial_id: ""
+    device: /dev/ttyACM0
+    firmware_target: t
+    compile_definition: USE_LEFT_ARM
+    topic_actuators: actuators/left_arm
+    topic_sensors: sensors/left_arm
+    controller: {name: left_arm_controller, type: joint_trajectory_controller/JointTrajectoryController}
+actuators:
+  - id: a
+    urdf_joint: left_shoulder_z_link_joint
+    board: rp2040_left_arm
+    virtual_pin: 0
+    physical_pin: 10
+    servo_type: "270"
+    offset_deg: 0.0
+    direction: 1
+    scale: 1.0
+    servo_min_deg: -1.0
+    servo_max_deg: 1.0
+    servo_default_deg: 0.0
+    enabled: false
+  - id: b
+    urdf_joint: left_shoulder_x_link_joint
+    board: rp2040_left_arm
+    virtual_pin: 0
+    physical_pin: 11
+    servo_type: "270"
+    offset_deg: 0.0
+    direction: 1
+    scale: 1.0
+    servo_min_deg: -1.0
+    servo_max_deg: 1.0
+    servo_default_deg: 0.0
+    enabled: false
+sensors: []

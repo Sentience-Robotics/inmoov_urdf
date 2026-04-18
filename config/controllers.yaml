@@ -1,0 +1,92 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+    left_arm_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+    right_arm_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+# Extra joints (not in ros2_control) published at 0 so robot_state_publisher builds full TF tree.
+# Fixes disconnected tree in view_frames (base_node->stand_link vs torso_y_link->arms).
+joint_state_broadcaster:
+  ros__parameters:
+    extra_joints:
+      - Empty.001_link_joint
+      - Empty.002_link_joint
+      - i01.torso.midStom_link_joint
+      - i01.torso.topStom_link_joint
+      - left_shoulder_z_link_joint
+      - i01.leftHand.wrist.001_link_joint
+      - i01.leftHand.index2_link_joint
+      - i01.leftHand.index3_link_joint
+      - i01.leftHand.majeure2_link_joint
+      - i01.leftHand.majeure3_link_joint
+      - i01.leftHand.pinky0_link_joint
+      - i01.leftHand.pinky2_link_joint
+      - i01.leftHand.pinky3_link_joint
+      - i01.leftHand.ringfinger0_link_joint
+      - i01.leftHand.ringfinger2_link_joint
+      - i01.leftHand.ringfinger3_link_joint
+      - i01.leftHand.thumb1_link_joint
+      - i01.leftHand.thumb3_link_joint
+      - right_shoulder_z_link_joint
+      - i01.rightHand.wrist.001_link_joint
+      - i01.rightHand.index2_link_joint
+      - i01.rightHand.index3_link_joint
+      - i01.rightHand.majeure2_link_joint
+      - i01.rightHand.majeure3_link_joint
+      - i01.rightHand.pinky0_link_joint
+      - i01.rightHand.pinky2_link_joint
+      - i01.rightHand.pinky3_link_joint
+      - i01.rightHand.ringfinger0_link_joint
+      - i01.rightHand.ringfinger2_link_joint
+      - i01.rightHand.ringfinger3_link_joint
+      - i01.rightHand.thumb1_link_joint
+      - i01.rightHand.thumb3_link_joint
+      - i01.head.neck.001_link_joint
+      - i01.head.rollNeck_link_joint
+      - i01.head.rothead_link_joint
+      - i01.head.jaw_link_joint
+      - i01.head.eyeRight_link_joint
+      - i01.head.eyeRight.001_link_joint
+      - i01.head.eyeLeft.001_link_joint
+      - i01.head.eyeLeft_link_joint
+
+# Joint names must match URDF exactly for correct TF tree (robot_state_publisher + RViz/Gazebo)
+left_arm_controller:
+  ros__parameters:
+    joints:
+      - left_shoulder_y_link_joint
+      - left_shoulder_z_link_joint
+      - left_shoulder_x_link_joint
+      - left_elbow_x_link_joint
+      - left_wrist_z_link_joint
+      - i01.leftHand.thumb_link_joint
+      - i01.leftHand.index_link_joint
+      - i01.leftHand.majeure_link_joint
+      - i01.leftHand.ringFinger_link_joint
+      - i01.leftHand.pinky_link_joint
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+
+right_arm_controller:
+  ros__parameters:
+    joints:
+      - right_shoulder_y_link_joint
+      - right_shoulder_z_link_joint
+      - right_shoulder_x_link_joint
+      - right_elbow
+      - right_wrist_z_link_joint
+      - i01.rightHand.thumb_link_joint
+      - i01.rightHand.index_link_joint
+      - i01.rightHand.majeure_link_joint
+      - i01.rightHand.ringFinger_link_joint
+      - i01.rightHand.pinky_link_joint
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position

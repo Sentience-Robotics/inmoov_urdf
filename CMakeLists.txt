@@ -15,6 +15,9 @@ if(BUILD_TESTING)
   ament_add_pytest_test(xacro_smoke test/test_xacro_smoke.py
     TIMEOUT 180
   )
+  ament_add_pytest_test(hardware_config test/test_hardware_config.py
+    TIMEOUT 120
+  )
 endif()
 
 ament_package()

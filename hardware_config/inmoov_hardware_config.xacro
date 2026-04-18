@@ -4,8 +4,7 @@
     
     <xacro:include filename="inmoov_actuators_config.xacro"/>
 
-    <!-- Import ROS2 Control Configuration -->
-    <xacro:include filename="inmoov_actuators_config_ros2_control.xacro"/>
+    <!-- ros2_control URDF fragments live under description/ros2_control/ (see config/hardware/active.yaml + generator). -->
 
     <!-- Import Sensors Configuration -->
     <xacro:include filename="inmoov_sensors_config.xacro"/>

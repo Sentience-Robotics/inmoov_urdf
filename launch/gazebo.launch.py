@@ -51,8 +51,7 @@ def generate_launch_description():
     share = get_package_share_directory("thais_urdf")
     default_base = os.path.join(share, "description")
     default_urdf = os.path.join(default_base, "urdf", "inmoov.urdf.xacro")
-    lucy_share = get_package_share_directory("lucy_ros2_control")
-    controller_config_path = os.path.join(lucy_share, "config", "lucy_controllers.yaml")
+    controller_config_path = os.path.join(share, "config", "controllers.yaml")
 
     urdf_path_arg = DeclareLaunchArgument(
         "urdf_path",

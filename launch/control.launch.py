@@ -14,13 +14,14 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-# Real robot + RViz + rosbridge. Control panel at ws://localhost:9090.
+# Real robot: robot_state_publisher + ros2_control_node + spawners.
+# Controllers live in this package (config/controllers.yaml).
 
 import os
 
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, ExecuteProcess, TimerAction
+from launch.actions import DeclareLaunchArgument, TimerAction
 from launch.substitutions import Command, LaunchConfiguration, PathJoinSubstitution
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
@@ -43,18 +44,11 @@ def generate_launch_description():
     urdf_path = LaunchConfiguration("urdf_path")
     base_path = LaunchConfiguration("base_path")
 
-    controllers_yaml = os.path.join(share, "config", "controllers.yaml")
-    robot_description = Command([
-        "xacro ", urdf_path, " base_path:=", base_path,
-        " controller_config:=", controllers_yaml,
+    controllers_yaml = PathJoinSubstitution([
+        FindPackageShare("thais_urdf"), "config", "controllers.yaml",
     ])
+    robot_description = Command(["xacro ", urdf_path, " base_path:=", base_path])
     robot_description_dict = {"robot_description": robot_description}
-
-    rosbridge = ExecuteProcess(
-        cmd=["ros2", "launch", "rosbridge_server", "rosbridge_websocket_launch.xml"],
-        output="screen",
-        shell=True,
-    )
 
     robot_state_publisher = Node(
         package="robot_state_publisher",
@@ -92,22 +86,8 @@ def generate_launch_description():
         output="screen",
     )
 
-    rviz_config = PathJoinSubstitution([
-        FindPackageShare("thais_urdf"), "config", "inmoov_rviz.rviz",
-    ])
-    rviz = Node(
-        package="rviz2",
-        executable="rviz2",
-        name="rviz2",
-        output="screen",
-        arguments=["--display-config", rviz_config],
-        parameters=[{"use_sim_time": False}],
-    )
-
     return LaunchDescription([
         urdf_path_arg, base_path_arg,
-        rosbridge,
         robot_state_publisher, ros2_control_node,
         spawn_joint_state, spawn_left, spawn_right,
-        rviz,
     ])
