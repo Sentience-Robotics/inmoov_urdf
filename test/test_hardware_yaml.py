@@ -17,6 +17,7 @@
 
 from __future__ import annotations
 
+import re
 import shutil
 import subprocess
 import xml.etree.ElementTree as ET
@@ -63,7 +64,7 @@ REQUIRED_SENSOR = (
 )
 REQUIRED_BOARD = (
     "serial_id",
-    "device",
+    "board_class",
     "firmware_target",
     "compile_definition",
     "topic_actuators",
@@ -71,8 +72,17 @@ REQUIRED_BOARD = (
     "controller",
 )
 
+BOARD_CLASSES = frozenset({"internal_servo_only", "internal_servo_i2c_pwm"})
+_BOARD_ID_RE = re.compile(r"^rp2040_[a-z][a-z0-9_]*$")
+_TOPIC_RE = re.compile(r"^[a-z][a-z0-9_/]*$")
+_SERIAL_ID_RE = re.compile(r"^[A-Za-z0-9]*$")
+
 
 def _active_yaml_path() -> Path:
+    """Prefer the checkout under ``test/..`` so pytest validates edited YAML without reinstall."""
+    src = Path(__file__).resolve().parents[1] / "config" / "hardware" / "active.yaml"
+    if src.is_file():
+        return src
     try:
         from ament_index_python.packages import get_package_share_directory
 
@@ -81,7 +91,7 @@ def _active_yaml_path() -> Path:
             return p
     except Exception:
         pass
-    return Path(__file__).resolve().parents[1] / "config" / "hardware" / "active.yaml"
+    return src
 
 
 def _urdf_xacro_path() -> Path:
@@ -115,7 +125,7 @@ def load_hardware_yaml(path: Path) -> dict[str, Any]:
         return yaml.safe_load(f)
 
 
-def validate_hardware_config(data: dict[str, Any], urdf_joints: set[str] | None = None) -> None:
+def validate_hardware_yaml(data: dict[str, Any], urdf_joints: set[str] | None = None) -> None:
     for key in REQUIRED_ROOT:
         if key not in data:
             raise ValueError(f"missing root key: {key}")
@@ -132,6 +142,33 @@ def validate_hardware_config(data: dict[str, Any], urdf_joints: set[str] | None 
         ctrl = bdef["controller"]
         if "name" not in ctrl or "type" not in ctrl:
             raise ValueError(f"board {bid}: controller needs name and type")
+
+        if not _BOARD_ID_RE.fullmatch(bid):
+            raise ValueError(
+                f"board id {bid!r} must match {_BOARD_ID_RE.pattern} "
+                "(must stay aligned with lucy_config_generator derivation rules)"
+            )
+        bc = bdef["board_class"]
+        if bc not in BOARD_CLASSES:
+            raise ValueError(
+                f"board {bid}: board_class must be one of {sorted(BOARD_CLASSES)}, got {bc!r}"
+            )
+        sid = bdef["serial_id"]
+        if not isinstance(sid, str):
+            raise ValueError(f"board {bid}: serial_id must be a string")
+        if sid and not _SERIAL_ID_RE.fullmatch(sid):
+            raise ValueError(
+                f"board {bid}: serial_id must be empty or alphanumeric "
+                "(USB serial / picotool --ser)"
+            )
+        for topic_key in ("topic_actuators", "topic_sensors"):
+            t = bdef[topic_key]
+            if not isinstance(t, str) or not t:
+                raise ValueError(f"board {bid}: {topic_key} must be a non-empty string")
+            if not _TOPIC_RE.fullmatch(t):
+                raise ValueError(
+                    f"board {bid}: {topic_key} must match {_TOPIC_RE.pattern} (no leading slash)"
+                )
 
     actuators: list[dict[str, Any]] = data["actuators"]
     if not isinstance(actuators, list):
@@ -215,7 +252,7 @@ def test_active_yaml_validates():
     path = _active_yaml_path()
     assert path.is_file(), f"missing {path}"
     data = load_hardware_yaml(path)
-    validate_hardware_config(data, urdf_joint_names_from_xacro())
+    validate_hardware_yaml(data, urdf_joint_names_from_xacro())
 
 
 @pytest.mark.parametrize(
@@ -230,4 +267,4 @@ def test_invalid_fixture_rejected(name: str, msg: str):
     path = Path(__file__).resolve().parent / "fixtures" / name
     data = load_hardware_yaml(path)
     with pytest.raises(ValueError, match=msg):
-        validate_hardware_config(data)
+        validate_hardware_yaml(data)

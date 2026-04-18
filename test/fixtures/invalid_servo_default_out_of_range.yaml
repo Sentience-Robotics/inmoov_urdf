@@ -5,7 +5,7 @@ controller_manager: {update_rate: 100}
 boards:
   rp2040_left_arm:
     serial_id: ""
-    device: /dev/ttyACM0
+    board_class: internal_servo_only
     firmware_target: t
     compile_definition: USE_LEFT_ARM
     topic_actuators: actuators/left_arm

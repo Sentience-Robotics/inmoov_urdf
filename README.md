@@ -9,23 +9,27 @@ The **`package.xml` name is `thais_urdf`** (historical name; content is the InMo
 ```text
 thais_urdf/
 ├── package.xml              # ROS package: thais_urdf
-├── CMakeLists.txt           # Installs launch/, config/, inmoov/ into share/thais_urdf
+├── CMakeLists.txt           # Installs launch/, config/, description/, docs/
+├── docs/                    # Developer + hardware mapping (see Documentation map)
 ├── launch/
-│   ├── rviz.launch.py      # Real stack + RViz + rosbridge + ros2_control node + spawners
-│   ├── gazebo.launch.py    # Gazebo + clock bridge + spawn + gz_ros2_control + RViz + rosbridge
+│   ├── control.launch.py    # ros2_control + spawners (default controllers from this package)
+│   ├── rviz.launch.py       # Real stack + RViz + rosbridge + ros2_control + spawners
+│   ├── gazebo.launch.py     # Gazebo + clock bridge + spawn + gz_ros2_control + RViz + rosbridge
 │   └── rviz_standalone.launch.py
 ├── config/
-│   └── inmoov_rviz.rviz
-└── inmoov/
-    ├── urdf/inmoov.urdf.xacro           # Top-level xacro (base_path, use_gazebo_sim, controller_config)
-    ├── 3dmodel/robot_description.urdf.xacro
+│   ├── controllers.yaml
+│   ├── inmoov_rviz.rviz
+│   └── hardware/            # active.yaml — hardware single source of truth
+└── description/
+    ├── urdf/inmoov.urdf.xacro
+    ├── robot_description/
     ├── ros2_control/
-    │   ├── inmoov_ros2_control.xacro    # Real vs sim ros2_control systems
+    │   ├── inmoov_ros2_control.xacro
     │   └── inmoov_gazebo.xacro
-    └── meshes/                          # Collision/visual assets (e.g. dae)
+    └── meshes/
 ```
 
-**Install:** `launch/`, `config/`, and **`inmoov/`** (URDF, meshes) install to **`share/thais_urdf`**. Default `urdf_path` / `base_path` in the combo launches use **`ros2 pkg prefix thais_urdf`**; override only for custom trees.
+**Install:** `launch/`, `config/`, **`description/`**, and **`docs/`** install to **`share/thais_urdf`**. Default `urdf_path` / `base_path` in the combo launches use **`ros2 pkg prefix thais_urdf`**; override only for custom trees.
 
 ## Relationship to lucy_ros_packages
 
@@ -73,8 +77,8 @@ ros2 launch thais_urdf gazebo.launch.py
 
 Optional arguments for **`rviz.launch.py`** and **`gazebo.launch.py`** only:
 
-- `urdf_path:=<path>` — default: `$(ros2 pkg prefix thais_urdf)/share/thais_urdf/inmoov/urdf/inmoov.urdf.xacro`
-- `base_path:=<path>` — default: `.../share/thais_urdf/inmoov` (mesh and xacro include root)
+- `urdf_path:=<path>` — default: `$(ros2 pkg prefix thais_urdf)/share/thais_urdf/description/urdf/inmoov.urdf.xacro`
+- `base_path:=<path>` — default: `.../share/thais_urdf/description` (mesh and xacro include root)
 
 ### RViz in a second terminal (bringup already running)
 
@@ -136,9 +140,11 @@ Tests call **`xacro`** on the URDF; coverage mainly reflects **test + launch** P
 | Doc | Content |
 |-----|---------|
 | This file | Repository scope and integration |
-| [**doc/DEVELOPER.md**](doc/DEVELOPER.md) | **Contributors** — URDF/xacro, launches, install layout, extension checklist |
+| [**docs/DEVELOPER.md**](docs/DEVELOPER.md) | **Contributors** — URDF/xacro, hardware YAML, launches, install layout, extension checklist |
+| [**docs/hardware_mapping.md**](docs/hardware_mapping.md) | Schema and calibration for `config/hardware/active.yaml` |
+| [**docs/inmoov_i2.md**](docs/inmoov_i2.md) | i1 scope vs i2 head actuators (YAML appendix) |
 | **lucy_ros_packages** repo README | Bringup, hardware control, cameras |
-| Workspace **`lucy_ws/docs/developer_lucy_packages.md`** | Index pointing to each repo’s `doc/DEVELOPER.md` |
+| Workspace **`lucy_ws/docs/developer_lucy_packages.md`** | Index pointing to each repo’s developer doc (paths vary by repo) |
 | Workspace **`lucy_ws/docs/simulation_and_visualization.md`** | Control panel ↔ ROS pipeline, sim time, gaps |
 
 ## License and assets

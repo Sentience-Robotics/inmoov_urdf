@@ -1,4 +1,4 @@
-# Hardware mapping — single source of truth for config generator.
+# Hardware mapping — single source of truth for lucy_config_generator.
 # URDF joint names must match description/robot_description (processed URDF).
 # left_shoulder_y_link_joint / right_shoulder_y_link_joint: torso board.
 
@@ -14,8 +14,8 @@ controller_manager:
 
 boards:
   rp2040_left_arm:
-    serial_id: ""
-    device: /dev/ttyACM0
+    serial_id: E6617C93E3858429
+    board_class: internal_servo_only
     firmware_target: pico_micro_ros_left_arm
     compile_definition: USE_LEFT_ARM
     topic_actuators: actuators/left_arm
@@ -24,8 +24,8 @@ boards:
       name: left_arm_controller
       type: joint_trajectory_controller/JointTrajectoryController
   rp2040_right_arm:
-    serial_id: ""
-    device: /dev/ttyACM1
+    serial_id: E6617C93E37A6629
+    board_class: internal_servo_only
     firmware_target: pico_micro_ros_right_arm
     compile_definition: USE_RIGHT_ARM
     topic_actuators: actuators/right_arm
@@ -35,7 +35,7 @@ boards:
       type: joint_trajectory_controller/JointTrajectoryController
   rp2040_torso_head:
     serial_id: ""
-    device: /dev/ttyACM2
+    board_class: internal_servo_i2c_pwm
     firmware_target: pico_micro_ros_torso
     compile_definition: USE_TORSO
     topic_actuators: actuators/torso
@@ -202,9 +202,9 @@ actuators:
     offset_deg: 0.0
     direction: 1
     scale: 1.0
-    servo_min_deg: 140.0
-    servo_max_deg: 180.0
-    servo_default_deg: 180.0
+    servo_min_deg: 155.0
+    servo_max_deg: 165.0
+    servo_default_deg: 160.0
     enabled: true
   - id: right_shoulder_x
     urdf_joint: right_shoulder_x_link_joint
@@ -215,9 +215,9 @@ actuators:
     offset_deg: 0.0
     direction: 1
     scale: 1.0
-    servo_min_deg: 155.0
-    servo_max_deg: 165.0
-    servo_default_deg: 160.0
+    servo_min_deg: 140.0
+    servo_max_deg: 180.0
+    servo_default_deg: 180.0
     enabled: true
   - id: right_elbow
     urdf_joint: right_elbow

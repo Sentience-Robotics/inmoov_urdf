@@ -4,5 +4,5 @@ be under the GNU General Public License, as dictated by that
 
 # More information
 
-- [Developer guide](doc/DEVELOPER.md) — workflow, CI, layout, style
+- [Developer guide](docs/DEVELOPER.md) — workflow, CI, layout, style
 - [Code of Conduct](CODE_OF_CONDUCT.md)
