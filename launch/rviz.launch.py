@@ -28,7 +28,7 @@ from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
     share = get_package_share_directory("thais_urdf")
-    default_base = os.path.join(share, "inmoov")
+    default_base = os.path.join(share, "description")
     default_urdf = os.path.join(default_base, "urdf", "inmoov.urdf.xacro")
     urdf_path_arg = DeclareLaunchArgument(
         "urdf_path",
