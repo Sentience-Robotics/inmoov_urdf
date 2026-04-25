@@ -65,6 +65,7 @@ REQUIRED_SENSOR = (
 REQUIRED_BOARD = (
     "serial_id",
     "board_class",
+    "internal_servo_slots",
     "firmware_target",
     "compile_definition",
     "topic_actuators",

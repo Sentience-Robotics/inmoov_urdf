@@ -17,36 +17,65 @@
 # Real robot: robot_state_publisher + ros2_control_node + spawners.
 # Controllers live in this package (config/controllers.yaml).
 
-import os
+from pathlib import Path
 
-from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, TimerAction
-from launch.substitutions import Command, LaunchConfiguration, PathJoinSubstitution
+from launch.substitutions import Command, LaunchConfiguration
 from launch_ros.actions import Node
-from launch_ros.substitutions import FindPackageShare
+import yaml
+
+
+def _controllers_to_spawn(controllers_yaml_path: Path) -> list[str]:
+    """Return controller names declared under controller_manager.ros__parameters."""
+    data = yaml.safe_load(controllers_yaml_path.read_text(encoding="utf-8")) or {}
+    cm_params = data.get("controller_manager", {}).get("ros__parameters", {})
+    if not isinstance(cm_params, dict):
+        return []
+    return [name for name in cm_params.keys() if name != "update_rate"]
+
+
+def _load_launch_defaults(package_root: Path) -> dict[str, str]:
+    """Load launch path defaults from config/control.launch.yaml."""
+    config_path = package_root / "config" / "control.launch.yaml"
+    data = yaml.safe_load(config_path.read_text(encoding="utf-8")) or {}
+    if not isinstance(data, dict):
+        raise RuntimeError(f"Invalid launch defaults file: {config_path}")
+    required = ("urdf_path", "base_path", "controllers_yaml")
+    missing = [key for key in required if key not in data or not str(data[key]).strip()]
+    if missing:
+        raise RuntimeError(f"Missing keys in {config_path}: {missing}")
+    return {key: str(data[key]).strip() for key in required}
 
 
 def generate_launch_description():
-    share = get_package_share_directory("thais_urdf")
-    default_base = os.path.join(share, "description")
-    default_urdf = os.path.join(default_base, "urdf", "inmoov.urdf.xacro")
+    package_root = Path(__file__).resolve().parents[1]
+    defaults = _load_launch_defaults(package_root)
+    default_urdf = str((package_root / defaults["urdf_path"]).resolve())
+    default_base = str((package_root / defaults["base_path"]).resolve())
+    default_controllers_yaml = str((package_root / defaults["controllers_yaml"]).resolve())
+    controllers_yaml_path = Path(default_controllers_yaml)
+    controller_names = _controllers_to_spawn(controllers_yaml_path)
+
     urdf_path_arg = DeclareLaunchArgument(
         "urdf_path",
         default_value=default_urdf,
-        description="Path to inmoov.urdf.xacro",
+        description="Absolute path to robot URDF xacro",
     )
     base_path_arg = DeclareLaunchArgument(
         "base_path",
         default_value=default_base,
         description="Base path for xacro (mesh_dir)",
     )
+    controllers_yaml_arg = DeclareLaunchArgument(
+        "controllers_yaml",
+        default_value=default_controllers_yaml,
+        description="Absolute path to controller_manager YAML config",
+    )
     urdf_path = LaunchConfiguration("urdf_path")
     base_path = LaunchConfiguration("base_path")
+    controllers_yaml = LaunchConfiguration("controllers_yaml")
 
-    controllers_yaml = PathJoinSubstitution([
-        FindPackageShare("thais_urdf"), "config", "controllers.yaml",
-    ])
     robot_description = Command(["xacro ", urdf_path, " base_path:=", base_path])
     robot_description_dict = {"robot_description": robot_description}
 
@@ -63,31 +92,23 @@ def generate_launch_description():
                 package="controller_manager",
                 executable="ros2_control_node",
                 output="screen",
-                parameters=[controllers_yaml, robot_description_dict],
+                parameters=[controllers_yaml],
+                remappings=[("~/robot_description", "/robot_description")],
             )
         ],
     )
-    spawn_joint_state = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["joint_state_broadcaster"],
-        output="screen",
-    )
-    spawn_left = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["left_arm_controller"],
-        output="screen",
-    )
-    spawn_right = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["right_arm_controller"],
-        output="screen",
-    )
+    spawners = [
+        Node(
+            package="controller_manager",
+            executable="spawner",
+            arguments=[controller],
+            output="screen",
+        )
+        for controller in controller_names
+    ]
 
     return LaunchDescription([
-        urdf_path_arg, base_path_arg,
+        urdf_path_arg, base_path_arg, controllers_yaml_arg,
         robot_state_publisher, ros2_control_node,
-        spawn_joint_state, spawn_left, spawn_right,
+        *spawners,
     ])

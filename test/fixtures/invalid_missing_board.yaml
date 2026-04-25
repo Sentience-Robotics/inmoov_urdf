@@ -6,6 +6,7 @@ boards:
   rp2040_left_arm:
     serial_id: ""
     board_class: internal_servo_only
+    internal_servo_slots: 18
     firmware_target: t
     compile_definition: USE_LEFT_ARM
     topic_actuators: actuators/left_arm
