@@ -40,15 +40,16 @@ def _inmoov_paths():
 def _controller_yaml() -> Path:
     try:
         from ament_index_python.packages import get_package_share_directory
-        p = (
-            Path(get_package_share_directory("lucy_ros2_control"))
-            / "config"
-            / "lucy_controllers.yaml"
-        )
-        if p.is_file():
-            return p
+
+        thais = Path(get_package_share_directory("thais_urdf")) / "config" / "controllers.yaml"
+        if thais.is_file():
+            return thais
     except Exception:
         pass
+    root = Path(__file__).resolve().parents[1]
+    p = root / "config" / "controllers.yaml"
+    if p.is_file():
+        return p
     ws_src = Path(__file__).resolve().parents[1].parent
     return ws_src / "lucy_ros2_control" / "config" / "lucy_controllers.yaml"
 
@@ -58,8 +59,8 @@ def controller_config() -> Path:
     path = _controller_yaml()
     if not path.is_file():
         pytest.skip(
-            "Missing lucy_ros2_control/config/lucy_controllers.yaml — "
-            "build lucy_ros2_control or place it next to thais_urdf under colcon src/"
+            "Missing thais_urdf/config/controllers.yaml (or legacy lucy_ros2_control path) — "
+            "build thais_urdf from this workspace."
         )
     return path
 
