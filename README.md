@@ -1,6 +1,8 @@
 # thais_urdf
 
-ROS 2 **Humble** repository for the **InMoov-derived** robot description used by Lucy: **URDF/xacro**, **meshes**, **ros2_control** xacro blocks, **RViz** configuration, and **combo launch files** that tie together RViz, Gazebo (GZ Sim), `ros2_control`, and `rosbridge` for the web control panel.
+ROS 2 **Humble** repository for the **InMoov-derived** robot description used by Lucy: **URDF/xacro**, **meshes**, **ros2_control** xacro blocks, **RViz** configuration, and **launch files** for **ros2_control** plus **RViz** or **Gazebo (GZ Sim)**.
+
+The **web control panel** (rosbridge + hardware **`/config/*`** services) is **not** started from this package; use **`lucy_bringup`** **`lucy.launch.py`** (or **`web_ros_api.launch.py`**) — see workspace **`lucy_ws/README.md`**.
 
 The **`package.xml` name is `thais_urdf`** (historical name; content is the InMoov-style model and tooling).
 
@@ -13,8 +15,7 @@ thais_urdf/
 ├── docs/                    # Developer + hardware mapping (see Documentation map)
 ├── launch/
 │   ├── control.launch.py    # ros2_control + spawners (default controllers from this package)
-│   ├── rviz.launch.py       # Real stack + RViz + rosbridge + ros2_control + spawners
-│   ├── gazebo.launch.py     # Gazebo + clock bridge + spawn + gz_ros2_control + RViz + rosbridge
+│   ├── gazebo.launch.py     # Gazebo + … + optional RViz via start_rviz (no rosbridge)
 │   └── rviz_standalone.launch.py
 ├── config/
 │   ├── controllers.yaml
@@ -35,15 +36,17 @@ thais_urdf/
 
 | Repo | Role |
 |------|------|
-| **thais_urdf** (this repo) | Canonical **robot description** and **sim/visualization/rosbridge** entry launches. |
-| **[lucy_ros_packages](https://github.com/Sentience-Robotics/lucy_ros_packages)** | **Jetson bringup**, **`LucySystemHardware`**, **camera_ros**, RealSense. `lucy_ros2_control` consumes this URDF when using default layout (both repos in one `lucy_ws/src`). |
+| **thais_urdf** (this repo) | Canonical **robot description** and **sim/visualization** entry launches (**no rosbridge**). |
+| **[lucy_ros_packages](https://github.com/Sentience-Robotics/lucy_ros_packages)** | **Jetson bringup** (**`lucy_bringup`**), **`LucySystemHardware`**, **camera_ros**, RealSense, **`web_ros_api`** (rosbridge + **`lucy_config_pipeline`**). `lucy_ros2_control` consumes this URDF when using default layout (both repos in one `lucy_ws/src`). |
 
 Default combo launches resolve controller YAML from the **`lucy_ros2_control`** package share (`get_package_share_directory`). Install **`lucy_ros2_control`** in the same workspace/underlay (there is **no** `package.xml` dependency to avoid a build cycle with this package). Keep YAML, xacro joint lists, and teleop/UI config in sync.
 
 ## Requirements
 
 - ROS 2 **Humble**
-- Packages used by default combo launches: `robot_state_publisher`, `controller_manager`, `rviz2`, `ros_gz_sim`, `ros_gz_bridge`, `gz_ros2_control`, `rosbridge_server`, `launch_ros`, and **`lucy_ros2_control`** (controller YAML + real-hardware plugin name in xacro). **`lucy_ros2_control`** is not listed in this package’s `package.xml` on purpose (avoids a **`colcon` cycle** with `lucy_ros2_control` → `thais_urdf`); keep both packages in the workspace.
+- Packages used by default **`thais_urdf`** launches: `robot_state_publisher`, `controller_manager`, `rviz2`, `ros_gz_sim`, `ros_gz_bridge`, `gz_ros2_control`, `launch_ros`, and **`lucy_ros2_control`** (controller YAML + real-hardware plugin name in xacro). **`lucy_ros2_control`** is not listed in this package’s `package.xml` on purpose (avoids a **`colcon` cycle** with `lucy_ros2_control` → `thais_urdf`); keep both packages in the workspace.
+
+For the **control panel**, also build/source **`lucy_bringup`** and **`lucy_config_pipeline`** (pulled in via **`lucy_bringup`** `package.xml`).
 
 Install other dependencies with `rosdep` from your workspace root when a `ros_distribution` is sourced.
 
@@ -65,24 +68,36 @@ colcon build --symlink-install --packages-select thais_urdf lucy_ros2_control
 
 ## Quick start
 
-### All-in-one (single machine)
+### Robot description + RViz or Gazebo (no web panel)
 
 ```bash
-# Real robot + RViz + rosbridge (websocket for control panel, default ws://localhost:9090)
-ros2 launch thais_urdf rviz.launch.py
+# Real robot + ros2_control (terminal 1), then RViz only (terminal 2)
+ros2 launch thais_urdf control.launch.py
+ros2 launch thais_urdf rviz_standalone.launch.py
 
-# Gazebo sim + RViz + ros2_control (sim) + rosbridge
+# Gazebo sim + ros2_control + optional RViz (no rosbridge)
 ros2 launch thais_urdf gazebo.launch.py
 ```
 
-Optional arguments for **`rviz.launch.py`** and **`gazebo.launch.py`** only:
+Optional arguments for **`control.launch.py`** and **`gazebo.launch.py`**:
 
-- `urdf_path:=<path>` — default: `$(ros2 pkg prefix thais_urdf)/share/thais_urdf/description/urdf/inmoov.urdf.xacro`
-- `base_path:=<path>` — default: `.../share/thais_urdf/description` (mesh and xacro include root)
+- `urdf_path`, `base_path`, `controllers_yaml` — **`control.launch.py`** (defaults from **`config/control.launch.yaml`**).
+- `urdf_path`, `base_path`, `robot_package`, `start_rviz` — **`gazebo.launch.py`**.
+
+### With the web control panel (rosbridge + `/config/*`)
+
+Use **`lucy_bringup`** **`lucy.launch.py`** (single entry; set **`real`**, **`rviz`**, **`gazebo`**):
+
+```bash
+ros2 launch lucy_bringup lucy.launch.py real:=false rviz:=true
+ros2 launch lucy_bringup lucy.launch.py gazebo:=true real:=false
+```
+
+Or start **`web_ros_api.launch.py`** next to **`thais_urdf`** RViz/Gazebo in separate terminals.
 
 ### RViz in a second terminal (bringup already running)
 
-Use **`rviz_standalone.launch.py`** when another stack already publishes **`/robot_description`** and **`/joint_states`** — for example **[`lucy_bringup`](https://github.com/Sentience-Robotics/lucy_ros_packages)** has started the full Jetson launch. This avoids a duplicate `robot_state_publisher`, `ros2_control` node, and combo RViz from `rviz.launch.py`.
+Use **`rviz_standalone.launch.py`** when another stack already publishes **`/robot_description`** and **`/joint_states`** — for example **[`lucy_bringup`](https://github.com/Sentience-Robotics/lucy_ros_packages)** has started **`lucy.launch.py`**. This avoids a second **`robot_state_publisher`**, **`ros2_control_node`**, or full control launch on the same graph.
 
 **Terminal 1** (from **`lucy_ros_packages`**, workspace sourced):
 
@@ -99,6 +114,8 @@ ros2 launch thais_urdf rviz_standalone.launch.py
 Optional: `rviz_config:=<path>` — default packaged **`config/inmoov_rviz.rviz`**.
 
 If you run **`lucy_ros2_control`** alone (e.g. `control.launch.py`) instead of full bringup, you can still use the same **`rviz_standalone.launch.py`** as long as `/robot_description` and `/joint_states` are available.
+
+For **RViz + panel** on one machine without full Jetson bringup, use **`ros2 launch lucy_bringup lucy.launch.py real:=false rviz:=true`**.
 
 ## Tests and coverage (local)
 
