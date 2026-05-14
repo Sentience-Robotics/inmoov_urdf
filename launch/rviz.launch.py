@@ -14,18 +14,32 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-# Real robot + RViz + rosbridge. Control stack comes from control.launch.py.
+# Real robot + RViz + rosbridge + lucy_config_pipeline (same config services as lucy.launch.py).
 from pathlib import Path
 
 from launch import LaunchDescription
-from launch.actions import ExecuteProcess, IncludeLaunchDescription
+from launch.actions import DeclareLaunchArgument, ExecuteProcess, IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import PathJoinSubstitution
+from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 
 
 def generate_launch_description():
+    robot_package_arg = DeclareLaunchArgument(
+        "robot_package",
+        default_value="thais_urdf",
+        description="Robot description package: hardware YAML paths for lucy_config_pipeline",
+    )
+    config_dir_arg = DeclareLaunchArgument(
+        "config_dir",
+        default_value="",
+        description=(
+            "Override hardware config directory for lucy_config_pipeline "
+            "(empty = <robot_package>/config/hardware)"
+        ),
+    )
+
     package_root = Path(__file__).resolve().parents[1]
     control_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(str(package_root / "launch" / "control.launch.py"))
@@ -35,6 +49,20 @@ def generate_launch_description():
         cmd=["ros2", "launch", "rosbridge_server", "rosbridge_websocket_launch.xml"],
         output="screen",
         shell=True,
+    )
+
+    config_pipeline_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            PathJoinSubstitution([
+                FindPackageShare("lucy_config_pipeline"),
+                "launch",
+                "config_pipeline.launch.py",
+            ])
+        ]),
+        launch_arguments=[
+            ("robot_package", LaunchConfiguration("robot_package")),
+            ("config_dir", LaunchConfiguration("config_dir")),
+        ],
     )
 
     rviz_config = PathJoinSubstitution([
@@ -50,7 +78,10 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
+        robot_package_arg,
+        config_dir_arg,
         control_launch,
         rosbridge,
+        config_pipeline_launch,
         rviz,
     ])
