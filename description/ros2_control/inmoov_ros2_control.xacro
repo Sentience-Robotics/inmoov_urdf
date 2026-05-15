@@ -15,6 +15,7 @@
           </xacro:unless>
       </hardware>
       <joint name="left_shoulder_z_link_joint">
+          <dynamics damping="0.7" friction="0.5"/>
           <param name="virtual_pin">0</param>
           <param name="servo_type">270</param>
           <param name="offset_deg">0.0</param>
@@ -23,8 +24,17 @@
           <param name="servo_min_deg">0.0</param>
           <param name="servo_max_deg">270.0</param>
           <param name="servo_default_deg">135.0</param>
-          <command_interface name="position" />
-          <state_interface name="position" />
+
+          <dynamics damping="0.7" friction="0.5"/>
+
+          <command_interface name="position">
+            <param name="min">-1.57</param>
+            <param name="max">1.57</param>
+          </command_interface>
+
+          <state_interface name="position"/>
+          <state_interface name="velocity"/>
+
       </joint>
       <joint name="left_shoulder_x_link_joint">
           <param name="virtual_pin">1</param>
@@ -35,10 +45,19 @@
           <param name="servo_min_deg">0.0</param>
           <param name="servo_max_deg">270.0</param>
           <param name="servo_default_deg">135.0</param>
-          <command_interface name="position" />
-          <state_interface name="position" />
+
+          <dynamics damping="0.7" friction="0.5"/>
+
+          <command_interface name="position">
+            <param name="min">-1.57</param>
+            <param name="max">1.57</param>
+          </command_interface>
+
+          <state_interface name="position"/>
+          <state_interface name="velocity"/>
       </joint>
       <joint name="left_elbow_x_link_joint">
+          <dynamics damping="0.7" friction="0.5"/>
           <param name="virtual_pin">2</param>
           <param name="servo_type">270</param>
           <param name="offset_deg">0.0</param>
@@ -51,6 +70,7 @@
           <state_interface name="position" />
       </joint>
       <joint name="left_wrist_z_link_joint">
+          <dynamics damping="0.7" friction="0.5"/>
           <param name="virtual_pin">3</param>
           <param name="servo_type">300</param>
           <param name="offset_deg">0.0</param>
@@ -63,6 +83,7 @@
           <state_interface name="position" />
       </joint>
       <joint name="i01.leftHand.thumb_link_joint">
+          <dynamics damping="0.7" friction="0.5"/>
           <param name="virtual_pin">4</param>
           <param name="servo_type">300</param>
           <param name="offset_deg">0.0</param>
@@ -75,6 +96,7 @@
           <state_interface name="position" />
       </joint>
       <joint name="i01.leftHand.index_link_joint">
+          <dynamics damping="0.7" friction="0.5"/>
           <param name="virtual_pin">5</param>
           <param name="servo_type">300</param>
           <param name="offset_deg">0.0</param>
@@ -87,6 +109,7 @@
           <state_interface name="position" />
       </joint>
       <joint name="i01.leftHand.majeure_link_joint">
+          <dynamics damping="0.7" friction="0.5"/>
           <param name="virtual_pin">6</param>
           <param name="servo_type">300</param>
           <param name="offset_deg">0.0</param>
@@ -99,6 +122,7 @@
           <state_interface name="position" />
       </joint>
       <joint name="i01.leftHand.ringFinger_link_joint">
+          <dynamics damping="0.7" friction="0.5"/>
           <param name="virtual_pin">7</param>
           <param name="servo_type">300</param>
           <param name="offset_deg">0.0</param>
@@ -111,6 +135,7 @@
           <state_interface name="position" />
       </joint>
       <joint name="i01.leftHand.pinky_link_joint">
+          <dynamics damping="0.7" friction="0.5"/>
           <param name="virtual_pin">8</param>
           <param name="servo_type">300</param>
           <param name="offset_deg">0.0</param>
@@ -135,6 +160,7 @@
           </xacro:unless>
       </hardware>
       <joint name="right_shoulder_z_link_joint">
+          <dynamics damping="0.7" friction="0.5"/>
           <param name="virtual_pin">0</param>
           <param name="servo_type">270</param>
           <param name="offset_deg">0.0</param>
@@ -147,6 +173,7 @@
           <state_interface name="position" />
       </joint>
       <joint name="right_shoulder_x_link_joint">
+          <dynamics damping="0.7" friction="0.5"/>
           <param name="virtual_pin">1</param>
           <param name="servo_type">270</param>
           <param name="offset_deg">0.0</param>
@@ -159,6 +186,7 @@
           <state_interface name="position" />
       </joint>
       <joint name="right_elbow">
+          <dynamics damping="0.7" friction="0.5"/>
           <param name="virtual_pin">2</param>
           <param name="servo_type">270</param>
           <param name="offset_deg">0.0</param>
@@ -171,6 +199,7 @@
           <state_interface name="position" />
       </joint>
       <joint name="right_wrist_z_link_joint">
+          <dynamics damping="0.7" friction="0.5"/>
           <param name="virtual_pin">3</param>
           <param name="servo_type">300</param>
           <param name="offset_deg">0.0</param>
@@ -183,6 +212,7 @@
           <state_interface name="position" />
       </joint>
       <joint name="i01.rightHand.thumb_link_joint">
+          <dynamics damping="0.7" friction="0.5"/>
           <param name="virtual_pin">4</param>
           <param name="servo_type">300</param>
           <param name="offset_deg">0.0</param>
@@ -195,6 +225,7 @@
           <state_interface name="position" />
       </joint>
       <joint name="i01.rightHand.index_link_joint">
+          <dynamics damping="0.7" friction="0.5"/>
           <param name="virtual_pin">5</param>
           <param name="servo_type">300</param>
           <param name="offset_deg">0.0</param>
@@ -207,6 +238,7 @@
           <state_interface name="position" />
       </joint>
       <joint name="i01.rightHand.majeure_link_joint">
+          <dynamics damping="0.7" friction="0.5"/>
           <param name="virtual_pin">6</param>
           <param name="servo_type">300</param>
           <param name="offset_deg">0.0</param>
@@ -219,6 +251,7 @@
           <state_interface name="position" />
       </joint>
       <joint name="i01.rightHand.ringFinger_link_joint">
+          <dynamics damping="0.7" friction="0.5"/>
           <param name="virtual_pin">7</param>
           <param name="servo_type">300</param>
           <param name="offset_deg">0.0</param>
@@ -231,6 +264,7 @@
           <state_interface name="position" />
       </joint>
       <joint name="i01.rightHand.pinky_link_joint">
+          <dynamics damping="0.7" friction="0.5"/>
           <param name="virtual_pin">8</param>
           <param name="servo_type">300</param>
           <param name="offset_deg">0.0</param>
@@ -255,6 +289,7 @@
           </xacro:unless>
       </hardware>
       <joint name="left_shoulder_y_link_joint">
+          <dynamics damping="0.7" friction="0.5"/>
           <param name="virtual_pin">0</param>
           <param name="servo_type">270</param>
           <param name="offset_deg">0.0</param>
@@ -267,6 +302,7 @@
           <state_interface name="position" />
       </joint>
       <joint name="right_shoulder_y_link_joint">
+          <dynamics damping="0.7" friction="0.5"/>
           <param name="virtual_pin">1</param>
           <param name="servo_type">270</param>
           <param name="offset_deg">0.0</param>

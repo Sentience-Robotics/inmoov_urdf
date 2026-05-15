@@ -80,8 +80,11 @@ Editing joint names or interfaces here requires matching **`config/controllers.y
 | Launch | Stack |
 |--------|-------|
 | `control.launch.py` | Real: `robot_state_publisher`, delayed `ros2_control_node`, spawners. Add **`rviz_standalone.launch.py`** in another terminal for RViz. |
-| `gazebo.launch.py` | GZ Sim, `/clock` bridge, spawn, `gz_ros2_control` plugin path, optional RViz via **`start_rviz`**. Args **`urdf_path`**, **`base_path`**, **`robot_package`**, **`start_rviz`**. |
+| `gazebo.launch.py` | GZ Sim, `/clock` bridge, spawn, `gz_ros2_control` plugin path. Args **`base_path`**. |
+| `rviz.launch.py` | RViz2 — use when **`/robot_description`** and **`/joint_states`** already exist. |
 | `rviz_standalone.launch.py` | RViz2 only — use when **`/robot_description`** and **`/joint_states`** already exist. |
+
+**Dependency**: thais_urdf package doesn't init robot. Robot need to be init with robot_state_publisher before launching gazebo or rviz. See lucy_bringup `lucy.launch.py` to properly sequence the launches.
 
 **Arguments** (URDF launches): `urdf_path`, `base_path` — defaults come from **`get_package_share_directory("thais_urdf")`** (installed `description/`).
 
