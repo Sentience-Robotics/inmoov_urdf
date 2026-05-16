@@ -14,8 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-# Gazebo sim + RViz + ros2_control (sim spawners) + rosbridge.
-# Control panel at ws://localhost:9090.
+# Gazebo sim + ros2_control (sim spawners). Optional RViz (``start_rviz``). No rosbridge.
 
 import os
 
@@ -23,11 +22,12 @@ from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import (
     DeclareLaunchArgument,
-    ExecuteProcess,
+    GroupAction,
     IncludeLaunchDescription,
     SetEnvironmentVariable,
     TimerAction,
 )
+from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import (
     Command,
@@ -63,11 +63,15 @@ def generate_launch_description():
         default_value=default_base,
         description="Base path for xacro (mesh_dir)",
     )
-
-    rosbridge = ExecuteProcess(
-        cmd=["ros2", "launch", "rosbridge_server", "rosbridge_websocket_launch.xml"],
-        output="screen",
-        shell=True,
+    robot_package_arg = DeclareLaunchArgument(
+        "robot_package",
+        default_value="thais_urdf",
+        description="Package share for RViz display config (config/inmoov_rviz.rviz)",
+    )
+    start_rviz_arg = DeclareLaunchArgument(
+        "start_rviz",
+        default_value="true",
+        description="If true, start RViz2 (set false for headless Gazebo)",
     )
 
     urdf_path = LaunchConfiguration("urdf_path")
@@ -165,7 +169,9 @@ def generate_launch_description():
     )
 
     rviz_config = PathJoinSubstitution([
-        FindPackageShare("thais_urdf"), "config", "inmoov_rviz.rviz",
+        FindPackageShare(LaunchConfiguration("robot_package")),
+        "config",
+        "inmoov_rviz.rviz",
     ])
     rviz = Node(
         package="rviz2",
@@ -175,11 +181,16 @@ def generate_launch_description():
         arguments=["--display-config", rviz_config],
         parameters=[{"use_sim_time": True}],
     )
+    rviz_group = GroupAction(
+        condition=IfCondition(LaunchConfiguration("start_rviz")),
+        actions=[rviz],
+    )
 
     return LaunchDescription([
         urdf_path_arg,
         base_path_arg,
-        rosbridge,
+        robot_package_arg,
+        start_rviz_arg,
         SetEnvironmentVariable(name="GZ_SIM_RESOURCE_PATH", value=gz_resource_path),
         SetEnvironmentVariable(name="GZ_SIM_SYSTEM_PLUGIN_PATH", value=gz_plugin_path),
         SetEnvironmentVariable(name="IGN_GAZEBO_SYSTEM_PLUGIN_PATH", value=ign_plugin_path),
@@ -190,5 +201,5 @@ def generate_launch_description():
         spawn_joint_state_sim,
         spawn_left_sim,
         spawn_right_sim,
-        rviz,
+        rviz_group,
     ])

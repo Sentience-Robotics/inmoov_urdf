@@ -18,7 +18,7 @@
 RViz2 only — no robot_state_publisher, no ros2_control, no Gazebo.
 
 Use when another stack already publishes /robot_description and /joint_states
-(e.g. lucy_bringup lucy.launch.py + lucy_ros2_control control.launch.py).
+(e.g. lucy_bringup lucy.launch.py).
 
 Terminal 1:
   ros2 launch lucy_bringup lucy.launch.py
@@ -26,7 +26,9 @@ Terminal 1:
 Terminal 2:
   ros2 launch thais_urdf rviz_standalone.launch.py
 
-For a single machine that starts control + rosbridge + RViz together, use rviz.launch.py instead.
+For a single machine that starts control, RViz, and the **web panel** together, use
+``lucy_bringup`` ``lucy.launch.py`` with ``real:=false`` and ``rviz:=true`` (includes
+``web_ros_api``).
 """
 
 import os

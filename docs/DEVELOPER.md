@@ -15,7 +15,7 @@ ROS 2 **Humble**. For **contributors** who change URDF/xacro, meshes, RViz confi
 | **Hardware mapping** (boards, actuators, sensors) | `config/hardware/active.yaml` — see [hardware_mapping.md](hardware_mapping.md) |
 | **Controller parameters** for this package’s default bringup | `config/controllers.yaml` (joint lists must stay aligned with ros2_control / URDF) |
 | **RViz** saved layout | `config/inmoov_rviz.rviz` |
-| **Launches** (RViz and/or GZ Sim + rosbridge + control) | `launch/` |
+| **Launches** (RViz and/or GZ Sim + control) | `launch/` |
 
 For **InMoov i2–style** head and expression actuators not present in the current i1 URDF, see [inmoov_i2.md](inmoov_i2.md).
 
@@ -35,7 +35,6 @@ thais_urdf/
 ├── CMakeLists.txt
 ├── launch/
 │   ├── control.launch.py
-│   ├── rviz.launch.py
 │   ├── gazebo.launch.py
 │   └── rviz_standalone.launch.py
 ├── config/
@@ -57,7 +56,7 @@ thais_urdf/
 
 ## 3. Build and install (`CMakeLists.txt`)
 
-**`launch/`**, **`config/`**, **`description/`**, and **`docs/`** install to `share/thais_urdf/`. Defaults for `urdf_path` and `base_path` in **`rviz.launch.py`** / **`gazebo.launch.py`** / **`control.launch.py`** come from **`get_package_share_directory("thais_urdf")`** → `.../description` and `.../description/urdf/inmoov.urdf.xacro`.
+**`launch/`**, **`config/`**, **`description/`**, and **`docs/`** install to `share/thais_urdf/`. Defaults for `urdf_path` and `base_path` in **`gazebo.launch.py`** / **`control.launch.py`** come from **`get_package_share_directory("thais_urdf")`** → `.../description` and `.../description/urdf/inmoov.urdf.xacro` (see **`config/control.launch.yaml`** for **`control.launch.py`**).
 
 **`lucy_ros2_control`** may consume this URDF when both packages are in one workspace. This package does **not** declare **`exec_depend` `lucy_ros2_control`** (avoids a **lucy_ros2_control ↔ thais_urdf** cycle for `colcon`). Combo launches still **require** `lucy_ros2_control` at runtime if you use its default controller YAML path.
 
@@ -80,9 +79,9 @@ Editing joint names or interfaces here requires matching **`config/controllers.y
 
 | Launch | Stack |
 |--------|-------|
-| `control.launch.py` | ros2_control node + spawners; default `controller_config` from this package’s share. |
-| `rviz.launch.py` | Real-oriented: `robot_state_publisher`, delayed `ros2_control_node`, spawners, rosbridge, RViz (`use_sim_time: false`). |
-| `gazebo.launch.py` | GZ Sim, `/clock` bridge, spawn, `gz_ros2_control` plugin path, rosbridge, RViz (`use_sim_time: true` where applicable). |
+| `control.launch.py` | Real: `robot_state_publisher`, delayed `ros2_control_node`, spawners. Add **`rviz_standalone.launch.py`** in another terminal for RViz. |
+| `gazebo.launch.py` | GZ Sim, `/clock` bridge, spawn, `gz_ros2_control` plugin path, optional RViz via **`start_rviz`**. Args **`urdf_path`**, **`base_path`**, **`robot_package`**, **`start_rviz`**. |
+| `rviz_standalone.launch.py` | RViz2 only — use when **`/robot_description`** and **`/joint_states`** already exist. |
 
 **Arguments** (URDF launches): `urdf_path`, `base_path` — defaults come from **`get_package_share_directory("thais_urdf")`** (installed `description/`).
 
@@ -109,9 +108,10 @@ Editing joint names or interfaces here requires matching **`config/controllers.y
 ## 8. Quick commands
 
 ```bash
-ros2 launch thais_urdf rviz.launch.py
-ros2 launch thais_urdf gazebo.launch.py
 ros2 launch thais_urdf control.launch.py
+ros2 launch thais_urdf rviz_standalone.launch.py
+ros2 launch thais_urdf gazebo.launch.py
+# With web panel: lucy_bringup lucy.launch.py real:=false rviz:=true
 # Optional: urdf_path:=... base_path:=...
 ```
 
