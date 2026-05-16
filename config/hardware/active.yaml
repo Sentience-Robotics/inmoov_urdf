@@ -5,6 +5,48 @@
 version: 1
 robot_name: thais
 
+passive_urdf_joints:
+  - i01.head.eyeLeft.001_link_joint
+  - i01.head.eyeLeft_link_joint
+  - i01.head.eyeRight.001_link_joint
+  - i01.head.eyeRight_link_joint
+  - i01.head.jaw_link_joint
+  - i01.head.neck.001_link_joint
+  - i01.head.rollNeck_link_joint
+  - i01.head.rothead_link_joint
+  - i01.torso.midStom_link_joint
+  - i01.torso.topStom_link_joint
+
+ignore_urdf_joints:
+  - Empty.001_link_joint
+  - Empty.002_link_joint
+  - i01.leftHand.index2_link_joint
+  - i01.leftHand.index3_link_joint
+  - i01.leftHand.majeure2_link_joint
+  - i01.leftHand.majeure3_link_joint
+  - i01.leftHand.pinky0_link_joint
+  - i01.leftHand.pinky2_link_joint
+  - i01.leftHand.pinky3_link_joint
+  - i01.leftHand.ringfinger0_link_joint
+  - i01.leftHand.ringfinger2_link_joint
+  - i01.leftHand.ringfinger3_link_joint
+  - i01.leftHand.thumb1_link_joint
+  - i01.leftHand.thumb3_link_joint
+  - i01.leftHand.wrist.001_link_joint
+  - i01.rightHand.index2_link_joint
+  - i01.rightHand.index3_link_joint
+  - i01.rightHand.majeure2_link_joint
+  - i01.rightHand.majeure3_link_joint
+  - i01.rightHand.pinky0_link_joint
+  - i01.rightHand.pinky2_link_joint
+  - i01.rightHand.pinky3_link_joint
+  - i01.rightHand.ringfinger0_link_joint
+  - i01.rightHand.ringfinger2_link_joint
+  - i01.rightHand.ringfinger3_link_joint
+  - i01.rightHand.thumb1_link_joint
+  - i01.rightHand.thumb3_link_joint
+  - i01.rightHand.wrist.001_link_joint
+
 firmware:
   source_dir: micro_ros_raspberrypi_pico_sdk
   build_dir: build

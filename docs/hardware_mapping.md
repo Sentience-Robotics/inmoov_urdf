@@ -9,7 +9,7 @@ For **InMoov i1 vs i2** scope and how to extend the YAML with **head / expressio
 | Path | Role |
 |------|------|
 | `config/hardware/active.yaml` | Active mapping used for generation and validation |
-| `config/hardware/active_meta.yaml` | `{ name, activated_at }` for the active slot |
+| `config/hardware/active_meta.yaml` | `{ name, activated_at }` for the active slot; optional `{ flashed_name, flashed_at }` after a successful pipeline flash |
 | `config/hardware/configs/*.yaml` | Named presets (e.g. `default.yaml` mirrors the last activated snapshot) |
 | `config/hardware/backups/` | Automatic backups before activation |
 
@@ -17,6 +17,8 @@ For **InMoov i1 vs i2** scope and how to extend the YAML with **head / expressio
 
 - **`version`**: schema version (integer, currently `1`).
 - **`robot_name`**: logical name (e.g. `thais`).
+- **`candidate_urdf_joints`** *(optional)*: string list of URDF joint names you may assign to actuators in the control UI even before every joint appears on an actuator row.
+- **`passive_urdf_joints`** / **`ignore_urdf_joints`** *(optional)*: string lists merged together; URDF joints named here are **excluded** from the pipeline **“not mapped to any actuator”** cross-check warning. **Synonyms** (same validation rules): `urdf_passive`, `urdf_passive_joints`, `urdf_ignore`, `urdf_ignore_joints`. Cross-check matches **`actuators[].urdf_joint`** against the URDF (not actuator **`id`**). Does **not** remove joints from the URDF or generation elsewhere — only suppresses that informational warning on save.
 - **`firmware`**: `source_dir`, `build_dir` — paths relative to the micro-ROS firmware workspace for the pipeline.
 - **`controller_manager`**: e.g. `update_rate`.
 - **`boards`**: ordered map of board id → `serial_id` (optional USB serial for `picotool --ser`, alphanumeric or empty), **`board_class`** (`internal_servo_only` \| `internal_servo_i2c_pwm`), **`internal_servo_slots`** (max valid `physical_pin` for actuators on that board), firmware target, compile definition, micro-ROS actuator/sensor topics, and `controller` (`name`, `type`). **Order** of keys is the order of generated ros2_control blocks and controller sections. **Board id** is also the firmware C basename: `config_<board_id>.c`. **No `/dev/ttyACM*`** here — serial devices are launch-time (`lucy_bringup` args), not committed hardware truth.
