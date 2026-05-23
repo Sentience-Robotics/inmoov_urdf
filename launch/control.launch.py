@@ -21,7 +21,7 @@ from pathlib import Path
 
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, TimerAction
-from launch.substitutions import Command, LaunchConfiguration
+from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 import yaml
 
@@ -51,7 +51,9 @@ def _load_launch_defaults(package_root: Path) -> dict[str, str]:
 def generate_launch_description():
     package_root = Path(__file__).resolve().parents[1]
     defaults = _load_launch_defaults(package_root)
-    default_controllers_yaml = str((package_root / defaults["controllers_yaml"]).resolve())
+    default_controllers_yaml = str(
+        (package_root / defaults["controllers_yaml"]).resolve()
+    )
     controllers_yaml_path = Path(default_controllers_yaml)
     controller_names = _controllers_to_spawn(controllers_yaml_path)
 
@@ -84,8 +86,10 @@ def generate_launch_description():
         for controller in controller_names
     ]
 
-    return LaunchDescription([
-        controllers_yaml_arg,
-        ros2_control_node,
-        *spawners,
-    ])
+    return LaunchDescription(
+        [
+            controllers_yaml_arg,
+            ros2_control_node,
+            *spawners,
+        ]
+    )

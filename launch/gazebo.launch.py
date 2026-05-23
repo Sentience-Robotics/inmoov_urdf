@@ -22,21 +22,16 @@ from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import (
     DeclareLaunchArgument,
-    GroupAction,
     IncludeLaunchDescription,
     SetEnvironmentVariable,
     TimerAction,
 )
-from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import (
-    Command,
     LaunchConfiguration,
     PathJoinSubstitution,
-    TextSubstitution,
 )
 from launch_ros.actions import Node
-from launch_ros.substitutions import FindPackageShare
 
 
 def _gz_ros2_control_plugin_path():
@@ -45,6 +40,7 @@ def _gz_ros2_control_plugin_path():
         return os.path.join(os.path.dirname(share), "lib")
     except Exception:
         return "/opt/ros/humble/lib"
+
 
 def generate_launch_description():
     # Paths
@@ -119,23 +115,26 @@ def generate_launch_description():
     spawn_right = create_spawner("right_arm_controller", delay=4.0)
     spawn_torso = create_spawner("torso_head_controller", delay=6.0)
 
-    return LaunchDescription([
-        # Arguments
-        base_path_arg,
-
-        # Env Vars
-        SetEnvironmentVariable(name="GZ_SIM_RESOURCE_PATH", value=mesh_dae),
-        SetEnvironmentVariable(name="GZ_SIM_SYSTEM_PLUGIN_PATH", value=gz_plugin_path),
-        SetEnvironmentVariable(name="IGN_GAZEBO_SYSTEM_PLUGIN_PATH", value=ign_plugin_path),
-
-        # State and Control
-        spawn_jsb,
-        spawn_left,
-        spawn_right,
-        spawn_torso,
-
-        # Simulation
-        clock_bridge,
-        gz_sim_launch,
-        spawn_robot,
-    ])
+    return LaunchDescription(
+        [
+            # Arguments
+            base_path_arg,
+            # Env Vars
+            SetEnvironmentVariable(name="GZ_SIM_RESOURCE_PATH", value=mesh_dae),
+            SetEnvironmentVariable(
+                name="GZ_SIM_SYSTEM_PLUGIN_PATH", value=gz_plugin_path
+            ),
+            SetEnvironmentVariable(
+                name="IGN_GAZEBO_SYSTEM_PLUGIN_PATH", value=ign_plugin_path
+            ),
+            # State and Control
+            spawn_jsb,
+            spawn_left,
+            spawn_right,
+            spawn_torso,
+            # Simulation
+            clock_bridge,
+            gz_sim_launch,
+            spawn_robot,
+        ]
+    )
