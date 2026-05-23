@@ -60,9 +60,9 @@ def generate_launch_description():
     clock_bridge = Node(
         package="ros_gz_bridge",
         executable="parameter_bridge",
-        arguments=["/world/empty/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock"],
+        arguments=["/world/default/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock"],
         parameters=[{"use_sim_time": True}],
-        remappings=[("/world/empty/clock", "/clock")],
+        remappings=[("/world/default/clock", "/clock")],
         output="screen",
     )
 
@@ -81,9 +81,10 @@ def generate_launch_description():
         [s for s in [os.environ.get("IGN_GAZEBO_SYSTEM_PLUGIN_PATH", ""), ros_lib] if s]
     ).strip(os.pathsep)
 
+    default_world = os.path.join(pkg_share, "worlds", "default.sdf")
     gz_sim_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(gz_sim_launch_path),
-        launch_arguments={"gz_args": "-r empty.sdf"}.items(),
+        launch_arguments={"gz_args": f"-r {default_world}"}.items(),
     )
 
     # Spawn Robot
