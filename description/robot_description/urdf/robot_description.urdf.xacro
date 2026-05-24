@@ -14,399 +14,456 @@
     <child link="stand_link"/>
   </joint>
   <joint name="Empty.002_link_joint" type="continuous">
-    <limit lower="0" upper="0" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0" upper="0" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 8.97279"/>
     <parent link="stand_link"/>
     <child link="torso_bottom_link"/>
     <axis xyz="0.00000 0.00000 1.00000"/>
   </joint>
   <joint name="i01.head.eyeRight_link_joint" type="revolute">
-    <limit lower="-0.78530" upper="0.78530" effort="0.00000" velocity="0.78540"/>
+    <limit lower="-0.78530" upper="0.78530" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="0.00000 -0.00000 0.00000" xyz="-0.00000 -0.00590 0.00000"/>
     <parent link="i01.head.eyeRight.001_link"/>
     <child link="i01.head.eyeRight_link"/>
     <axis xyz="0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="i01.head.jaw_link_joint" type="revolute">
-    <limit lower="0.00000" upper="0.17453" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="0.17453" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="-0.00000 -0.00000 -1.57080" xyz="-0.36176 0.01121 0.32442"/>
     <parent link="i01.head.rothead_link"/>
     <child link="i01.head.jaw_link"/>
     <axis xyz="0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="left_shoulder_y_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="0.00021 -0.00000 -0.00000" xyz="1.35472 -0.00337 2.80749"/>
     <parent link="torso_y_link"/>
     <child link="left_shoulder_y_link"/>
     <axis xyz="0.00000 -0.99994 0.01111"/>
   </joint>
   <joint name="left_shoulder_x_link_joint" type="revolute">
-    <limit lower="-1.57080" upper="2.35619" effort="0.00000" velocity="0.78540"/>
+    <limit lower="-1.57080" upper="2.35619" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="-0.00000 -0.00000 -0.00000" xyz="0.11351 0.00189 -0.37504"/>
     <parent link="left_shoulder_y_link"/>
     <child link="left_shoulder_x_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="left_shoulder_z_link_joint" type="revolute">
-    <limit lower="-1.57080" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="-1.57080" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="0.00000 0.00000 0.00000" xyz="0.62406 -0.00937 -0.59421"/>
     <parent link="left_shoulder_x_link"/>
     <child link="left_shoulder_z_link"/>
     <axis xyz="0.00000 0.00000 1.00000"/>
   </joint>
   <joint name="left_elbow_x_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="0.06567 -0.00000 -0.00000" xyz="-0.01281 0.29228 -2.11577"/>
     <parent link="left_shoulder_z_link"/>
     <child link="left_elbow_x_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="left_wrist_z_link_joint" type="revolute">
-    <limit lower="-1.57080" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="-1.57080" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="-0.41605 -0.00000 0.00000" xyz="-0.08767 -0.98766 -2.53936"/>
     <parent link="left_elbow_x_link"/>
     <child link="left_wrist_z_link"/>
     <axis xyz="0.00000 0.00000 1.00000"/>
   </joint>
   <joint name="i01.leftHand.wrist.001_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="-0.00000 0.00000 -0.61611" xyz="-0.00000 -0.00000 -0.16925"/>
     <parent link="left_wrist_z_link"/>
     <child link="i01.leftHand.wrist.001_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="i01.leftHand.index_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="-1.56854 -0.09096 -0.00330" xyz="0.32645 -0.01145 -0.94982"/>
     <parent link="i01.leftHand.wrist.001_link"/>
     <child link="i01.leftHand.index_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="i01.leftHand.index2_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="-0.00000 0.00000 -0.00000" xyz="0.00258 0.34105 0.00685"/>
     <parent link="i01.leftHand.index_link"/>
     <child link="i01.leftHand.index2_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="i01.torso.midStom_link_joint" type="revolute">
-    <limit lower="-2.35619" upper="2.35619" effort="0.00000" velocity="0.78540"/>
+    <limit lower="-2.35619" upper="2.35619" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="0.00000 0.06589 1.57080" xyz="-0.00213 0.05565 1.13807"/>
     <parent link="torso_bottom_link"/>
     <child link="torso_z_link"/>
     <axis xyz="0.00000 0.00000 1.00000"/>
   </joint>
   <joint name="i01.leftHand.index3_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="0.00000 -0.00000 -0.00000" xyz="0.00103 0.22697 0.00433"/>
     <parent link="i01.leftHand.index2_link"/>
     <child link="i01.leftHand.index3_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="i01.leftHand.majeure_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="-1.56854 0.00160 -0.00309" xyz="0.07161 -0.01170 -0.98881"/>
     <parent link="i01.leftHand.wrist.001_link"/>
     <child link="i01.leftHand.majeure_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="i01.leftHand.majeure2_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="-0.00000 -0.00000 0.00000" xyz="0.00272 0.35935 0.00722"/>
     <parent link="i01.leftHand.majeure_link"/>
     <child link="i01.leftHand.majeure2_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="i01.leftHand.majeure3_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="0.00000 -0.00000 -0.00000" xyz="0.00109 0.23915 0.00456"/>
     <parent link="i01.leftHand.majeure2_link"/>
     <child link="i01.leftHand.majeure3_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="i01.leftHand.pinky0_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="-1.56789 -0.68643 -0.00494" xyz="-0.24002 0.00108 -0.35218"/>
     <parent link="i01.leftHand.wrist.001_link"/>
     <child link="i01.leftHand.pinky0_link"/>
     <axis xyz="0.00000 -0.99994 0.01111"/>
   </joint>
   <joint name="i01.leftHand.pinky_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="-0.00000 0.00000 0.94526" xyz="-0.43178 0.20489 0.00726"/>
     <parent link="i01.leftHand.pinky0_link"/>
     <child link="i01.leftHand.pinky_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="i01.leftHand.pinky2_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="-0.00000 0.00000 -0.00000" xyz="0.00225 0.29796 0.00599"/>
     <parent link="i01.leftHand.pinky_link"/>
     <child link="i01.leftHand.pinky2_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="i01.leftHand.pinky3_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="-0.00000 -0.00000 -0.00000" xyz="0.00090 0.19830 0.00378"/>
     <parent link="i01.leftHand.pinky2_link"/>
     <child link="i01.leftHand.pinky3_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="i01.leftHand.ringfinger0_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="-1.56789 -0.68643 -0.00494" xyz="-0.05673 0.00101 -0.57588"/>
     <parent link="i01.leftHand.wrist.001_link"/>
     <child link="i01.leftHand.ringfinger0_link"/>
     <axis xyz="0.00000 -0.99994 0.01111"/>
   </joint>
   <joint name="i01.leftHand.ringFinger_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="-0.00000 0.00000 0.77485" xyz="-0.33329 0.15280 -0.00664"/>
     <parent link="i01.leftHand.ringfinger0_link"/>
     <child link="i01.leftHand.ringFinger_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="i01.torso.topStom_link_joint" type="revolute">
-    <limit lower="-0.34907" upper="0.34907" effort="0.00000" velocity="0.78540"/>
+    <limit lower="-0.34907" upper="0.34907" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="0.00000 0.00000 -1.57080" xyz="-0.06317 0.00033 1.01916"/>
     <parent link="torso_z_link"/>
     <child link="torso_y_link"/>
     <axis xyz="0.00000 -0.99994 0.01111"/>
   </joint>
   <joint name="i01.leftHand.ringfinger2_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="-0.00000 -0.00000 0.00000" xyz="0.00258 0.34105 0.00685"/>
     <parent link="i01.leftHand.ringFinger_link"/>
     <child link="i01.leftHand.ringfinger2_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="i01.leftHand.ringfinger3_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="-0.00000 0.00000 -0.00000" xyz="0.00103 0.22697 0.00433"/>
     <parent link="i01.leftHand.ringfinger2_link"/>
     <child link="i01.leftHand.ringfinger3_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="i01.leftHand.thumb1_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="1.51635 -0.09893 -0.00332" xyz="0.28234 -0.00002 -0.37340"/>
     <parent link="i01.leftHand.wrist.001_link"/>
     <child link="i01.leftHand.thumb1_link"/>
     <axis xyz="0.00000 -0.99994 0.01111"/>
   </joint>
   <joint name="i01.leftHand.thumb_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="-0.03182 -0.32566 0.83064" xyz="0.25977 -0.13332 -0.00800"/>
     <parent link="i01.leftHand.thumb1_link"/>
     <child link="i01.leftHand.thumb_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="i01.leftHand.thumb3_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="0.00001 -0.00000 0.00000" xyz="0.01229 -0.33047 -0.00704"/>
     <parent link="i01.leftHand.thumb_link"/>
     <child link="i01.leftHand.thumb3_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="right_shoulder_y_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="0.00021 -0.00000 -0.00000" xyz="-1.34979 -0.00337 2.80749"/>
     <parent link="torso_y_link"/>
     <child link="right_shoulder_y_link"/>
     <axis xyz="0.00000 0.99994 0.01111"/>
   </joint>
   <joint name="right_shoulder_x_link_joint" type="revolute">
-    <limit lower="-1.57080" upper="2.35619" effort="0.00000" velocity="0.78540"/>
+    <limit lower="-1.57080" upper="2.35619" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="-0.00000 -0.00000 -0.00000" xyz="-0.11351 0.00189 -0.37504"/>
     <parent link="right_shoulder_y_link"/>
     <child link="right_shoulder_x_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="right_shoulder_z_link_joint" type="revolute">
-    <limit lower="-1.57080" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="-1.57080" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="0.00000 0.00000 0.00000" xyz="-0.62406 -0.00937 -0.59421"/>
     <parent link="right_shoulder_x_link"/>
     <child link="right_shoulder_z_link"/>
     <axis xyz="0.00000 0.00000 1.00000"/>
   </joint>
   <joint name="right_elbow" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="0.06567 0.00000 0.00000" xyz="0.00858 0.29228 -2.11577"/>
     <parent link="right_shoulder_z_link"/>
     <child link="right_elbow_x_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="right_wrist_z_link_joint" type="revolute">
-    <limit lower="-1.57080" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="-1.57080" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="-0.41605 0.00000 0.00000" xyz="0.08767 -0.98766 -2.53936"/>
     <parent link="right_elbow_x_link"/>
     <child link="right_wrist_z_link"/>
     <axis xyz="0.00000 0.00000 1.00000"/>
   </joint>
   <joint name="i01.head.neck.001_link_joint" type="revolute">
-    <limit lower="-0.34907" upper="0.34907" effort="0.00000" velocity="0.78540"/>
+    <limit lower="-0.34907" upper="0.34907" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="0.06589 -0.00000 -0.00000" xyz="0.00390 0.29817 4.29073"/>
     <parent link="torso_y_link"/>
     <child link="i01.head.neck.001_link"/>
     <axis xyz="0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="i01.rightHand.wrist.001_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="0.00000 0.00000 0.63517" xyz="-0.00000 -0.00000 -0.16508"/>
     <parent link="right_wrist_z_link"/>
     <child link="i01.rightHand.wrist.001_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="i01.rightHand.index_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="1.57305 0.09096 -0.01576" xyz="-0.32320 -0.00773 -0.95398"/>
     <parent link="i01.rightHand.wrist.001_link"/>
     <child link="i01.rightHand.index_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="i01.rightHand.index2_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="0.00000 -0.00000 0.00000" xyz="-0.00258 -0.34105 -0.00685"/>
     <parent link="i01.rightHand.index_link"/>
     <child link="i01.rightHand.index2_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="i01.rightHand.index3_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="0.00000 0.00000 -0.00000" xyz="-0.00103 -0.22697 -0.00432"/>
     <parent link="i01.rightHand.index2_link"/>
     <child link="i01.rightHand.index3_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="i01.rightHand.majeure_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="1.57305 -0.00160 -0.01597" xyz="-0.06841 -0.01284 -0.99297"/>
     <parent link="i01.rightHand.wrist.001_link"/>
     <child link="i01.rightHand.majeure_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="i01.rightHand.majeure2_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="-0.00000 -0.00000 -0.00000" xyz="-0.00272 -0.35935 -0.00722"/>
     <parent link="i01.rightHand.majeure_link"/>
     <child link="i01.rightHand.majeure2_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="i01.rightHand.majeure3_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="0.00000 -0.00000 0.00000" xyz="-0.00109 -0.23915 -0.00456"/>
     <parent link="i01.rightHand.majeure2_link"/>
     <child link="i01.rightHand.majeure3_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="i01.rightHand.pinky0_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="1.57370 0.68643 -0.01412" xyz="0.24340 -0.00601 -0.35634"/>
     <parent link="i01.rightHand.wrist.001_link"/>
     <child link="i01.rightHand.pinky0_link"/>
     <axis xyz="0.00000 -0.99994 0.01111"/>
   </joint>
   <joint name="i01.rightHand.pinky_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="-0.00000 -0.00000 0.94526" xyz="0.43178 -0.20489 -0.00726"/>
     <parent link="i01.rightHand.pinky0_link"/>
     <child link="i01.rightHand.pinky_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="i01.rightHand.pinky2_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="0.00000 0.00000 -0.00000" xyz="-0.00225 -0.29796 -0.00598"/>
     <parent link="i01.rightHand.pinky_link"/>
     <child link="i01.rightHand.pinky2_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="i01.head.rollNeck_link_joint" type="revolute">
-    <limit lower="-0.34907" upper="0.34907" effort="0.00000" velocity="0.78540"/>
+    <limit lower="-0.34907" upper="0.34907" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="-0.00000 0.00000 -0.00000" xyz="0.00000 -0.00000 0.00435"/>
     <parent link="i01.head.neck.001_link"/>
     <child link="neck_link"/>
     <axis xyz="0.00000 0.99994 0.01111"/>
   </joint>
   <joint name="i01.rightHand.pinky3_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00090 -0.19830 -0.00378"/>
     <parent link="i01.rightHand.pinky2_link"/>
     <child link="i01.rightHand.pinky3_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="i01.rightHand.ringfinger0_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="1.57370 0.68643 -0.01412" xyz="0.06015 -0.00258 -0.58004"/>
     <parent link="i01.rightHand.wrist.001_link"/>
     <child link="i01.rightHand.ringfinger0_link"/>
     <axis xyz="0.00000 -0.99994 0.01111"/>
   </joint>
   <joint name="i01.rightHand.ringFinger_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="-0.00000 -0.00000 0.77485" xyz="0.33328 -0.15280 0.00664"/>
     <parent link="i01.rightHand.ringfinger0_link"/>
     <child link="i01.rightHand.ringFinger_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="i01.rightHand.ringfinger2_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="-0.00000 -0.00000 0.00000" xyz="-0.00258 -0.34105 -0.00685"/>
     <parent link="i01.rightHand.ringFinger_link"/>
     <child link="i01.rightHand.ringfinger2_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="i01.rightHand.ringfinger3_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="-0.00000 0.00000 -0.00000" xyz="-0.00103 -0.22697 -0.00432"/>
     <parent link="i01.rightHand.ringfinger2_link"/>
     <child link="i01.rightHand.ringfinger3_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="i01.rightHand.thumb1_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="-1.62525 0.09893 -0.01574" xyz="-0.27888 0.00285 -0.37757"/>
     <parent link="i01.rightHand.wrist.001_link"/>
     <child link="i01.rightHand.thumb1_link"/>
     <axis xyz="0.00000 -0.99994 0.01111"/>
   </joint>
   <joint name="i01.rightHand.thumb_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="-0.03182 -0.32566 0.83064" xyz="-0.25977 0.13332 0.00800"/>
     <parent link="i01.rightHand.thumb1_link"/>
     <child link="i01.rightHand.thumb_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="i01.rightHand.thumb3_link_joint" type="revolute">
-    <limit lower="0.00000" upper="1.57080" effort="0.00000" velocity="0.78540"/>
+    <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="0.00001 -0.00000 0.00000" xyz="-0.01229 0.33047 0.00704"/>
     <parent link="i01.rightHand.thumb_link"/>
     <child link="i01.rightHand.thumb3_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="i01.head.rothead_link_joint" type="revolute">
-    <limit lower="-0.52360" upper="0.52360" effort="0.00000" velocity="0.78540"/>
+    <limit lower="-0.52360" upper="0.52360" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="0.00000 -0.00000 1.57080" xyz="0.00246 0.01503 0.24911"/>
     <parent link="neck_link"/>
     <child link="i01.head.rothead_link"/>
     <axis xyz="0.00000 0.00000 1.00000"/>
   </joint>
   <joint name="i01.head.eyeLeft.001_link_joint" type="revolute">
-    <limit lower="-0.34907" upper="0.34907" effort="0.00000" velocity="0.78540"/>
+    <limit lower="-0.34907" upper="0.34907" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="0.00000 0.00000 -1.57080" xyz="-1.08601 -0.29198 0.37576"/>
     <parent link="i01.head.rothead_link"/>
     <child link="i01.head.eyeLeft.001_link"/>
     <axis xyz="0.00000 0.00000 1.00000"/>
   </joint>
   <joint name="i01.head.eyeLeft_link_joint" type="revolute">
-    <limit lower="-0.78530" upper="0.78530" effort="0.00000" velocity="0.78540"/>
+    <limit lower="-0.78530" upper="0.78530" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="0.00000 -0.00000 0.00000" xyz="0.00000 -0.00590 0.00000"/>
     <parent link="i01.head.eyeLeft.001_link"/>
     <child link="i01.head.eyeLeft_link"/>
     <axis xyz="0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="i01.head.eyeRight.001_link_joint" type="revolute">
-    <limit lower="-0.34907" upper="0.34907" effort="0.00000" velocity="0.78540"/>
+    <limit lower="-0.34907" upper="0.34907" effort="100.00000" velocity="0.78540"/>
+    <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="-0.00000 -0.00000 -1.57080" xyz="-1.09644 0.29850 0.37576"/>
     <parent link="i01.head.rothead_link"/>
     <child link="i01.head.eyeRight.001_link"/>

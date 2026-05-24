@@ -21,7 +21,7 @@ from pathlib import Path
 
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, TimerAction
-from launch.substitutions import Command, LaunchConfiguration
+from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 import yaml
 
@@ -51,40 +51,19 @@ def _load_launch_defaults(package_root: Path) -> dict[str, str]:
 def generate_launch_description():
     package_root = Path(__file__).resolve().parents[1]
     defaults = _load_launch_defaults(package_root)
-    default_urdf = str((package_root / defaults["urdf_path"]).resolve())
-    default_base = str((package_root / defaults["base_path"]).resolve())
-    default_controllers_yaml = str((package_root / defaults["controllers_yaml"]).resolve())
+    default_controllers_yaml = str(
+        (package_root / defaults["controllers_yaml"]).resolve()
+    )
     controllers_yaml_path = Path(default_controllers_yaml)
     controller_names = _controllers_to_spawn(controllers_yaml_path)
 
-    urdf_path_arg = DeclareLaunchArgument(
-        "urdf_path",
-        default_value=default_urdf,
-        description="Absolute path to robot URDF xacro",
-    )
-    base_path_arg = DeclareLaunchArgument(
-        "base_path",
-        default_value=default_base,
-        description="Base path for xacro (mesh_dir)",
-    )
     controllers_yaml_arg = DeclareLaunchArgument(
         "controllers_yaml",
         default_value=default_controllers_yaml,
         description="Absolute path to controller_manager YAML config",
     )
-    urdf_path = LaunchConfiguration("urdf_path")
-    base_path = LaunchConfiguration("base_path")
     controllers_yaml = LaunchConfiguration("controllers_yaml")
 
-    robot_description = Command(["xacro ", urdf_path, " base_path:=", base_path])
-    robot_description_dict = {"robot_description": robot_description}
-
-    robot_state_publisher = Node(
-        package="robot_state_publisher",
-        executable="robot_state_publisher",
-        output="screen",
-        parameters=[robot_description_dict],
-    )
     ros2_control_node = TimerAction(
         period=2.0,
         actions=[
@@ -107,8 +86,10 @@ def generate_launch_description():
         for controller in controller_names
     ]
 
-    return LaunchDescription([
-        urdf_path_arg, base_path_arg, controllers_yaml_arg,
-        robot_state_publisher, ros2_control_node,
-        *spawners,
-    ])
+    return LaunchDescription(
+        [
+            controllers_yaml_arg,
+            ros2_control_node,
+            *spawners,
+        ]
+    )

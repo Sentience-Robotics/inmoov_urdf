@@ -22,21 +22,16 @@ from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import (
     DeclareLaunchArgument,
-    GroupAction,
     IncludeLaunchDescription,
     SetEnvironmentVariable,
     TimerAction,
 )
-from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import (
-    Command,
     LaunchConfiguration,
     PathJoinSubstitution,
-    TextSubstitution,
 )
 from launch_ros.actions import Node
-from launch_ros.substitutions import FindPackageShare
 
 
 def _gz_ros2_control_plugin_path():
@@ -48,83 +43,35 @@ def _gz_ros2_control_plugin_path():
 
 
 def generate_launch_description():
-    share = get_package_share_directory("thais_urdf")
-    default_base = os.path.join(share, "description")
-    default_urdf = os.path.join(default_base, "urdf", "inmoov.urdf.xacro")
-    controller_config_path = os.path.join(share, "config", "controllers.yaml")
+    # Paths
+    pkg_share = get_package_share_directory("thais_urdf")
+    default_base = os.path.join(pkg_share, "description")
 
-    urdf_path_arg = DeclareLaunchArgument(
-        "urdf_path",
-        default_value=default_urdf,
-        description="Path to inmoov.urdf.xacro",
-    )
+    # Launch Arguments
     base_path_arg = DeclareLaunchArgument(
         "base_path",
         default_value=default_base,
         description="Base path for xacro (mesh_dir)",
     )
-    robot_package_arg = DeclareLaunchArgument(
-        "robot_package",
-        default_value="thais_urdf",
-        description="Package share for RViz display config (config/inmoov_rviz.rviz)",
-    )
-    start_rviz_arg = DeclareLaunchArgument(
-        "start_rviz",
-        default_value="true",
-        description="If true, start RViz2 (set false for headless Gazebo)",
-    )
 
-    urdf_path = LaunchConfiguration("urdf_path")
     base_path = LaunchConfiguration("base_path")
-    mesh_dae = PathJoinSubstitution([base_path, "robot_description", "meshes", "dae"])
-    gz_resource_path = [mesh_dae, TextSubstitution(text=os.pathsep), base_path]
 
-    robot_description = Command([
-        "xacro ", urdf_path,
-        " base_path:=", base_path,
-        " use_gazebo_sim:=true",
-        " controller_config:=", controller_config_path,
-    ])
-    robot_description_dict = {"robot_description": robot_description}
-
-    try:
-        _gz_sim_share = get_package_share_directory("ros_gz_sim")
-        _gz_sim_launch_path = os.path.join(_gz_sim_share, "launch", "gz_sim.launch.py")
-    except Exception:
-        _gz_sim_launch_path = "/opt/ros/humble/share/ros_gz_sim/launch/gz_sim.launch.py"
-
-    gz_sim_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(_gz_sim_launch_path),
-        launch_arguments={"gz_args": "-r empty.sdf"}.items(),
-    )
-
+    # Bridge for Clock (Sim Time)
     clock_bridge = Node(
         package="ros_gz_bridge",
         executable="parameter_bridge",
-        arguments=["/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock"],
+        arguments=["/world/default/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock"],
+        parameters=[{"use_sim_time": True}],
+        remappings=[("/world/default/clock", "/clock")],
         output="screen",
     )
 
-    robot_state_publisher = Node(
-        package="robot_state_publisher",
-        executable="robot_state_publisher",
-        output="screen",
-        parameters=[robot_description_dict, {"use_sim_time": True}],
-    )
-
-    spawn_lucy_gazebo = TimerAction(
-        period=4.0,
-        actions=[
-            Node(
-                package="ros_gz_sim",
-                executable="create",
-                name="spawn_lucy",
-                arguments=["-name", "lucy", "-param", "robot_description", "-z", "0.5"],
-                parameters=[robot_description_dict],
-                output="screen",
-            )
-        ],
-    )
+    # Gazebo Launch
+    try:
+        gz_sim_share = get_package_share_directory("ros_gz_sim")
+        gz_sim_launch_path = os.path.join(gz_sim_share, "launch", "gz_sim.launch.py")
+    except Exception:
+        gz_sim_launch_path = "/opt/ros/humble/share/ros_gz_sim/launch/gz_sim.launch.py"
 
     ros_lib = _gz_ros2_control_plugin_path()
     gz_plugin_path = os.pathsep.join(
@@ -134,72 +81,61 @@ def generate_launch_description():
         [s for s in [os.environ.get("IGN_GAZEBO_SYSTEM_PLUGIN_PATH", ""), ros_lib] if s]
     ).strip(os.pathsep)
 
-    spawn_joint_state_sim = TimerAction(
-        period=0.0,
-        actions=[
-            Node(
-                package="controller_manager",
-                executable="spawner",
-                arguments=["joint_state_broadcaster", "--switch-timeout", "10"],
-                output="screen",
-            )
-        ],
-    )
-    spawn_left_sim = TimerAction(
-        period=0.5,
-        actions=[
-            Node(
-                package="controller_manager",
-                executable="spawner",
-                arguments=["left_arm_controller", "--switch-timeout", "10"],
-                output="screen",
-            )
-        ],
-    )
-    spawn_right_sim = TimerAction(
-        period=1.0,
-        actions=[
-            Node(
-                package="controller_manager",
-                executable="spawner",
-                arguments=["right_arm_controller", "--switch-timeout", "10"],
-                output="screen",
-            )
-        ],
+    default_world = os.path.join(pkg_share, "worlds", "default.sdf")
+    gz_sim_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(gz_sim_launch_path),
+        launch_arguments={"gz_args": f"-r {default_world}"}.items(),
     )
 
-    rviz_config = PathJoinSubstitution([
-        FindPackageShare(LaunchConfiguration("robot_package")),
-        "config",
-        "inmoov_rviz.rviz",
-    ])
-    rviz = Node(
-        package="rviz2",
-        executable="rviz2",
-        name="rviz2",
+    # Spawn Robot
+    spawn_robot = Node(
+        package="ros_gz_sim",
+        executable="create",
+        arguments=["-name", "lucy", "-topic", "robot_description", "-z", "0.5"],
         output="screen",
-        arguments=["--display-config", rviz_config],
         parameters=[{"use_sim_time": True}],
     )
-    rviz_group = GroupAction(
-        condition=IfCondition(LaunchConfiguration("start_rviz")),
-        actions=[rviz],
-    )
+    mesh_dae = PathJoinSubstitution([base_path, "robot_description", "meshes", "dae"])
 
-    return LaunchDescription([
-        urdf_path_arg,
-        base_path_arg,
-        robot_package_arg,
-        start_rviz_arg,
-        SetEnvironmentVariable(name="GZ_SIM_RESOURCE_PATH", value=gz_resource_path),
-        SetEnvironmentVariable(name="GZ_SIM_SYSTEM_PLUGIN_PATH", value=gz_plugin_path),
-        SetEnvironmentVariable(name="IGN_GAZEBO_SYSTEM_PLUGIN_PATH", value=ign_plugin_path),
-        gz_sim_launch,
-        clock_bridge,
-        robot_state_publisher,
-        spawn_lucy_gazebo,
-        spawn_joint_state_sim,
-        spawn_left_sim,
-        spawn_right_sim,
-        rviz_group,
-    ])
+    # Controller Spawners
+    # These interact with the controller_manager running INSIDE Gazebo (gz_ros2_control)
+    def create_spawner(name, delay=0.0):
+        spawner = Node(
+            package="controller_manager",
+            executable="spawner",
+            arguments=[name, "--switch-timeout", "10"],
+            output="screen",
+            parameters=[{"use_sim_time": True}],
+        )
+        if delay > 0.0:
+            return TimerAction(period=delay, actions=[spawner])
+        return spawner
+
+    spawn_jsb = create_spawner("joint_state_broadcaster")
+    spawn_left = create_spawner("left_arm_controller", delay=2.0)
+    spawn_right = create_spawner("right_arm_controller", delay=4.0)
+    spawn_torso = create_spawner("torso_head_controller", delay=6.0)
+
+    return LaunchDescription(
+        [
+            # Arguments
+            base_path_arg,
+            # Env Vars
+            SetEnvironmentVariable(name="GZ_SIM_RESOURCE_PATH", value=mesh_dae),
+            SetEnvironmentVariable(
+                name="GZ_SIM_SYSTEM_PLUGIN_PATH", value=gz_plugin_path
+            ),
+            SetEnvironmentVariable(
+                name="IGN_GAZEBO_SYSTEM_PLUGIN_PATH", value=ign_plugin_path
+            ),
+            # State and Control
+            spawn_jsb,
+            spawn_left,
+            spawn_right,
+            spawn_torso,
+            # Simulation
+            clock_bridge,
+            gz_sim_launch,
+            spawn_robot,
+        ]
+    )

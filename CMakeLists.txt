@@ -4,7 +4,7 @@ project(thais_urdf)
 find_package(ament_cmake REQUIRED)
 
 install(
-  DIRECTORY launch config description docs
+  DIRECTORY launch config description docs worlds
   DESTINATION share/${PROJECT_NAME}/
 )
 
