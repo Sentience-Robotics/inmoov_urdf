@@ -66,6 +66,28 @@ def generate_launch_description():
         output="screen",
     )
 
+    camera_bridge = Node(
+        package="ros_gz_bridge",
+        executable="parameter_bridge",
+        arguments=["/world/default/camera@sensor_msgs/msg/Image[gz.msgs.Image"],
+        parameters=[{"use_sim_time": True}],
+        remappings=[("/world/default/camera", "/camera/gazebo/raw")],
+        output="screen",
+    )
+
+    camera_compressor = Node(
+        package="image_transport",
+        executable="republish",
+        remappings=[
+            ("in", "/camera/gazebo/raw"),
+            ("out/compressed", "/camera/gazebo/compressed"),
+        ],
+        parameters=[
+            {"in_transport": "raw", "out_transport": "compressed", "use_sim_time": True}
+        ],
+        output="screen",
+    )
+
     # Gazebo Launch
     try:
         gz_sim_share = get_package_share_directory("ros_gz_sim")
@@ -134,8 +156,10 @@ def generate_launch_description():
             spawn_right,
             spawn_torso,
             # Simulation
-            clock_bridge,
             gz_sim_launch,
+            clock_bridge,
+            camera_bridge,
+            camera_compressor,
             spawn_robot,
         ]
     )
