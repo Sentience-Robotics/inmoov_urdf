@@ -77,7 +77,7 @@ right_arm_controller:
     joints:
       - right_shoulder_z_link_joint
       - right_shoulder_x_link_joint
-      - right_elbow
+      - right_elbow_x_link_joint
       - right_wrist_z_link_joint
       - i01.rightHand.thumb_link_joint
       - i01.rightHand.index_link_joint

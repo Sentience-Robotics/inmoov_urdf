@@ -158,7 +158,7 @@
           <command_interface name="position" />
           <state_interface name="position" />
       </joint>
-      <joint name="right_elbow">
+      <joint name="right_elbow_x_link_joint">
           <param name="virtual_pin">2</param>
           <param name="servo_type">270</param>
           <param name="offset_deg">0.0</param>

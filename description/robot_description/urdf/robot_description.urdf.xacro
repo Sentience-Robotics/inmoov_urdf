@@ -261,7 +261,7 @@
     <child link="right_shoulder_z_link"/>
     <axis xyz="0.00000 0.00000 1.00000"/>
   </joint>
-  <joint name="right_elbow" type="revolute">
+  <joint name="right_elbow_x_link_joint" type="revolute">
     <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
     <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="0.06567 0.00000 0.00000" xyz="0.00858 0.29228 -2.11577"/>
