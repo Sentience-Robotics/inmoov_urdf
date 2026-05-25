@@ -49,6 +49,15 @@ Older InMoov-style actuator tables often name torso PCA pins **5** and **6** as 
 
 Extra head DOFs (eyelids, cheeks, separate eyeball drivers, and so on) are **not** listed in `active.yaml` until the URDF exports matching joint names and each row is validated on hardware. See [inmoov_i2.md](inmoov_i2.md) for a YAML appendix for a future **InMoov i2**–style extension.
 
+## Simulation mode (control panel)
+
+With **SIMULATION ONLY** enabled in the activate workflow, `lucy_config_generator` emits:
+
+- One `<ros2_control name="LucyHardwareSim">` block (`mock_components/GenericSystem` for RViz-only, `gz_ros2_control/GazeboSimSystem` when `use_gazebo_sim:=true`).
+- `controllers.yaml` with `joint_state_broadcaster` + a single `lucy_sim_controller` listing every actuator `urdf_joint`.
+
+After generation, `lucy_config_pipeline` calls **`/lucy_control/restart`** so the running stack reloads without a full `lucy.launch.py` restart. Structural joint changes still require that restart (Humble does not hot-swap URDF hardware topology).
+
 ## Editing
 
 1. Edit `config/hardware/active.yaml` (or a copy under `configs/`).

@@ -1,28 +1,19 @@
 #!/usr/bin/env python3
 # Copyright 2025 Sentience Robotics Team
 #
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# SPDX-License-Identifier: GPL-3.0-only
 
 # Gazebo sim + ros2_control (sim spawners). Optional RViz (``start_rviz``). No rosbridge.
 
 import os
+from pathlib import Path
 
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import (
     DeclareLaunchArgument,
     IncludeLaunchDescription,
+    OpaqueFunction,
     SetEnvironmentVariable,
     TimerAction,
 )
@@ -32,6 +23,7 @@ from launch.substitutions import (
     PathJoinSubstitution,
 )
 from launch_ros.actions import Node
+from lucy_control_supervisor.controllers_spawn import controllers_to_spawn
 
 
 def _gz_ros2_control_plugin_path():
@@ -42,21 +34,36 @@ def _gz_ros2_control_plugin_path():
         return "/opt/ros/humble/lib"
 
 
+def _default_controllers_yaml(pkg_share: str) -> str:
+    cwd_candidate = Path.cwd() / "src" / "thais_urdf" / "config" / "controllers.yaml"
+    if cwd_candidate.is_file():
+        return str(cwd_candidate.resolve())
+    return os.path.join(pkg_share, "config", "controllers.yaml")
+
+
 def generate_launch_description():
-    # Paths
     pkg_share = get_package_share_directory("thais_urdf")
     default_base = os.path.join(pkg_share, "description")
+    default_controllers = _default_controllers_yaml(pkg_share)
 
-    # Launch Arguments
     base_path_arg = DeclareLaunchArgument(
         "base_path",
         default_value=default_base,
         description="Base path for xacro (mesh_dir)",
     )
+    controllers_yaml_arg = DeclareLaunchArgument(
+        "controllers_yaml",
+        default_value=default_controllers,
+        description="Absolute path to controllers.yaml (pipeline write path)",
+    )
+    urdf_path_arg = DeclareLaunchArgument(
+        "urdf_path",
+        default_value=os.path.join(default_base, "urdf", "inmoov.urdf.xacro"),
+        description="Top-level robot xacro",
+    )
 
     base_path = LaunchConfiguration("base_path")
 
-    # Bridge for Clock (Sim Time)
     clock_bridge = Node(
         package="ros_gz_bridge",
         executable="parameter_bridge",
@@ -88,7 +95,6 @@ def generate_launch_description():
         output="screen",
     )
 
-    # Gazebo Launch
     try:
         gz_sim_share = get_package_share_directory("ros_gz_sim")
         gz_sim_launch_path = os.path.join(gz_sim_share, "launch", "gz_sim.launch.py")
@@ -109,7 +115,6 @@ def generate_launch_description():
         launch_arguments={"gz_args": f"-r {default_world}"}.items(),
     )
 
-    # Spawn Robot
     spawn_robot = Node(
         package="ros_gz_sim",
         executable="create",
@@ -119,9 +124,7 @@ def generate_launch_description():
     )
     mesh_dae = PathJoinSubstitution([base_path, "robot_description", "meshes", "dae"])
 
-    # Controller Spawners
-    # These interact with the controller_manager running INSIDE Gazebo (gz_ros2_control)
-    def create_spawner(name, delay=0.0):
+    def create_spawner(name: str, delay: float = 0.0):
         spawner = Node(
             package="controller_manager",
             executable="spawner",
@@ -133,16 +136,34 @@ def generate_launch_description():
             return TimerAction(period=delay, actions=[spawner])
         return spawner
 
-    spawn_jsb = create_spawner("joint_state_broadcaster")
-    spawn_left = create_spawner("left_arm_controller", delay=2.0)
-    spawn_right = create_spawner("right_arm_controller", delay=4.0)
-    spawn_torso = create_spawner("torso_head_controller", delay=6.0)
+    def spawner_actions_from_yaml(context, *args, **kwargs):
+        yaml_path = LaunchConfiguration("controllers_yaml").perform(context)
+        names = controllers_to_spawn(Path(yaml_path))
+        return [create_spawner(name, delay=float(idx * 2)) for idx, name in enumerate(names)]
+
+    supervisor_share = get_package_share_directory("lucy_control_supervisor")
+    supervisor = Node(
+        package="lucy_control_supervisor",
+        executable="control_supervisor_node",
+        name="lucy_control_supervisor",
+        output="screen",
+        parameters=[
+            {
+                "urdf_path": LaunchConfiguration("urdf_path"),
+                "base_path": LaunchConfiguration("base_path"),
+                "controllers_yaml": LaunchConfiguration("controllers_yaml"),
+                "use_gazebo_sim": True,
+                "gazebo_only": True,
+                "autostart": False,
+            }
+        ],
+    )
 
     return LaunchDescription(
         [
-            # Arguments
             base_path_arg,
-            # Env Vars
+            controllers_yaml_arg,
+            urdf_path_arg,
             SetEnvironmentVariable(name="GZ_SIM_RESOURCE_PATH", value=mesh_dae),
             SetEnvironmentVariable(
                 name="GZ_SIM_SYSTEM_PLUGIN_PATH", value=gz_plugin_path
@@ -150,12 +171,8 @@ def generate_launch_description():
             SetEnvironmentVariable(
                 name="IGN_GAZEBO_SYSTEM_PLUGIN_PATH", value=ign_plugin_path
             ),
-            # State and Control
-            spawn_jsb,
-            spawn_left,
-            spawn_right,
-            spawn_torso,
-            # Simulation
+            supervisor,
+            OpaqueFunction(function=spawner_actions_from_yaml),
             gz_sim_launch,
             clock_bridge,
             camera_bridge,
