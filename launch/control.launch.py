@@ -58,6 +58,11 @@ def generate_launch_description():
         default_value=default_base,
         description="Base path for xacro mesh_dir",
     )
+    use_mock_hardware_arg = DeclareLaunchArgument(
+        "use_mock_hardware",
+        default_value="false",
+        description="Forwarded to xacro: emit mock_components/GenericSystem plugin",
+    )
 
     supervisor_launch = TimerAction(
         period=2.0,
@@ -71,6 +76,7 @@ def generate_launch_description():
                     "base_path": LaunchConfiguration("base_path"),
                     "controllers_yaml": LaunchConfiguration("controllers_yaml"),
                     "use_gazebo_sim": "false",
+                    "use_mock_hardware": LaunchConfiguration("use_mock_hardware"),
                     "gazebo_only": "false",
                     "autostart": "true",
                 }.items(),
@@ -83,6 +89,7 @@ def generate_launch_description():
             controllers_yaml_arg,
             urdf_path_arg,
             base_path_arg,
+            use_mock_hardware_arg,
             supervisor_launch,
         ]
     )
