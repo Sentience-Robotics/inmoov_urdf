@@ -1,7 +1,18 @@
 #!/usr/bin/env python3
 # Copyright 2025 Sentience Robotics Team
 #
-# SPDX-License-Identifier: GPL-3.0-only
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 # Gazebo sim + ros2_control (sim spawners). Optional RViz (``start_rviz``). No rosbridge.
 
@@ -141,7 +152,6 @@ def generate_launch_description():
         names = controllers_to_spawn(Path(yaml_path))
         return [create_spawner(name, delay=float(idx * 2)) for idx, name in enumerate(names)]
 
-    supervisor_share = get_package_share_directory("lucy_control_supervisor")
     supervisor = Node(
         package="lucy_control_supervisor",
         executable="control_supervisor_node",
