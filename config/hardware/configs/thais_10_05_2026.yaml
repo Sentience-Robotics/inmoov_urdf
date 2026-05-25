@@ -117,8 +117,8 @@ actuators:
     servo_max_deg: 180
     servo_default_deg: 180
     enabled: true
-  - id: right_elbow
-    urdf_joint: right_elbow
+  - id: right_elbow_x
+    urdf_joint: right_elbow_x_link_joint
     board: rp2040_right_arm
     virtual_pin: 2
     physical_pin: 12
