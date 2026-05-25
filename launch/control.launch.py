@@ -14,29 +14,19 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-# Real robot: robot_state_publisher + ros2_control_node + spawners.
-# Controllers live in this package (config/controllers.yaml).
+# Real robot / RViz-only: lucy_control_supervisor owns RSP + ros2_control_node + spawners.
 
 from pathlib import Path
 
+from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, TimerAction
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, TimerAction
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
-from launch_ros.actions import Node
 import yaml
 
 
-def _controllers_to_spawn(controllers_yaml_path: Path) -> list[str]:
-    """Return controller names declared under controller_manager.ros__parameters."""
-    data = yaml.safe_load(controllers_yaml_path.read_text(encoding="utf-8")) or {}
-    cm_params = data.get("controller_manager", {}).get("ros__parameters", {})
-    if not isinstance(cm_params, dict):
-        return []
-    return [name for name in cm_params.keys() if name != "update_rate"]
-
-
 def _load_launch_defaults(package_root: Path) -> dict[str, str]:
-    """Load launch path defaults from config/control.launch.yaml."""
     config_path = package_root / "config" / "control.launch.yaml"
     data = yaml.safe_load(config_path.read_text(encoding="utf-8")) or {}
     if not isinstance(data, dict):
@@ -54,42 +44,63 @@ def generate_launch_description():
     default_controllers_yaml = str(
         (package_root / defaults["controllers_yaml"]).resolve()
     )
-    controllers_yaml_path = Path(default_controllers_yaml)
-    controller_names = _controllers_to_spawn(controllers_yaml_path)
+    default_urdf = str((package_root / defaults["urdf_path"]).resolve())
+    default_base = str((package_root / defaults["base_path"]).resolve())
+
+    try:
+        supervisor_share = get_package_share_directory("lucy_control_supervisor")
+    except Exception as e:
+        raise RuntimeError(
+            "lucy_control_supervisor package required for control.launch.py"
+        ) from e
 
     controllers_yaml_arg = DeclareLaunchArgument(
         "controllers_yaml",
         default_value=default_controllers_yaml,
         description="Absolute path to controller_manager YAML config",
     )
-    controllers_yaml = LaunchConfiguration("controllers_yaml")
+    urdf_path_arg = DeclareLaunchArgument(
+        "urdf_path",
+        default_value=default_urdf,
+        description="Top-level robot xacro path",
+    )
+    base_path_arg = DeclareLaunchArgument(
+        "base_path",
+        default_value=default_base,
+        description="Base path for xacro mesh_dir",
+    )
+    use_mock_hardware_arg = DeclareLaunchArgument(
+        "use_mock_hardware",
+        default_value="false",
+        description="Forwarded to xacro: emit mock_components/GenericSystem plugin",
+    )
 
-    ros2_control_node = TimerAction(
+    supervisor_launch = TimerAction(
         period=2.0,
         actions=[
-            Node(
-                package="controller_manager",
-                executable="ros2_control_node",
-                output="screen",
-                parameters=[controllers_yaml],
-                remappings=[("~/robot_description", "/robot_description")],
+            IncludeLaunchDescription(
+                PythonLaunchDescriptionSource(
+                    [supervisor_share, "/launch/control_supervisor.launch.py"]
+                ),
+                launch_arguments={
+                    "urdf_path": LaunchConfiguration("urdf_path"),
+                    "base_path": LaunchConfiguration("base_path"),
+                    "controllers_yaml": LaunchConfiguration("controllers_yaml"),
+                    "use_gazebo_sim": "false",
+                    "use_mock_hardware": LaunchConfiguration("use_mock_hardware"),
+                    "gazebo_only": "false",
+                    "autostart": "true",
+                }.items(),
             )
         ],
     )
-    spawners = [
-        Node(
-            package="controller_manager",
-            executable="spawner",
-            arguments=[controller],
-            output="screen",
-        )
-        for controller in controller_names
-    ]
 
     return LaunchDescription(
         [
             controllers_yaml_arg,
-            ros2_control_node,
-            *spawners,
+            urdf_path_arg,
+            base_path_arg,
+            use_mock_hardware_arg,
+            supervisor_launch,
         ]
     )

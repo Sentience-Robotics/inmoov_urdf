@@ -17,8 +17,8 @@ For **InMoov i1 vs i2** scope and how to extend the YAML with **head / expressio
 
 - **`version`**: schema version (integer, currently `1`).
 - **`robot_name`**: logical name (e.g. `thais`).
-- **`candidate_urdf_joints`** *(optional)*: string list of URDF joint names you may assign to actuators in the control UI even before every joint appears on an actuator row.
 - **`passive_urdf_joints`** / **`ignore_urdf_joints`** *(optional)*: string lists merged together; URDF joints named here are **excluded** from the pipeline **“not mapped to any actuator”** cross-check warning. **Synonyms** (same validation rules): `urdf_passive`, `urdf_passive_joints`, `urdf_ignore`, `urdf_ignore_joints`. Cross-check matches **`actuators[].urdf_joint`** against the URDF (not actuator **`id`**). Does **not** remove joints from the URDF or generation elsewhere — only suppresses that informational warning on save.
+  - The control panel **Configuration** page also treats `passive_urdf_joints` as the **assignable pool** for new actuators: the **JOINT** dropdown lists every passive entry minus anything in `ignore_urdf_joints` and minus joints already mapped to another actuator. Picking a joint **removes** it from `passive_urdf_joints`; deleting an actuator (or clearing its joint) **re-adds** the freed joint (`appendPassiveUrdfJointIfUnassigned`), so the two lists stay in sync as the operator edits.
 - **`firmware`**: `source_dir`, `build_dir` — paths relative to the micro-ROS firmware workspace for the pipeline.
 - **`controller_manager`**: e.g. `update_rate`.
 - **`boards`**: ordered map of board id → `serial_id` (optional USB serial for `picotool --ser`, alphanumeric or empty), **`board_class`** (`internal_servo_only` \| `internal_servo_i2c_pwm`), **`internal_servo_slots`** (max valid `physical_pin` for actuators on that board), firmware target, compile definition, micro-ROS actuator/sensor topics, and `controller` (`name`, `type`). **Order** of keys is the order of generated ros2_control blocks and controller sections. **Board id** is also the firmware C basename: `config_<board_id>.c`. **No `/dev/ttyACM*`** here — serial devices are launch-time (`lucy_bringup` args), not committed hardware truth.
@@ -48,6 +48,15 @@ Older InMoov-style actuator tables often name torso PCA pins **5** and **6** as 
 ## Head and expression actuators
 
 Extra head DOFs (eyelids, cheeks, separate eyeball drivers, and so on) are **not** listed in `active.yaml` until the URDF exports matching joint names and each row is validated on hardware. See [inmoov_i2.md](inmoov_i2.md) for a YAML appendix for a future **InMoov i2**–style extension.
+
+## Simulation mode (control panel)
+
+With **SIMULATION ONLY** enabled in the activate workflow, `lucy_config_generator` emits:
+
+- One `<ros2_control name="LucyHardwareSim">` block (`mock_components/GenericSystem` for RViz-only, `gz_ros2_control/GazeboSimSystem` when `use_gazebo_sim:=true`).
+- `controllers.yaml` with `joint_state_broadcaster` + a single `lucy_sim_controller` listing every actuator `urdf_joint`.
+
+After generation, `lucy_config_pipeline` calls **`/lucy_control/restart`** so the running stack reloads without a full `lucy.launch.py` restart. Structural joint changes still require that restart (Humble does not hot-swap URDF hardware topology).
 
 ## Editing
 
