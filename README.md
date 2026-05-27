@@ -66,6 +66,27 @@ For full stack development, build together with `lucy_ros2_control` at minimum:
 colcon build --symlink-install --packages-select thais_urdf lucy_ros2_control
 ```
 
+## Compiling xacro → URDF
+
+The robot description is authored in xacro and must be preprocessed into plain URDF for tools that cannot consume xacro (web viewers, Isaac Sim, offline MoveIt pipelines, …).
+
+**Prerequisite:** ROS 2 Humble sourced. Run from the **package root** (`thais_urdf/`):
+
+```bash
+ros2 run xacro xacro description/urdf/inmoov.urdf.xacro \
+  base_path:=$(pwd)/description \
+  use_gazebo_sim:=false \
+| sed 's|file://[^ "]*meshes/dae/\([^"]*\)|meshes/dae/\1|g' \
+  > description/robot_description/urdf/robot_description.urdf
+```
+
+| Argument | Default | Purpose |
+|---|---|---|
+| `base_path` | `.` | Directory that contains `robot_description/meshes/dae/`. Must be the **parent of `robot_description/`** — the xacro appends `/robot_description/meshes/dae` to this. |
+| `use_gazebo_sim` | `false` | `true` sets heavy inertias on the base link for Gazebo stability. |
+
+The compiled file lives at `description/robot_description/urdf/robot_description.urdf` and is committed to the repository. Regenerate it whenever `robot_description.urdf.xacro` or `inmoov.urdf.xacro` changes.
+
 ## Quick start
 
 ### Robot description + RViz or Gazebo (no web panel)
