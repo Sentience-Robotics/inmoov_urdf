@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+Shared URDF properties.
+
+`model_scale` is the single source of truth for uniform length scaling. Edit
+the value here when Lucy is measured; no launch/CLI argument is plumbed.
+
+It is referenced as ${model_scale} in robot_description.urdf.xacro on every
+joint <origin xyz>, in-link <visual>/<collision> <origin xyz>, and primitive
+collision sizes (box/cylinder/sphere). Mesh <mesh scale="..."> is left at
+1 1 1 so DAE files are never re-exported.
+
+Default 0.1163 targets the measured Lucy crown height of 1.75 m. Previous
+0.113 produced ~1.70 m — bumped by the 1.75/1.70 ratio. Replace if the
+measured factor changes.
+-->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:property name="model_scale" value="0.1163"/>
+
+</robot>

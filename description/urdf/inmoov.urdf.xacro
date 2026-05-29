@@ -3,9 +3,13 @@
   <!-- base_path: set by launch file (host-independent). When running xacro standalone, use . or pass base_path. -->
   <xacro:arg name="base_path" default="."/>
   <xacro:arg name="use_gazebo_sim" default="false"/>
+  <xacro:arg name="use_mock_hardware" default="false"/>
   <xacro:arg name="controller_config" default=""/>
   <xacro:property name="mesh_dir" value="file://$(arg base_path)/robot_description/meshes/dae"/>
   <xacro:property name="use_gazebo_sim" value="$(arg use_gazebo_sim)"/>
+
+  <!-- model_scale lives in properties.xacro; not a launch argument. -->
+  <xacro:include filename="../robot_description/urdf/properties.xacro"/>
 
   <!-- Import inmoov physical description (urdf) macro (uses use_gazebo_sim for heavy stand in sim) -->
   <xacro:include filename="../robot_description/urdf/robot_description.urdf.xacro"/>

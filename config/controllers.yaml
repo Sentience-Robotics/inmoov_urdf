@@ -50,8 +50,6 @@ joint_state_broadcaster:
       - i01.rightHand.thumb1_link_joint
       - i01.rightHand.thumb3_link_joint
       - i01.rightHand.wrist.001_link_joint
-      - i01.torso.midStom_link_joint
-      - i01.torso.topStom_link_joint
 
 left_arm_controller:
   ros__parameters:
@@ -95,6 +93,8 @@ torso_head_controller:
     joints:
       - left_shoulder_y_link_joint
       - right_shoulder_y_link_joint
+      - i01.torso.midStom_link_joint
+      - i01.torso.topStom_link_joint
     command_interfaces:
       - position
     state_interfaces:

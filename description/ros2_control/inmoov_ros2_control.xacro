@@ -294,27 +294,27 @@
           <command_interface name="position" />
           <state_interface name="position" />
       </joint>
-      <joint name="i01.torso.topStom_link_joint">
+      <joint name="i01.torso.midStom_link_joint">
           <param name="virtual_pin">2</param>
-          <param name="servo_type">270</param>
-          <param name="offset_deg">0</param>
+          <param name="servo_type">180</param>
+          <param name="offset_deg">90</param>
           <param name="direction">1</param>
           <param name="scale">1</param>
           <param name="servo_min_deg">0</param>
-          <param name="servo_max_deg">270</param>
-          <param name="servo_default_deg">135</param>
+          <param name="servo_max_deg">180</param>
+          <param name="servo_default_deg">90</param>
           <command_interface name="position" />
           <state_interface name="position" />
       </joint>
-      <joint name="i01.torso.midStom_link_joint">
+      <joint name="i01.torso.topStom_link_joint">
           <param name="virtual_pin">3</param>
-          <param name="servo_type">270</param>
+          <param name="servo_type">180</param>
           <param name="offset_deg">0</param>
           <param name="direction">1</param>
           <param name="scale">1</param>
           <param name="servo_min_deg">0</param>
-          <param name="servo_max_deg">270</param>
-          <param name="servo_default_deg">135</param>
+          <param name="servo_max_deg">180</param>
+          <param name="servo_default_deg">90</param>
           <command_interface name="position" />
           <state_interface name="position" />
       </joint>

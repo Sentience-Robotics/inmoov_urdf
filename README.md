@@ -16,6 +16,7 @@ thais_urdf/
 ├── launch/
 │   ├── control.launch.py    # ros2_control + spawners (default controllers from this package)
 │   ├── gazebo.launch.py     # Gazebo + … + optional RViz via start_rviz (no rosbridge)
+│   ├── joint_preview.launch.py
 │   └── rviz_standalone.launch.py
 ├── config/
 │   ├── controllers.yaml
@@ -85,9 +86,22 @@ ros2 run xacro xacro description/urdf/inmoov.urdf.xacro \
 | `base_path` | `.` | Directory that contains `robot_description/meshes/dae/`. Must be the **parent of `robot_description/`** — the xacro appends `/robot_description/meshes/dae` to this. |
 | `use_gazebo_sim` | `false` | `true` sets heavy inertias on the base link for Gazebo stability. |
 
+`model_scale` is **not** a launch argument. It is a single xacro property in
+[`description/robot_description/urdf/properties.xacro`](description/robot_description/urdf/properties.xacro)
+(default `0.113`). Edit that file and rebuild to change the model size.
+
 The compiled file lives at `description/robot_description/urdf/robot_description.urdf` and is committed to the repository. Regenerate it whenever `robot_description.urdf.xacro` or `inmoov.urdf.xacro` changes.
 
 ## Quick start
+
+### URDF joint-limit preview (sliders + RViz)
+
+```bash
+ros2 launch thais_urdf joint_preview.launch.py
+```
+
+To change the model size, edit `model_scale` in
+`description/robot_description/urdf/properties.xacro` and rebuild.
 
 ### Robot description + RViz or Gazebo (no web panel)
 

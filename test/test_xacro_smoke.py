@@ -14,11 +14,11 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 """Generate URDF with xacro (no Gazebo / ROS nodes). Uses install share when available."""
-import shutil
-import subprocess
 from pathlib import Path
 
 import pytest
+
+from xacro_helper import run_xacro
 
 
 def _inmoov_paths():
@@ -66,34 +66,33 @@ def controller_config() -> Path:
 
 
 def test_xacro_real_mode(controller_config: Path):
-    xacro = shutil.which("xacro")
-    assert xacro, "xacro not on PATH (install ros-humble-xacro)"
     urdf, base = _inmoov_paths()
     assert urdf.is_file(), f"missing {urdf} — colcon build thais_urdf to install description/"
-    cmd = [
-        xacro,
-        str(urdf),
-        f"base_path:={base}",
-        f"controller_config:={controller_config}",
-        "use_gazebo_sim:=false",
-    ]
-    r = subprocess.run(cmd, capture_output=True, text=True, timeout=120, check=False)
+    r = run_xacro(
+        [
+            str(urdf),
+            f"base_path:={base}",
+            f"controller_config:={controller_config}",
+            "use_gazebo_sim:=false",
+            "use_mock_hardware:=true",
+        ]
+    )
     assert r.returncode == 0, r.stderr + r.stdout
     assert "<robot" in r.stdout
+    assert "${model_scale" not in r.stdout
 
 
 def test_xacro_gazebo_mode(controller_config: Path):
-    xacro = shutil.which("xacro")
-    assert xacro, "xacro not on PATH (install ros-humble-xacro)"
     urdf, base = _inmoov_paths()
     assert urdf.is_file(), f"missing {urdf} — colcon build thais_urdf to install description/"
-    cmd = [
-        xacro,
-        str(urdf),
-        f"base_path:={base}",
-        f"controller_config:={controller_config}",
-        "use_gazebo_sim:=true",
-    ]
-    r = subprocess.run(cmd, capture_output=True, text=True, timeout=120, check=False)
+    r = run_xacro(
+        [
+            str(urdf),
+            f"base_path:={base}",
+            f"controller_config:={controller_config}",
+            "use_gazebo_sim:=true",
+            "use_mock_hardware:=false",
+        ]
+    )
     assert r.returncode == 0, r.stderr + r.stdout
     assert "<robot" in r.stdout
