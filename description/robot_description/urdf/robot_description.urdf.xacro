@@ -728,18 +728,6 @@
         <mesh filename="${mesh_dir}/Texture.260.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </collision>
-    <collision name="i01..leftArm.shoulder.full.008_collision">
-      <origin rpy="0.06568 0.00000 0.00000" xyz="${model_scale * -1.46578} ${model_scale * 1.11459} ${model_scale * -13.51522}"/>
-      <geometry>
-        <mesh filename="${mesh_dir}/Texture.261.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
-      </geometry>
-    </collision>
-    <collision name="i01..leftArm.shoulder.full.009_collision">
-      <origin rpy="0.06568 0.00000 0.00000" xyz="${model_scale * -1.46578} ${model_scale * 1.11459} ${model_scale * -13.51522}"/>
-      <geometry>
-        <mesh filename="${mesh_dir}/Texture.262.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
-      </geometry>
-    </collision>
     <collision name="i01..leftArm.shoulder.full.010_collision">
       <origin rpy="0.06568 0.00000 0.00000" xyz="${model_scale * -1.46578} ${model_scale * 1.11459} ${model_scale * -13.51522}"/>
       <geometry>
@@ -831,20 +819,6 @@
       <origin rpy="0.06568 0.00000 0.00000" xyz="${model_scale * -1.46578} ${model_scale * 1.11459} ${model_scale * -13.51522}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.260.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
-      </geometry>
-    </visual>
-    <visual name="i01..leftArm.shoulder.full.008">
-      <material name="Material.390"/>
-      <origin rpy="0.06568 0.00000 0.00000" xyz="${model_scale * -1.46578} ${model_scale * 1.11459} ${model_scale * -13.51522}"/>
-      <geometry>
-        <mesh filename="${mesh_dir}/Texture.261.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
-      </geometry>
-    </visual>
-    <visual name="i01..leftArm.shoulder.full.009">
-      <material name="Material.390"/>
-      <origin rpy="0.06568 0.00000 0.00000" xyz="${model_scale * -1.46578} ${model_scale * 1.11459} ${model_scale * -13.51522}"/>
-      <geometry>
-        <mesh filename="${mesh_dir}/Texture.262.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01..leftArm.shoulder.full.010">
