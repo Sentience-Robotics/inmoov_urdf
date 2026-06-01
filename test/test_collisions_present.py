@@ -99,7 +99,8 @@ def test_hand_mesh_collisions(urdf_root):
 
 
 def test_all_visual_links_have_collision(urdf_root):
-    """Any link with a <visual><mesh/> must have at least one <collision>.
+    """
+    Every visual mesh link must have at least one collision.
 
     Eye-pivot frames (eyeRight.001, eyeLeft.001, neck.001) are intermediate
     transforms with no visual — they may legitimately have no collision.
@@ -117,7 +118,8 @@ def test_all_visual_links_have_collision(urdf_root):
 
 
 def test_every_visual_mesh_has_paired_collision(urdf_root):
-    """Per-visual coverage: links with N visual meshes get N (or more) collisions.
+    """
+    Links with N visual meshes must have N or more collisions.
 
     Multi-mesh links like ``torso_y_link`` (80 sub-DAEs) must collide as the
     full visual hull, not just a single representative mesh. Hand-authored

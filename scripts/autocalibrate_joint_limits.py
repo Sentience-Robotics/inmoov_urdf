@@ -266,7 +266,8 @@ def sweep(
         viz.step(p, body, name_to_idx, cid)
 
     def contact_pairs() -> set[tuple[int, int]]:
-        """Set of (linkA, linkB) pairs currently penetrating beyond the threshold.
+        """
+        Return link pairs currently penetrating beyond the threshold.
 
         Indices are sorted so order doesn't matter; same-link contacts are
         ignored (PyBullet folds multi-mesh links into one rigid body, so this

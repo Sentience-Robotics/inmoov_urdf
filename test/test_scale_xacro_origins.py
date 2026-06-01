@@ -81,8 +81,12 @@ def test_sphere_radius_wrapped(mod):
 
 
 def test_mesh_scale_wrapped(mod):
-    """Without this, joint frames shrink but DAEs stay full size — the stand
-    misaligns with the torso (regression seen on Lucy URDF)."""
+    """
+    Mesh scale must be wrapped with model_scale.
+
+    Without this, joint frames shrink but DAEs stay full size — the stand
+    misaligns with the torso (regression seen on Lucy URDF).
+    """
     out = mod._transform(SAMPLE)
     assert (
         'scale="${model_scale * 1.00000} ${model_scale * 1.00000} '

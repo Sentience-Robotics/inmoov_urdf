@@ -41,9 +41,9 @@ def _controller_yaml() -> Path:
     try:
         from ament_index_python.packages import get_package_share_directory
 
-        thais = Path(get_package_share_directory("thais_urdf")) / "config" / "controllers.yaml"
-        if thais.is_file():
-            return thais
+        share_yaml = Path(get_package_share_directory("thais_urdf")) / "config" / "controllers.yaml"
+        if share_yaml.is_file():
+            return share_yaml
     except Exception:
         pass
     root = Path(__file__).resolve().parents[1]

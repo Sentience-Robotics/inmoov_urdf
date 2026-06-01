@@ -13,7 +13,7 @@
                 <scene>ambient</scene>
                 <ambient_light>0.4 0.4 0.4</ambient_light>
                 <background_color>0.8 0.8 0.8</background_color>
-                <camera_pose>-10 -10 20 0 0.4636 0.7853</camera_pose>
+                <camera_pose>-1 -1 2 0 0.5 0.8</camera_pose>
 
             </plugin>
 
@@ -75,7 +75,7 @@
 
         <model name="camera">
             <static>true</static>
-            <pose>-10 -10 20 0 0.4636 0.7853</pose>
+            <pose>-1 -1 2 0 0.5 0.8</pose>
             <link name="camera_link">
 
                 <sensor name="camera" type="camera">

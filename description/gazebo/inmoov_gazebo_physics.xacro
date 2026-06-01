@@ -1,12 +1,17 @@
 <?xml version="1.0"?>
-<!-- Gazebo plugin for gz_ros2_control: runs controller_manager inside Gazebo and drives simulated joints.
-     Expects controller_config arg from parent (inmoov.urdf.xacro).
+<!-- Gazebo (gz-sim) physics + surface tuning, included only when
+     use_gazebo_sim:=true. This file is pure simulation tuning: world
+     anchoring, friction, contact stiffness, and self-collision flags.
 
-     Collision strategy: every URDF link reuses its visual mesh as the collision
-     mesh (see scripts/inject_collisions.py). Gazebo macros below only assign
-     surface/contact properties — `gazebo_body_link` disables self_collide on
-     adjacent body meshes (avoids jitter), `gazebo_hand_link` enables it with
-     friction tuned for grasping. -->
+     The gz_ros2_control plugin itself lives next door in
+     description/ros2_control/inmoov_gz_ros2_control.xacro because it is the
+     ros2_control bridge into Gazebo, not a physics property.
+
+     Collision strategy: every URDF link reuses its visual mesh as the
+     collision mesh (see scripts/inject_collisions.py). The macros below only
+     assign surface/contact properties — `gazebo_body_link` disables
+     self_collide on adjacent body meshes (avoids jitter), `gazebo_hand_link`
+     enables it with friction tuned for grasping. -->
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
   <!-- Fix entire stand to the world so the robot does not fall (gz-sim may still move root; heavy mass in URDF is fallback). -->
   <gazebo reference="base_node">
@@ -80,12 +85,4 @@
   </xacro:macro>
   <xacro:gazebo_hand_side side="left"/>
   <xacro:gazebo_hand_side side="right"/>
-
-  <gazebo>
-    <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
-      <parameters>$(arg controller_config)</parameters>
-      <!-- Empty namespace so controller topics stay at /left_arm_controller, /right_arm_controller (panel expects these). -->
-      <namespace></namespace>
-    </plugin>
-  </gazebo>
 </robot>

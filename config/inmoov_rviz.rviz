@@ -1,5 +1,6 @@
 # Minimal portable RViz config for InMoov/Lucy robot.
-# No window geometry (works on any screen). RobotModel uses /robot_description topic.
+# Window Geometry only sets dock visibility (no fixed size/position) so the
+# layout still adapts to any screen. RobotModel uses /robot_description topic.
 # Fixed Frame must be base_node (root link) so the full TF tree connects.
 
 Panels:
@@ -8,8 +9,25 @@ Panels:
   - Class: rviz_common/Views
     Name: Views
 
+# Start with the left dock (Displays/Views) folded so the 3D view gets the
+# full width. Click the small arrow on the left edge to expand it again.
+# No Width/Height/X/Y here so the window still adapts to any screen.
+Window Geometry:
+  Hide Left Dock: true
+  Hide Right Dock: false
+
 Visualization Manager:
   Class: rviz_common/VisualizationManager
+  # Toolbar tools. MoveCamera is required to rotate/pan/zoom with the mouse;
+  # without an explicit Tools list some RViz builds load only Interact.
+  Tools:
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Interact
+      Hide Inactive Objects: true
+    - Class: rviz_default_plugins/Select
+    - Class: rviz_default_plugins/FocusCamera
+    - Class: rviz_default_plugins/Measure
+      Line color: 128; 128; 0
   Displays:
     - Class: rviz_default_plugins/Grid
       Enabled: true
@@ -55,7 +73,7 @@ Visualization Manager:
     # a focal point. ThirdPersonFollower locks onto a TF frame.
     Current:
       Class: rviz_default_plugins/XYOrbit
-      Distance: 4
+      Distance: 2.4
       Focal Point:
         X: 0
         Y: 0
@@ -74,7 +92,7 @@ Visualization Manager:
         Yaw: 3.14159
       - Class: rviz_default_plugins/Orbit
         Name: Orbit (free rotation)
-        Distance: 4
+        Distance: 2.4
         Focal Point:
           X: 0
           Y: 0

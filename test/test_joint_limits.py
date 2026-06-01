@@ -71,6 +71,6 @@ def test_actuated_joints_have_limits(urdf_root, actuated_joint_names):
 
 
 def test_model_scale_property_resolves(urdf_root):
-    """xacro should fully expand model_scale (no leftover ${...} tokens)."""
+    """Xacro should fully expand model_scale (no leftover ${...} tokens)."""
     text = ET.tostring(urdf_root, encoding="unicode")
     assert "${model_scale" not in text, "model_scale property left unevaluated"

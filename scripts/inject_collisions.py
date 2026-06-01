@@ -2,8 +2,7 @@
 # Copyright 2025 Sentience Robotics Team
 # SPDX-License-Identifier: GPL-3.0-or-later
 """
-Inject mesh-reuse <collision> blocks for **every** <visual> mesh in **every**
-<link>.
+Inject mesh-reuse collision blocks for every visual mesh in every link.
 
 Strategy
 --------
@@ -72,7 +71,7 @@ MALFORMED_ORIGIN = re.compile(r"<origin[a-z]")
 # Body / hand classification only used for exporting the link sets that the
 # Gazebo xacro and tests consume. Both groups now use mesh-reuse collisions;
 # the split exists purely for Gazebo physics properties (friction, kp/kd,
-# self_collide). Keep aligned with description/ros2_control/inmoov_gazebo.xacro.
+# self_collide). Keep aligned with description/gazebo/inmoov_gazebo_physics.xacro.
 BODY_LINKS = [
     "torso_bottom_link",
     "torso_z_link",
@@ -122,7 +121,8 @@ def _collision_for_visual(visual_name: str, origin_attrs: str, mesh_file: str) -
 
 
 def _inject_link(_name: str, body: str) -> str:
-    """For each <visual><mesh/> in this link, append a paired <collision>.
+    """
+    For each visual mesh in this link, append a paired collision.
 
     Collision names are derived from the visual's `name=` attribute, so the
     operation is idempotent on re-runs.

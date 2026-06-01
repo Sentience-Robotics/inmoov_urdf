@@ -104,7 +104,8 @@ def test_skips_link_without_visual(inj):
 
 
 def test_preserves_existing_collision(inj):
-    """Hand-authored collisions on base_node/stand_link must not be clobbered.
+    """
+    Hand-authored collisions on base_node/stand_link must not be clobbered.
 
     The per-visual collision is still added alongside (the hand-authored block
     is named differently, so they don't conflict).

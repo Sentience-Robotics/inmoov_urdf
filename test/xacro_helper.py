@@ -11,7 +11,8 @@ import pytest
 
 
 def run_xacro(args: Sequence[str], *, timeout: int = 120) -> subprocess.CompletedProcess[str]:
-    """Run xacro via standalone binary or ``ros2 run xacro xacro``.
+    """
+    Run xacro via standalone binary or ``ros2 run xacro xacro``.
 
     Skips the calling test (instead of erroring) when neither is on PATH —
     lets host-side ``pytest`` runs pass with only the pure-Python tests, while

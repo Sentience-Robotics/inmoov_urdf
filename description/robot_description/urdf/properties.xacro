@@ -10,12 +10,12 @@ joint <origin xyz>, in-link <visual>/<collision> <origin xyz>, and primitive
 collision sizes (box/cylinder/sphere). Mesh <mesh scale="..."> is left at
 1 1 1 so DAE files are never re-exported.
 
-Default 0.1163 targets the measured Lucy crown height of 1.75 m. Previous
-0.113 produced ~1.70 m — bumped by the 1.75/1.70 ratio. Replace if the
-measured factor changes.
+Default 0.1196 targets a measured crown height of 1.80 m. Earlier values:
+0.1163 ≈ 1.75 m, 0.113 ≈ 1.70 m — each bump is the height ratio. Replace
+if the measured factor changes.
 -->
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:property name="model_scale" value="0.1163"/>
+  <xacro:property name="model_scale" value="0.1196"/>
 
 </robot>

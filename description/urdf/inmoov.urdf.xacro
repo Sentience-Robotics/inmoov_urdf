@@ -17,8 +17,14 @@
   <!-- Import inmoov ros2_control description (use_gazebo_sim switches to gz_ros2_control in Gazebo launch) -->
   <xacro:include filename="../ros2_control/inmoov_ros2_control.xacro" />
 
-  <!-- gz_ros2_control plugin: only when use_gazebo_sim=true (controller_manager runs inside Gazebo) -->
+  <!-- Gazebo-only bits, gated on use_gazebo_sim:=true:
+         - gazebo/inmoov_gazebo_physics.xacro    physics + surface tuning
+                                                 (static stand, friction, self_collide, kp/kd)
+         - ros2_control/inmoov_gz_ros2_control.xacro
+                                                 gz_ros2_control plugin so the same
+                                                 controllers drive simulated joints -->
   <xacro:if value="$(arg use_gazebo_sim)">
-    <xacro:include filename="../ros2_control/inmoov_gazebo.xacro"/>
+    <xacro:include filename="../gazebo/inmoov_gazebo_physics.xacro"/>
+    <xacro:include filename="../ros2_control/inmoov_gz_ros2_control.xacro"/>
   </xacro:if>
 </robot>
