@@ -64,9 +64,12 @@ VISUAL_BLOCK = re.compile(
     re.DOTALL,
 )
 
-PLACEHOLDER_INERTIAL = (
-    '<inertial><mass value="0.001"/>'
-    '<inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>'
+# mass=0.001 placeholder from xacro — compact or pretty-printed whitespace.
+PLACEHOLDER_INERTIAL_RE = re.compile(
+    r"<inertial>\s*<mass value=\"0.001\"/>\s*"
+    r"<inertia ixx=\"1e-6\" ixy=\"0\" ixz=\"0\" iyy=\"1e-6\" iyz=\"0\" izz=\"1e-6\"/>\s*"
+    r"</inertial>",
+    re.DOTALL,
 )
 BETTER_INERTIAL = (
     '<inertial><mass value="0.15"/>'
@@ -148,7 +151,7 @@ def _inject_link(_name: str, body: str) -> str:
         snippets.append(_collision_for_visual(vname, m.group("origin"), m.group("mesh")))
     if not snippets:
         return body
-    body = body.replace(PLACEHOLDER_INERTIAL, BETTER_INERTIAL, 1)
+    body, _ = PLACEHOLDER_INERTIAL_RE.subn(BETTER_INERTIAL, body, count=1)
     return "".join(snippets) + "\n" + body
 
 
