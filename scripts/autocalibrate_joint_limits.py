@@ -1,6 +1,18 @@
 #!/usr/bin/env python3
 # Copyright 2025 Sentience Robotics Team
-# SPDX-License-Identifier: GPL-3.0-or-later
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 Auto-calibrate URDF joint limits via self-collision sweep (PyBullet).
 
@@ -55,7 +67,6 @@ import subprocess
 import sys
 import tempfile
 import time
-import xml.etree.ElementTree as ET
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional
@@ -144,7 +155,11 @@ class PyBulletGuiVisualizer(Visualizer):
 
 
 class RvizVisualizer(Visualizer):
-    """Publish ``/joint_states`` so an RViz already showing /robot_description renders the sweep."""
+    """
+    Publish ``/joint_states`` for an RViz session on ``/robot_description``.
+
+    Renders the calibration sweep in an already-open RViz config.
+    """
 
     connection_mode_name = "DIRECT"
 
@@ -229,7 +244,8 @@ def sweep(
         sys.exit("pybullet not installed (pip install pybullet)")
 
     viz = visualizer or Visualizer()
-    threshold = -abs(penetration_mm) * 1e-3  # bullet contactDistance is in metres, < 0 = penetration
+    # PyBullet contactDistance is metres; negative means penetration depth.
+    threshold = -abs(penetration_mm) * 1e-3
 
     with tempfile.NamedTemporaryFile("w", suffix=".urdf", delete=False) as fh:
         fh.write(urdf_text)

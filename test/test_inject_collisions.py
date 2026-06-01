@@ -1,5 +1,17 @@
 # Copyright 2025 Sentience Robotics Team
-# SPDX-License-Identifier: GPL-3.0-or-later
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 """Unit tests for scripts/inject_collisions.py."""
 
@@ -33,34 +45,45 @@ def inj():
     return _load_inject_module()
 
 
-SAMPLE_URDF = """\
+_PLACEHOLDER_INERTIAL = """\
+    <inertial>
+      <mass value="0.001"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>"""
+
+SAMPLE_URDF = f"""\
 <?xml version="1.0"?>
 <robot name="test">
   <link name="frame_only">
-    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
+{_PLACEHOLDER_INERTIAL}
   </link>
   <link name="torso_bottom_link">
     <visual name="torso_v">
       <origin rpy="0 0 0" xyz="0.0 0.0 1.0"/>
       <geometry>
-        <mesh filename="${mesh_dir}/torso.dae" scale="1 1 1"/>
+        <mesh filename="${{mesh_dir}}/torso.dae" scale="1 1 1"/>
       </geometry>
     </visual>
-    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
+{_PLACEHOLDER_INERTIAL}
   </link>
   <link name="i01.leftHand.index_link">
     <visual name="finger">
       <origin rpy="1.0 0.0 0.0" xyz="0.1 0.2 0.3"/>
       <geometry>
-        <mesh filename="${mesh_dir}/finger.dae" scale="1 1 1"/>
+        <mesh filename="${{mesh_dir}}/finger.dae" scale="1 1 1"/>
       </geometry>
     </visual>
-    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
+{_PLACEHOLDER_INERTIAL}
   </link>
   <link name="already_has_collision">
-    <visual name="v"><origin rpy="0 0 0" xyz="0 0 0"/><geometry><mesh filename="m.dae" scale="1 1 1"/></geometry></visual>
-    <collision name="hand_authored"><geometry><box size="0.01 0.01 0.01"/></geometry></collision>
-    <inertial><mass value="0.001"/><inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/></inertial>
+    <visual name="v">
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry><mesh filename="m.dae" scale="1 1 1"/></geometry>
+    </visual>
+    <collision name="hand_authored">
+      <geometry><box size="0.01 0.01 0.01"/></geometry>
+    </collision>
+{_PLACEHOLDER_INERTIAL}
   </link>
 </robot>
 """
