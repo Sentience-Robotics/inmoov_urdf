@@ -16,7 +16,7 @@ For **InMoov i1 vs i2** scope and how to extend the YAML with **head / expressio
 ## Top-level keys
 
 - **`version`**: schema version (integer, currently `1`).
-- **`robot_name`**: logical name (e.g. `thais`).
+- **`robot_name`**: logical name (e.g. `inmoov`).
 - **`passive_urdf_joints`** / **`ignore_urdf_joints`** *(optional)*: string lists merged together; URDF joints named here are **excluded** from the pipeline **“not mapped to any actuator”** cross-check warning. **Synonyms** (same validation rules): `urdf_passive`, `urdf_passive_joints`, `urdf_ignore`, `urdf_ignore_joints`. Cross-check matches **`actuators[].urdf_joint`** against the URDF (not actuator **`id`**). Does **not** remove joints from the URDF or generation elsewhere — only suppresses that informational warning on save.
   - The control panel **Configuration** page also treats `passive_urdf_joints` as the **assignable pool** for new actuators: the **JOINT** dropdown lists every passive entry minus anything in `ignore_urdf_joints` and minus joints already mapped to another actuator. Picking a joint **removes** it from `passive_urdf_joints`; deleting an actuator (or clearing its joint) **re-adds** the freed joint (`appendPassiveUrdfJointIfUnassigned`), so the two lists stay in sync as the operator edits.
 - **`firmware`**: `source_dir`, `build_dir` — paths relative to the micro-ROS firmware workspace for the pipeline.

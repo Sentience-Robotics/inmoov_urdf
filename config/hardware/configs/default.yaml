@@ -3,7 +3,7 @@
 # left_shoulder_y_link_joint / right_shoulder_y_link_joint: torso board.
 
 version: 1
-robot_name: thais
+robot_name: inmoov
 
 passive_urdf_joints:
   - i01.head.eyeLeft.001_link_joint

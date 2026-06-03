@@ -19,6 +19,8 @@
   <!-- No exec_depend on lucy_ros2_control: would cycle (lucy_ros2_control depends on thais_urdf for URDF share). Controller parameters ship in this package as config/controllers.yaml (#95). -->
   <exec_depend>controller_manager</exec_depend>
   <exec_depend>lucy_control_supervisor</exec_depend>
+  <!-- autocalibrate_joint_limits.py needs PyBullet (pip: pybullet; installed in Dockerfile.humble) -->
+  <exec_depend>python3-yaml</exec_depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>

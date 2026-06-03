@@ -14,7 +14,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-# Gazebo sim + ros2_control (sim spawners). Optional RViz (``start_rviz``). No rosbridge.
+# Gazebo Harmonic sim + ros2_control (sim spawners). Optional RViz (``start_rviz``).
+# No rosbridge.
+#
+# ``headless:=true`` runs gz-sim server-only with EGL rendering
+# (``gz sim -s -r --headless-rendering``) so camera sensors keep producing
+# frames without an X server — the ros_gz camera bridge stays functional.
 
 import os
 from pathlib import Path
@@ -32,6 +37,7 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import (
     LaunchConfiguration,
     PathJoinSubstitution,
+    PythonExpression,
 )
 from launch_ros.actions import Node
 from lucy_control_supervisor.controllers_spawn import controllers_to_spawn
@@ -72,6 +78,15 @@ def generate_launch_description():
         default_value=os.path.join(default_base, "urdf", "inmoov.urdf.xacro"),
         description="Top-level robot xacro",
     )
+    headless_arg = DeclareLaunchArgument(
+        "headless",
+        default_value="false",
+        description=(
+            "If true: run gz-sim server-only with EGL rendering "
+            "(-s -r --headless-rendering). Camera sensors keep producing frames "
+            "without an X server, so the ros_gz camera bridge stays functional."
+        ),
+    )
 
     base_path = LaunchConfiguration("base_path")
 
@@ -96,13 +111,12 @@ def generate_launch_description():
     camera_compressor = Node(
         package="image_transport",
         executable="republish",
+        arguments=["raw", "compressed"],
         remappings=[
             ("in", "/camera/gazebo/raw"),
             ("out/compressed", "/camera/gazebo/compressed"),
         ],
-        parameters=[
-            {"in_transport": "raw", "out_transport": "compressed", "use_sim_time": True}
-        ],
+        parameters=[{"use_sim_time": True}],
         output="screen",
     )
 
@@ -116,14 +130,22 @@ def generate_launch_description():
     gz_plugin_path = os.pathsep.join(
         [s for s in [os.environ.get("GZ_SIM_SYSTEM_PLUGIN_PATH", ""), ros_lib] if s]
     ).strip(os.pathsep)
-    ign_plugin_path = os.pathsep.join(
-        [s for s in [os.environ.get("IGN_GAZEBO_SYSTEM_PLUGIN_PATH", ""), ros_lib] if s]
-    ).strip(os.pathsep)
 
     default_world = os.path.join(pkg_share, "worlds", "default.sdf")
+    # When headless: server-only (-s) with EGL rendering (--headless-rendering)
+    # so OGRE2 still renders camera sensors without an X display. Otherwise:
+    # normal GUI launch.
+    gz_args = PythonExpression(
+        [
+            "'-s -r --headless-rendering ", default_world, "'",
+            " if '", LaunchConfiguration("headless"),
+            "'.lower() in ('true', '1', 'yes') ",
+            "else '-r ", default_world, "'",
+        ]
+    )
     gz_sim_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(gz_sim_launch_path),
-        launch_arguments={"gz_args": f"-r {default_world}"}.items(),
+        launch_arguments={"gz_args": gz_args}.items(),
     )
 
     spawn_robot = Node(
@@ -174,12 +196,10 @@ def generate_launch_description():
             base_path_arg,
             controllers_yaml_arg,
             urdf_path_arg,
+            headless_arg,
             SetEnvironmentVariable(name="GZ_SIM_RESOURCE_PATH", value=mesh_dae),
             SetEnvironmentVariable(
                 name="GZ_SIM_SYSTEM_PLUGIN_PATH", value=gz_plugin_path
-            ),
-            SetEnvironmentVariable(
-                name="IGN_GAZEBO_SYSTEM_PLUGIN_PATH", value=ign_plugin_path
             ),
             supervisor,
             OpaqueFunction(function=spawner_actions_from_yaml),

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!-- gz_ros2_control bridge: runs controller_manager inside Gazebo so the same
+     ros2_control controllers drive the simulated joints. Expects
+     `controller_config` arg from the parent (inmoov.urdf.xacro).
+
+     Gazebo physics / surface tuning lives in
+     description/gazebo/inmoov_gazebo_physics.xacro to keep this file scoped
+     strictly to the ros2_control ↔ gz-sim bridge. -->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <gazebo>
+    <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+      <parameters>$(arg controller_config)</parameters>
+      <!-- Empty namespace so controller topics stay at /left_arm_controller, /right_arm_controller (panel expects these). -->
+      <namespace></namespace>
+    </plugin>
+  </gazebo>
+</robot>

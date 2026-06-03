@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<!-- Gazebo (gz-sim) physics + surface tuning, included only when
+     use_gazebo_sim:=true. This file is pure simulation tuning: world
+     anchoring, friction, contact stiffness, and self-collision flags.
+
+     The gz_ros2_control plugin itself lives next door in
+     description/ros2_control/inmoov_gz_ros2_control.xacro because it is the
+     ros2_control bridge into Gazebo, not a physics property.
+
+     Collision strategy: every URDF link reuses its visual mesh as the
+     collision mesh (see scripts/inject_collisions.py). The macros below only
+     assign surface/contact properties — `gazebo_body_link` disables
+     self_collide on adjacent body meshes (avoids jitter), `gazebo_hand_link`
+     enables it with friction tuned for grasping. -->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!-- Fix entire stand to the world so the robot does not fall (gz-sim may still move root; heavy mass in URDF is fallback). -->
+  <gazebo reference="base_node">
+    <static>true</static>
+  </gazebo>
+  <gazebo reference="stand_link">
+    <static>true</static>
+  </gazebo>
+
+  <!-- Body links: full-mesh collisions with self-collision disabled. Adjacent
+       shoulder/elbow meshes overlap at neutral pose; enabling self-collide
+       there causes jitter in gz-sim. Tighten contact stiffness defaults. -->
+  <xacro:macro name="gazebo_body_link" params="link">
+    <gazebo reference="${link}">
+      <mu1>0.6</mu1>
+      <mu2>0.6</mu2>
+      <kp>1e6</kp>
+      <kd>10</kd>
+      <self_collide>false</self_collide>
+    </gazebo>
+  </xacro:macro>
+  <xacro:gazebo_body_link link="torso_bottom_link"/>
+  <xacro:gazebo_body_link link="torso_z_link"/>
+  <xacro:gazebo_body_link link="torso_y_link"/>
+  <xacro:gazebo_body_link link="left_shoulder_y_link"/>
+  <xacro:gazebo_body_link link="left_shoulder_x_link"/>
+  <xacro:gazebo_body_link link="left_shoulder_z_link"/>
+  <xacro:gazebo_body_link link="left_elbow_x_link"/>
+  <xacro:gazebo_body_link link="left_wrist_z_link"/>
+  <xacro:gazebo_body_link link="right_shoulder_y_link"/>
+  <xacro:gazebo_body_link link="right_shoulder_x_link"/>
+  <xacro:gazebo_body_link link="right_shoulder_z_link"/>
+  <xacro:gazebo_body_link link="right_elbow_x_link"/>
+  <xacro:gazebo_body_link link="right_wrist_z_link"/>
+  <xacro:gazebo_body_link link="neck_link"/>
+  <xacro:gazebo_body_link link="i01.head.rothead_link"/>
+  <xacro:gazebo_body_link link="i01.head.jaw_link"/>
+
+  <!-- Finger / palm links: mesh collisions with high friction + self-collide
+       so finger-finger and finger-palm contacts work for grasping. Every
+       phalanx (proximal/medial/distal), abductor base, and the wrist palm
+       carry the same surface props. -->
+  <xacro:macro name="gazebo_hand_link" params="link">
+    <gazebo reference="${link}">
+      <mu1>0.9</mu1>
+      <mu2>0.9</mu2>
+      <kp>1e6</kp>
+      <kd>10</kd>
+      <self_collide>true</self_collide>
+    </gazebo>
+  </xacro:macro>
+  <xacro:macro name="gazebo_hand_side" params="side">
+    <xacro:gazebo_hand_link link="i01.${side}Hand.wrist.001_link"/>
+    <xacro:gazebo_hand_link link="i01.${side}Hand.index_link"/>
+    <xacro:gazebo_hand_link link="i01.${side}Hand.index2_link"/>
+    <xacro:gazebo_hand_link link="i01.${side}Hand.index3_link"/>
+    <xacro:gazebo_hand_link link="i01.${side}Hand.majeure_link"/>
+    <xacro:gazebo_hand_link link="i01.${side}Hand.majeure2_link"/>
+    <xacro:gazebo_hand_link link="i01.${side}Hand.majeure3_link"/>
+    <xacro:gazebo_hand_link link="i01.${side}Hand.ringfinger0_link"/>
+    <xacro:gazebo_hand_link link="i01.${side}Hand.ringFinger_link"/>
+    <xacro:gazebo_hand_link link="i01.${side}Hand.ringfinger2_link"/>
+    <xacro:gazebo_hand_link link="i01.${side}Hand.ringfinger3_link"/>
+    <xacro:gazebo_hand_link link="i01.${side}Hand.pinky0_link"/>
+    <xacro:gazebo_hand_link link="i01.${side}Hand.pinky_link"/>
+    <xacro:gazebo_hand_link link="i01.${side}Hand.pinky2_link"/>
+    <xacro:gazebo_hand_link link="i01.${side}Hand.pinky3_link"/>
+    <xacro:gazebo_hand_link link="i01.${side}Hand.thumb1_link"/>
+    <xacro:gazebo_hand_link link="i01.${side}Hand.thumb_link"/>
+    <xacro:gazebo_hand_link link="i01.${side}Hand.thumb3_link"/>
+  </xacro:macro>
+  <xacro:gazebo_hand_side side="left"/>
+  <xacro:gazebo_hand_side side="right"/>
+</robot>

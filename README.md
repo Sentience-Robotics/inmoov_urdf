@@ -1,194 +1,167 @@
 # thais_urdf
 
-ROS 2 **Humble** repository for the **InMoov-derived** robot description used by Lucy: **URDF/xacro**, **meshes**, **ros2_control** xacro blocks, **RViz** configuration, and **launch files** for **ros2_control** plus **RViz** or **Gazebo (GZ Sim)**.
+ROS 2 **Humble** package with the **InMoov-derived** robot description used by Lucy: **URDF/xacro**, **DAE meshes**, **ros2_control** blocks, **Gazebo (gz-sim) physics**, an **RViz** layout, and **launch files** for ros2_control + RViz / Gazebo.
 
-The **web control panel** (rosbridge + hardware **`/config/*`** services) is **not** started from this package; use **`lucy_bringup`** **`lucy.launch.py`** (or **`web_ros_api.launch.py`**) — see workspace **`lucy_ws/README.md`**.
+The web control panel (rosbridge + `/config/*` services) is **not** started from here — use `lucy_bringup` (`lucy.launch.py`) or `web_ros_api.launch.py` from `lucy_ros_packages`.
 
-The **`package.xml` name is `thais_urdf`** (historical name; content is the InMoov-style model and tooling).
+> Historical name: `package.xml` is `thais_urdf` but the content is the InMoov-style description used by Lucy.
 
 ## Repository layout
 
 ```text
 thais_urdf/
 ├── package.xml              # ROS package: thais_urdf
-├── CMakeLists.txt           # Installs launch/, config/, description/, docs/
-├── docs/                    # Developer + hardware mapping (see Documentation map)
+├── CMakeLists.txt           # Installs launch/, config/, description/, docs/, worlds/
+├── docs/                    # Developer + hardware docs (see Documentation map)
 ├── launch/
-│   ├── control.launch.py    # ros2_control + spawners (default controllers from this package)
-│   ├── gazebo.launch.py     # Gazebo + … + optional RViz via start_rviz (no rosbridge)
-│   └── rviz_standalone.launch.py
+│   ├── control.launch.py        # ros2_control + spawners (real robot)
+│   ├── gazebo.launch.py         # gz-sim + ros2_control + optional RViz
+│   ├── joint_preview.launch.py  # robot_state_publisher + joint_state_publisher_gui + RViz
+│   ├── rviz.launch.py           # RViz2 only (used by lucy_bringup)
+│   └── rviz_standalone.launch.py # RViz2 only (manual second-terminal use)
 ├── config/
-│   ├── controllers.yaml
-│   ├── inmoov_rviz.rviz
-│   └── hardware/            # active.yaml — hardware single source of truth
-└── description/
-    ├── urdf/inmoov.urdf.xacro
-    ├── robot_description/
-    ├── ros2_control/
-    │   ├── inmoov_ros2_control.xacro
-    │   └── inmoov_gazebo.xacro
-    └── meshes/
+│   ├── controllers.yaml         # controller_manager + named controllers
+│   ├── control.launch.yaml      # defaults for control.launch.py
+│   ├── inmoov_rviz.rviz         # RViz layout (visual + collision overlay)
+│   └── hardware/
+│       ├── active.yaml          # single source of truth for the live mapping
+│       ├── active_meta.yaml     # which preset is active + flash metadata
+│       └── configs/             # named presets (default / sim / dated snapshots)
+├── description/
+│   ├── urdf/inmoov.urdf.xacro                    # top-level entry
+│   ├── robot_description/
+│   │   ├── urdf/properties.xacro                 # model_scale
+│   │   ├── urdf/robot_description.urdf.xacro     # links, joints, visuals, collisions, materials
+│   │   └── meshes/dae/*.dae                      # 290 Collada meshes (visual + collision)
+│   ├── ros2_control/
+│   │   ├── inmoov_ros2_control.xacro             # hardware interfaces (real / sim / mock)
+│   │   └── inmoov_gz_ros2_control.xacro          # gz_ros2_control plugin (sim only)
+│   └── gazebo/
+│       └── inmoov_gazebo_physics.xacro           # static / friction / self_collide (sim only)
+├── worlds/default.sdf       # minimal world used by gazebo.launch.py
+├── scripts/                 # inject_collisions.py, autocalibrate_joint_limits.py, scale_xacro_origins.py
+├── test/                    # pytest suite (xacro smoke, YAML, collisions, joint limits)
+└── archive/                 # Original InMoov-i1 STL meshes + URDF + PDF (lineage, not runtime)
 ```
 
-**Install:** `launch/`, `config/`, **`description/`**, and **`docs/`** install to **`share/thais_urdf`**. Default `urdf_path` / `base_path` in the combo launches use **`ros2 pkg prefix thais_urdf`**; override only for custom trees.
+**Install**: `launch/`, `config/`, `description/`, `docs/`, `worlds/` install to `share/thais_urdf/`. The combo launches resolve defaults from `get_package_share_directory("thais_urdf")`; override only for custom trees.
 
-## Relationship to lucy_ros_packages
+## Relationship to `lucy_ros_packages`
 
 | Repo | Role |
 |------|------|
-| **thais_urdf** (this repo) | Canonical **robot description** and **sim/visualization** entry launches (**no rosbridge**). |
-| **[lucy_ros_packages](https://github.com/Sentience-Robotics/lucy_ros_packages)** | **Jetson bringup** (**`lucy_bringup`**), **`LucySystemHardware`**, **camera_ros**, RealSense, **`web_ros_api`** (rosbridge + **`lucy_config_pipeline`**). `lucy_ros2_control` consumes this URDF when using default layout (both repos in one `lucy_ws/src`). |
+| **`thais_urdf`** (this) | Canonical robot description + sim/visualization entry launches (no rosbridge). |
+| **`lucy_ros_packages`** | LUCY bringup (`lucy_bringup`), `LucySystemHardware` plugin, cameras, `web_ros_api` (rosbridge + `lucy_config_pipeline`). |
 
-Default combo launches resolve controller YAML from the **`lucy_ros2_control`** package share (`get_package_share_directory`). Install **`lucy_ros2_control`** in the same workspace/underlay (there is **no** `package.xml` dependency to avoid a build cycle with this package). Keep YAML, xacro joint lists, and teleop/UI config in sync.
+`lucy_ros2_control` consumes this URDF when both packages share `lucy_ws/src/`. **No** `package.xml` dependency on `lucy_ros2_control` (would create a colcon cycle) — keep both packages in the workspace.
 
 ## Requirements
 
-- ROS 2 **Humble**
-- Packages used by default **`thais_urdf`** launches: `robot_state_publisher`, `controller_manager`, `rviz2`, `ros_gz_sim`, `ros_gz_bridge`, `gz_ros2_control`, `launch_ros`, and **`lucy_ros2_control`** (controller YAML + real-hardware plugin name in xacro). **`lucy_ros2_control`** is not listed in this package’s `package.xml` on purpose (avoids a **`colcon` cycle** with `lucy_ros2_control` → `thais_urdf`); keep both packages in the workspace.
-
-For the **control panel**, also build/source **`lucy_bringup`** and **`lucy_config_pipeline`** (pulled in via **`lucy_bringup`** `package.xml`).
-
-Install other dependencies with `rosdep` from your workspace root when a `ros_distribution` is sourced.
-
-## Building
+ROS 2 Humble plus: `robot_state_publisher`, `controller_manager`, `rviz2`, `ros_gz_sim`, `ros_gz_bridge`, `gz_ros2_control`, `launch_ros`, `lucy_ros2_control`. The auto-cal script also needs **PyBullet** (already in the `lucy_ros2:humble` image, `pip` otherwise).
 
 ```bash
-# In a colcon workspace that contains this repo under src/
+rosdep install --from-paths src --ignore-src -r -y
+```
+
+For the control panel, also build `lucy_bringup` + `lucy_config_pipeline` (pulled in via `lucy_bringup`'s `package.xml`).
+
+## Build
+
+```bash
 source /opt/ros/humble/setup.bash
 cd lucy_ws
-colcon build --packages-select thais_urdf
+colcon build --symlink-install --packages-select thais_urdf lucy_ros2_control
 source install/setup.bash
 ```
 
-For full stack development, build together with `lucy_ros2_control` at minimum:
+`--symlink-install` lets edits to `description/`, `launch/`, `config/`, and `scripts/` be picked up on the next `ros2 launch` without rebuilding. Re-run `colcon build` only after touching `CMakeLists.txt`, `package.xml`, or `test/`.
+
+## Quick launches
 
 ```bash
-colcon build --symlink-install --packages-select thais_urdf lucy_ros2_control
-```
+# URDF preview with sliders + RViz (no hardware, no controllers)
+ros2 launch thais_urdf joint_preview.launch.py
 
-## Compiling xacro → URDF
-
-The robot description is authored in xacro and must be preprocessed into plain URDF for tools that cannot consume xacro (web viewers, Isaac Sim, offline MoveIt pipelines, …).
-
-**Prerequisite:** ROS 2 Humble sourced. Run from the **package root** (`thais_urdf/`):
-
-```bash
-ros2 run xacro xacro description/urdf/inmoov.urdf.xacro \
-  base_path:=$(pwd)/description \
-  use_gazebo_sim:=false \
-| sed 's|file://[^ "]*meshes/dae/\([^"]*\)|meshes/dae/\1|g' \
-  > description/robot_description/urdf/robot_description.urdf
-```
-
-| Argument | Default | Purpose |
-|---|---|---|
-| `base_path` | `.` | Directory that contains `robot_description/meshes/dae/`. Must be the **parent of `robot_description/`** — the xacro appends `/robot_description/meshes/dae` to this. |
-| `use_gazebo_sim` | `false` | `true` sets heavy inertias on the base link for Gazebo stability. |
-
-The compiled file lives at `description/robot_description/urdf/robot_description.urdf` and is committed to the repository. Regenerate it whenever `robot_description.urdf.xacro` or `inmoov.urdf.xacro` changes.
-
-## Quick start
-
-### Robot description + RViz or Gazebo (no web panel)
-
-```bash
-# Real robot + ros2_control (terminal 1), then RViz only (terminal 2)
+# Real robot: ros2_control + controllers (RViz in another terminal)
 ros2 launch thais_urdf control.launch.py
 ros2 launch thais_urdf rviz_standalone.launch.py
 
-# Gazebo sim + ros2_control + optional RViz (no rosbridge)
-ros2 launch thais_urdf gazebo.launch.py
-```
+# gz-sim + ros2_control + optional RViz
+ros2 launch thais_urdf gazebo.launch.py                  # GUI
+ros2 launch thais_urdf gazebo.launch.py headless:=true   # server-only, EGL render
+ros2 launch thais_urdf gazebo.launch.py start_rviz:=true # spawn RViz too
 
-Optional arguments for **`control.launch.py`** and **`gazebo.launch.py`**:
-
-- `urdf_path`, `base_path`, `controllers_yaml` — **`control.launch.py`** (defaults from **`config/control.launch.yaml`**).
-- `urdf_path`, `base_path`, `robot_package`, `start_rviz` — **`gazebo.launch.py`**.
-
-### With the web control panel (rosbridge + `/config/*`)
-
-Use **`lucy_bringup`** **`lucy.launch.py`** (single entry; set **`real`**, **`rviz`**, **`gazebo`**):
-
-```bash
+# Full stack (rosbridge + web panel) — from lucy_bringup
 ros2 launch lucy_bringup lucy.launch.py real:=false rviz:=true
 ros2 launch lucy_bringup lucy.launch.py gazebo:=true real:=false
 ```
 
-Or start **`web_ros_api.launch.py`** next to **`thais_urdf`** RViz/Gazebo in separate terminals.
+Common arguments:
 
-### RViz in a second terminal (bringup already running)
+| Launch | Arg | Default | Notes |
+|--------|-----|---------|-------|
+| `control.launch.py` | `urdf_path`, `base_path`, `controllers_yaml`, `use_mock_hardware` | from `config/control.launch.yaml` | `use_mock_hardware:=true` swaps `LucySystemHardware` for `mock_components/GenericSystem`. |
+| `gazebo.launch.py` | `urdf_path`, `base_path`, `controllers_yaml`, `headless`, `start_rviz` | package share | `headless:=true` runs `gz sim -s -r --headless-rendering`. |
+| `rviz_standalone.launch.py` | `rviz_config`, `use_sim_time` | `config/inmoov_rviz.rviz`, `false` | Use when `/robot_description` + `/joint_states` already exist. |
+| `joint_preview.launch.py` | `jsp_gui` | `true` | `false` hides sliders so an external publisher can drive `/joint_states`. |
 
-Use **`rviz_standalone.launch.py`** when another stack already publishes **`/robot_description`** and **`/joint_states`** — for example **[`lucy_bringup`](https://github.com/Sentience-Robotics/lucy_ros_packages)** has started **`lucy.launch.py`**. This avoids a second **`robot_state_publisher`**, **`ros2_control_node`**, or full control launch on the same graph.
+## Standalone xacro → URDF
 
-**Terminal 1** (from **`lucy_ros_packages`**, workspace sourced):
+Tools that cannot consume xacro (Isaac Sim, offline MoveIt pipelines, the LCP exporter, …):
 
 ```bash
-ros2 launch lucy_bringup lucy.launch.py
+ros2 run xacro xacro description/urdf/inmoov.urdf.xacro \
+    base_path:=$(pwd)/description \
+    use_gazebo_sim:=false \
+  | sed 's|file://[^ "]*meshes/dae/\([^"]*\)|meshes/dae/\1|g' \
+  > /tmp/robot_description.urdf
 ```
 
-**Terminal 2** (same machine; `source install/setup.bash` from your colcon workspace):
+| Argument | Default | Purpose |
+|----------|---------|---------|
+| `base_path` | `.` | Parent of `robot_description/`; the xacro appends `/robot_description/meshes/dae`. |
+| `use_gazebo_sim` | `false` | `true` enables `gz_ros2_control` plugin + Gazebo physics overrides. |
+| `use_mock_hardware` | `false` | `true` swaps the real-hardware plugin for `mock_components/GenericSystem`. |
+
+`model_scale` is **not** a launch arg — it is a single xacro property in [`description/robot_description/urdf/properties.xacro`](description/robot_description/urdf/properties.xacro) (current value `0.1196`, targets a measured crown height of 1.80 m). The flat URDF is **not** committed; regenerate on demand when needed.
+
+## Tests and CI
 
 ```bash
-ros2 launch thais_urdf rviz_standalone.launch.py
-```
-
-Optional: `rviz_config:=<path>` — default packaged **`config/inmoov_rviz.rviz`**.
-
-If you run **`lucy_ros2_control`** alone (e.g. `control.launch.py`) instead of full bringup, you can still use the same **`rviz_standalone.launch.py`** as long as `/robot_description` and `/joint_states` are available.
-
-For **RViz + panel** on one machine without full Jetson bringup, use **`ros2 launch lucy_bringup lucy.launch.py real:=false rviz:=true`**.
-
-## Tests and coverage (local)
-
-**Dependencies:** `python3-pytest-cov` (e.g. `sudo apt install python3-pytest-cov`).
-
-From your **workspace root**, with `src/thais_urdf` and `src/lucy_ros2_control` (same layout as CI):
-
-```bash
-source /opt/ros/humble/setup.bash
-colcon build --symlink-install \
-  --packages-select thais_urdf lucy_ros2_control \
+colcon build --symlink-install --packages-select thais_urdf lucy_ros2_control \
   --cmake-args -DBUILD_TESTING=ON
-source install/setup.bash
-
-colcon test --packages-select thais_urdf lucy_ros2_control --event-handlers console_direct+
+colcon test --packages-select thais_urdf --event-handlers console_direct+
 colcon test-result --verbose
 ```
 
-**Coverage** for this repo’s pytest suite (xacro smoke + launch/test tree):
+Local coverage (needs `python3-pytest-cov`):
 
 ```bash
 mkdir -p build/coverage_reports build/coverage_html
 python3 -m pytest src/thais_urdf/test/ \
-  --cov=src/thais_urdf/launch \
-  --cov=src/thais_urdf/test \
+  --cov=src/thais_urdf/launch --cov=src/thais_urdf/test \
   --cov-report=term-missing \
   --cov-report=xml:build/coverage_reports/thais_urdf.xml \
   --cov-report=html:build/coverage_html/thais_urdf
 ```
 
-Tests call **`xacro`** on the URDF; coverage mainly reflects **test + launch** Python lines, not meshes or C++.
-
-## CI
-
-**GitHub Actions** (`.github/workflows/ci.yml`) builds `thais_urdf` and `lucy_ros2_control`, runs **`colcon test`**, then **`pytest-cov`** for `src/thais_urdf/test/`. Cobertura XML and HTML are uploaded to [**Codecov**](https://codecov.io) (flag `thais_urdf`) when **`CODECOV_TOKEN`** is set, and stored as artifact `coverage-thais_urdf`.
+CI: `.github/workflows/ci.yml` builds `thais_urdf` + `lucy_ros2_control`, runs `colcon test`, then `pytest-cov`. Cobertura XML + HTML are uploaded to Codecov (flag `thais_urdf`) when `CODECOV_TOKEN` is set.
 
 ## Documentation map
 
 | Doc | Content |
 |-----|---------|
-| This file | Repository scope and integration |
-| [**docs/DEVELOPER.md**](docs/DEVELOPER.md) | **Contributors** — URDF/xacro, hardware YAML, launches, install layout, extension checklist |
-| [**docs/hardware_mapping.md**](docs/hardware_mapping.md) | Schema and calibration for `config/hardware/active.yaml` |
-| [**docs/inmoov_i2.md**](docs/inmoov_i2.md) | i1 scope vs i2 head actuators (YAML appendix) |
-| **lucy_ros_packages** repo README | Bringup, hardware control, cameras |
-| Workspace **`lucy_ws/docs/developer_lucy_packages.md`** | Index pointing to each repo’s developer doc (paths vary by repo) |
-| Workspace **`lucy_ws/docs/simulation_and_visualization.md`** | Control panel ↔ ROS pipeline, sim time, gaps |
+| This file | Package scope, build, launches, integration points |
+| [**`docs/DEVELOPER.md`**](docs/DEVELOPER.md) | **Editing the URDF**, calibration workflow (collisions + joint limits), xacro architecture, scripts, extension checklist |
+| [`docs/hardware_mapping.md`](docs/hardware_mapping.md) | Schema for `config/hardware/active.yaml` (boards, actuators, calibration fields) |
+| [`docs/inmoov_i2.md`](docs/inmoov_i2.md) | i1 (current) vs i2 head/expression actuators — YAML appendix |
+| `lucy_ros_packages` README | Lucy system bringup, hardware plugin, cameras, web panel |
+| `lucy_ws/docs/simulation_and_visualization.md` | Control panel ↔ ROS pipeline and sim-time notes |
 
 ## License and assets
 
-- **InMoov-derived** meshes and model lineage: see project **LICENSE** and attribution (e.g. **CC BY-NC 4.0**, Gael Langevin / InMoov project, where applicable).
-- **Package code** (launch files, xacro, CMake): **GPL-3.0** per `package.xml` unless stated otherwise.
+- **InMoov-derived** meshes and lineage: see `LICENSE` and attribution (CC BY-NC 4.0, Gael Langevin / InMoov). The original STL set + InMoov.urdf + PDF live under `archive/` for reference.
+- **Package code** (launch, xacro, CMake, scripts): **GPL-3.0** per `package.xml`.
 
 ## Maintainer
 

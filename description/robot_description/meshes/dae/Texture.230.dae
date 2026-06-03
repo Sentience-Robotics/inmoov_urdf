@@ -152,10 +152,7 @@
         <vertices id="Texture_230-mesh-vertices">
           <input semantic="POSITION" source="#Texture_230-mesh-positions"/>
         </vertices>
-        <lines count="1">
-          <input semantic="VERTEX" source="#Texture_230-mesh-vertices" offset="0"/>
-          <p>255 1013</p>
-        </lines>
+        
         <triangles material="Material_012-material" count="4184">
           <input semantic="VERTEX" source="#Texture_230-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#Texture_230-mesh-normals" offset="1"/>

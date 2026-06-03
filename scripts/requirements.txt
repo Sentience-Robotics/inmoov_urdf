@@ -1,0 +1,3 @@
+# Optional: URDF joint-limit auto-calibration (scripts/autocalibrate_joint_limits.py).
+# Installed in the lucy_ros2:humble image via Dockerfile.humble (pip).
+pybullet>=3.2.0
