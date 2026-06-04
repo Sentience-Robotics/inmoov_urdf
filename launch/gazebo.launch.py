@@ -130,7 +130,7 @@ def generate_launch_description():
     )
 
     bridge_config_path = os.path.join(
-        get_package_share_directory("thais_urdf"), "config", "gazebo_bridge.yaml"
+        get_package_share_directory("thais_urdf"), "description", "gazebo", "gazebo_bridge.yaml"
     )
     bridge = Node(
         package="ros_gz_bridge",
