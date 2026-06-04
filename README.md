@@ -100,7 +100,7 @@ Common arguments:
 
 | Launch | Arg | Default | Notes |
 |--------|-----|---------|-------|
-| `control.launch.py` | `urdf_path`, `base_path`, `controllers_yaml`, `use_mock_hardware` | from `config/control.launch.yaml` | `use_mock_hardware:=true` swaps `LucySystemHardware` for `mock_components/GenericSystem`. |
+| `control.launch.py` | `urdf_path`, `base_path`, `controllers_yaml`, `use_mock_hardware` | from `config/control.launch.yaml` | `use_mock_hardware:=true` keeps `LucySystemHardware` but sets `publish_actuators:=false` so URDF clamping is enforced without micro-ROS publishing. |
 | `gazebo.launch.py` | `urdf_path`, `base_path`, `controllers_yaml`, `headless`, `start_rviz` | package share | `headless:=true` runs `gz sim -s -r --headless-rendering`. |
 | `rviz_standalone.launch.py` | `rviz_config`, `use_sim_time` | `config/inmoov_rviz.rviz`, `false` | Use when `/robot_description` + `/joint_states` already exist. |
 | `joint_preview.launch.py` | `jsp_gui` | `true` | `false` hides sliders so an external publisher can drive `/joint_states`. |
@@ -121,7 +121,7 @@ ros2 run xacro xacro description/urdf/inmoov.urdf.xacro \
 |----------|---------|---------|
 | `base_path` | `.` | Parent of `robot_description/`; the xacro appends `/robot_description/meshes/dae`. |
 | `use_gazebo_sim` | `false` | `true` enables `gz_ros2_control` plugin + Gazebo physics overrides. |
-| `use_mock_hardware` | `false` | `true` swaps the real-hardware plugin for `mock_components/GenericSystem`. |
+| `use_mock_hardware` | `false` | `true` keeps `LucySystemHardware` but disables the micro-ROS actuator publisher (URDF clamping still runs). |
 
 `model_scale` is **not** a launch arg — it is a single xacro property in [`description/robot_description/urdf/properties.xacro`](description/robot_description/urdf/properties.xacro) (current value `0.1196`, targets a measured crown height of 1.80 m). The flat URDF is **not** committed; regenerate on demand when needed.
 

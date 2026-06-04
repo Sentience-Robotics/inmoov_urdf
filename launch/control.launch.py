@@ -26,6 +26,12 @@ from launch.substitutions import LaunchConfiguration
 import yaml
 
 
+_DEFAULT_GENERATED_FILES = {
+    "ros2_control_xacro": "inmoov_ros2_control.xacro",
+    "controllers_yaml": "controllers.yaml",
+}
+
+
 def _load_launch_defaults(package_root: Path) -> dict[str, str]:
     config_path = package_root / "config" / "control.launch.yaml"
     data = yaml.safe_load(config_path.read_text(encoding="utf-8")) or {}
@@ -38,11 +44,29 @@ def _load_launch_defaults(package_root: Path) -> dict[str, str]:
     return {key: str(data[key]).strip() for key in required}
 
 
+def _active_generated_files(package_root: Path) -> dict[str, str]:
+    """Generated-artifact filenames from the active preset (defaults if unreadable)."""
+    active = package_root / "config" / "hardware" / "active.yaml"
+    out = dict(_DEFAULT_GENERATED_FILES)
+    try:
+        data = yaml.safe_load(active.read_text(encoding="utf-8"))
+    except (OSError, yaml.YAMLError):
+        return out
+    section = data.get("generated_files") if isinstance(data, dict) else None
+    if isinstance(section, dict):
+        for key in out:
+            value = section.get(key)
+            if isinstance(value, str) and value.strip() and "/" not in value:
+                out[key] = value.strip()
+    return out
+
+
 def generate_launch_description():
     package_root = Path(__file__).resolve().parents[1]
     defaults = _load_launch_defaults(package_root)
+    generated = _active_generated_files(package_root)
     default_controllers_yaml = str(
-        (package_root / defaults["controllers_yaml"]).resolve()
+        (package_root / "config" / generated["controllers_yaml"]).resolve()
     )
     default_urdf = str((package_root / defaults["urdf_path"]).resolve())
     default_base = str((package_root / defaults["base_path"]).resolve())
@@ -72,7 +96,15 @@ def generate_launch_description():
     use_mock_hardware_arg = DeclareLaunchArgument(
         "use_mock_hardware",
         default_value="false",
-        description="Forwarded to xacro: emit mock_components/GenericSystem plugin",
+        description=(
+            "Forwarded to xacro: LucySystemHardware with publish_actuators:=false "
+            "(URDF clamping still applied, no micro-ROS publish)"
+        ),
+    )
+    ros2_control_file_arg = DeclareLaunchArgument(
+        "ros2_control_file",
+        default_value=generated["ros2_control_xacro"],
+        description="Generated ros2_control xacro basename (generated_files in active.yaml)",
     )
 
     supervisor_launch = TimerAction(
@@ -90,6 +122,7 @@ def generate_launch_description():
                     "use_mock_hardware": LaunchConfiguration("use_mock_hardware"),
                     "gazebo_only": "false",
                     "autostart": "true",
+                    "ros2_control_file": LaunchConfiguration("ros2_control_file"),
                 }.items(),
             )
         ],
@@ -101,6 +134,7 @@ def generate_launch_description():
             urdf_path_arg,
             base_path_arg,
             use_mock_hardware_arg,
+            ros2_control_file_arg,
             supervisor_launch,
         ]
     )

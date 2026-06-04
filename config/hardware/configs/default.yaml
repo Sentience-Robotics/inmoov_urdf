@@ -5,18 +5,15 @@
 version: 1
 robot_name: inmoov
 
-passive_urdf_joints:
-  - i01.head.eyeLeft.001_link_joint
-  - i01.head.eyeLeft_link_joint
-  - i01.head.eyeRight.001_link_joint
-  - i01.head.eyeRight_link_joint
-  - i01.head.jaw_link_joint
-  - i01.head.neck.001_link_joint
-  - i01.head.rollNeck_link_joint
-  - i01.head.rothead_link_joint
-  - i01.torso.midStom_link_joint
-  - i01.torso.topStom_link_joint
+# Generated-artifact filenames (bare basenames; directories are fixed by repo
+# convention: description/ros2_control/ and config/). Consumed by
+# lucy_config_generator, lucy_config_pipeline, inmoov.urdf.xacro and the
+# thais_urdf launches so every layer agrees on the names.
+generated_files:
+  ros2_control_xacro: inmoov_ros2_control.xacro
+  controllers_yaml: controllers.yaml
 
+passive_urdf_joints: []
 ignore_urdf_joints:
   - Empty.001_link_joint
   - Empty.002_link_joint
@@ -46,14 +43,11 @@ ignore_urdf_joints:
   - i01.rightHand.thumb1_link_joint
   - i01.rightHand.thumb3_link_joint
   - i01.rightHand.wrist.001_link_joint
-
 firmware:
   source_dir: micro_ros_raspberrypi_pico_sdk
   build_dir: build
-
 controller_manager:
   update_rate: 100
-
 boards:
   rp2040_left_arm:
     serial_id: E6617C93E3858429
@@ -78,7 +72,7 @@ boards:
       name: right_arm_controller
       type: joint_trajectory_controller/JointTrajectoryController
   rp2040_torso_head:
-    serial_id: ""
+    serial_id: ''
     board_class: internal_servo_i2c_pwm
     internal_servo_slots: 16
     firmware_target: pico_micro_ros_torso
@@ -88,274 +82,397 @@ boards:
     controller:
       name: torso_head_controller
       type: joint_trajectory_controller/JointTrajectoryController
-
 actuators:
-  # Torso board — shoulder Y joints are wired here (legacy URDF names).
   - id: left_shoulder_y_torso
     urdf_joint: left_shoulder_y_link_joint
     board: rp2040_torso_head
     virtual_pin: 0
     physical_pin: 5
-    servo_type: "270"
-    offset_deg: 0.0
+    servo_type: '270'
+    offset_deg: 0
     direction: 1
-    scale: 1.0
-    servo_min_deg: 0.0
-    servo_max_deg: 270.0
-    servo_default_deg: 0.0
+    scale: 1
+    servo_min_deg: 0
+    servo_max_deg: 180
+    servo_default_deg: 0
     enabled: false
   - id: right_shoulder_y_torso
     urdf_joint: right_shoulder_y_link_joint
     board: rp2040_torso_head
     virtual_pin: 1
     physical_pin: 6
-    servo_type: "270"
-    offset_deg: 0.0
+    servo_type: '270'
+    offset_deg: 0
     direction: 1
-    scale: 1.0
-    servo_min_deg: 0.0
-    servo_max_deg: 270.0
-    servo_default_deg: 0.0
+    scale: 1
+    servo_min_deg: 0
+    servo_max_deg: 180
+    servo_default_deg: 0
     enabled: false
-
-  # Left arm (no shoulder Y — see torso entries above).
   - id: left_shoulder_z
     urdf_joint: left_shoulder_z_link_joint
     board: rp2040_left_arm
     virtual_pin: 0
     physical_pin: 10
-    servo_type: "270"
-    offset_deg: 0.0
+    servo_type: '270'
+    offset_deg: 90
     direction: 1
-    scale: 1.0
-    servo_min_deg: 0.0
-    servo_max_deg: 270.0
-    servo_default_deg: 135.0
+    scale: 1
+    servo_min_deg: 0
+    servo_max_deg: 180
+    servo_default_deg: 90
     enabled: false
   - id: left_shoulder_x
     urdf_joint: left_shoulder_x_link_joint
     board: rp2040_left_arm
     virtual_pin: 1
     physical_pin: 11
-    servo_type: "270"
-    offset_deg: 0.0
+    servo_type: '270'
+    offset_deg: 0
     direction: 1
-    scale: 1.0
-    servo_min_deg: 0.0
-    servo_max_deg: 270.0
-    servo_default_deg: 135.0
+    scale: 1
+    servo_min_deg: 0
+    servo_max_deg: 180
+    servo_default_deg: 0
     enabled: false
   - id: left_elbow_x
     urdf_joint: left_elbow_x_link_joint
     board: rp2040_left_arm
     virtual_pin: 2
     physical_pin: 12
-    servo_type: "270"
-    offset_deg: 0.0
+    servo_type: '270'
+    offset_deg: 0
     direction: 1
-    scale: 1.0
-    servo_min_deg: 0.0
-    servo_max_deg: 270.0
-    servo_default_deg: 90.0
+    scale: 1
+    servo_min_deg: 0
+    servo_max_deg: 180
+    servo_default_deg: 0
     enabled: false
   - id: left_wrist_z
     urdf_joint: left_wrist_z_link_joint
     board: rp2040_left_arm
     virtual_pin: 3
     physical_pin: 13
-    servo_type: "300"
-    offset_deg: 0.0
+    servo_type: '300'
+    offset_deg: 150
     direction: 1
-    scale: 1.0
-    servo_min_deg: 0.0
-    servo_max_deg: 150.0
-    servo_default_deg: 50.0
+    scale: 1
+    servo_min_deg: 0
+    servo_max_deg: 300
+    servo_default_deg: 150
     enabled: false
   - id: left_thumb
     urdf_joint: i01.leftHand.thumb_link_joint
     board: rp2040_left_arm
     virtual_pin: 4
     physical_pin: 14
-    servo_type: "300"
-    offset_deg: 0.0
+    servo_type: '300'
+    offset_deg: 0
     direction: 1
-    scale: 1.0
-    servo_min_deg: 0.0
-    servo_max_deg: 150.0
-    servo_default_deg: 50.0
+    scale: 1
+    servo_min_deg: 0
+    servo_max_deg: 180
+    servo_default_deg: 0
     enabled: false
   - id: left_index
     urdf_joint: i01.leftHand.index_link_joint
     board: rp2040_left_arm
     virtual_pin: 5
     physical_pin: 15
-    servo_type: "300"
-    offset_deg: 0.0
+    servo_type: '300'
+    offset_deg: 0
     direction: 1
-    scale: 1.0
-    servo_min_deg: 0.0
-    servo_max_deg: 150.0
-    servo_default_deg: 50.0
+    scale: 1
+    servo_min_deg: 0
+    servo_max_deg: 180
+    servo_default_deg: 0
     enabled: false
   - id: left_majeure
     urdf_joint: i01.leftHand.majeure_link_joint
     board: rp2040_left_arm
     virtual_pin: 6
     physical_pin: 16
-    servo_type: "300"
-    offset_deg: 0.0
+    servo_type: '300'
+    offset_deg: 0
     direction: 1
-    scale: 1.0
-    servo_min_deg: 0.0
-    servo_max_deg: 150.0
-    servo_default_deg: 50.0
+    scale: 1
+    servo_min_deg: 0
+    servo_max_deg: 180
+    servo_default_deg: 0
     enabled: false
   - id: left_ring
     urdf_joint: i01.leftHand.ringFinger_link_joint
     board: rp2040_left_arm
     virtual_pin: 7
     physical_pin: 17
-    servo_type: "300"
-    offset_deg: 0.0
+    servo_type: '300'
+    offset_deg: 0
     direction: 1
-    scale: 1.0
-    servo_min_deg: 0.0
-    servo_max_deg: 150.0
-    servo_default_deg: 50.0
+    scale: 1
+    servo_min_deg: 0
+    servo_max_deg: 180
+    servo_default_deg: 0
     enabled: false
   - id: left_pinky
     urdf_joint: i01.leftHand.pinky_link_joint
     board: rp2040_left_arm
     virtual_pin: 8
     physical_pin: 18
-    servo_type: "300"
-    offset_deg: 0.0
+    servo_type: '300'
+    offset_deg: 0
     direction: 1
-    scale: 1.0
-    servo_min_deg: 0.0
-    servo_max_deg: 150.0
-    servo_default_deg: 50.0
+    scale: 0.25
+    servo_min_deg: 0
+    servo_max_deg: 180
+    servo_default_deg: 0
     enabled: false
-
-  # Right arm
   - id: right_shoulder_z
     urdf_joint: right_shoulder_z_link_joint
     board: rp2040_right_arm
     virtual_pin: 0
     physical_pin: 10
-    servo_type: "270"
-    offset_deg: 0.0
-    direction: 1
-    scale: 1.0
-    servo_min_deg: 155.0
-    servo_max_deg: 165.0
-    servo_default_deg: 160.0
-    enabled: true
+    servo_type: '270'
+    offset_deg: 90
+    direction: -1
+    scale: 1
+    servo_min_deg: 0
+    servo_max_deg: 180
+    servo_default_deg: 90
+    enabled: false
   - id: right_shoulder_x
     urdf_joint: right_shoulder_x_link_joint
     board: rp2040_right_arm
     virtual_pin: 1
     physical_pin: 11
-    servo_type: "270"
-    offset_deg: 0.0
+    servo_type: '270'
+    offset_deg: 0
     direction: 1
-    scale: 1.0
-    servo_min_deg: 140.0
-    servo_max_deg: 180.0
-    servo_default_deg: 180.0
-    enabled: true
+    scale: 1
+    servo_min_deg: 0
+    servo_max_deg: 180
+    servo_default_deg: 0
+    enabled: false
   - id: right_elbow_x
     urdf_joint: right_elbow_x_link_joint
     board: rp2040_right_arm
     virtual_pin: 2
     physical_pin: 12
-    servo_type: "270"
-    offset_deg: 0.0
+    servo_type: '270'
+    offset_deg: 0
     direction: 1
-    scale: 1.0
-    servo_min_deg: 100.0
-    servo_max_deg: 110.0
-    servo_default_deg: 100.0
-    enabled: true
+    scale: 1
+    servo_min_deg: 0
+    servo_max_deg: 180
+    servo_default_deg: 0
+    enabled: false
   - id: right_wrist_z
     urdf_joint: right_wrist_z_link_joint
     board: rp2040_right_arm
     virtual_pin: 3
     physical_pin: 13
-    servo_type: "300"
-    offset_deg: 0.0
-    direction: 1
-    scale: 1.0
-    servo_min_deg: 0.0
-    servo_max_deg: 230.0
-    servo_default_deg: 150.0
-    enabled: true
+    servo_type: '300'
+    offset_deg: 150
+    direction: -1
+    scale: 1
+    servo_min_deg: 0
+    servo_max_deg: 300
+    servo_default_deg: 150
+    enabled: false
   - id: right_thumb
     urdf_joint: i01.rightHand.thumb_link_joint
     board: rp2040_right_arm
     virtual_pin: 4
     physical_pin: 14
-    servo_type: "300"
-    offset_deg: 0.0
+    servo_type: '300'
+    offset_deg: 0
     direction: 1
-    scale: 1.0
-    servo_min_deg: 36.0
-    servo_max_deg: 150.0
-    servo_default_deg: 36.0
-    enabled: true
+    scale: 1
+    servo_min_deg: 0
+    servo_max_deg: 180
+    servo_default_deg: 0
+    enabled: false
   - id: right_index
     urdf_joint: i01.rightHand.index_link_joint
     board: rp2040_right_arm
     virtual_pin: 5
     physical_pin: 15
-    servo_type: "300"
-    offset_deg: 0.0
+    servo_type: '300'
+    offset_deg: 0
     direction: 1
-    scale: 1.0
-    servo_min_deg: 16.0
-    servo_max_deg: 150.0
-    servo_default_deg: 16.0
-    enabled: true
+    scale: 1
+    servo_min_deg: 0
+    servo_max_deg: 180
+    servo_default_deg: 0
+    enabled: false
   - id: right_majeure
     urdf_joint: i01.rightHand.majeure_link_joint
     board: rp2040_right_arm
     virtual_pin: 6
     physical_pin: 16
-    servo_type: "300"
-    offset_deg: 0.0
+    servo_type: '300'
+    offset_deg: 0
     direction: 1
-    scale: 1.0
-    servo_min_deg: 21.0
-    servo_max_deg: 150.0
-    servo_default_deg: 21.0
-    enabled: true
+    scale: 1
+    servo_min_deg: 0
+    servo_max_deg: 180
+    servo_default_deg: 0
+    enabled: false
   - id: right_ring
     urdf_joint: i01.rightHand.ringFinger_link_joint
     board: rp2040_right_arm
     virtual_pin: 7
     physical_pin: 17
-    servo_type: "300"
-    offset_deg: 0.0
+    servo_type: '300'
+    offset_deg: 0
     direction: 1
-    scale: 1.0
-    servo_min_deg: 33.0
-    servo_max_deg: 150.0
-    servo_default_deg: 33.0
-    enabled: true
+    scale: 1
+    servo_min_deg: 0
+    servo_max_deg: 180
+    servo_default_deg: 0
+    enabled: false
   - id: right_pinky
     urdf_joint: i01.rightHand.pinky_link_joint
     board: rp2040_right_arm
     virtual_pin: 8
     physical_pin: 18
-    servo_type: "300"
-    offset_deg: 0.0
+    servo_type: '300'
+    offset_deg: 0
     direction: 1
-    scale: 1.0
-    servo_min_deg: 30.0
-    servo_max_deg: 150.0
-    servo_default_deg: 30.0
-    enabled: true
-
+    scale: 1
+    servo_min_deg: 0
+    servo_max_deg: 180
+    servo_default_deg: 0
+    enabled: false
+  - id: act_left_arm_9
+    urdf_joint: i01.torso.midStom_link_joint
+    board: rp2040_torso_head
+    virtual_pin: 2
+    physical_pin: 7
+    servo_type: '270'
+    offset_deg: 135
+    direction: 1
+    scale: 1
+    servo_min_deg: 0
+    servo_max_deg: 270
+    servo_default_deg: 135
+    enabled: false
+  - id: act_left_arm_10
+    urdf_joint: i01.torso.topStom_link_joint
+    board: rp2040_torso_head
+    virtual_pin: 3
+    physical_pin: 8
+    servo_type: '270'
+    offset_deg: 90
+    direction: 1
+    scale: 1
+    servo_min_deg: 0
+    servo_max_deg: 180
+    servo_default_deg: 90
+    enabled: false
+  - id: act_left_arm_11
+    urdf_joint: i01.head.rothead_link_joint
+    board: rp2040_torso_head
+    virtual_pin: 4
+    physical_pin: 9
+    servo_type: '270'
+    offset_deg: 90
+    direction: 1
+    scale: 1
+    servo_min_deg: 0
+    servo_max_deg: 180
+    servo_default_deg: 90
+    enabled: false
+  - id: act_left_arm_12
+    urdf_joint: i01.head.rollNeck_link_joint
+    board: rp2040_torso_head
+    virtual_pin: 5
+    physical_pin: 10
+    servo_type: '270'
+    offset_deg: 90
+    direction: 1
+    scale: 1
+    servo_min_deg: 0
+    servo_max_deg: 180
+    servo_default_deg: 90
+    enabled: false
+  - id: act_left_arm_13
+    urdf_joint: i01.head.neck.001_link_joint
+    board: rp2040_torso_head
+    virtual_pin: 6
+    physical_pin: 11
+    servo_type: '300'
+    offset_deg: 90
+    direction: 1
+    scale: 1
+    servo_min_deg: 0
+    servo_max_deg: 180
+    servo_default_deg: 90
+    enabled: false
+  - id: act_left_arm_14
+    urdf_joint: i01.head.jaw_link_joint
+    board: rp2040_torso_head
+    virtual_pin: 7
+    physical_pin: 12
+    servo_type: '300'
+    offset_deg: 90
+    direction: 1
+    scale: 1
+    servo_min_deg: 0
+    servo_max_deg: 180
+    servo_default_deg: 90
+    enabled: false
+  - id: act_left_arm_15
+    urdf_joint: i01.head.eyeRight_link_joint
+    board: rp2040_torso_head
+    virtual_pin: 8
+    physical_pin: 13
+    servo_type: '180'
+    offset_deg: 90
+    direction: 1
+    scale: 1
+    servo_min_deg: 0
+    servo_max_deg: 180
+    servo_default_deg: 90
+    enabled: false
+  - id: act_left_arm_16
+    urdf_joint: i01.head.eyeRight.001_link_joint
+    board: rp2040_torso_head
+    virtual_pin: 9
+    physical_pin: 14
+    servo_type: '180'
+    offset_deg: 90
+    direction: 1
+    scale: 1
+    servo_min_deg: 0
+    servo_max_deg: 180
+    servo_default_deg: 90
+    enabled: false
+  - id: act_left_arm_17
+    urdf_joint: i01.head.eyeLeft_link_joint
+    board: rp2040_torso_head
+    virtual_pin: 10
+    physical_pin: 15
+    servo_type: '180'
+    offset_deg: 90
+    direction: 1
+    scale: 1
+    servo_min_deg: 0
+    servo_max_deg: 180
+    servo_default_deg: 90
+    enabled: false
+  - id: act_right_arm_9
+    urdf_joint: i01.head.eyeLeft.001_link_joint
+    board: rp2040_torso_head
+    virtual_pin: 11
+    physical_pin: 16
+    servo_type: '180'
+    offset_deg: 90
+    direction: 1
+    scale: 1
+    servo_min_deg: 0
+    servo_max_deg: 180
+    servo_default_deg: 90
+    enabled: false
 sensors:
   - id: left_thumb_pressure
     type: pressure
