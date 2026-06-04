@@ -26,6 +26,8 @@ jobs:
 
       - name: Install tooling
         run: |
+          sudo curl https://packages.osrfoundation.org/gazebo.gpg --output /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg
+          echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] https://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null
           apt-get update && apt-get install -y --no-install-recommends \
             python3-rosdep \
             python3-pytest \
@@ -33,7 +35,8 @@ jobs:
             python3-yaml \
             build-essential \
             cmake \
-            git
+            git \
+            gz-harmonic
           # Do not rm -rf /var/lib/apt/lists/* here; rosdep uses apt next and needs indexes.
           rosdep init || true
           rosdep update

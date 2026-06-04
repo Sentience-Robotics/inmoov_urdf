@@ -3,6 +3,8 @@ project(thais_urdf)
 
 find_package(ament_cmake REQUIRED)
 
+add_subdirectory(plugins)
+
 install(
   DIRECTORY launch config description docs worlds
   DESTINATION share/${PROJECT_NAME}/

@@ -36,19 +36,21 @@ from launch.actions import (
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import (
     LaunchConfiguration,
-    PathJoinSubstitution,
     PythonExpression,
 )
 from launch_ros.actions import Node
 from lucy_control_supervisor.controllers_spawn import controllers_to_spawn
+from ament_index_python.packages import get_package_prefix
 
 
 def _gz_ros2_control_plugin_path():
+    pkg_share = get_package_prefix("thais_urdf")
+    plugin_path = os.path.join(pkg_share, "lib", "mock_sensor")
     try:
         share = get_package_share_directory("gz_ros2_control")
-        return os.path.join(os.path.dirname(share), "lib")
+        return os.path.join(os.path.dirname(share), "lib") + os.pathsep + plugin_path
     except Exception:
-        return "/opt/ros/humble/lib"
+        return "/opt/ros/humble/lib" + os.pathsep + plugin_path
 
 
 def _default_controllers_yaml(pkg_share: str) -> str:
@@ -88,23 +90,14 @@ def generate_launch_description():
         ),
     )
 
-    base_path = LaunchConfiguration("base_path")
-
-    clock_bridge = Node(
-        package="ros_gz_bridge",
-        executable="parameter_bridge",
-        arguments=["/world/default/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock"],
-        parameters=[{"use_sim_time": True}],
-        remappings=[("/world/default/clock", "/clock")],
-        output="screen",
+    bridge_config_path = os.path.join(
+        get_package_share_directory("thais_urdf"), "config", "gazebo_bridge.yaml"
     )
-
-    camera_bridge = Node(
+    bridge = Node(
         package="ros_gz_bridge",
         executable="parameter_bridge",
-        arguments=["/world/default/camera@sensor_msgs/msg/Image[gz.msgs.Image"],
-        parameters=[{"use_sim_time": True}],
-        remappings=[("/world/default/camera", "/camera/gazebo/raw")],
+        parameters=[{"use_sim_time": True, "config_file": bridge_config_path}],
+        remappings=[("/world/default/clock", "/clock")],
         output="screen",
     )
 
@@ -114,33 +107,37 @@ def generate_launch_description():
         arguments=["raw", "compressed"],
         remappings=[
             ("in", "/camera/gazebo/raw"),
-            ("out/compressed", "/camera/gazebo/compressed"),
+            ("out/compressed", "/ext_camera/jpg"),
         ],
         parameters=[{"use_sim_time": True}],
         output="screen",
     )
-
-    try:
-        gz_sim_share = get_package_share_directory("ros_gz_sim")
-        gz_sim_launch_path = os.path.join(gz_sim_share, "launch", "gz_sim.launch.py")
-    except Exception:
-        gz_sim_launch_path = "/opt/ros/humble/share/ros_gz_sim/launch/gz_sim.launch.py"
 
     ros_lib = _gz_ros2_control_plugin_path()
     gz_plugin_path = os.pathsep.join(
         [s for s in [os.environ.get("GZ_SIM_SYSTEM_PLUGIN_PATH", ""), ros_lib] if s]
     ).strip(os.pathsep)
 
+    try:
+        gz_sim_share = get_package_share_directory("ros_gz_sim")
+        gz_sim_launch_path = os.path.join(gz_sim_share, "launch", "gz_sim.launch.py")
+    except Exception:
+        gz_sim_launch_path = "/opt/ros/humble/share/ros_gz_sim/launch/gz_sim.launch.py"
     default_world = os.path.join(pkg_share, "worlds", "default.sdf")
     # When headless: server-only (-s) with EGL rendering (--headless-rendering)
     # so OGRE2 still renders camera sensors without an X display. Otherwise:
     # normal GUI launch.
     gz_args = PythonExpression(
         [
-            "'-s -r --headless-rendering ", default_world, "'",
-            " if '", LaunchConfiguration("headless"),
+            "'-s -r --headless-rendering ",
+            default_world,
+            "'",
+            " if '",
+            LaunchConfiguration("headless"),
             "'.lower() in ('true', '1', 'yes') ",
-            "else '-r ", default_world, "'",
+            "else '-r ",
+            default_world,
+            "'",
         ]
     )
     gz_sim_launch = IncludeLaunchDescription(
@@ -155,7 +152,7 @@ def generate_launch_description():
         output="screen",
         parameters=[{"use_sim_time": True}],
     )
-    mesh_dae = PathJoinSubstitution([base_path, "robot_description", "meshes", "dae"])
+    mesh_dae = get_package_share_directory("thais_urdf")
 
     def create_spawner(name: str, delay: float = 0.0):
         spawner = Node(
@@ -172,7 +169,9 @@ def generate_launch_description():
     def spawner_actions_from_yaml(context, *args, **kwargs):
         yaml_path = LaunchConfiguration("controllers_yaml").perform(context)
         names = controllers_to_spawn(Path(yaml_path))
-        return [create_spawner(name, delay=float(idx * 2)) for idx, name in enumerate(names)]
+        return [
+            create_spawner(name, delay=float(idx * 2)) for idx, name in enumerate(names)
+        ]
 
     supervisor = Node(
         package="lucy_control_supervisor",
@@ -203,10 +202,9 @@ def generate_launch_description():
             ),
             supervisor,
             OpaqueFunction(function=spawner_actions_from_yaml),
-            gz_sim_launch,
-            clock_bridge,
-            camera_bridge,
-            camera_compressor,
             spawn_robot,
+            gz_sim_launch,
+            bridge,
+            camera_compressor,
         ]
     )
