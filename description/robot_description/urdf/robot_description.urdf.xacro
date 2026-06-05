@@ -366,7 +366,7 @@
     <axis xyz="-0.99994 0.00000 0.01111"/>
   </joint>
   <joint name="i01.head.rollNeck_link_joint" type="revolute">
-    <limit lower="0.00000" upper="0.00000" effort="100.00000" velocity="0.78540"/><!-- autocalibrated: 0.0 deg .. 0.0 deg (hit_lower=True, hit_upper=True) -->
+    <limit lower="-1.57080" upper="1.57080" effort="100.00000" velocity="0.78540"/><!-- hand-set: autocal sweep was degenerate (0 .. 0 deg) -->
     <dynamics damping="0.7" friction="0.5"/>
     <origin rpy="-0.00000 0.00000 -0.00000" xyz="${model_scale * 0.00000} ${model_scale * -0.00000} ${model_scale * 0.00435}"/>
     <parent link="i01.head.neck.001_link"/>

@@ -99,7 +99,7 @@ Common arguments are listed in the root [README.md](../README.md#quick-launches)
 | `robot_description/urdf/properties.xacro` | `model_scale` xacro property — the **single** length-scale knob. Multiplies every joint/visual/collision `<origin xyz>` and primitive size in the body URDF. |
 | `robot_description/urdf/robot_description.urdf.xacro` | Links, joints, visuals (`<mesh>`), collisions (`<mesh>` or primitive), inertias, named `<material>` definitions, and `<material name="…"/>` refs on visuals. |
 | `robot_description/meshes/dae/*.dae` | Collada meshes — used by **all three renderers** as the visual mesh (Gazebo also as the source of `<diffuse>` colour for mesh visuals, see §6). |
-| `ros2_control/inmoov_ros2_control.xacro` | `<ros2_control>` block: selects `LucySystemHardware` (real), `gz_ros2_control/GazeboSimSystem` (Gazebo), or `mock_components/GenericSystem` (mock). |
+| `ros2_control/inmoov_ros2_control.xacro` | `<ros2_control>` block: selects `gz_ros2_control/GazeboSimSystem` (Gazebo) or `lucy_ros2_control/LucySystemHardware` (real + mock — `publish_actuators:=false` toggles the micro-ROS publisher off in mock). Each `<command_interface name="position">` carries `<param name="min/max">` from the URDF `<limit>`; `LucySystemHardware` clamps to that envelope. The stock `gz_ros2_control` plugin in this workspace does **not** apply the clamp. |
 | `ros2_control/inmoov_gz_ros2_control.xacro` | gz-sim only — declares the `gz_ros2_control-system` plugin so `controller_manager` runs inside Gazebo with `$(arg controller_config)`. |
 | `gazebo/inmoov_gazebo_physics.xacro` | gz-sim only — `<static>` on the stand, body/hand friction (`mu1/mu2`), contact stiffness (`kp/kd`), `self_collide` flags. **No colours** (see §6). |
 
@@ -150,6 +150,8 @@ Practical consequences:
 ### 6.5 Joint limits
 
 Limits are per-joint, in radians, on the `<limit lower="…" upper="…"/>` of each actuated joint in `robot_description.urdf.xacro`. They are **decoupled** from `config/hardware/active.yaml`: the hardware mapping handles servo↔URDF conversion (`offset_deg`, `direction`, `scale` — see [hardware_mapping.md](hardware_mapping.md)).
+
+`lucy_config_generator` copies the `<limit lower upper>` of every actuated joint into the `<command_interface name="position">` block of the regenerated `inmoov_ros2_control.xacro` as `<param name="min/max"/>` (radians). At runtime, `LucySystemHardware` clamps `hw_commands_` to that envelope before the actuator mapping. Stock `gz_ros2_control` does **not** apply this clamp; rely on URDF `<limit>` enforcement coming from the spawned model when running in Gazebo.
 
 Two complementary routes — see §7.
 
@@ -232,7 +234,7 @@ Treat the result as an **upper bound on the kinematic envelope**, not the real e
 After hand or auto-calibration, validate in the full stack:
 
 ```bash
-# Mock-hardware path (controllers spawn against GenericSystem; no Gazebo, no real motors)
+# Mock-hardware path (LucySystemHardware with publish_actuators:=false; no Gazebo, no real motors)
 ros2 launch lucy_bringup lucy.launch.py real:=false rviz:=true
 
 # Headless Gazebo (server-only with EGL rendering — camera sensors keep producing frames)

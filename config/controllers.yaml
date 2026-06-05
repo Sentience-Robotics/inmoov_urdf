@@ -16,14 +16,6 @@ joint_state_broadcaster:
     extra_joints:
       - Empty.001_link_joint
       - Empty.002_link_joint
-      - i01.head.eyeLeft.001_link_joint
-      - i01.head.eyeLeft_link_joint
-      - i01.head.eyeRight.001_link_joint
-      - i01.head.eyeRight_link_joint
-      - i01.head.jaw_link_joint
-      - i01.head.neck.001_link_joint
-      - i01.head.rollNeck_link_joint
-      - i01.head.rothead_link_joint
       - i01.leftHand.index2_link_joint
       - i01.leftHand.index3_link_joint
       - i01.leftHand.majeure2_link_joint
@@ -50,8 +42,6 @@ joint_state_broadcaster:
       - i01.rightHand.thumb1_link_joint
       - i01.rightHand.thumb3_link_joint
       - i01.rightHand.wrist.001_link_joint
-      - i01.torso.midStom_link_joint
-      - i01.torso.topStom_link_joint
 
 left_arm_controller:
   ros__parameters:
@@ -95,6 +85,16 @@ torso_head_controller:
     joints:
       - left_shoulder_y_link_joint
       - right_shoulder_y_link_joint
+      - i01.torso.midStom_link_joint
+      - i01.torso.topStom_link_joint
+      - i01.head.rothead_link_joint
+      - i01.head.rollNeck_link_joint
+      - i01.head.neck.001_link_joint
+      - i01.head.jaw_link_joint
+      - i01.head.eyeRight_link_joint
+      - i01.head.eyeRight.001_link_joint
+      - i01.head.eyeLeft_link_joint
+      - i01.head.eyeLeft.001_link_joint
     command_interfaces:
       - position
     state_interfaces:

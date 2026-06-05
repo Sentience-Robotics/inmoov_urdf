@@ -25,6 +25,7 @@ import os
 from pathlib import Path
 
 from ament_index_python.packages import get_package_share_directory
+import yaml
 from launch import LaunchDescription
 from launch.actions import (
     DeclareLaunchArgument,
@@ -53,17 +54,50 @@ def _gz_ros2_control_plugin_path():
         return "/opt/ros/humble/lib" + os.pathsep + plugin_path
 
 
-def _default_controllers_yaml(pkg_share: str) -> str:
-    cwd_candidate = Path.cwd() / "src" / "thais_urdf" / "config" / "controllers.yaml"
+_DEFAULT_GENERATED_FILES = {
+    "ros2_control_xacro": "inmoov_ros2_control.xacro",
+    "controllers_yaml": "controllers.yaml",
+}
+
+
+def _active_generated_files(pkg_share: str) -> dict[str, str]:
+    """Generated-artifact filenames from the active preset (defaults if unreadable)."""
+    candidates = [
+        Path.cwd() / "src" / "thais_urdf" / "config" / "hardware" / "active.yaml",
+        Path(pkg_share) / "config" / "hardware" / "active.yaml",
+    ]
+    out = dict(_DEFAULT_GENERATED_FILES)
+    for active in candidates:
+        if not active.is_file():
+            continue
+        try:
+            data = yaml.safe_load(active.read_text(encoding="utf-8"))
+        except (OSError, yaml.YAMLError):
+            return out
+        section = data.get("generated_files") if isinstance(data, dict) else None
+        if isinstance(section, dict):
+            for key in out:
+                value = section.get(key)
+                if isinstance(value, str) and value.strip() and "/" not in value:
+                    out[key] = value.strip()
+        return out
+    return out
+
+
+def _default_controllers_yaml(pkg_share: str, controllers_basename: str) -> str:
+    cwd_candidate = (
+        Path.cwd() / "src" / "thais_urdf" / "config" / controllers_basename
+    )
     if cwd_candidate.is_file():
         return str(cwd_candidate.resolve())
-    return os.path.join(pkg_share, "config", "controllers.yaml")
+    return os.path.join(pkg_share, "config", controllers_basename)
 
 
 def generate_launch_description():
     pkg_share = get_package_share_directory("thais_urdf")
     default_base = os.path.join(pkg_share, "description")
-    default_controllers = _default_controllers_yaml(pkg_share)
+    generated = _active_generated_files(pkg_share)
+    default_controllers = _default_controllers_yaml(pkg_share, generated["controllers_yaml"])
 
     base_path_arg = DeclareLaunchArgument(
         "base_path",
@@ -79,6 +113,11 @@ def generate_launch_description():
         "urdf_path",
         default_value=os.path.join(default_base, "urdf", "inmoov.urdf.xacro"),
         description="Top-level robot xacro",
+    )
+    ros2_control_file_arg = DeclareLaunchArgument(
+        "ros2_control_file",
+        default_value=generated["ros2_control_xacro"],
+        description="Generated ros2_control xacro basename (generated_files in active.yaml)",
     )
     headless_arg = DeclareLaunchArgument(
         "headless",
@@ -186,6 +225,7 @@ def generate_launch_description():
                 "use_gazebo_sim": True,
                 "gazebo_only": True,
                 "autostart": False,
+                "ros2_control_file": LaunchConfiguration("ros2_control_file"),
             }
         ],
     )
@@ -195,6 +235,7 @@ def generate_launch_description():
             base_path_arg,
             controllers_yaml_arg,
             urdf_path_arg,
+            ros2_control_file_arg,
             headless_arg,
             SetEnvironmentVariable(name="GZ_SIM_RESOURCE_PATH", value=mesh_dae),
             SetEnvironmentVariable(

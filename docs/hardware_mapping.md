@@ -27,17 +27,33 @@ For **InMoov i1 vs i2** scope and how to extend the YAML with **head / expressio
 
 ## Hardware angle limits (`servo_*_deg`)
 
-Values sent to real servos are expressed in **degrees in the servo’s own range**. This is independent of how the URDF might visualize the joint (often symmetric angles); the mapping from **URDF / ros2_control command** to **hardware command** is what `offset_deg`, `direction`, and `scale` are for (see below).
+`servo_min_deg`, `servo_max_deg`, and `servo_default_deg` are **servo-frame degrees**: the angle the motor actually sees, before any URDF visualization convention. They bound electrical/mechanical travel in firmware and in **LucySystemHardware** after the URDF→servo mapping.
 
-## `offset_deg`, `direction`, and `scale` (URDF command → hardware)
+They are **not** the same as the LCP slider’s joint-space meaning unless `offset_deg = 0`, `direction = ±1`, and `scale = 1`. The control panel slider is labeled in **servo degrees**; trajectory commands on the wire stay in **URDF radians**.
 
-These fields tune how a **trajectory command in joint space** (what `joint_trajectory_controller` and the URDF use for that `urdf_joint`) is converted to the **angle actually sent to the servo** (within `[servo_min_deg, servo_max_deg]`):
+## URDF `<limit>` (joint-space envelope)
 
-- **`direction`**: `+1` or `-1` to flip motion if the horn is mounted opposite to the positive URDF axis.
-- **`scale`**: ratio between a change in **commanded joint angle** and a change in **servo angle** when the mechanism is not 1:1 (gear reduction, non-linear linkage approximated as linear, etc.).
-- **`offset_deg`**: constant shift after direction/scale so that “zero” in the controller matches the real neutral pose for that hardware assembly.
+Each `urdf_joint` has `<limit lower="…" upper="…"/>` in the URDF (radians). **`lucy_config_generator`** copies those onto each actuated joint’s ros2_control position **command_interface** as `<param name="min">` / `<param name="max">` in `description/ros2_control/inmoov_ros2_control.xacro`. **LucySystemHardware** (real hardware and RViz/mock) clamps `hw_commands_` to that envelope before converting to actuator degrees, so MoveIt, teleop, CLI, and the LCP can command past the URDF wall in the UI but the stack stops at the realized angle. `/joint_states` reports the clamped joint position.
 
-So they are **calibration between ros2_control / URDF joint values and real actuator commands**, not a separate “RViz-only” layer. Gazebo (ideal model) may ignore them unless the sim stack is extended to mimic the same mapping; the **LucySystemHardware** plugin and firmware are the consumers of these parameters once generated into ros2_control.
+**Gazebo** uses stock **`gz_ros2_control/GazeboSimSystem`**, which does **not** apply those `min`/`max` params in `write()` — only **LucySystemHardware** enforces the ros2_control URDF envelope today. Gazebo may still respect joint limits from the spawned model/physics depending on how the world is built; that is separate from ros2_control clamping. After changing generated limits for real/mock, reload the control stack; for Gazebo topology changes, **restart Gazebo** so `gz_ros2_control` reloads the URDF.
+
+RViz-only / mock hardware uses **`lucy_ros2_control/LucySystemHardware`** with `publish_actuators:=false` so URDF limits are enforced the same way as on real hardware, without micro-ROS topics.
+
+## `offset_deg`, `direction`, and `scale` (URDF command ↔ servo)
+
+Symmetric mapping (used by **LucySystemHardware**, firmware, and the LCP):
+
+```text
+joint_deg = (servo_deg - offset_deg) * direction * scale
+servo_deg = joint_deg / (direction * scale) + offset_deg
+joint_rad = deg_to_rad(joint_deg)
+```
+
+- **`direction`**: `+1` or `-1` if the horn is mounted opposite the positive URDF axis.
+- **`scale`**: ratio between a change in **commanded joint angle** and **servo angle** when the linkage is not 1:1.
+- **`offset_deg`**: shift so URDF “zero” matches the real neutral assembly (e.g. `offset_deg: 90` with a 0–180° servo maps URDF 0° to servo 90°).
+
+These are **calibration between ros2_control / URDF joint commands and the servo command**, not an RViz-only layer. Generated ros2_control params are the source of truth for the plugin and for the panel’s publish/subscribe conversion.
 
 ## Shoulder Y joints
 
@@ -53,7 +69,7 @@ Extra head DOFs (eyelids, cheeks, separate eyeball drivers, and so on) are **not
 
 With **SIMULATION ONLY** enabled in the activate workflow, `lucy_config_generator` emits:
 
-- One `<ros2_control name="LucyHardwareSim">` block (`mock_components/GenericSystem` for RViz-only, `gz_ros2_control/GazeboSimSystem` when `use_gazebo_sim:=true`).
+- One `<ros2_control>` block per board (`gz_ros2_control/GazeboSimSystem` when `use_gazebo_sim:=true`, otherwise `lucy_ros2_control/LucySystemHardware` with `publish_actuators:=false` for RViz/mock). URDF `min`/`max` on the command interface are enforced by **LucySystemHardware** only (real + mock), not by the stock Gazebo plugin.
 - `controllers.yaml` with `joint_state_broadcaster` + a single `lucy_sim_controller` listing every actuator `urdf_joint`.
 
 After generation, `lucy_config_pipeline` calls **`/lucy_control/restart`** so the running stack reloads without a full `lucy.launch.py` restart. Structural joint changes still require that restart (Humble does not hot-swap URDF hardware topology).
