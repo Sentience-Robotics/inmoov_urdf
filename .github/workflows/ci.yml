@@ -1,0 +1,123 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - master
+      - dev
+
+jobs:
+  build-and-test:
+    name: Build and test (thais_urdf)
+    runs-on: ubuntu-latest
+    container:
+      image: osrf/ros:humble-desktop
+    # Colcon tree must live next to the checkout, not under it: copying $GITHUB_WORKSPACE
+    # into workspace/ws/... would copy a directory into its own subtree ("cannot copy into itself").
+    # COLCON_WS must be canonical (no ..): upload-artifact@v4 rejects paths with relative segments.
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set COLCON_WS
+        run: |
+          echo "COLCON_WS=$(cd "${GITHUB_WORKSPACE}/.." && pwd)/colcon_ws" >> "${GITHUB_ENV}"
+
+      - name: Install tooling
+        run: |
+          sudo curl https://packages.osrfoundation.org/gazebo.gpg --output /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg
+          echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] https://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null
+          apt-get update && apt-get install -y --no-install-recommends \
+            python3-rosdep \
+            python3-pytest \
+            python3-pytest-cov \
+            python3-yaml \
+            build-essential \
+            cmake \
+            git \
+            gz-harmonic
+          # Do not rm -rf /var/lib/apt/lists/* here; rosdep uses apt next and needs indexes.
+          rosdep init || true
+          rosdep update
+
+      # Full-stack tests with lucy_ros2_control belong in the lucy_ros_packages repo once
+      # lucy_ros2_control is on the default branch there; this repo only declares runtime
+      # integration with that package, not a test_depend.
+      - name: Workspace layout
+        run: |
+          set -e
+          mkdir -p "${COLCON_WS}/src"
+          cp -a "${GITHUB_WORKSPACE}" "${COLCON_WS}/src/thais_urdf"
+
+      - name: rosdep install
+        working-directory: ${{ env.COLCON_WS }}
+        shell: bash
+        run: |
+          set -e
+          apt-get update
+          source /opt/ros/humble/setup.bash
+          rosdep install --from-paths src --ignore-src -r -y
+
+      - name: colcon build
+        working-directory: ${{ env.COLCON_WS }}
+        shell: bash
+        run: |
+          source /opt/ros/humble/setup.bash
+          colcon build --symlink-install \
+            --packages-select thais_urdf \
+            --cmake-args -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON
+
+      - name: colcon test
+        working-directory: ${{ env.COLCON_WS }}
+        shell: bash
+        run: |
+          source /opt/ros/humble/setup.bash
+          source install/setup.bash
+          colcon test \
+            --packages-select thais_urdf \
+            --event-handlers console_direct+ \
+            --pytest-args "--tb=short -vv"
+
+      - name: colcon test-result
+        working-directory: ${{ env.COLCON_WS }}
+        shell: bash
+        run: |
+          source /opt/ros/humble/setup.bash
+          source install/setup.bash
+          colcon test-result --verbose
+
+      - name: Code coverage (pytest-cov)
+        working-directory: ${{ env.COLCON_WS }}
+        shell: bash
+        if: success()
+        run: |
+          set -e
+          source /opt/ros/humble/setup.bash
+          source install/setup.bash
+          mkdir -p build/coverage_reports
+          python3 -m pytest src/thais_urdf/test/ \
+            --cov=src/thais_urdf/launch \
+            --cov=src/thais_urdf/test \
+            --cov-report=xml:build/coverage_reports/thais_urdf.xml \
+            --cov-report=html:build/coverage_reports/html_thais_urdf \
+            --cov-report=term-missing \
+            --cov-branch
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        if: success()
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ${{ env.COLCON_WS }}/build/coverage_reports/thais_urdf.xml
+          flags: thais_urdf
+          name: thais_urdf
+          fail_ci_if_error: false
+
+      - name: Upload coverage artifacts (XML + HTML)
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage-thais_urdf
+          path: ${{ env.COLCON_WS }}/build/coverage_reports/
+          retention-days: 14

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <asset>
+    <contributor>
+      <author>Blender User</author>
+      <authoring_tool>Blender 4.2.16 LTS commit date:2025-11-17, commit time:16:05, hash:39502cae951c</authoring_tool>
+    </contributor>
+    <created>2026-01-07T18:30:02</created>
+    <modified>2026-01-07T18:30:02</modified>
+    <unit name="meter" meter="1"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_effects>
+    <effect id="Material_024-effect">
+      <profile_COMMON>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <color sid="diffuse">0.3444044 0.2464545 0.1263869 1</color>
+            </diffuse>
+            <reflectivity>
+              <float sid="specular">0.5</float>
+            </reflectivity>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="Material_025-effect">
+      <profile_COMMON>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <color sid="diffuse">1 1 1 1</color>
+            </diffuse>
+            <reflectivity>
+              <float sid="specular">0.5</float>
+            </reflectivity>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="Material_031-effect">
+      <profile_COMMON>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <color sid="diffuse">0 0 0 1</color>
+            </diffuse>
+            <reflectivity>
+              <float sid="specular">1</float>
+            </reflectivity>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_images/>
+  <library_materials>
+    <material id="Material_024-material" name="Material.024">
+      <instance_effect url="#Material_024-effect"/>
+    </material>
+    <material id="Material_025-material" name="Material.025">
+      <instance_effect url="#Material_025-effect"/>
+    </material>
+    <material id="Material_031-material" name="Material.031">
+      <instance_effect url="#Material_031-effect"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="Texture_213-mesh" name="Texture.213">
+      <mesh>
+        <source id="Texture_213-mesh-positions">
+          <float_array id="Texture_213-mesh-positions-array" count="24">-2.074543 -0.1154679 11.47581 -2.074543 -0.07229357 11.46851 -2.101862 -0.07229357 11.46851 -2.074543 -0.1186074 11.45723 -2.101862 -0.1154679 11.47581 -2.101862 -0.1186074 11.45723 -2.074543 -0.04066079 11.44468 -2.101862 -0.04053187 11.44536</float_array>
+          <technique_common>
+            <accessor source="#Texture_213-mesh-positions-array" count="8" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Texture_213-mesh-normals">
+          <float_array id="Texture_213-mesh-normals-array" count="36">1 0 0 0 0.166618 0.9860215 0 0.166618 0.9860216 0 -0.9860213 0.1666194 0 -0.9860213 0.1666194 -1 -1.07378e-5 1.8145e-6 -1 -5.83576e-6 -1.83074e-5 0 -0.1589413 -0.987288 -0.02544629 -0.1501906 -0.9883295 0 0.5889736 0.8081523 0.02282428 0.6015678 0.7984956 1 1.84171e-6 -7.55979e-6</float_array>
+          <technique_common>
+            <accessor source="#Texture_213-mesh-normals-array" count="12" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Texture_213-mesh-vertices">
+          <input semantic="POSITION" source="#Texture_213-mesh-positions"/>
+        </vertices>
+        <triangles material="Material_024-material" count="12">
+          <input semantic="VERTEX" source="#Texture_213-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Texture_213-mesh-normals" offset="1"/>
+          <p>1 0 0 0 3 0 0 1 1 1 2 1 2 2 4 2 0 2 5 3 3 3 0 3 0 4 4 4 5 4 4 5 2 5 5 5 2 6 7 6 5 6 6 7 3 7 5 7 5 8 7 8 6 8 7 9 2 9 1 9 1 10 6 10 7 10 1 11 3 11 6 11</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="tmp_export_Texture_213" name="tmp_export_Texture.213" type="NODE">
+        <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+        <instance_geometry url="#Texture_213-mesh" name="tmp_export_Texture.213">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="Material_024-material" target="#Material_024-material"/>
+              <instance_material symbol="Material_025-material" target="#Material_025-material"/>
+              <instance_material symbol="Material_031-material" target="#Material_031-material"/>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>

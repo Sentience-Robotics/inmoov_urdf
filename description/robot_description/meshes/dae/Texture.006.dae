@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <asset>
+    <contributor>
+      <author>Blender User</author>
+      <authoring_tool>Blender 4.2.16 LTS commit date:2025-11-17, commit time:16:05, hash:39502cae951c</authoring_tool>
+    </contributor>
+    <created>2026-01-07T18:29:59</created>
+    <modified>2026-01-07T18:29:59</modified>
+    <unit name="meter" meter="1"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_effects>
+    <effect id="Material_016-effect">
+      <profile_COMMON>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <color sid="diffuse">0.01737516 0.01634236 0.02989305 1</color>
+            </diffuse>
+            <reflectivity>
+              <float sid="specular">1</float>
+            </reflectivity>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="Material_017-effect">
+      <profile_COMMON>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <color sid="diffuse">0.4113217 0.2915698 0.1249583 1</color>
+            </diffuse>
+            <reflectivity>
+              <float sid="specular">0.9745098</float>
+            </reflectivity>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_images/>
+  <library_materials>
+    <material id="Material_016-material" name="Material.016">
+      <instance_effect url="#Material_016-effect"/>
+    </material>
+    <material id="Material_017-material" name="Material.017">
+      <instance_effect url="#Material_017-effect"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="Texture_006-mesh" name="Texture.006">
+      <mesh>
+        <source id="Texture_006-mesh-positions">
+          <float_array id="Texture_006-mesh-positions-array" count="30">-1.272066 0.2545401 13.01999 -1.244747 0.2545401 13.01999 -1.244747 0.2733341 13.01867 -1.272066 0.2733341 13.01867 -1.272066 0.2655912 12.94027 -1.244747 0.2655912 12.94027 -1.244747 0.2677965 12.94011 -1.272066 0.2677965 12.94011 -1.244747 0.2514611 12.97632 -1.272066 0.2514611 12.97632</float_array>
+          <technique_common>
+            <accessor source="#Texture_006-mesh-positions-array" count="10" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Texture_006-mesh-normals">
+          <float_array id="Texture_006-mesh-normals-array" count="48">0 0.07030832 0.9975253 0 -0.07074314 -0.9974945 0 0.9975247 -0.07031649 0 -0.9975247 0.0703181 0 -0.9310293 -0.3649445 1 0 0 1 0 0 1 0 0 -1 0 0 -1 0 0 -1 0 0 0 0.07030832 0.9975253 0 -0.07074314 -0.9974945 0 0.9975247 -0.07031649 0 -0.9975247 0.0703181 0 -0.9310293 -0.3649445</float_array>
+          <technique_common>
+            <accessor source="#Texture_006-mesh-normals-array" count="16" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Texture_006-mesh-colors-Col" name="Col">
+          <float_array id="Texture_006-mesh-colors-Col-array" count="192">1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</float_array>
+          <technique_common>
+            <accessor source="#Texture_006-mesh-colors-Col-array" count="48" stride="4">
+              <param name="R" type="float"/>
+              <param name="G" type="float"/>
+              <param name="B" type="float"/>
+              <param name="A" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Texture_006-mesh-vertices">
+          <input semantic="POSITION" source="#Texture_006-mesh-positions"/>
+        </vertices>
+        <triangles material="Material_017-material" count="16">
+          <input semantic="VERTEX" source="#Texture_006-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Texture_006-mesh-normals" offset="1"/>
+          <input semantic="COLOR" source="#Texture_006-mesh-colors-Col" offset="2" set="0"/>
+          <p>1 0 0 3 0 1 0 0 2 7 1 3 5 1 4 4 1 5 6 2 6 3 2 7 2 2 8 9 3 9 1 3 10 0 3 11 4 4 12 8 4 13 9 4 14 8 5 15 6 5 16 2 5 17 1 6 18 8 6 19 2 6 20 8 7 21 5 7 22 6 7 23 9 8 24 3 8 25 7 8 26 4 9 27 9 9 28 7 9 29 9 10 30 0 10 31 3 10 32 1 11 33 2 11 34 3 11 35 7 12 36 6 12 37 5 12 38 6 13 39 7 13 40 3 13 41 9 14 42 8 14 43 1 14 44 4 15 45 5 15 46 8 15 47</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="tmp_export_Texture_006" name="tmp_export_Texture.006" type="NODE">
+        <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+        <instance_geometry url="#Texture_006-mesh" name="tmp_export_Texture.006">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="Material_016-material" target="#Material_016-material"/>
+              <instance_material symbol="Material_017-material" target="#Material_017-material"/>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>
