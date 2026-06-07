@@ -2,7 +2,7 @@
 
 ## What this repository implements today
 
-**`thais_urdf`** ships an **InMoov i1–line** robot description under `description/` (meshes, joints, ros2_control xacro). The hardware YAML in **`config/hardware/active.yaml`** therefore lists only actuators and sensors that match **that** URDF and the current Lucy wiring (arms, torso shoulder Y, fingers, pressure sensors, and so on).
+**`inmoov_urdf`** ships an **InMoov i1–line** robot description under `description/` (meshes, joints, ros2_control xacro). The hardware YAML in **`config/hardware/active.yaml`** therefore lists only actuators and sensors that match **that** URDF and the current Lucy wiring (arms, torso shoulder Y, fingers, pressure sensors, and so on).
 
 It does **not** list **InMoov i2–style** head and expression actuators (extra eyelids, cheeks, brows, separate eyeball drivers, and so on) because those joints are either absent from the processed URDF or not yet committed to a single wiring story in this repo.
 

@@ -24,7 +24,7 @@ Terminal 1:
   ros2 launch lucy_bringup lucy.launch.py
 
 Terminal 2:
-  ros2 launch thais_urdf rviz_standalone.launch.py
+  ros2 launch inmoov_urdf rviz_standalone.launch.py
 
 For a single machine that starts control, RViz, and the **web panel** together, use
 ``lucy_bringup`` ``lucy.launch.py`` with ``real:=false`` and ``rviz:=true`` (includes
@@ -43,7 +43,7 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
     default_rviz = os.path.join(
-        get_package_share_directory("thais_urdf"),
+        get_package_share_directory("inmoov_urdf"),
         "config",
         "inmoov_rviz.rviz",
     )

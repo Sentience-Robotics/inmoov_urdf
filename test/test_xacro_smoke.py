@@ -24,7 +24,7 @@ from xacro_helper import run_xacro
 def _inmoov_paths():
     try:
         from ament_index_python.packages import get_package_share_directory
-        share = Path(get_package_share_directory("thais_urdf"))
+        share = Path(get_package_share_directory("inmoov_urdf"))
         description = share / "description"
         urdf = description / "urdf" / "inmoov.urdf.xacro"
         if urdf.is_file():
@@ -41,7 +41,7 @@ def _controller_yaml() -> Path:
     try:
         from ament_index_python.packages import get_package_share_directory
 
-        pkg_share = Path(get_package_share_directory("thais_urdf"))
+        pkg_share = Path(get_package_share_directory("inmoov_urdf"))
         share_yaml = pkg_share / "config" / "controllers.yaml"
         if share_yaml.is_file():
             return share_yaml
@@ -60,15 +60,15 @@ def controller_config() -> Path:
     path = _controller_yaml()
     if not path.is_file():
         pytest.skip(
-            "Missing thais_urdf/config/controllers.yaml (or legacy lucy_ros2_control path) — "
-            "build thais_urdf from this workspace."
+            "Missing inmoov_urdf/config/controllers.yaml (or legacy lucy_ros2_control path) — "
+            "build inmoov_urdf from this workspace."
         )
     return path
 
 
 def test_xacro_real_mode(controller_config: Path):
     urdf, base = _inmoov_paths()
-    assert urdf.is_file(), f"missing {urdf} — colcon build thais_urdf to install description/"
+    assert urdf.is_file(), f"missing {urdf} — colcon build inmoov_urdf to install description/"
     r = run_xacro(
         [
             str(urdf),
@@ -85,7 +85,7 @@ def test_xacro_real_mode(controller_config: Path):
 
 def test_xacro_gazebo_mode(controller_config: Path):
     urdf, base = _inmoov_paths()
-    assert urdf.is_file(), f"missing {urdf} — colcon build thais_urdf to install description/"
+    assert urdf.is_file(), f"missing {urdf} — colcon build inmoov_urdf to install description/"
     r = run_xacro(
         [
             str(urdf),
