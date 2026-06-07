@@ -77,5 +77,5 @@ After generation, `lucy_config_pipeline` calls **`/lucy_control/restart`** so th
 ## Editing
 
 1. Edit `config/hardware/active.yaml` (or a copy under `configs/`).
-2. Run validation (`colcon test --packages-select thais_urdf`) and the generator when implemented.
+2. Run validation (`colcon test --packages-select inmoov_urdf`) and the generator when implemented.
 3. Re-commit generated artifacts (`description/ros2_control/inmoov_ros2_control.xacro`, `config/controllers.yaml`) after regeneration.

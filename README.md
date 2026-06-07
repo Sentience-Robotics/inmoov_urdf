@@ -1,16 +1,16 @@
-# thais_urdf
+# inmoov_urdf
 
 ROS 2 **Humble** package with the **InMoov-derived** robot description used by Lucy: **URDF/xacro**, **DAE meshes**, **ros2_control** blocks, **Gazebo (gz-sim) physics**, an **RViz** layout, and **launch files** for ros2_control + RViz / Gazebo.
 
 The web control panel (rosbridge + `/config/*` services) is **not** started from here — use `lucy_bringup` (`lucy.launch.py`) or `web_ros_api.launch.py` from `lucy_ros_packages`.
 
-> Historical name: `package.xml` is `thais_urdf` but the content is the InMoov-style description used by Lucy.
+> Historical name: `package.xml` is `inmoov_urdf` but the content is the InMoov-style description used by Lucy.
 
 ## Repository layout
 
 ```text
-thais_urdf/
-├── package.xml              # ROS package: thais_urdf
+inmoov_urdf/
+├── package.xml              # ROS package: inmoov_urdf
 ├── CMakeLists.txt           # Installs launch/, config/, description/, docs/, worlds/
 ├── docs/                    # Developer + hardware docs (see Documentation map)
 ├── launch/
@@ -44,13 +44,13 @@ thais_urdf/
 └── archive/                 # Original InMoov-i1 STL meshes + URDF + PDF (lineage, not runtime)
 ```
 
-**Install**: `launch/`, `config/`, `description/`, `docs/`, `worlds/` install to `share/thais_urdf/`. The combo launches resolve defaults from `get_package_share_directory("thais_urdf")`; override only for custom trees.
+**Install**: `launch/`, `config/`, `description/`, `docs/`, `worlds/` install to `share/inmoov_urdf/`. The combo launches resolve defaults from `get_package_share_directory("inmoov_urdf")`; override only for custom trees.
 
 ## Relationship to `lucy_ros_packages`
 
 | Repo | Role |
 |------|------|
-| **`thais_urdf`** (this) | Canonical robot description + sim/visualization entry launches (no rosbridge). |
+| **`inmoov_urdf`** (this) | Canonical robot description + sim/visualization entry launches (no rosbridge). |
 | **`lucy_ros_packages`** | LUCY bringup (`lucy_bringup`), `LucySystemHardware` plugin, cameras, `web_ros_api` (rosbridge + `lucy_config_pipeline`). |
 
 `lucy_ros2_control` consumes this URDF when both packages share `lucy_ws/src/`. **No** `package.xml` dependency on `lucy_ros2_control` (would create a colcon cycle) — keep both packages in the workspace.
@@ -70,7 +70,7 @@ For the control panel, also build `lucy_bringup` + `lucy_config_pipeline` (pulle
 ```bash
 source /opt/ros/humble/setup.bash
 cd lucy_ws
-colcon build --symlink-install --packages-select thais_urdf lucy_ros2_control
+colcon build --symlink-install --packages-select inmoov_urdf lucy_ros2_control
 source install/setup.bash
 ```
 
@@ -80,16 +80,16 @@ source install/setup.bash
 
 ```bash
 # URDF preview with sliders + RViz (no hardware, no controllers)
-ros2 launch thais_urdf joint_preview.launch.py
+ros2 launch inmoov_urdf joint_preview.launch.py
 
 # Real robot: ros2_control + controllers (RViz in another terminal)
-ros2 launch thais_urdf control.launch.py
-ros2 launch thais_urdf rviz_standalone.launch.py
+ros2 launch inmoov_urdf control.launch.py
+ros2 launch inmoov_urdf rviz_standalone.launch.py
 
 # gz-sim + ros2_control + optional RViz
-ros2 launch thais_urdf gazebo.launch.py                  # GUI
-ros2 launch thais_urdf gazebo.launch.py headless:=true   # server-only, EGL render
-ros2 launch thais_urdf gazebo.launch.py start_rviz:=true # spawn RViz too
+ros2 launch inmoov_urdf gazebo.launch.py                  # GUI
+ros2 launch inmoov_urdf gazebo.launch.py headless:=true   # server-only, EGL render
+ros2 launch inmoov_urdf gazebo.launch.py start_rviz:=true # spawn RViz too
 
 # Full stack (rosbridge + web panel) — from lucy_bringup
 ros2 launch lucy_bringup lucy.launch.py real:=false rviz:=true
@@ -128,9 +128,9 @@ ros2 run xacro xacro description/urdf/inmoov.urdf.xacro \
 ## Tests and CI
 
 ```bash
-colcon build --symlink-install --packages-select thais_urdf lucy_ros2_control \
+colcon build --symlink-install --packages-select inmoov_urdf lucy_ros2_control \
   --cmake-args -DBUILD_TESTING=ON
-colcon test --packages-select thais_urdf --event-handlers console_direct+
+colcon test --packages-select inmoov_urdf --event-handlers console_direct+
 colcon test-result --verbose
 ```
 
@@ -138,14 +138,14 @@ Local coverage (needs `python3-pytest-cov`):
 
 ```bash
 mkdir -p build/coverage_reports build/coverage_html
-python3 -m pytest src/thais_urdf/test/ \
-  --cov=src/thais_urdf/launch --cov=src/thais_urdf/test \
+python3 -m pytest src/inmoov_urdf/test/ \
+  --cov=src/inmoov_urdf/launch --cov=src/inmoov_urdf/test \
   --cov-report=term-missing \
-  --cov-report=xml:build/coverage_reports/thais_urdf.xml \
-  --cov-report=html:build/coverage_html/thais_urdf
+  --cov-report=xml:build/coverage_reports/inmoov_urdf.xml \
+  --cov-report=html:build/coverage_html/inmoov_urdf
 ```
 
-CI: `.github/workflows/ci.yml` builds `thais_urdf` + `lucy_ros2_control`, runs `colcon test`, then `pytest-cov`. Cobertura XML + HTML are uploaded to Codecov (flag `thais_urdf`) when `CODECOV_TOKEN` is set.
+CI: `.github/workflows/ci.yml` builds `inmoov_urdf` + `lucy_ros2_control`, runs `colcon test`, then `pytest-cov`. Cobertura XML + HTML are uploaded to Codecov (flag `inmoov_urdf`) when `CODECOV_TOKEN` is set.
 
 ## Documentation map
 

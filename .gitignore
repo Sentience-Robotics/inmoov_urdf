@@ -52,3 +52,6 @@ CATKIN_IGNORE
 
 *.log
 .DS_Store
+
+config/hardware/backups/*.yaml
+config/hardware/active_meta.yaml

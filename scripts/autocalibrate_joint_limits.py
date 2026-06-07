@@ -49,7 +49,7 @@ Live visualization
 - ``--view rviz``: publishes ``/joint_states`` while sweeping. Watch the
   motion in your existing RViz config:
 
-      ros2 launch thais_urdf joint_preview.launch.py jsp_gui:=false &
+      ros2 launch inmoov_urdf joint_preview.launch.py jsp_gui:=false &
       python3 scripts/autocalibrate_joint_limits.py --view rviz --rate-hz 60
 
   The ``jsp_gui:=false`` flag turns off ``joint_state_publisher_gui`` so it
@@ -191,7 +191,7 @@ class RvizVisualizer(Visualizer):
         self._idxs = [name_to_idx[n] for n in self._joint_names]
         print(
             f"[--view rviz] publishing /joint_states for {len(self._joint_names)} joints. "
-            "Make sure `ros2 launch thais_urdf joint_preview.launch.py jsp_gui:=false` is running."
+            "Make sure `ros2 launch inmoov_urdf joint_preview.launch.py jsp_gui:=false` is running."
         )
 
     def step(self, p, body, name_to_idx, cid) -> None:
