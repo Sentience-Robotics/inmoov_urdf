@@ -45,7 +45,7 @@ from ament_index_python.packages import get_package_prefix
 
 
 def _gz_ros2_control_plugin_path():
-    pkg_share = get_package_prefix("thais_urdf")
+    pkg_share = get_package_prefix("inmoov_urdf")
     plugin_path = os.path.join(pkg_share, "lib", "mock_sensor")
     try:
         share = get_package_share_directory("gz_ros2_control")
@@ -63,7 +63,7 @@ _DEFAULT_GENERATED_FILES = {
 def _active_generated_files(pkg_share: str) -> dict[str, str]:
     """Generated-artifact filenames from the active preset (defaults if unreadable)."""
     candidates = [
-        Path.cwd() / "src" / "thais_urdf" / "config" / "hardware" / "active.yaml",
+        Path.cwd() / "src" / "inmoov_urdf" / "config" / "hardware" / "active.yaml",
         Path(pkg_share) / "config" / "hardware" / "active.yaml",
     ]
     out = dict(_DEFAULT_GENERATED_FILES)
@@ -86,7 +86,7 @@ def _active_generated_files(pkg_share: str) -> dict[str, str]:
 
 def _default_controllers_yaml(pkg_share: str, controllers_basename: str) -> str:
     cwd_candidate = (
-        Path.cwd() / "src" / "thais_urdf" / "config" / controllers_basename
+        Path.cwd() / "src" / "inmoov_urdf" / "config" / controllers_basename
     )
     if cwd_candidate.is_file():
         return str(cwd_candidate.resolve())
@@ -94,7 +94,7 @@ def _default_controllers_yaml(pkg_share: str, controllers_basename: str) -> str:
 
 
 def generate_launch_description():
-    pkg_share = get_package_share_directory("thais_urdf")
+    pkg_share = get_package_share_directory("inmoov_urdf")
     default_base = os.path.join(pkg_share, "description")
     generated = _active_generated_files(pkg_share)
     default_controllers = _default_controllers_yaml(pkg_share, generated["controllers_yaml"])
@@ -130,7 +130,7 @@ def generate_launch_description():
     )
 
     bridge_config_path = os.path.join(
-        get_package_share_directory("thais_urdf"), "config", "gazebo_bridge.yaml"
+        get_package_share_directory("inmoov_urdf"), "config", "gazebo_bridge.yaml"
     )
     bridge = Node(
         package="ros_gz_bridge",
@@ -191,7 +191,7 @@ def generate_launch_description():
         output="screen",
         parameters=[{"use_sim_time": True}],
     )
-    mesh_dae = get_package_share_directory("thais_urdf")
+    mesh_dae = get_package_share_directory("inmoov_urdf")
 
     def create_spawner(name: str, delay: float = 0.0):
         spawner = Node(

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(thais_urdf)
+project(inmoov_urdf)
 
 find_package(ament_cmake REQUIRED)
 

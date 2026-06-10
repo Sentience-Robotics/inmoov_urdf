@@ -87,7 +87,7 @@ def _active_yaml_path() -> Path:
     try:
         from ament_index_python.packages import get_package_share_directory
 
-        p = Path(get_package_share_directory("thais_urdf")) / "config" / "hardware" / "active.yaml"
+        p = Path(get_package_share_directory("inmoov_urdf")) / "config" / "hardware" / "active.yaml"
         if p.is_file():
             return p
     except Exception:
@@ -99,7 +99,7 @@ def _urdf_xacro_path() -> Path:
     try:
         from ament_index_python.packages import get_package_share_directory
 
-        share = Path(get_package_share_directory("thais_urdf"))
+        share = Path(get_package_share_directory("inmoov_urdf"))
         urdf = share / "description" / "urdf" / "inmoov.urdf.xacro"
         if urdf.is_file():
             return urdf
@@ -113,7 +113,7 @@ def _controllers_yaml_path() -> Path:
     try:
         from ament_index_python.packages import get_package_share_directory
 
-        p = Path(get_package_share_directory("thais_urdf")) / "config" / "controllers.yaml"
+        p = Path(get_package_share_directory("inmoov_urdf")) / "config" / "controllers.yaml"
         if p.is_file():
             return p
     except Exception:

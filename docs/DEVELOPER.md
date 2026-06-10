@@ -1,4 +1,4 @@
-# Developer guide — `thais_urdf`
+# Developer guide — `inmoov_urdf`
 
 ROS 2 **Humble**. For contributors who change URDF/xacro, meshes, RViz config, hardware YAML, or launch files. Bringup, hardware plugin, and cameras live in **`lucy_ros_packages`** ([Sentience-Robotics/lucy_ros_packages](https://github.com/Sentience-Robotics/lucy_ros_packages) → `docs/DEVELOPER.md`).
 
@@ -24,7 +24,7 @@ For InMoov-i2 head/expression actuators not present in the i1 URDF, see [inmoov_
 ## 2. Layout
 
 ```text
-thais_urdf/
+inmoov_urdf/
 ├── package.xml / CMakeLists.txt
 ├── docs/                         # this file, hardware_mapping.md, inmoov_i2.md
 ├── launch/                       # 5 entry points (see §4)
@@ -47,10 +47,10 @@ thais_urdf/
 
 ## 3. Build and install
 
-`CMakeLists.txt` installs `launch/`, `config/`, `description/`, `docs/`, `worlds/` to `share/thais_urdf/`. Launches resolve paths from `get_package_share_directory("thais_urdf")`.
+`CMakeLists.txt` installs `launch/`, `config/`, `description/`, `docs/`, `worlds/` to `share/inmoov_urdf/`. Launches resolve paths from `get_package_share_directory("inmoov_urdf")`.
 
 ```bash
-colcon build --symlink-install --packages-select thais_urdf lucy_ros2_control
+colcon build --symlink-install --packages-select inmoov_urdf lucy_ros2_control
 source install/setup.bash
 ```
 
@@ -119,7 +119,7 @@ Single number in `description/robot_description/urdf/properties.xacro`. Current 
 2. If the visual has a mesh, also write a paired `<collision>` (same origin + mesh) — or run `scripts/inject_collisions.py` to do it for you (idempotent; see §7.1).
 3. Pick or define a `<material name="Material.NNN">` and reference it on the new `<visual>` so RViz / LCP get a colour.
 4. Update `config/hardware/active.yaml` and `config/controllers.yaml` if the new joint is actuated (then regenerate via `lucy_config_generator`).
-5. Validate: `colcon test --packages-select thais_urdf` (xacro smoke + collisions present + joint limits) and `joint_preview.launch.py`.
+5. Validate: `colcon test --packages-select inmoov_urdf` (xacro smoke + collisions present + joint limits) and `joint_preview.launch.py`.
 
 ### 6.3 Replacing a mesh
 
@@ -170,13 +170,13 @@ Workflow:
 1. **Manual edit** — hand-author `<collision>` blocks in `robot_description.urdf.xacro`, mirroring the matching `<visual>` origin + mesh filename, or use a primitive (`<box>`, `<cylinder>`, `<sphere>`) when a mesh is overkill. Wrap dimensions in `${model_scale * N}`.
 2. **Auto-injection** (idempotent; collision names derive from each visual's `name=`):
    ```bash
-   python3 src/thais_urdf/scripts/inject_collisions.py \
-     src/thais_urdf/description/robot_description/urdf/robot_description.urdf.xacro
+   python3 src/inmoov_urdf/scripts/inject_collisions.py \
+     src/inmoov_urdf/description/robot_description/urdf/robot_description.urdf.xacro
    ```
    The script also bumps placeholder near-zero inertias to `mass=0.15` so dynamic sims don't blow up.
 3. **Visual check**:
    ```bash
-   ros2 launch thais_urdf joint_preview.launch.py
+   ros2 launch inmoov_urdf joint_preview.launch.py
    ```
    The default RViz config has two `RobotModel` displays — opaque visual + translucent collision overlay. Toggle the visual off to see only collisions (what PyBullet / Gazebo will see); raise alpha for clarity. Drive joints with the sliders and look for:
    - collisions that don't hug the mesh (DAE artefact),
@@ -191,7 +191,7 @@ Workflow:
 4. Reload:
    ```bash
    # Quick slider preview
-   ros2 launch thais_urdf joint_preview.launch.py
+   ros2 launch inmoov_urdf joint_preview.launch.py
    # OR in a running stack, without relaunching
    ros2 service call /lucy_control/restart std_srvs/srv/Trigger {}
    ```
@@ -202,17 +202,17 @@ Workflow:
 
 ```bash
 # Terminal 1 — RViz only (no slider GUI fighting the publisher)
-ros2 launch thais_urdf joint_preview.launch.py jsp_gui:=false
+ros2 launch inmoov_urdf joint_preview.launch.py jsp_gui:=false
 
 # Terminal 2 — drive /joint_states from the sweep
-python3 src/thais_urdf/scripts/autocalibrate_joint_limits.py --view rviz --rate-hz 60
+python3 src/inmoov_urdf/scripts/autocalibrate_joint_limits.py --view rviz --rate-hz 60
 
 # Focus on a single chain while debugging (repeat --joint, others held at zero)
-python3 src/thais_urdf/scripts/autocalibrate_joint_limits.py \
+python3 src/inmoov_urdf/scripts/autocalibrate_joint_limits.py \
   --view rviz --rate-hz 30 --joint left_shoulder_y --joint left_shoulder_x
 
 # Write the result back into the URDF instead of dry-run
-python3 src/thais_urdf/scripts/autocalibrate_joint_limits.py --apply
+python3 src/inmoov_urdf/scripts/autocalibrate_joint_limits.py --apply
 ```
 
 Flags:
@@ -279,9 +279,9 @@ For InMoov-i2 head extension, see [inmoov_i2.md](inmoov_i2.md).
 ## 10. Tests
 
 ```bash
-colcon build --symlink-install --packages-select thais_urdf lucy_ros2_control \
+colcon build --symlink-install --packages-select inmoov_urdf lucy_ros2_control \
   --cmake-args -DBUILD_TESTING=ON
-colcon test --packages-select thais_urdf --event-handlers console_direct+
+colcon test --packages-select inmoov_urdf --event-handlers console_direct+
 colcon test-result --verbose
 ```
 
@@ -294,7 +294,7 @@ colcon test-result --verbose
 | `test_scale_xacro_origins.py` | `scale_xacro_origins.py` regex covers all the patterns it claims to. |
 | `test_hardware_yaml.py` | `active.yaml` schema, board references, virtual-pin contiguity, etc. |
 
-CI (`.github/workflows/ci.yml`) runs the same tests, then `pytest-cov` for `test/` only, and uploads Cobertura XML + HTML to Codecov (flag `thais_urdf`) when `CODECOV_TOKEN` is set. Triggers: PRs and pushes to `main` / `master` / `dev`.
+CI (`.github/workflows/ci.yml`) runs the same tests, then `pytest-cov` for `test/` only, and uploads Cobertura XML + HTML to Codecov (flag `inmoov_urdf`) when `CODECOV_TOKEN` is set. Triggers: PRs and pushes to `main` / `master` / `dev`.
 
 ---
 
@@ -320,7 +320,7 @@ CI (`.github/workflows/ci.yml`) runs the same tests, then `pytest-cov` for `test
 The root `CONTRIBUTING.md` carries the GPL-3.0 "contributing" wording expected by `ament_copyright`; `LICENSE` is at the root.
 
 - Open issues and merge requests on the host for this repository.
-- Match ROS 2 / ament style; run `colcon test --packages-select thais_urdf` before submitting.
+- Match ROS 2 / ament style; run `colcon test --packages-select inmoov_urdf` before submitting.
 - Update this guide or the root `README.md` whenever the layout or workflow changes.
 
 See `CODE_OF_CONDUCT.md` at the repository root.
