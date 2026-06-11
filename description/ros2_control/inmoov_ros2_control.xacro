@@ -348,8 +348,8 @@
           <param name="servo_max_deg">270</param>
           <param name="servo_default_deg">135</param>
           <command_interface name="position">
-            <param name="min">-0.50615</param>
-            <param name="max">0.50615</param>
+            <param name="min">-1.5708</param>
+            <param name="max">1.5708</param>
           </command_interface>
           <state_interface name="position" />
       </joint>
@@ -363,8 +363,8 @@
           <param name="servo_max_deg">180</param>
           <param name="servo_default_deg">90</param>
           <command_interface name="position">
-            <param name="min">-0.12217</param>
-            <param name="max">0.12217</param>
+            <param name="min">-0.2618</param>
+            <param name="max">0.2618</param>
           </command_interface>
           <state_interface name="position" />
       </joint>
@@ -378,8 +378,8 @@
           <param name="servo_max_deg">180</param>
           <param name="servo_default_deg">90</param>
           <command_interface name="position">
-            <param name="min">-0.08727</param>
-            <param name="max">0.04363</param>
+            <param name="min">-1.5708</param>
+            <param name="max">1.5708</param>
           </command_interface>
           <state_interface name="position" />
       </joint>
@@ -393,8 +393,8 @@
           <param name="servo_max_deg">180</param>
           <param name="servo_default_deg">90</param>
           <command_interface name="position">
-            <param name="min">-1.5708</param>
-            <param name="max">1.5708</param>
+            <param name="min">-0.34907</param>
+            <param name="max">0.34907</param>
           </command_interface>
           <state_interface name="position" />
       </joint>
@@ -409,19 +409,19 @@
           <param name="servo_default_deg">90</param>
           <command_interface name="position">
             <param name="min">-0.34907</param>
-            <param name="max">0.0</param>
+            <param name="max">0.34907</param>
           </command_interface>
           <state_interface name="position" />
       </joint>
       <joint name="i01.head.jaw_link_joint">
           <param name="virtual_pin">7</param>
           <param name="servo_type">300</param>
-          <param name="offset_deg">90</param>
+          <param name="offset_deg">0</param>
           <param name="direction">1</param>
           <param name="scale">1</param>
           <param name="servo_min_deg">0</param>
           <param name="servo_max_deg">180</param>
-          <param name="servo_default_deg">90</param>
+          <param name="servo_default_deg">0</param>
           <command_interface name="position">
             <param name="min">0.0</param>
             <param name="max">0.17453</param>
