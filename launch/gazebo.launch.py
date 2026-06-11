@@ -24,9 +24,8 @@
 import os
 from pathlib import Path
 
-from ament_index_python.packages import get_package_share_directory
 import yaml
-from launch import LaunchDescription
+from ament_index_python.packages import get_package_prefix, get_package_share_directory
 from launch.actions import (
     DeclareLaunchArgument,
     IncludeLaunchDescription,
@@ -41,7 +40,8 @@ from launch.substitutions import (
 )
 from launch_ros.actions import Node
 from lucy_control_supervisor.controllers_spawn import controllers_to_spawn
-from ament_index_python.packages import get_package_prefix
+
+from launch import LaunchDescription
 
 
 def _gz_ros2_control_plugin_path():
@@ -91,7 +91,7 @@ def _default_controllers_yaml(pkg_share: str, controllers_basename: str) -> str:
     return os.path.join(pkg_share, "config", controllers_basename)
 
 
-def _sim_camera_topics(pkg_share: str) -> list[str]:
+def _sim_camera_topics(pkg_share: str) -> list[tuple[str, str]]:
     """LCP-facing (compressed) topics for every camera simulated in Gazebo."""
     candidates = [
         Path.cwd() / "src" / "thais_urdf" / "config" / "hardware" / "active.yaml",
@@ -107,12 +107,15 @@ def _sim_camera_topics(pkg_share: str) -> list[str]:
         cameras = data.get("cameras") if isinstance(data, dict) else None
         if not isinstance(cameras, list):
             return []
-        topics: list[str] = []
+        topics: list[tuple[str, str]] = []
         for cam in cameras:
             if not isinstance(cam, dict):
                 continue
             topic = cam.get("topic")
             if not isinstance(topic, str) or not topic.strip():
+                continue
+            compressed_topic = cam.get("compressed_topic")
+            if not isinstance(compressed_topic, str) or not compressed_topic.strip():
                 continue
             if cam.get("external"):
                 gz_topic = cam.get("sim_gz_topic")
@@ -120,7 +123,7 @@ def _sim_camera_topics(pkg_share: str) -> list[str]:
                     continue
             elif not cam.get("link"):
                 continue
-            topics.append(topic.strip())
+            topics.append((topic.strip(), compressed_topic.strip()))
         return topics
     return []
 
@@ -181,8 +184,7 @@ def generate_launch_description():
     # ros_gz_bridge can only emit raw Image; the LCP wants JPEG CompressedImage.
     # For every simulated camera (robot-mounted + external world camera), republish
     # the bridged raw topic -> the compressed topic the LCP subscribes to.
-    def _camera_compressor(raw_topic: str) -> Node:
-        compressed_topic = raw_topic + "/compressed"
+    def _camera_compressor(topic: str, compressed_topic: str) -> Node:
         safe = "".join(c if c.isalnum() else "_" for c in compressed_topic).strip("_")
         if ros_distro == "humble":
             return Node(
@@ -191,7 +193,7 @@ def generate_launch_description():
                 name="camera_compressor_" + safe,
                 arguments=["raw", "compressed"],
                 remappings=[
-                    ("in", raw_topic),
+                    ("in", topic),
                     ("out/compressed", compressed_topic),
                 ],
                 parameters=[{"use_sim_time": True}],
@@ -203,7 +205,7 @@ def generate_launch_description():
                 executable="republish",
                 name="camera_compressor_" + safe,
                 remappings=[
-                    ("in", raw_topic),
+                    ("in", topic),
                     ("out/compressed", compressed_topic),
                 ],
                 parameters=[
@@ -217,7 +219,8 @@ def generate_launch_description():
             )
 
     camera_compressors = [
-        _camera_compressor(topic) for topic in _sim_camera_topics(pkg_share)
+        _camera_compressor(topic, compressed_topic)
+        for topic, compressed_topic in _sim_camera_topics(pkg_share)
     ]
 
     ros_lib = _gz_ros2_control_plugin_path()

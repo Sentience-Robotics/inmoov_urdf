@@ -48,6 +48,7 @@ cameras:
   - id: 'ext_camera'
     name: 'External USB Webcam'
     topic: '/ext_camera/jpg'
+    compressed_topic: '/ext_camera/jpg/compressed'
     message_type: 'sensor_msgs/msg/CompressedImage'
     external: true
     sim_gz_topic: '/world/default/camera'
@@ -55,6 +56,7 @@ cameras:
   - realsense-rgb:
     name: 'Realsense RGB'
     topic: '/realsense/realsense2_camera/color/image_raw'
+    compressed_topic: '/realsense/realsense2_camera/color/image_raw/compressed'
     message_type: 'sensor_msgs/msg/CompressedImage'
     external: false
     link: 'i01.head.eyeLeft_link'
@@ -62,6 +64,7 @@ cameras:
   - realsense-aligned-depth:
     name: 'Realsense Aligned Depth'
     topic: '/realsense/realsense2_camera/aligned_depth_to_color/image_raw'
+    compressed_topic: '/realsense/realsense2_camera/aligned_depth_to_color/image_raw/compressed'
     message_type: 'sensor_msgs/msg/CompressedImage'
     external: false
     link: 'i01.head.eyeLeft_link'
@@ -69,6 +72,7 @@ cameras:
   - left_eye_camera:
     name: 'Left eye webcam'
     topic: '/camera/internal/left_eye/jpg'
+    compressed_topic: '/camera/internal/left_eye/jpg/compressed'
     message_type: 'sensor_msgs/msg/CompressedImage'
     external: false
     link: 'i01.head.eyeRight_link'
@@ -76,6 +80,7 @@ cameras:
   - right_eye_camera:
     name: 'Right eye webcam'
     topic: '/camera/internal/right_eye/jpg'
+    compressed_topic: '/camera/internal/right_eye/jpg/compressed'
     message_type: 'sensor_msgs/msg/CompressedImage'
     external: false
     link: 'i01.head.eyeLeft_link'
