@@ -126,6 +126,7 @@ def _sim_camera_topics(pkg_share: str) -> list[str]:
 
 
 def generate_launch_description():
+    ros_distro = os.environ.get("ROS_DISTRO", "humble").lower()
     pkg_share = get_package_share_directory("thais_urdf")
     default_base = os.path.join(pkg_share, "description")
     generated = _active_generated_files(pkg_share)
@@ -183,23 +184,37 @@ def generate_launch_description():
     def _camera_compressor(raw_topic: str) -> Node:
         compressed_topic = raw_topic + "/compressed"
         safe = "".join(c if c.isalnum() else "_" for c in compressed_topic).strip("_")
-        return Node(
-            package="image_transport",
-            executable="republish",
-            name="camera_compressor_" + safe,
-            remappings=[
-                ("in", raw_topic),
-                ("out/compressed", compressed_topic),
-            ],
-            parameters=[
-                {
-                    "use_sim_time": True,
-                    "in_transport": "raw",
-                    "out_transport": "compressed",
-                }
-            ],
-            output="screen",
-        )
+        if ros_distro == "humble":
+            return Node(
+                package="image_transport",
+                executable="republish",
+                name="camera_compressor_" + safe,
+                arguments=["raw", "compressed"],
+                remappings=[
+                    ("in", raw_topic),
+                    ("out/compressed", compressed_topic),
+                ],
+                parameters=[{"use_sim_time": True}],
+                output="screen",
+            )
+        else:
+            return Node(
+                package="image_transport",
+                executable="republish",
+                name="camera_compressor_" + safe,
+                remappings=[
+                    ("in", raw_topic),
+                    ("out/compressed", compressed_topic),
+                ],
+                parameters=[
+                    {
+                        "use_sim_time": True,
+                        "in_transport": "raw",
+                        "out_transport": "compressed",
+                    }
+                ],
+                output="screen",
+            )
 
     camera_compressors = [
         _camera_compressor(topic) for topic in _sim_camera_topics(pkg_share)
