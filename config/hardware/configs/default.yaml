@@ -47,9 +47,10 @@ ignore_urdf_joints:
 cameras:
   - id: 'ext_camera'
     name: 'External USB Webcam'
-    topic: '/camera/external/ext1/jpg'
+    topic: '/ext_camera/jpg'
     message_type: 'sensor_msgs/msg/CompressedImage'
     external: true
+    sim_gz_topic: '/world/default/camera'
   
   - realsense-rgb:
     name: 'Realsense RGB'

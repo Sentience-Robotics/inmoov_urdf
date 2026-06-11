@@ -5,23 +5,29 @@
   gz_type_name: "gz.msgs.Clock"
   direction: GZ_TO_ROS
 
-- ros_topic_name: "/realsense/realsense2_camera/color/image_raw/compressed"
-  gz_topic_name: "/realsense/realsense2_camera/color/image_raw/compressed"
+# Raw frames; gazebo.launch.py republishes -> compressed topic (CompressedImage) for the LCP.
+- ros_topic_name: "/ext_camera/jpg/raw"
+  gz_topic_name: "/world/default/camera"
   ros_type_name: "sensor_msgs/msg/Image"
   gz_type_name: "gz.msgs.Image"
   direction: GZ_TO_ROS
-- ros_topic_name: "/realsense/realsense2_camera/aligned_depth_to_color/image_raw/compressed"
-  gz_topic_name: "/realsense/realsense2_camera/aligned_depth_to_color/image_raw/compressed"
+- ros_topic_name: "/realsense/realsense2_camera/color/image_raw"
+  gz_topic_name: "/realsense/realsense2_camera/color/image_raw"
   ros_type_name: "sensor_msgs/msg/Image"
   gz_type_name: "gz.msgs.Image"
   direction: GZ_TO_ROS
-- ros_topic_name: "/camera/internal/left_eye/jpg"
-  gz_topic_name: "/camera/internal/left_eye/jpg"
+- ros_topic_name: "/realsense/realsense2_camera/aligned_depth_to_color/image_raw"
+  gz_topic_name: "/realsense/realsense2_camera/aligned_depth_to_color/image_raw"
   ros_type_name: "sensor_msgs/msg/Image"
   gz_type_name: "gz.msgs.Image"
   direction: GZ_TO_ROS
-- ros_topic_name: "/camera/internal/right_eye/jpg"
-  gz_topic_name: "/camera/internal/right_eye/jpg"
+- ros_topic_name: "/camera/internal/left_eye/jpg/raw"
+  gz_topic_name: "/camera/internal/left_eye/jpg/raw"
+  ros_type_name: "sensor_msgs/msg/Image"
+  gz_type_name: "gz.msgs.Image"
+  direction: GZ_TO_ROS
+- ros_topic_name: "/camera/internal/right_eye/jpg/raw"
+  gz_topic_name: "/camera/internal/right_eye/jpg/raw"
   ros_type_name: "sensor_msgs/msg/Image"
   gz_type_name: "gz.msgs.Image"
   direction: GZ_TO_ROS

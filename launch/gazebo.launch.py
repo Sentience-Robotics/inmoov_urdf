@@ -93,6 +93,54 @@ def _default_controllers_yaml(pkg_share: str, controllers_basename: str) -> str:
     return os.path.join(pkg_share, "config", controllers_basename)
 
 
+def _gazebo_camera_raw_topic(topic: str) -> str:
+    """
+    Raw-image topic the gz camera/bridge use in sim (mirrors lucy_config_generator).
+
+    gz-sim + ros_gz_bridge only emit raw ``sensor_msgs/msg/Image``; the LCP consumes
+    JPEG ``CompressedImage`` on ``topic``. The gz camera renders to this raw topic and
+    we republish it (raw -> compressed) onto ``topic``.
+    """
+    suffix = "/compressed"
+    if topic.endswith(suffix):
+        return topic[: -len(suffix)]
+    return topic + "/raw"
+
+
+def _sim_camera_topics(pkg_share: str) -> list[str]:
+    """LCP-facing (compressed) topics for every camera simulated in Gazebo."""
+    candidates = [
+        Path.cwd() / "src" / "thais_urdf" / "config" / "hardware" / "active.yaml",
+        Path(pkg_share) / "config" / "hardware" / "active.yaml",
+    ]
+    for active in candidates:
+        if not active.is_file():
+            continue
+        try:
+            data = yaml.safe_load(active.read_text(encoding="utf-8"))
+        except (OSError, yaml.YAMLError):
+            return []
+        cameras = data.get("cameras") if isinstance(data, dict) else None
+        if not isinstance(cameras, list):
+            return []
+        topics: list[str] = []
+        for cam in cameras:
+            if not isinstance(cam, dict):
+                continue
+            topic = cam.get("topic")
+            if not isinstance(topic, str) or not topic.strip():
+                continue
+            if cam.get("external"):
+                gz_topic = cam.get("sim_gz_topic")
+                if not isinstance(gz_topic, str) or not gz_topic.strip():
+                    continue
+            elif not cam.get("link"):
+                continue
+            topics.append(topic.strip())
+        return topics
+    return []
+
+
 def generate_launch_description():
     pkg_share = get_package_share_directory("thais_urdf")
     default_base = os.path.join(pkg_share, "description")
@@ -140,17 +188,28 @@ def generate_launch_description():
         output="screen",
     )
 
-    camera_compressor = Node(
-        package="image_transport",
-        executable="republish",
-        arguments=["raw", "compressed"],
-        remappings=[
-            ("in", "/camera/gazebo/raw"),
-            ("out/compressed", "/ext_camera/jpg"),
-        ],
-        parameters=[{"use_sim_time": True}],
-        output="screen",
-    )
+    # ros_gz_bridge can only emit raw Image; the LCP wants JPEG CompressedImage.
+    # For every simulated camera (robot-mounted + external world camera), republish
+    # the bridged raw topic -> the compressed topic the LCP subscribes to.
+    def _camera_compressor(compressed_topic: str) -> Node:
+        raw_topic = _gazebo_camera_raw_topic(compressed_topic)
+        safe = "".join(c if c.isalnum() else "_" for c in compressed_topic).strip("_")
+        return Node(
+            package="image_transport",
+            executable="republish",
+            name="camera_compressor_" + safe,
+            arguments=["raw", "compressed"],
+            remappings=[
+                ("in", raw_topic),
+                ("out/compressed", compressed_topic),
+            ],
+            parameters=[{"use_sim_time": True}],
+            output="screen",
+        )
+
+    camera_compressors = [
+        _camera_compressor(topic) for topic in _sim_camera_topics(pkg_share)
+    ]
 
     ros_lib = _gz_ros2_control_plugin_path()
     gz_plugin_path = os.pathsep.join(
@@ -246,6 +305,6 @@ def generate_launch_description():
             spawn_robot,
             gz_sim_launch,
             bridge,
-            camera_compressor,
+            *camera_compressors,
         ]
     )
