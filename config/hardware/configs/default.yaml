@@ -54,14 +54,14 @@ cameras:
   
   - realsense-rgb:
     name: 'Realsense RGB'
-    topic: '/realsense/realsense2_camera/color/image_raw/compressed'
+    topic: '/realsense/realsense2_camera/color/image_raw'
     message_type: 'sensor_msgs/msg/CompressedImage'
     external: false
     link: 'i01.head.eyeLeft_link'
 
   - realsense-aligned-depth:
     name: 'Realsense Aligned Depth'
-    topic: '/realsense/realsense2_camera/aligned_depth_to_color/image_raw/compressed'
+    topic: '/realsense/realsense2_camera/aligned_depth_to_color/image_raw'
     message_type: 'sensor_msgs/msg/CompressedImage'
     external: false
     link: 'i01.head.eyeLeft_link'

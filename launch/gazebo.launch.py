@@ -85,26 +85,10 @@ def _active_generated_files(pkg_share: str) -> dict[str, str]:
 
 
 def _default_controllers_yaml(pkg_share: str, controllers_basename: str) -> str:
-    cwd_candidate = (
-        Path.cwd() / "src" / "thais_urdf" / "config" / controllers_basename
-    )
+    cwd_candidate = Path.cwd() / "src" / "thais_urdf" / "config" / controllers_basename
     if cwd_candidate.is_file():
         return str(cwd_candidate.resolve())
     return os.path.join(pkg_share, "config", controllers_basename)
-
-
-def _gazebo_camera_raw_topic(topic: str) -> str:
-    """
-    Raw-image topic the gz camera/bridge use in sim (mirrors lucy_config_generator).
-
-    gz-sim + ros_gz_bridge only emit raw ``sensor_msgs/msg/Image``; the LCP consumes
-    JPEG ``CompressedImage`` on ``topic``. The gz camera renders to this raw topic and
-    we republish it (raw -> compressed) onto ``topic``.
-    """
-    suffix = "/compressed"
-    if topic.endswith(suffix):
-        return topic[: -len(suffix)]
-    return topic + "/raw"
 
 
 def _sim_camera_topics(pkg_share: str) -> list[str]:
@@ -145,7 +129,9 @@ def generate_launch_description():
     pkg_share = get_package_share_directory("thais_urdf")
     default_base = os.path.join(pkg_share, "description")
     generated = _active_generated_files(pkg_share)
-    default_controllers = _default_controllers_yaml(pkg_share, generated["controllers_yaml"])
+    default_controllers = _default_controllers_yaml(
+        pkg_share, generated["controllers_yaml"]
+    )
 
     base_path_arg = DeclareLaunchArgument(
         "base_path",
@@ -178,7 +164,10 @@ def generate_launch_description():
     )
 
     bridge_config_path = os.path.join(
-        get_package_share_directory("thais_urdf"), "description", "gazebo", "gazebo_bridge.yaml"
+        get_package_share_directory("thais_urdf"),
+        "description",
+        "gazebo",
+        "gazebo_bridge.yaml",
     )
     bridge = Node(
         package="ros_gz_bridge",
@@ -191,19 +180,24 @@ def generate_launch_description():
     # ros_gz_bridge can only emit raw Image; the LCP wants JPEG CompressedImage.
     # For every simulated camera (robot-mounted + external world camera), republish
     # the bridged raw topic -> the compressed topic the LCP subscribes to.
-    def _camera_compressor(compressed_topic: str) -> Node:
-        raw_topic = _gazebo_camera_raw_topic(compressed_topic)
+    def _camera_compressor(raw_topic: str) -> Node:
+        compressed_topic = raw_topic + "/compressed"
         safe = "".join(c if c.isalnum() else "_" for c in compressed_topic).strip("_")
         return Node(
             package="image_transport",
             executable="republish",
             name="camera_compressor_" + safe,
-            arguments=["raw", "compressed"],
             remappings=[
                 ("in", raw_topic),
                 ("out/compressed", compressed_topic),
             ],
-            parameters=[{"use_sim_time": True}],
+            parameters=[
+                {
+                    "use_sim_time": True,
+                    "in_transport": "raw",
+                    "out_transport": "compressed",
+                }
+            ],
             output="screen",
         )
 
