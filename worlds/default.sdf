@@ -99,37 +99,5 @@
 
             </link>
         </model>
-
-        <model name="sensor_left_arm">
-            <static>true</static>
-            <pose>-10 -10 20 0 0.4636 0.7853</pose>
-            <plugin filename="libmock_sensor.so" name="mock_sensor::MockSensorSystem">
-                <update_rate>10</update_rate>
-                <sensor>
-                    <theta>5.0</theta>
-                    <sigma>0</sigma>
-                    <name>thumb</name>
-                </sensor>
-                <sensor/>
-                <sensor/>
-                <sensor/>
-                <sensor/>
-            </plugin>
-        </model>
-
-        <model name="sensor_right_arm">
-            <static>true</static>
-            <pose>-10 -10 20 0 0.4636 0.7853</pose>
-            <plugin filename="libmock_sensor.so" name="mock_sensor::MockSensorSystem">
-                <update_rate>10.0</update_rate>
-                <sensor/>
-                <sensor/>
-                <sensor/>
-                <sensor/>
-                <sensor/>
-            </plugin>
-        </model>
-
-
     </world>
 </sdf>

@@ -19,7 +19,10 @@
 
   <!-- Import inmoov ros2_control description (use_gazebo_sim switches to gz_ros2_control in Gazebo launch).
        Filename comes from the generated_files config so the generator, pipeline and launches agree. -->
-  <xacro:include filename="../ros2_control/$(arg ros2_control_file)" />
+  <!-- Import inmoov ros2_control description (use_gazebo_sim switches to gz_ros2_control in Gazebo launch) -->
+  <xacro:unless value="$(arg use_gazebo_sim)">
+    <xacro:include filename="../ros2_control/$(arg ros2_control_file)" />
+  </xacro:unless>
 
   <!-- Gazebo-only bits, gated on use_gazebo_sim:=true:
          - gazebo/inmoov_gazebo_physics.xacro    physics + surface tuning
@@ -29,6 +32,6 @@
                                                  controllers drive simulated joints -->
   <xacro:if value="$(arg use_gazebo_sim)">
     <xacro:include filename="../gazebo/inmoov_gazebo_physics.xacro"/>
-    <xacro:include filename="../ros2_control/inmoov_gz_ros2_control.xacro"/>
+    <xacro:include filename="../gazebo/gazebo.xacro"/>
   </xacro:if>
 </robot>
