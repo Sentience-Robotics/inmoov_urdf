@@ -3,9 +3,9 @@
      use_gazebo_sim:=true. This file is pure simulation tuning: world
      anchoring, friction, contact stiffness, and self-collision flags.
 
-     The gz_ros2_control plugin itself lives next door in
-     description/ros2_control/inmoov_gz_ros2_control.xacro because it is the
-     ros2_control bridge into Gazebo, not a physics property.
+     The gz_ros2_control plugin itself lives next door in the generated
+     description/gazebo/gazebo.xacro because it is the ros2_control bridge
+     into Gazebo (and carries the camera sensors), not a physics property.
 
      Collision strategy: every URDF link reuses its visual mesh as the
      collision mesh (see scripts/inject_collisions.py). The macros below only
