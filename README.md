@@ -34,10 +34,11 @@ inmoov_urdf/
 │   │   ├── urdf/robot_description.urdf.xacro     # links, joints, visuals, collisions, materials
 │   │   └── meshes/dae/*.dae                      # 290 Collada meshes (visual + collision)
 │   ├── ros2_control/
-│   │   ├── inmoov_ros2_control.xacro             # hardware interfaces (real / sim / mock)
-│   │   └── inmoov_gz_ros2_control.xacro          # gz_ros2_control plugin (sim only)
+│   │   └── inmoov_ros2_control.xacro             # hardware interfaces (real / mock)
 │   └── gazebo/
-│       └── inmoov_gazebo_physics.xacro           # static / friction / self_collide (sim only)
+│       ├── inmoov_gazebo_physics.xacro           # static / friction / self_collide (sim only)
+│       ├── gazebo.xacro                          # generated gz_ros2_control plugin + camera sensors (sim only)
+│       └── gazebo_bridge.yaml                    # generated ros_gz_bridge topic map (sim only)
 ├── worlds/default.sdf       # minimal world used by gazebo.launch.py
 ├── scripts/                 # inject_collisions.py, autocalibrate_joint_limits.py, scale_xacro_origins.py
 ├── test/                    # pytest suite (xacro smoke, YAML, collisions, joint limits)
