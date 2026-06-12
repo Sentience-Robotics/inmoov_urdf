@@ -1,18 +1,8 @@
-# Hardware mapping — single source of truth for lucy_config_generator.
-# URDF joint names must match description/robot_description (processed URDF).
-# left_shoulder_y_link_joint / right_shoulder_y_link_joint: torso board.
-
 version: 1
 robot_name: inmoov
-
-# Generated-artifact filenames (bare basenames; directories are fixed by repo
-# convention: description/ros2_control/ and config/). Consumed by
-# lucy_config_generator, lucy_config_pipeline, inmoov.urdf.xacro and the
-# thais_urdf launches so every layer agrees on the names.
 generated_files:
   ros2_control_xacro: inmoov_ros2_control.xacro
   controllers_yaml: controllers.yaml
-
 passive_urdf_joints: []
 ignore_urdf_joints:
   - Empty.001_link_joint
@@ -386,7 +376,7 @@ actuators:
     servo_max_deg: 180
     servo_default_deg: 0
     enabled: false
-  - id: act_left_arm_9
+  - id: torso_stom_mid
     urdf_joint: i01.torso.midStom_link_joint
     board: rp2040_torso_head
     virtual_pin: 2
@@ -399,7 +389,7 @@ actuators:
     servo_max_deg: 270
     servo_default_deg: 135
     enabled: false
-  - id: act_left_arm_10
+  - id: torso_stom_top
     urdf_joint: i01.torso.topStom_link_joint
     board: rp2040_torso_head
     virtual_pin: 3
@@ -412,7 +402,7 @@ actuators:
     servo_max_deg: 180
     servo_default_deg: 90
     enabled: false
-  - id: act_left_arm_11
+  - id: head_rot
     urdf_joint: i01.head.rothead_link_joint
     board: rp2040_torso_head
     virtual_pin: 4
@@ -425,7 +415,7 @@ actuators:
     servo_max_deg: 180
     servo_default_deg: 90
     enabled: false
-  - id: act_left_arm_12
+  - id: head_neck_roll
     urdf_joint: i01.head.rollNeck_link_joint
     board: rp2040_torso_head
     virtual_pin: 5
@@ -438,7 +428,7 @@ actuators:
     servo_max_deg: 180
     servo_default_deg: 90
     enabled: false
-  - id: act_left_arm_13
+  - id: head_neck
     urdf_joint: i01.head.neck.001_link_joint
     board: rp2040_torso_head
     virtual_pin: 6
@@ -451,20 +441,20 @@ actuators:
     servo_max_deg: 180
     servo_default_deg: 90
     enabled: false
-  - id: act_left_arm_14
+  - id: head_jaw
     urdf_joint: i01.head.jaw_link_joint
     board: rp2040_torso_head
     virtual_pin: 7
     physical_pin: 12
     servo_type: '300'
-    offset_deg: 90
+    offset_deg: 0
     direction: 1
     scale: 1
     servo_min_deg: 0
     servo_max_deg: 180
-    servo_default_deg: 90
+    servo_default_deg: 0
     enabled: false
-  - id: act_left_arm_15
+  - id: head_eye_right_y
     urdf_joint: i01.head.eyeRight_link_joint
     board: rp2040_torso_head
     virtual_pin: 8
@@ -477,7 +467,7 @@ actuators:
     servo_max_deg: 180
     servo_default_deg: 90
     enabled: false
-  - id: act_left_arm_16
+  - id: head_eye_right_x
     urdf_joint: i01.head.eyeRight.001_link_joint
     board: rp2040_torso_head
     virtual_pin: 9
@@ -490,7 +480,7 @@ actuators:
     servo_max_deg: 180
     servo_default_deg: 90
     enabled: false
-  - id: act_left_arm_17
+  - id: head_eye_left_y
     urdf_joint: i01.head.eyeLeft_link_joint
     board: rp2040_torso_head
     virtual_pin: 10
@@ -503,7 +493,7 @@ actuators:
     servo_max_deg: 180
     servo_default_deg: 90
     enabled: false
-  - id: act_right_arm_9
+  - id: head_eye_left_x
     urdf_joint: i01.head.eyeLeft.001_link_joint
     board: rp2040_torso_head
     virtual_pin: 11
