@@ -533,7 +533,7 @@
     </collision>
 
     <visual name="i01.head.eyeRight.full">
-      <material name="Material.038"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 0.00000 0.00000" xyz="${model_scale * 0.29460} ${model_scale * 0.89123} ${model_scale * -16.02297}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.012.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -562,21 +562,21 @@
     </collision>
 
     <visual name="i01.head.mouth">
-      <material name="Material.046"/>
+      <material name="Material.White"/>
       <origin rpy="0.00000 0.00000 -0.00000" xyz="${model_scale * 0.00732} ${model_scale * 0.15065} ${model_scale * -15.97164}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.014.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.head.mouth.001">
-      <material name="Material.046"/>
+      <material name="Material.White"/>
       <origin rpy="0.00000 0.00000 -0.00000" xyz="${model_scale * 0.00732} ${model_scale * 0.15065} ${model_scale * -15.97164}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.086.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.head.mouth.002">
-      <material name="Material.046"/>
+      <material name="Material.White"/>
       <origin rpy="0.00000 0.00000 -0.00000" xyz="${model_scale * 0.00732} ${model_scale * 0.15065} ${model_scale * -15.97164}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.087.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -629,49 +629,49 @@
     </collision>
 
     <visual name="i01.leftArm.omoplate.full">
-      <material name="Material.254"/>
+      <material name="Material.White"/>
       <origin rpy="0.06568 0.00000 0.00000" xyz="${model_scale * -1.35226} ${model_scale * 1.11649} ${model_scale * -13.89027}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.004.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.leftArm.omoplate.full.001">
-      <material name="Material.254"/>
+      <material name="Material.White"/>
       <origin rpy="0.06568 0.00000 0.00000" xyz="${model_scale * -1.35226} ${model_scale * 1.11649} ${model_scale * -13.89027}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.248.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.leftArm.omoplate.full.002">
-      <material name="Material.254"/>
+      <material name="Material.White"/>
       <origin rpy="0.06568 0.00000 0.00000" xyz="${model_scale * -1.35226} ${model_scale * 1.11649} ${model_scale * -13.89027}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.249.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.leftArm.omoplate.full.003">
-      <material name="Material.254"/>
+      <material name="Material.White"/>
       <origin rpy="0.06568 0.00000 0.00000" xyz="${model_scale * -1.35226} ${model_scale * 1.11649} ${model_scale * -13.89027}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.250.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.leftArm.omoplate.full.004">
-      <material name="Material.254"/>
+      <material name="Material.White"/>
       <origin rpy="0.06568 0.00000 0.00000" xyz="${model_scale * -1.35226} ${model_scale * 1.11649} ${model_scale * -13.89027}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.251.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.leftArm.omoplate.full.005">
-      <material name="Material.254"/>
+      <material name="Material.White"/>
       <origin rpy="0.06568 0.00000 0.00000" xyz="${model_scale * -1.35226} ${model_scale * 1.11649} ${model_scale * -13.89027}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.252.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.leftArm.omoplate.full.006">
-      <material name="Material.254"/>
+      <material name="Material.White"/>
       <origin rpy="0.06568 0.00000 0.00000" xyz="${model_scale * -1.35226} ${model_scale * 1.11649} ${model_scale * -13.89027}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.253.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -766,98 +766,98 @@
     </collision>
 
     <visual name="i01..leftArm.shoulder.full">
-      <material name="Material.239"/>
+      <material name="Material.White"/>
       <origin rpy="0.06568 0.00000 0.00000" xyz="${model_scale * -1.46578} ${model_scale * 1.11459} ${model_scale * -13.51522}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.003.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01..leftArm.shoulder.full.001">
-      <material name="Material.390"/>
+      <material name="Material.White"/>
       <origin rpy="0.06568 0.00000 0.00000" xyz="${model_scale * -1.46578} ${model_scale * 1.11459} ${model_scale * -13.51522}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.254.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01..leftArm.shoulder.full.002">
-      <material name="Material.390"/>
+      <material name="Material.White"/>
       <origin rpy="0.06568 0.00000 0.00000" xyz="${model_scale * -1.46578} ${model_scale * 1.11459} ${model_scale * -13.51522}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.255.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01..leftArm.shoulder.full.003">
-      <material name="Material.390"/>
+      <material name="Material.White"/>
       <origin rpy="0.06568 0.00000 0.00000" xyz="${model_scale * -1.46578} ${model_scale * 1.11459} ${model_scale * -13.51522}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.256.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01..leftArm.shoulder.full.004">
-      <material name="Material.390"/>
+      <material name="Material.White"/>
       <origin rpy="0.06568 0.00000 0.00000" xyz="${model_scale * -1.46578} ${model_scale * 1.11459} ${model_scale * -13.51522}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.257.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01..leftArm.shoulder.full.005">
-      <material name="Material.390"/>
+      <material name="Material.White"/>
       <origin rpy="0.06568 0.00000 0.00000" xyz="${model_scale * -1.46578} ${model_scale * 1.11459} ${model_scale * -13.51522}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.258.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01..leftArm.shoulder.full.006">
-      <material name="Material.390"/>
+      <material name="Material.White"/>
       <origin rpy="0.06568 0.00000 0.00000" xyz="${model_scale * -1.46578} ${model_scale * 1.11459} ${model_scale * -13.51522}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.259.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01..leftArm.shoulder.full.007">
-      <material name="Material.390"/>
+      <material name="Material.White"/>
       <origin rpy="0.06568 0.00000 0.00000" xyz="${model_scale * -1.46578} ${model_scale * 1.11459} ${model_scale * -13.51522}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.260.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01..leftArm.shoulder.full.010">
-      <material name="Material.390"/>
+      <material name="Material.White"/>
       <origin rpy="0.06568 0.00000 0.00000" xyz="${model_scale * -1.46578} ${model_scale * 1.11459} ${model_scale * -13.51522}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.263.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01..leftArm.shoulder.full.011">
-      <material name="Material.390"/>
+      <material name="Material.White"/>
       <origin rpy="0.06568 0.00000 0.00000" xyz="${model_scale * -1.46578} ${model_scale * 1.11459} ${model_scale * -13.51522}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.264.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01..leftArm.shoulder.full.014">
-      <material name="Material.390"/>
+      <material name="Material.White"/>
       <origin rpy="0.06568 0.00000 0.00000" xyz="${model_scale * -1.46578} ${model_scale * 1.11459} ${model_scale * -13.51522}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.267.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01..leftArm.shoulder.full.015">
-      <material name="Material.390"/>
+      <material name="Material.White"/>
       <origin rpy="0.06568 0.00000 0.00000" xyz="${model_scale * -1.46578} ${model_scale * 1.11459} ${model_scale * -13.51522}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.268.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01..leftArm.shoulder.full.016">
-      <material name="Material.390"/>
+      <material name="Material.White"/>
       <origin rpy="0.06568 0.00000 0.00000" xyz="${model_scale * -1.46578} ${model_scale * 1.11459} ${model_scale * -13.51522}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.269.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01..leftArm.shoulder.full.017">
-      <material name="Material.390"/>
+      <material name="Material.White"/>
       <origin rpy="0.06568 0.00000 0.00000" xyz="${model_scale * -1.46578} ${model_scale * 1.11459} ${model_scale * -13.51522}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.270.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -994,147 +994,147 @@
     </collision>
 
     <visual name="i01.leftArm.rotate.full">
-      <material name="[0131_Silver].001"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00792 -0.00000 -0.00000" xyz="${model_scale * -2.08983} ${model_scale * 1.12391} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__564753.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.leftArm.rotate.full.001">
-      <material name="[0131_Silver].001"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00792 -0.00000 -0.00000" xyz="${model_scale * -2.08983} ${model_scale * 1.12391} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__564753.001.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.leftArm.rotate.full.002">
-      <material name="[0131_Silver].001"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00792 -0.00000 -0.00000" xyz="${model_scale * -2.08983} ${model_scale * 1.12391} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__564753.002.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.leftArm.rotate.full.003">
-      <material name="[0131_Silver].001"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00792 -0.00000 -0.00000" xyz="${model_scale * -2.08983} ${model_scale * 1.12391} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__564753.003.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.leftArm.rotate.full.004">
-      <material name="[0131_Silver].001"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00792 -0.00000 -0.00000" xyz="${model_scale * -2.08983} ${model_scale * 1.12391} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__564753.004.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.leftArm.rotate.full.005">
-      <material name="[0131_Silver].001"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00792 -0.00000 -0.00000" xyz="${model_scale * -2.08983} ${model_scale * 1.12391} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__564753.005.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.leftArm.rotate.full.006">
-      <material name="[0131_Silver].001"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00792 -0.00000 -0.00000" xyz="${model_scale * -2.08983} ${model_scale * 1.12391} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__564753.006.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.leftArm.rotate.full.007">
-      <material name="[0131_Silver].001"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00792 -0.00000 -0.00000" xyz="${model_scale * -2.08983} ${model_scale * 1.12391} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__564753.007.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.leftArm.rotate.full.008">
-      <material name="[0131_Silver].001"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00792 -0.00000 -0.00000" xyz="${model_scale * -2.08983} ${model_scale * 1.12391} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__564753.008.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.leftArm.rotate.full.009">
-      <material name="[0131_Silver].001"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00792 -0.00000 -0.00000" xyz="${model_scale * -2.08983} ${model_scale * 1.12391} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__564753.009.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.leftArm.rotate.full.010">
-      <material name="[0131_Silver].001"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00792 -0.00000 -0.00000" xyz="${model_scale * -2.08983} ${model_scale * 1.12391} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__564753.010.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.leftArm.rotate.full.011">
-      <material name="[0131_Silver].001"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00792 -0.00000 -0.00000" xyz="${model_scale * -2.08983} ${model_scale * 1.12391} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__564753.011.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.leftArm.rotate.full.012">
-      <material name="[0131_Silver].001"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00792 -0.00000 -0.00000" xyz="${model_scale * -2.08983} ${model_scale * 1.12391} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__564753.012.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.leftArm.rotate.full.013">
-      <material name="[0131_Silver].001"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00792 -0.00000 -0.00000" xyz="${model_scale * -2.08983} ${model_scale * 1.12391} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__564753.013.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.leftArm.rotate.full.014">
-      <material name="[0131_Silver].001"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00792 -0.00000 -0.00000" xyz="${model_scale * -2.08983} ${model_scale * 1.12391} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__564753.014.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.leftArm.rotate.full.015">
-      <material name="[0131_Silver].001"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00792 -0.00000 -0.00000" xyz="${model_scale * -2.08983} ${model_scale * 1.12391} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__564753.015.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.leftArm.rotate.full.016">
-      <material name="[0131_Silver].001"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00792 -0.00000 -0.00000" xyz="${model_scale * -2.08983} ${model_scale * 1.12391} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__564753.016.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.leftArm.rotate.full.017">
-      <material name="[0131_Silver].001"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00792 -0.00000 -0.00000" xyz="${model_scale * -2.08983} ${model_scale * 1.12391} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__564753.017.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.leftArm.rotate.full.018">
-      <material name="[0131_Silver].001"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00792 -0.00000 -0.00000" xyz="${model_scale * -2.08983} ${model_scale * 1.12391} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__564753.018.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.leftArm.rotate.full.019">
-      <material name="[0131_Silver].001"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00792 -0.00000 -0.00000" xyz="${model_scale * -2.08983} ${model_scale * 1.12391} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__564753.019.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.leftArm.rotate.full.020">
-      <material name="[0131_Silver].001"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00792 -0.00000 -0.00000" xyz="${model_scale * -2.08983} ${model_scale * 1.12391} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__564753.020.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -1223,91 +1223,91 @@
     </collision>
 
     <visual name="i01.left.bicep.full">
-      <material name="Material.022"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 0.00000 0.00000" xyz="${model_scale * -2.07702} ${model_scale * 0.12073} ${model_scale * -10.83652}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.007.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.left.bicep.full.001">
-      <material name="Material.022"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 0.00000 0.00000" xyz="${model_scale * -2.07702} ${model_scale * 0.12073} ${model_scale * -10.83652}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.236.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.left.bicep.full.002">
-      <material name="Material.022"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 0.00000 0.00000" xyz="${model_scale * -2.07702} ${model_scale * 0.12073} ${model_scale * -10.83652}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.237.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.left.bicep.full.003">
-      <material name="Material.022"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 0.00000 0.00000" xyz="${model_scale * -2.07702} ${model_scale * 0.12073} ${model_scale * -10.83652}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.238.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.left.bicep.full.004">
-      <material name="Material.022"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 0.00000 0.00000" xyz="${model_scale * -2.07702} ${model_scale * 0.12073} ${model_scale * -10.83652}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.239.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.left.bicep.full.005">
-      <material name="Material.022"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 0.00000 0.00000" xyz="${model_scale * -2.07702} ${model_scale * 0.12073} ${model_scale * -10.83652}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.240.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.left.bicep.full.006">
-      <material name="Material.022"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 0.00000 0.00000" xyz="${model_scale * -2.07702} ${model_scale * 0.12073} ${model_scale * -10.83652}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.241.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.left.bicep.full.007">
-      <material name="Material.022"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 0.00000 0.00000" xyz="${model_scale * -2.07702} ${model_scale * 0.12073} ${model_scale * -10.83652}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.242.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.left.bicep.full.008">
-      <material name="Material.022"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 0.00000 0.00000" xyz="${model_scale * -2.07702} ${model_scale * 0.12073} ${model_scale * -10.83652}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.243.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.left.bicep.full.009">
-      <material name="Material.022"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 0.00000 0.00000" xyz="${model_scale * -2.07702} ${model_scale * 0.12073} ${model_scale * -10.83652}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.244.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.left.bicep.full.010">
-      <material name="Material.022"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 0.00000 0.00000" xyz="${model_scale * -2.07702} ${model_scale * 0.12073} ${model_scale * -10.83652}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.245.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.left.bicep.full.011">
-      <material name="Material.022"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 0.00000 0.00000" xyz="${model_scale * -2.07702} ${model_scale * 0.12073} ${model_scale * -10.83652}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.246.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.left.bicep.full.012">
-      <material name="Material.022"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 0.00000 0.00000" xyz="${model_scale * -2.07702} ${model_scale * 0.12073} ${model_scale * -10.83652}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.247.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -1324,7 +1324,7 @@
     </collision>
 
     <visual name="i01.leftHand.Wristlarge">
-      <material name="Material.602"/>
+      <material name="Material.White"/>
       <origin rpy="0.41605 0.00000 0.00000" xyz="${model_scale * -1.98935} ${model_scale * 4.36716} ${model_scale * -7.14138}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.039.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -1341,7 +1341,7 @@
     </collision>
 
     <visual name="i01.leftHand.Wristlarge.001">
-      <material name="Material.602"/>
+      <material name="Material.White"/>
       <origin rpy="0.41605 -0.00000 0.61611" xyz="${model_scale * -4.14720} ${model_scale * 2.41462} ${model_scale * -6.97213}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.235.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -1358,7 +1358,7 @@
     </collision>
 
     <visual name="i01.leftHand.indexPhal1">
-      <material name="Material.610"/>
+      <material name="Material.White"/>
       <origin rpy="1.98409 -0.61920 0.09256" xyz="${model_scale * -5.01013} ${model_scale * 5.59578} ${model_scale * 2.39863}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.018.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -1429,70 +1429,70 @@
     </collision>
 
     <visual name="i01.torso.midstom.full">
-      <material name="Material.008"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 -0.00000 0.00000" xyz="${model_scale * 0.00000} ${model_scale * 0.44365} ${model_scale * -8.97279}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.002.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.midstom.full.001">
-      <material name="Material.008"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 -0.00000 0.00000" xyz="${model_scale * 0.00000} ${model_scale * 0.44365} ${model_scale * -8.97279}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.195.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.midstom.full.002">
-      <material name="Material.008"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 -0.00000 0.00000" xyz="${model_scale * 0.00000} ${model_scale * 0.44365} ${model_scale * -8.97279}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.196.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.midstom.full.003">
-      <material name="Material.008"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 -0.00000 0.00000" xyz="${model_scale * 0.00000} ${model_scale * 0.44365} ${model_scale * -8.97279}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.197.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.midstom.full.004">
-      <material name="Material.008"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 -0.00000 0.00000" xyz="${model_scale * 0.00000} ${model_scale * 0.44365} ${model_scale * -8.97279}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.198.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.midstom.full.005">
-      <material name="Material.008"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 -0.00000 0.00000" xyz="${model_scale * 0.00000} ${model_scale * 0.44365} ${model_scale * -8.97279}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.199.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.midstom.full.006">
-      <material name="Material.008"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 -0.00000 0.00000" xyz="${model_scale * 0.00000} ${model_scale * 0.44365} ${model_scale * -8.97279}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.200.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.midstom.full.007">
-      <material name="Material.008"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 -0.00000 0.00000" xyz="${model_scale * 0.00000} ${model_scale * 0.44365} ${model_scale * -8.97279}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.201.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.midstom.full.008">
-      <material name="Material.008"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 -0.00000 0.00000" xyz="${model_scale * 0.00000} ${model_scale * 0.44365} ${model_scale * -8.97279}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.202.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.midstom.full.009">
-      <material name="Material.008"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 -0.00000 0.00000" xyz="${model_scale * 0.00000} ${model_scale * 0.44365} ${model_scale * -8.97279}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.203.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -1513,7 +1513,7 @@
     </collision>
 
     <visual name="i01.leftHand.indexPhal2">
-      <material name="Material.614"/>
+      <material name="Material.White"/>
       <origin rpy="1.98409 -0.61920 0.09256" xyz="${model_scale * -5.01271} ${model_scale * 5.25474} ${model_scale * 2.39178}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.019.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -1530,7 +1530,7 @@
     </collision>
 
     <visual name="i01.leftHand.indexPhal3">
-      <material name="Material.618"/>
+      <material name="Material.White"/>
       <origin rpy="1.98408 -0.61920 0.09256" xyz="${model_scale * -5.01374} ${model_scale * 5.02777} ${model_scale * 2.38745}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.020.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -1547,7 +1547,7 @@
     </collision>
 
     <visual name="i01.leftHand.majeurePhal1">
-      <material name="Material.609"/>
+      <material name="Material.White"/>
       <origin rpy="1.98409 -0.61920 -0.00000" xyz="${model_scale * -4.21669} ${model_scale * 5.99551} ${model_scale * 2.39975}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.022.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -1564,7 +1564,7 @@
     </collision>
 
     <visual name="i01.leftHand.majeurePhal2">
-      <material name="Material.613"/>
+      <material name="Material.White"/>
       <origin rpy="1.98409 -0.61920 -0.00000" xyz="${model_scale * -4.21941} ${model_scale * 5.63616} ${model_scale * 2.39254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.023.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -1581,7 +1581,7 @@
     </collision>
 
     <visual name="i01.leftHand.majeurePhal3">
-      <material name="Material.617"/>
+      <material name="Material.White"/>
       <origin rpy="1.98409 -0.61920 0.00000" xyz="${model_scale * -4.22050} ${model_scale * 5.39700} ${model_scale * 2.38798}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.024.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -1598,7 +1598,7 @@
     </collision>
 
     <visual name="i01.leftHand.WristSmall2">
-      <material name="Material.601"/>
+      <material name="Material.White"/>
       <origin rpy="1.98409 -0.61920 0.68804" xyz="${model_scale * -7.22704} ${model_scale * 2.64375} ${model_scale * 2.38651}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.041.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -1615,7 +1615,7 @@
     </collision>
 
     <visual name="i01.leftHand.pinkyPhal1">
-      <material name="Material.607"/>
+      <material name="Material.White"/>
       <origin rpy="1.98409 -0.61920 -0.25722" xyz="${model_scale * -2.00181} ${model_scale * 6.93659} ${model_scale * 2.37926}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.027.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -1632,7 +1632,7 @@
     </collision>
 
     <visual name="i01.leftHand.pinkyPhal2">
-      <material name="Material.611"/>
+      <material name="Material.White"/>
       <origin rpy="1.98409 -0.61921 -0.25722" xyz="${model_scale * -2.00407} ${model_scale * 6.63864} ${model_scale * 2.37327}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.028.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -1649,7 +1649,7 @@
     </collision>
 
     <visual name="i01.leftHand.pinkyPhal3">
-      <material name="Material.615"/>
+      <material name="Material.White"/>
       <origin rpy="1.98409 -0.61920 -0.25722" xyz="${model_scale * -2.00497} ${model_scale * 6.44033} ${model_scale * 2.36951}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.029.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -1666,7 +1666,7 @@
     </collision>
 
     <visual name="i01.leftHand.WristSmall">
-      <material name="Material.606"/>
+      <material name="Material.White"/>
       <origin rpy="1.98409 -0.61920 0.68804" xyz="${model_scale * -7.22704} ${model_scale * 2.35455} ${model_scale * 2.38651}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.040.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -1851,203 +1851,203 @@
     </collision>
 
     <visual name="i01.torso.topStom.full">
-      <material name="Material.007"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 0.00000 -1.57080" xyz="${model_scale * 1.05285} ${model_scale * -0.00213} ${model_scale * -10.06338}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.001.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.topStom.full.001">
-      <material name="Material.007"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 0.00000 -1.57080" xyz="${model_scale * 1.05285} ${model_scale * -0.00213} ${model_scale * -10.06338}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.167.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.topStom.full.002">
-      <material name="Material.007"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 0.00000 -1.57080" xyz="${model_scale * 1.05285} ${model_scale * -0.00213} ${model_scale * -10.06338}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.168.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.topStom.full.003">
-      <material name="Material.007"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 0.00000 -1.57080" xyz="${model_scale * 1.05285} ${model_scale * -0.00213} ${model_scale * -10.06338}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.169.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.topStom.full.004">
-      <material name="Material.007"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 0.00000 -1.57080" xyz="${model_scale * 1.05285} ${model_scale * -0.00213} ${model_scale * -10.06338}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.170.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.topStom.full.005">
-      <material name="Material.007"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 0.00000 -1.57080" xyz="${model_scale * 1.05285} ${model_scale * -0.00213} ${model_scale * -10.06338}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.171.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.topStom.full.006">
-      <material name="Material.007"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 0.00000 -1.57080" xyz="${model_scale * 1.05285} ${model_scale * -0.00213} ${model_scale * -10.06338}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.172.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.topStom.full.007">
-      <material name="Material.007"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 0.00000 -1.57080" xyz="${model_scale * 1.05285} ${model_scale * -0.00213} ${model_scale * -10.06338}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.173.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.topStom.full.008">
-      <material name="Material.007"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 0.00000 -1.57080" xyz="${model_scale * 1.05285} ${model_scale * -0.00213} ${model_scale * -10.06338}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.174.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.topStom.full.009">
-      <material name="Material.007"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 0.00000 -1.57080" xyz="${model_scale * 1.05285} ${model_scale * -0.00213} ${model_scale * -10.06338}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.175.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.topStom.full.010">
-      <material name="Material.007"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 0.00000 -1.57080" xyz="${model_scale * 1.05285} ${model_scale * -0.00213} ${model_scale * -10.06338}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.176.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.topStom.full.011">
-      <material name="Material.007"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 0.00000 -1.57080" xyz="${model_scale * 1.05285} ${model_scale * -0.00213} ${model_scale * -10.06338}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.177.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.topStom.full.012">
-      <material name="Material.007"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 0.00000 -1.57080" xyz="${model_scale * 1.05285} ${model_scale * -0.00213} ${model_scale * -10.06338}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.178.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.topStom.full.013">
-      <material name="Material.007"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 0.00000 -1.57080" xyz="${model_scale * 1.05285} ${model_scale * -0.00213} ${model_scale * -10.06338}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.179.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.topStom.full.014">
-      <material name="Material.007"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 0.00000 -1.57080" xyz="${model_scale * 1.05285} ${model_scale * -0.00213} ${model_scale * -10.06338}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.180.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.topStom.full.015">
-      <material name="Material.007"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 0.00000 -1.57080" xyz="${model_scale * 1.05285} ${model_scale * -0.00213} ${model_scale * -10.06338}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.181.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.topStom.full.016">
-      <material name="Material.007"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 0.00000 -1.57080" xyz="${model_scale * 1.05285} ${model_scale * -0.00213} ${model_scale * -10.06338}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.182.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.topStom.full.017">
-      <material name="Material.007"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 0.00000 -1.57080" xyz="${model_scale * 1.05285} ${model_scale * -0.00213} ${model_scale * -10.06338}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.183.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.topStom.full.018">
-      <material name="Material.007"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 0.00000 -1.57080" xyz="${model_scale * 1.05285} ${model_scale * -0.00213} ${model_scale * -10.06338}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.184.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.topStom.full.019">
-      <material name="Material.007"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 0.00000 -1.57080" xyz="${model_scale * 1.05285} ${model_scale * -0.00213} ${model_scale * -10.06338}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.185.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.topStom.full.020">
-      <material name="Material.007"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 0.00000 -1.57080" xyz="${model_scale * 1.05285} ${model_scale * -0.00213} ${model_scale * -10.06338}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.186.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.topStom.full.021">
-      <material name="Material.007"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 0.00000 -1.57080" xyz="${model_scale * 1.05285} ${model_scale * -0.00213} ${model_scale * -10.06338}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.187.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.topStom.full.022">
-      <material name="Material.007"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 0.00000 -1.57080" xyz="${model_scale * 1.05285} ${model_scale * -0.00213} ${model_scale * -10.06338}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.188.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.topStom.full.023">
-      <material name="Material.007"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 0.00000 -1.57080" xyz="${model_scale * 1.05285} ${model_scale * -0.00213} ${model_scale * -10.06338}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.189.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.topStom.full.024">
-      <material name="Material.007"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 0.00000 -1.57080" xyz="${model_scale * 1.05285} ${model_scale * -0.00213} ${model_scale * -10.06338}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.190.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.topStom.full.025">
-      <material name="Material.007"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 0.00000 -1.57080" xyz="${model_scale * 1.05285} ${model_scale * -0.00213} ${model_scale * -10.06338}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.191.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.topStom.full.026">
-      <material name="Material.007"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 0.00000 -1.57080" xyz="${model_scale * 1.05285} ${model_scale * -0.00213} ${model_scale * -10.06338}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.192.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.topStom.full.027">
-      <material name="Material.007"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 0.00000 -1.57080" xyz="${model_scale * 1.05285} ${model_scale * -0.00213} ${model_scale * -10.06338}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.193.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.topStom.full.028">
-      <material name="Material.007"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 0.00000 -1.57080" xyz="${model_scale * 1.05285} ${model_scale * -0.00213} ${model_scale * -10.06338}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.194.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -2068,7 +2068,7 @@
     </collision>
 
     <visual name="i01.leftHand.ringFingerPhal1">
-      <material name="Material.608"/>
+      <material name="Material.White"/>
       <origin rpy="1.98409 -0.61920 -0.08681" xyz="${model_scale * -3.38539} ${model_scale * 6.39614} ${model_scale * 2.39315}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.032.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -2085,7 +2085,7 @@
     </collision>
 
     <visual name="i01.leftHand.ringFingerPhal2">
-      <material name="Material.612"/>
+      <material name="Material.White"/>
       <origin rpy="1.98409 -0.61920 -0.08682" xyz="${model_scale * -3.38797} ${model_scale * 6.05509} ${model_scale * 2.38632}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.033.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -2102,7 +2102,7 @@
     </collision>
 
     <visual name="i01.leftHand.ringFingerPhal3">
-      <material name="Material.616"/>
+      <material name="Material.White"/>
       <origin rpy="1.98409 -0.61920 -0.08682" xyz="${model_scale * -3.38900} ${model_scale * 5.82812} ${model_scale * 2.38200}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.034.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -2119,7 +2119,7 @@
     </collision>
 
     <visual name="i01.leftHand.ThumbBase">
-      <material name="Material.603"/>
+      <material name="Material.White"/>
       <origin rpy="-1.08797 0.62375 -0.06004" xyz="${model_scale * -5.06759} ${model_scale * -5.98847} ${model_scale * -2.72986}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.035.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -2136,7 +2136,7 @@
     </collision>
 
     <visual name="i01.leftHand.ThumbMid">
-      <material name="Material.604"/>
+      <material name="Material.White"/>
       <origin rpy="-1.43268 0.82776 -1.11670" xyz="${model_scale * -8.37077} ${model_scale * -0.01374} ${model_scale * -0.04665}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.037.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -2153,7 +2153,7 @@
     </collision>
 
     <visual name="i01.leftHand.ThumbTip">
-      <material name="Material.605"/>
+      <material name="Material.White"/>
       <origin rpy="-1.43269 0.82776 -1.11671" xyz="${model_scale * -8.38306} ${model_scale * 0.31675} ${model_scale * -0.03957}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.038.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -2206,49 +2206,49 @@
     </collision>
 
     <visual name="i01.rightArm.omoplate.full">
-      <material name="Material.016"/>
+      <material name="Material.White"/>
       <origin rpy="0.06568 -0.00000 -0.00000" xyz="${model_scale * 1.35226} ${model_scale * 1.11648} ${model_scale * -13.89026}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.006.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.rightArm.omoplate.full.001">
-      <material name="Material.016"/>
+      <material name="Material.White"/>
       <origin rpy="0.06568 -0.00000 -0.00000" xyz="${model_scale * 1.35226} ${model_scale * 1.11648} ${model_scale * -13.89026}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.217.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.rightArm.omoplate.full.002">
-      <material name="Material.016"/>
+      <material name="Material.White"/>
       <origin rpy="0.06568 -0.00000 -0.00000" xyz="${model_scale * 1.35226} ${model_scale * 1.11648} ${model_scale * -13.89026}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.218.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.rightArm.omoplate.full.003">
-      <material name="Material.016"/>
+      <material name="Material.White"/>
       <origin rpy="0.06568 -0.00000 -0.00000" xyz="${model_scale * 1.35226} ${model_scale * 1.11648} ${model_scale * -13.89026}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.219.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.rightArm.omoplate.full.004">
-      <material name="Material.016"/>
+      <material name="Material.White"/>
       <origin rpy="0.06568 -0.00000 -0.00000" xyz="${model_scale * 1.35226} ${model_scale * 1.11648} ${model_scale * -13.89026}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.220.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.rightArm.omoplate.full.005">
-      <material name="Material.016"/>
+      <material name="Material.White"/>
       <origin rpy="0.06568 -0.00000 -0.00000" xyz="${model_scale * 1.35226} ${model_scale * 1.11648} ${model_scale * -13.89026}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.221.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.rightArm.omoplate.full.006">
-      <material name="Material.016"/>
+      <material name="Material.White"/>
       <origin rpy="0.06568 -0.00000 -0.00000" xyz="${model_scale * 1.35226} ${model_scale * 1.11648} ${model_scale * -13.89026}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.222.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -2331,84 +2331,84 @@
     </collision>
 
     <visual name="i01.rightArm.shoulder.full">
-      <material name="Material.238"/>
+      <material name="Material.White"/>
       <origin rpy="-0.06568 -0.00000 -3.14159" xyz="${model_scale * 1.46576} ${model_scale * 1.11459} ${model_scale * -13.51522}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.005.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.rightArm.shoulder.full.001">
-      <material name="Material.238"/>
+      <material name="Material.White"/>
       <origin rpy="-0.06568 -0.00000 -3.14159" xyz="${model_scale * 1.46576} ${model_scale * 1.11459} ${model_scale * -13.51522}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.223.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.rightArm.shoulder.full.002">
-      <material name="Material.238"/>
+      <material name="Material.White"/>
       <origin rpy="-0.06568 -0.00000 -3.14159" xyz="${model_scale * 1.46576} ${model_scale * 1.11459} ${model_scale * -13.51522}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.224.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.rightArm.shoulder.full.003">
-      <material name="Material.238"/>
+      <material name="Material.White"/>
       <origin rpy="-0.06568 -0.00000 -3.14159" xyz="${model_scale * 1.46576} ${model_scale * 1.11459} ${model_scale * -13.51522}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.225.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.rightArm.shoulder.full.004">
-      <material name="Material.238"/>
+      <material name="Material.White"/>
       <origin rpy="-0.06568 -0.00000 -3.14159" xyz="${model_scale * 1.46576} ${model_scale * 1.11459} ${model_scale * -13.51522}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.226.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.rightArm.shoulder.full.005">
-      <material name="Material.012"/>
+      <material name="Material.White"/>
       <origin rpy="-0.06568 -0.00000 -3.14159" xyz="${model_scale * 1.46576} ${model_scale * 1.11459} ${model_scale * -13.51522}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.227.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.rightArm.shoulder.full.006">
-      <material name="Material.238"/>
+      <material name="Material.White"/>
       <origin rpy="-0.06568 -0.00000 -3.14159" xyz="${model_scale * 1.46576} ${model_scale * 1.11459} ${model_scale * -13.51522}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.228.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.rightArm.shoulder.full.007">
-      <material name="Material.238"/>
+      <material name="Material.White"/>
       <origin rpy="-0.06568 -0.00000 -3.14159" xyz="${model_scale * 1.46576} ${model_scale * 1.11459} ${model_scale * -13.51522}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.229.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.rightArm.shoulder.full.008">
-      <material name="Material.238"/>
+      <material name="Material.White"/>
       <origin rpy="-0.06568 -0.00000 -3.14159" xyz="${model_scale * 1.46576} ${model_scale * 1.11459} ${model_scale * -13.51522}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.230.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.rightArm.shoulder.full.009">
-      <material name="Material.238"/>
+      <material name="Material.White"/>
       <origin rpy="-0.06568 -0.00000 -3.14159" xyz="${model_scale * 1.46576} ${model_scale * 1.11459} ${model_scale * -13.51522}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.231.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.rightArm.shoulder.full.011">
-      <material name="Material.238"/>
+      <material name="Material.White"/>
       <origin rpy="-0.06568 -0.00000 -3.14159" xyz="${model_scale * 1.46576} ${model_scale * 1.11459} ${model_scale * -13.51522}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.233.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.rightArm.shoulder.full.012">
-      <material name="Material.238"/>
+      <material name="Material.White"/>
       <origin rpy="-0.06568 -0.00000 -3.14159" xyz="${model_scale * 1.46576} ${model_scale * 1.11459} ${model_scale * -13.51522}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.234.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -2539,140 +2539,140 @@
     </collision>
 
     <visual name="i01.rightArm.rotate.full">
-      <material name="[0131_Silver]"/>
+      <material name="Material.White"/>
       <origin rpy="3.13367 0.00000 0.00000" xyz="${model_scale * 2.08983} ${model_scale * 1.12392} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__566220.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.rightArm.rotate.full.001">
-      <material name="[0131_Silver]"/>
+      <material name="Material.White"/>
       <origin rpy="3.13367 0.00000 0.00000" xyz="${model_scale * 2.08983} ${model_scale * 1.12392} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__566220.001.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.rightArm.rotate.full.002">
-      <material name="[0131_Silver]"/>
+      <material name="Material.White"/>
       <origin rpy="3.13367 0.00000 0.00000" xyz="${model_scale * 2.08983} ${model_scale * 1.12392} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__566220.002.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.rightArm.rotate.full.003">
-      <material name="[0131_Silver]"/>
+      <material name="Material.White"/>
       <origin rpy="3.13367 0.00000 0.00000" xyz="${model_scale * 2.08983} ${model_scale * 1.12392} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__566220.003.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.rightArm.rotate.full.004">
-      <material name="[0131_Silver]"/>
+      <material name="Material.White"/>
       <origin rpy="3.13367 0.00000 0.00000" xyz="${model_scale * 2.08983} ${model_scale * 1.12392} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__566220.004.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.rightArm.rotate.full.005">
-      <material name="[0131_Silver]"/>
+      <material name="Material.White"/>
       <origin rpy="3.13367 0.00000 0.00000" xyz="${model_scale * 2.08983} ${model_scale * 1.12392} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__566220.005.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.rightArm.rotate.full.006">
-      <material name="[0131_Silver]"/>
+      <material name="Material.White"/>
       <origin rpy="3.13367 0.00000 0.00000" xyz="${model_scale * 2.08983} ${model_scale * 1.12392} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__566220.006.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.rightArm.rotate.full.007">
-      <material name="[0131_Silver]"/>
+      <material name="Material.White"/>
       <origin rpy="3.13367 0.00000 0.00000" xyz="${model_scale * 2.08983} ${model_scale * 1.12392} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__566220.007.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.rightArm.rotate.full.008">
-      <material name="[0131_Silver]"/>
+      <material name="Material.White"/>
       <origin rpy="3.13367 0.00000 0.00000" xyz="${model_scale * 2.08983} ${model_scale * 1.12392} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__566220.008.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.rightArm.rotate.full.009">
-      <material name="[0131_Silver]"/>
+      <material name="Material.White"/>
       <origin rpy="3.13367 0.00000 0.00000" xyz="${model_scale * 2.08983} ${model_scale * 1.12392} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__566220.009.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.rightArm.rotate.full.010">
-      <material name="[0131_Silver]"/>
+      <material name="Material.White"/>
       <origin rpy="3.13367 0.00000 0.00000" xyz="${model_scale * 2.08983} ${model_scale * 1.12392} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__566220.010.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.rightArm.rotate.full.011">
-      <material name="[0131_Silver]"/>
+      <material name="Material.White"/>
       <origin rpy="3.13367 0.00000 0.00000" xyz="${model_scale * 2.08983} ${model_scale * 1.12392} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__566220.011.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.rightArm.rotate.full.012">
-      <material name="[0131_Silver]"/>
+      <material name="Material.White"/>
       <origin rpy="3.13367 0.00000 0.00000" xyz="${model_scale * 2.08983} ${model_scale * 1.12392} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__566220.012.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.rightArm.rotate.full.013">
-      <material name="[0131_Silver]"/>
+      <material name="Material.White"/>
       <origin rpy="3.13367 0.00000 0.00000" xyz="${model_scale * 2.08983} ${model_scale * 1.12392} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__566220.013.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.rightArm.rotate.full.014">
-      <material name="[0131_Silver]"/>
+      <material name="Material.White"/>
       <origin rpy="3.13367 0.00000 0.00000" xyz="${model_scale * 2.08983} ${model_scale * 1.12392} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__566220.014.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.rightArm.rotate.full.015">
-      <material name="[0131_Silver]"/>
+      <material name="Material.White"/>
       <origin rpy="3.13367 0.00000 0.00000" xyz="${model_scale * 2.08983} ${model_scale * 1.12392} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__566220.015.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.rightArm.rotate.full.016">
-      <material name="[0131_Silver]"/>
+      <material name="Material.White"/>
       <origin rpy="3.13367 0.00000 0.00000" xyz="${model_scale * 2.08983} ${model_scale * 1.12392} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__566220.016.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.rightArm.rotate.full.017">
-      <material name="[0131_Silver]"/>
+      <material name="Material.White"/>
       <origin rpy="3.13367 0.00000 0.00000" xyz="${model_scale * 2.08983} ${model_scale * 1.12392} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__566220.017.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.rightArm.rotate.full.018">
-      <material name="[0131_Silver]"/>
+      <material name="Material.White"/>
       <origin rpy="3.13367 0.00000 0.00000" xyz="${model_scale * 2.08983} ${model_scale * 1.12392} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__566220.018.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.rightArm.rotate.full.019">
-      <material name="[0131_Silver]"/>
+      <material name="Material.White"/>
       <origin rpy="3.13367 0.00000 0.00000" xyz="${model_scale * 2.08983} ${model_scale * 1.12392} ${model_scale * -12.92101}"/>
       <geometry>
         <mesh filename="${mesh_dir}/G-__566220.019.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -2761,91 +2761,91 @@
     </collision>
 
     <visual name="i01.right.bicep.full">
-      <material name="Material.031"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 -0.00000 0.00000" xyz="${model_scale * 2.08125} ${model_scale * 0.12073} ${model_scale * -10.83653}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.008.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.right.bicep.full.001">
-      <material name="Material.031"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 -0.00000 0.00000" xyz="${model_scale * 2.08125} ${model_scale * 0.12073} ${model_scale * -10.83653}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.205.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.right.bicep.full.002">
-      <material name="Material.031"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 -0.00000 0.00000" xyz="${model_scale * 2.08125} ${model_scale * 0.12073} ${model_scale * -10.83653}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.206.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.right.bicep.full.003">
-      <material name="Material.031"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 -0.00000 0.00000" xyz="${model_scale * 2.08125} ${model_scale * 0.12073} ${model_scale * -10.83653}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.207.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.right.bicep.full.004">
-      <material name="Material.031"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 -0.00000 0.00000" xyz="${model_scale * 2.08125} ${model_scale * 0.12073} ${model_scale * -10.83653}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.208.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.right.bicep.full.005">
-      <material name="Material.031"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 -0.00000 0.00000" xyz="${model_scale * 2.08125} ${model_scale * 0.12073} ${model_scale * -10.83653}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.209.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.right.bicep.full.006">
-      <material name="Material.031"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 -0.00000 0.00000" xyz="${model_scale * 2.08125} ${model_scale * 0.12073} ${model_scale * -10.83653}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.210.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.right.bicep.full.007">
-      <material name="Material.031"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 -0.00000 0.00000" xyz="${model_scale * 2.08125} ${model_scale * 0.12073} ${model_scale * -10.83653}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.211.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.right.bicep.full.008">
-      <material name="Material.031"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 -0.00000 0.00000" xyz="${model_scale * 2.08125} ${model_scale * 0.12073} ${model_scale * -10.83653}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.212.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.right.bicep.full.009">
-      <material name="Material.031"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 -0.00000 0.00000" xyz="${model_scale * 2.08125} ${model_scale * 0.12073} ${model_scale * -10.83653}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.213.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.right.bicep.full.010">
-      <material name="Material.031"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 -0.00000 0.00000" xyz="${model_scale * 2.08125} ${model_scale * 0.12073} ${model_scale * -10.83653}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.214.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.right.bicep.full.011">
-      <material name="Material.031"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 -0.00000 0.00000" xyz="${model_scale * 2.08125} ${model_scale * 0.12073} ${model_scale * -10.83653}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.215.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.right.bicep.full.012">
-      <material name="Material.031"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 -0.00000 0.00000" xyz="${model_scale * 2.08125} ${model_scale * 0.12073} ${model_scale * -10.83653}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.216.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -3336,560 +3336,560 @@
     </collision>
 
     <visual name="i01.torso.full">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.001">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.088.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.002">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.089.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.003">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.090.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.004">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.091.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.005">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.092.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.006">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.093.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.007">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.094.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.008">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.095.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.009">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.096.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.010">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.097.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.011">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.098.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.012">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.099.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.013">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.100.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.014">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.101.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.015">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.102.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.016">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.103.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.017">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.104.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.018">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.105.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.019">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.106.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.020">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.107.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.021">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.108.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.022">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.109.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.023">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.110.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.024">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.111.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.025">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.112.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.026">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.113.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.027">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.114.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.028">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.115.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.029">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.116.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.030">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.117.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.031">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.118.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.032">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.119.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.033">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.120.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.034">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.121.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.035">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.122.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.036">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.123.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.037">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.124.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.038">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.125.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.039">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.126.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.040">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.127.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.041">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.128.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.042">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.129.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.043">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.130.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.044">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.131.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.045">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.132.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.046">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.133.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.047">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.134.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.048">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.135.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.049">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.136.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.050">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.137.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.051">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.138.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.052">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.139.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.053">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.140.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.054">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.141.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.055">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.142.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.056">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.143.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.057">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.144.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.058">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.145.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.059">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.146.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.060">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.147.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.061">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.148.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.062">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.149.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.063">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.150.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.064">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.151.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.065">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.152.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.066">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.153.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.067">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.154.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.068">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.155.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.069">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.156.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.070">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.157.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.071">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.158.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.072">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.159.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.073">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.160.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.074">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.161.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.075">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.162.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.076">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.163.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.077">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.164.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.078">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.165.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.torso.full.079">
-      <material name="Material.026"/>
+      <material name="Material.White"/>
       <origin rpy="0.06589 -0.00000 -0.00000" xyz="${model_scale * 0.00246} ${model_scale * 1.11602} ${model_scale * -11.08254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.166.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -3910,7 +3910,7 @@
     </collision>
 
     <visual name="i01.rightHand.Wristlarge">
-      <material name="Material.629"/>
+      <material name="Material.White"/>
       <origin rpy="0.41605 0.00000 0.00000" xyz="${model_scale * 1.99358} ${model_scale * 4.36715} ${model_scale * -7.14139}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.065.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -3927,7 +3927,7 @@
     </collision>
 
     <visual name="i01.rightHand.Wristlarge.001">
-      <material name="Material.629"/>
+      <material name="Material.White"/>
       <origin rpy="0.41605 -0.00000 -0.63517" xyz="${model_scale * 4.19587} ${model_scale * 2.33260} ${model_scale * -6.97630}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.204.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -3944,7 +3944,7 @@
     </collision>
 
     <visual name="i01.rightHand.indexPhal1">
-      <material name="Material.632"/>
+      <material name="Material.White"/>
       <origin rpy="-1.15751 -0.61920 0.09256" xyz="${model_scale * 5.01012} ${model_scale * -5.59578} ${model_scale * -2.39863}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.044.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -3961,7 +3961,7 @@
     </collision>
 
     <visual name="i01.rightHand.indexPhal2">
-      <material name="Material.636"/>
+      <material name="Material.White"/>
       <origin rpy="-1.15751 -0.61920 0.09256" xyz="${model_scale * 5.01271} ${model_scale * -5.25474} ${model_scale * -2.39178}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.045.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -3978,7 +3978,7 @@
     </collision>
 
     <visual name="i01.rightHand.indexPhal3">
-      <material name="Material.640"/>
+      <material name="Material.White"/>
       <origin rpy="-1.15751 -0.61920 0.09256" xyz="${model_scale * 5.01374} ${model_scale * -5.02777} ${model_scale * -2.38746}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.046.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -3995,7 +3995,7 @@
     </collision>
 
     <visual name="i01.rightHand.majeurePhal1">
-      <material name="Material.633"/>
+      <material name="Material.White"/>
       <origin rpy="-1.15751 -0.61920 -0.00000" xyz="${model_scale * 4.21669} ${model_scale * -5.99551} ${model_scale * -2.39976}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.048.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -4012,7 +4012,7 @@
     </collision>
 
     <visual name="i01.rightHand.majeurePhal2">
-      <material name="Material.637"/>
+      <material name="Material.White"/>
       <origin rpy="-1.15751 -0.61920 -0.00000" xyz="${model_scale * 4.21941} ${model_scale * -5.63616} ${model_scale * -2.39254}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.049.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -4029,7 +4029,7 @@
     </collision>
 
     <visual name="i01.rightHand.majeurePhal3">
-      <material name="Material.641"/>
+      <material name="Material.White"/>
       <origin rpy="-1.15751 -0.61920 0.00000" xyz="${model_scale * 4.22050} ${model_scale * -5.39701} ${model_scale * -2.38798}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.050.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -4046,7 +4046,7 @@
     </collision>
 
     <visual name="i01.rightHand.WristSmall2">
-      <material name="Material.630"/>
+      <material name="Material.White"/>
       <origin rpy="-1.15751 -0.61920 0.68804" xyz="${model_scale * 7.22704} ${model_scale * -2.64375} ${model_scale * -2.38651}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.067.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -4063,7 +4063,7 @@
     </collision>
 
     <visual name="i01.rightHand.pinkyPhal1">
-      <material name="Material.635"/>
+      <material name="Material.White"/>
       <origin rpy="-1.15751 -0.61920 -0.25722" xyz="${model_scale * 2.00181} ${model_scale * -6.93660} ${model_scale * -2.37926}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.053.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -4083,7 +4083,7 @@
     </collision>
 
     <visual name="i01.rightHand.pinkyPhal2">
-      <material name="Material.639"/>
+      <material name="Material.White"/>
       <origin rpy="-1.15751 -0.61921 -0.25722" xyz="${model_scale * 2.00407} ${model_scale * -6.63864} ${model_scale * -2.37327}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.054.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -4100,7 +4100,7 @@
     </collision>
 
     <visual name="i01.rightHand.pinkyPhal3">
-      <material name="Material.643"/>
+      <material name="Material.White"/>
       <origin rpy="-1.15751 -0.61921 -0.25722" xyz="${model_scale * 2.00497} ${model_scale * -6.44034} ${model_scale * -2.36949}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.055.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -4117,7 +4117,7 @@
     </collision>
 
     <visual name="i01.rightHand.WristSmall">
-      <material name="Material.631"/>
+      <material name="Material.White"/>
       <origin rpy="-1.15751 -0.61920 0.68804" xyz="${model_scale * 7.22704} ${model_scale * -2.35455} ${model_scale * -2.38651}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.066.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -4134,7 +4134,7 @@
     </collision>
 
     <visual name="i01.rightHand.ringFingerPhal1">
-      <material name="Material.634"/>
+      <material name="Material.White"/>
       <origin rpy="-1.15751 -0.61920 -0.08681" xyz="${model_scale * 3.38539} ${model_scale * -6.39614} ${model_scale * -2.39316}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.058.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -4151,7 +4151,7 @@
     </collision>
 
     <visual name="i01.rightHand.ringFingerPhal2">
-      <material name="Material.638"/>
+      <material name="Material.White"/>
       <origin rpy="-1.15751 -0.61920 -0.08681" xyz="${model_scale * 3.38797} ${model_scale * -6.05509} ${model_scale * -2.38631}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.059.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -4168,7 +4168,7 @@
     </collision>
 
     <visual name="i01.rightHand.ringFingerPhal3">
-      <material name="Material.642"/>
+      <material name="Material.White"/>
       <origin rpy="-1.15751 -0.61920 -0.08681" xyz="${model_scale * 3.38900} ${model_scale * -5.82812} ${model_scale * -2.38199}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.060.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -4185,7 +4185,7 @@
     </collision>
 
     <visual name="i01.rightHand.ThumbBase">
-      <material name="Material.628"/>
+      <material name="Material.White"/>
       <origin rpy="2.05362 0.62375 -0.06004" xyz="${model_scale * 5.06759} ${model_scale * 5.98847} ${model_scale * 2.72987}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.063.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -4202,7 +4202,7 @@
     </collision>
 
     <visual name="i01.rightHand.ThumbMid">
-      <material name="Material.627"/>
+      <material name="Material.White"/>
       <origin rpy="1.70891 0.82776 -1.11670" xyz="${model_scale * 8.37077} ${model_scale * 0.01373} ${model_scale * 0.04665}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.061.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -4219,7 +4219,7 @@
     </collision>
 
     <visual name="i01.rightHand.ThumbTip">
-      <material name="Material.626"/>
+      <material name="Material.White"/>
       <origin rpy="1.70890 0.82776 -1.11671" xyz="${model_scale * 8.38306} ${model_scale * -0.31675} ${model_scale * 0.03958}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.062.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -4254,28 +4254,28 @@
     </collision>
 
     <visual name="i01.head.nekHinge">
-      <material name="Material.047"/>
+      <material name="Material.White"/>
       <origin rpy="0.00000 0.00000 0.00000" xyz="${model_scale * -0.00144} ${model_scale * -0.19608} ${model_scale * -15.39810}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.015.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.head.nekHinge.001">
-      <material name="Material.047"/>
+      <material name="Material.White"/>
       <origin rpy="0.00000 0.00000 0.00000" xyz="${model_scale * -0.00144} ${model_scale * -0.19608} ${model_scale * -15.39810}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.083.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.head.nekHinge.002">
-      <material name="Material.047"/>
+      <material name="Material.White"/>
       <origin rpy="0.00000 0.00000 0.00000" xyz="${model_scale * -0.00144} ${model_scale * -0.19608} ${model_scale * -15.39810}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.084.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.head.nekHinge.003">
-      <material name="Material.047"/>
+      <material name="Material.White"/>
       <origin rpy="0.00000 0.00000 0.00000" xyz="${model_scale * -0.00144} ${model_scale * -0.19608} ${model_scale * -15.39810}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.085.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -4382,112 +4382,112 @@
     </collision>
 
     <visual name="i01.head.full">
-      <material name="Material.044"/>
+      <material name="Material.White"/>
       <origin rpy="0.00000 -0.00000 -1.57080" xyz="${model_scale * -0.21111} ${model_scale * 0.00389} ${model_scale * -15.64721}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.013.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.head.full.001">
-      <material name="Material.044"/>
+      <material name="Material.White"/>
       <origin rpy="0.00000 -0.00000 -1.57080" xyz="${model_scale * -0.21111} ${model_scale * 0.00389} ${model_scale * -15.64721}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.068.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.head.full.002">
-      <material name="Material.044"/>
+      <material name="Material.White"/>
       <origin rpy="0.00000 -0.00000 -1.57080" xyz="${model_scale * -0.21111} ${model_scale * 0.00389} ${model_scale * -15.64721}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.069.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.head.full.003">
-      <material name="Material.044"/>
+      <material name="Material.White"/>
       <origin rpy="0.00000 -0.00000 -1.57080" xyz="${model_scale * -0.21111} ${model_scale * 0.00389} ${model_scale * -15.64721}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.070.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.head.full.004">
-      <material name="Material.044"/>
+      <material name="Material.White"/>
       <origin rpy="0.00000 -0.00000 -1.57080" xyz="${model_scale * -0.21111} ${model_scale * 0.00389} ${model_scale * -15.64721}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.071.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.head.full.005">
-      <material name="Material.044"/>
+      <material name="Material.White"/>
       <origin rpy="0.00000 -0.00000 -1.57080" xyz="${model_scale * -0.21111} ${model_scale * 0.00389} ${model_scale * -15.64721}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.072.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.head.full.006">
-      <material name="Material.044"/>
+      <material name="Material.White"/>
       <origin rpy="0.00000 -0.00000 -1.57080" xyz="${model_scale * -0.21111} ${model_scale * 0.00389} ${model_scale * -15.64721}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.073.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.head.full.007">
-      <material name="Material.044"/>
+      <material name="Material.White"/>
       <origin rpy="0.00000 -0.00000 -1.57080" xyz="${model_scale * -0.21111} ${model_scale * 0.00389} ${model_scale * -15.64721}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.074.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.head.full.008">
-      <material name="Material.044"/>
+      <material name="Material.White"/>
       <origin rpy="0.00000 -0.00000 -1.57080" xyz="${model_scale * -0.21111} ${model_scale * 0.00389} ${model_scale * -15.64721}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.075.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.head.full.009">
-      <material name="Material.044"/>
+      <material name="Material.White"/>
       <origin rpy="0.00000 -0.00000 -1.57080" xyz="${model_scale * -0.21111} ${model_scale * 0.00389} ${model_scale * -15.64721}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.076.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.head.full.010">
-      <material name="Material.044"/>
+      <material name="Material.White"/>
       <origin rpy="0.00000 -0.00000 -1.57080" xyz="${model_scale * -0.21111} ${model_scale * 0.00389} ${model_scale * -15.64721}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.077.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.head.full.011">
-      <material name="Material.044"/>
+      <material name="Material.White"/>
       <origin rpy="0.00000 -0.00000 -1.57080" xyz="${model_scale * -0.21111} ${model_scale * 0.00389} ${model_scale * -15.64721}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.078.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.head.full.012">
-      <material name="Material.044"/>
+      <material name="Material.White"/>
       <origin rpy="0.00000 -0.00000 -1.57080" xyz="${model_scale * -0.21111} ${model_scale * 0.00389} ${model_scale * -15.64721}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.079.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.head.full.013">
-      <material name="Material.044"/>
+      <material name="Material.White"/>
       <origin rpy="0.00000 -0.00000 -1.57080" xyz="${model_scale * -0.21111} ${model_scale * 0.00389} ${model_scale * -15.64721}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.080.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.head.full.014">
-      <material name="Material.044"/>
+      <material name="Material.White"/>
       <origin rpy="0.00000 -0.00000 -1.57080" xyz="${model_scale * -0.21111} ${model_scale * 0.00389} ${model_scale * -15.64721}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.081.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
       </geometry>
     </visual>
     <visual name="i01.head.full.015">
-      <material name="Material.044"/>
+      <material name="Material.White"/>
       <origin rpy="0.00000 -0.00000 -1.57080" xyz="${model_scale * -0.21111} ${model_scale * 0.00389} ${model_scale * -15.64721}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.082.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -4507,7 +4507,7 @@
     </collision>
 
     <visual name="i01.head.eyeLeft.full">
-      <material name="Material.035"/>
+      <material name="Material.White"/>
       <origin rpy="-0.00000 -0.00000 -0.00000" xyz="${model_scale * -0.29587} ${model_scale * 0.88079} ${model_scale * -16.02298}"/>
       <geometry>
         <mesh filename="${mesh_dir}/Texture.011.dae" scale="${model_scale * 1.00000} ${model_scale * 1.00000} ${model_scale * 1.00000}"/>
@@ -4515,166 +4515,7 @@
     </visual>
     <inertial><mass value="0.15"/><inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/></inertial>
   </link>
-  <material name="Material.007">
-    <color rgba="0.46275 0.28235 0.10588 1.00000"/>
-  </material>
-  <material name="Material.008">
-    <color rgba="0.00000 0.00000 0.00000 1.00000"/>
-  </material>
-  <material name="Material.012">
-    <color rgba="0.00000 0.00000 0.00000 1.00000"/>
-  </material>
-  <material name="Material.016">
-    <color rgba="0.01569 0.01569 0.02745 1.00000"/>
-  </material>
-  <material name="Material.022">
+  <material name="Material.White">
     <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.026">
-    <color rgba="0.00000 0.00000 0.00000 1.00000"/>
-  </material>
-  <material name="Material.031">
-    <color rgba="0.00000 0.00000 0.00000 1.00000"/>
-  </material>
-  <material name="Material.035">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.038">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.044">
-    <color rgba="0.00000 0.00000 0.00000 1.00000"/>
-  </material>
-  <material name="Material.046">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.047">
-    <color rgba="0.00000 0.00000 0.00000 1.00000"/>
-  </material>
-  <material name="Material.238">
-    <color rgba="0.76078 0.75686 0.80000 1.00000"/>
-  </material>
-  <material name="Material.239">
-    <color rgba="0.00000 0.00000 0.00000 1.00000"/>
-  </material>
-  <material name="Material.254">
-    <color rgba="0.01569 0.01569 0.02745 1.00000"/>
-  </material>
-  <material name="Material.390">
-    <color rgba="0.94510 0.96078 0.90980 1.00000"/>
-  </material>
-  <material name="Material.601">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.602">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.603">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.604">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.605">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.606">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.607">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.608">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.609">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.610">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.611">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.612">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.613">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.614">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.615">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.616">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.617">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.618">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.626">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.627">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.628">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.629">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.630">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.631">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.632">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.633">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.634">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.635">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.636">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.637">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.638">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.639">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.640">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.641">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.642">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="Material.643">
-    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
-  </material>
-  <material name="[0131_Silver]">
-    <color rgba="0.74902 0.74902 0.74902 1.00000"/>
-  </material>
-  <material name="[0131_Silver].001">
-    <color rgba="0.74902 0.74902 0.74902 1.00000"/>
   </material>
 </robot>
