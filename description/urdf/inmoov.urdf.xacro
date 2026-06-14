@@ -21,6 +21,7 @@
        In Gazebo (use_gazebo_sim:=true) the generated gazebo/gazebo.xacro provides the
        gz_ros2_control system instead, so skip this include to avoid double registration.
        Filename comes from the generated_files config so the generator, pipeline and launches agree. -->
+  <!-- Import inmoov ros2_control description (use_gazebo_sim switches to gz_ros2_control in Gazebo launch) -->
   <xacro:unless value="$(arg use_gazebo_sim)">
     <xacro:include filename="../ros2_control/$(arg ros2_control_file)" />
   </xacro:unless>
