@@ -1,4 +1,4 @@
-name: Create release
+name: Trigger Release
 
 on:
   workflow_dispatch:
@@ -8,51 +8,8 @@ on:
         required: true
         type: string
 
-permissions:
-  contents: write
-  pull-requests: write
-
 jobs:
   create-release:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      with:
-        ref: dev
-        fetch-depth: 0
-
-    - name: Configure Git
-      run: |
-        git config --global user.name "github-actions[bot]"
-        git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
-    - name: Create Release Branch
-      run: |
-        git checkout -b release/${{ inputs.version }}
-
-        echo "${{ inputs.version }}" > version.txt
-
-        git add version.txt
-        git commit -m "Migrating to ${{ inputs.version }}"
-        git push origin release/${{ inputs.version }}
-
-    - name: Create PR to Master
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        gh pr create \
-          --title "Release ${{ inputs.version }} -> Master" \
-          --body "Merge release ${{ inputs.version }} to master." \
-          --base master \
-          --head release/${{ inputs.version }}
-
-    - name: Create PR to Develop
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        gh pr create \
-          --title "Release ${{ inputs.version }} -> Dev" \
-          --body "Merge release ${{ inputs.version }} to dev." \
-          --base dev \
-          --head release/${{ inputs.version }}
+    uses: Sentience-Robotics/.github/.github/workflows/release.yaml@master
+    with:
+      version: ${{ inputs.version }}
