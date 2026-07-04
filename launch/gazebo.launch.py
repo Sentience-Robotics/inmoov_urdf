@@ -228,6 +228,22 @@ def generate_launch_description():
         [s for s in [os.environ.get("GZ_SIM_SYSTEM_PLUGIN_PATH", ""), ros_lib] if s]
     ).strip(os.pathsep)
 
+    gpu_env_actions = [
+        SetEnvironmentVariable(name="XDG_RUNTIME_DIR", value="/tmp/runtime-root"),
+    ]
+    if os.environ.get("LUCY_GPU_MODE", "").lower() in ("jetson", "nvidia"):
+        gpu_env_actions.extend(
+            [
+                SetEnvironmentVariable(
+                    name="__EGL_VENDOR_LIBRARY_FILENAMES",
+                    value="/usr/share/glvnd/egl_vendor.d/10_nvidia.json",
+                ),
+                SetEnvironmentVariable(
+                    name="__GLX_VENDOR_LIBRARY_NAME", value="nvidia"
+                ),
+            ]
+        )
+
     try:
         gz_sim_share = get_package_share_directory("ros_gz_sim")
         gz_sim_launch_path = os.path.join(gz_sim_share, "launch", "gz_sim.launch.py")
@@ -308,6 +324,7 @@ def generate_launch_description():
             urdf_path_arg,
             ros2_control_file_arg,
             headless_arg,
+            *gpu_env_actions,
             SetEnvironmentVariable(name="GZ_SIM_RESOURCE_PATH", value=mesh_dae),
             SetEnvironmentVariable(
                 name="GZ_SIM_SYSTEM_PLUGIN_PATH", value=gz_plugin_path
