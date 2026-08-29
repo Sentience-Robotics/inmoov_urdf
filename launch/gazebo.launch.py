@@ -43,7 +43,6 @@ from lucy_control_supervisor.controllers_spawn import controllers_to_spawn
 import yaml
 
 
-
 def _gz_ros2_control_plugin_path():
     pkg_share = get_package_prefix("inmoov_urdf")
     plugin_path = os.path.join(pkg_share, "lib", "mock_sensor")
@@ -51,7 +50,7 @@ def _gz_ros2_control_plugin_path():
         share = get_package_share_directory("gz_ros2_control")
         return os.path.join(os.path.dirname(share), "lib") + os.pathsep + plugin_path
     except Exception:
-        return "/opt/ros/humble/lib" + os.pathsep + plugin_path
+        return "/opt/ros/jazzy/lib" + os.pathsep + plugin_path
 
 
 _DEFAULT_GENERATED_FILES = {
@@ -129,7 +128,7 @@ def _sim_camera_topics(pkg_share: str) -> list[tuple[str, str]]:
 
 
 def generate_launch_description():
-    ros_distro = os.environ.get("ROS_DISTRO", "humble").lower()
+    ros_distro = os.environ.get("ROS_DISTRO", "jazzy").lower()
     pkg_share = get_package_share_directory("inmoov_urdf")
     default_base = os.path.join(pkg_share, "description")
     generated = _active_generated_files(pkg_share)
@@ -247,7 +246,7 @@ def generate_launch_description():
         gz_sim_share = get_package_share_directory("ros_gz_sim")
         gz_sim_launch_path = os.path.join(gz_sim_share, "launch", "gz_sim.launch.py")
     except Exception:
-        gz_sim_launch_path = "/opt/ros/humble/share/ros_gz_sim/launch/gz_sim.launch.py"
+        gz_sim_launch_path = "/opt/ros/jazzy/share/ros_gz_sim/launch/gz_sim.launch.py"
     default_world = os.path.join(pkg_share, "worlds", "default.sdf")
     # When headless: server-only (-s) with EGL rendering (--headless-rendering)
     # so OGRE2 still renders camera sensors without an X display. Otherwise:

@@ -1,6 +1,6 @@
 # inmoov_urdf
 
-ROS 2 **Humble** package with the **InMoov-derived** robot description used by Lucy: **URDF/xacro**, **DAE meshes**, **ros2_control** blocks, **Gazebo (gz-sim) physics**, an **RViz** layout, and **launch files** for ros2_control + RViz / Gazebo.
+ROS 2 **Jazzy** (Ubuntu 24.04) package with the **InMoov-derived** robot description used by Lucy: **URDF/xacro**, **DAE meshes**, **ros2_control** blocks, **Gazebo (gz-sim) physics**, an **RViz** layout, and **launch files** for ros2_control + RViz / Gazebo.
 
 The web control panel (rosbridge + `/config/*` services) is **not** started from here — use `lucy_bringup` (`lucy.launch.py`) or `web_ros_api.launch.py` from `lucy_ros_packages`.
 
@@ -58,7 +58,7 @@ inmoov_urdf/
 
 ## Requirements
 
-ROS 2 Humble plus: `robot_state_publisher`, `controller_manager`, `rviz2`, `ros_gz_sim`, `ros_gz_bridge`, `gz_ros2_control`, `launch_ros`, `lucy_ros2_control`. The auto-cal script also needs **PyBullet** (already in the `lucy_ros2:humble` image, `pip` otherwise).
+ROS 2 Jazzy (Ubuntu 24.04) plus: `robot_state_publisher`, `controller_manager`, `rviz2`, `ros_gz_sim`, `ros_gz_bridge`, `gz_ros2_control`, `launch_ros`, `lucy_ros2_control`. The auto-cal script also needs **PyBullet** (already in the `lucy_ros2:jazzy` image, `pip` otherwise).
 
 ```bash
 rosdep install --from-paths src --ignore-src -r -y
@@ -69,7 +69,7 @@ For the control panel, also build `lucy_bringup` + `lucy_config_pipeline` (pulle
 ## Build
 
 ```bash
-source /opt/ros/humble/setup.bash
+source /opt/ros/jazzy/setup.bash
 cd lucy_ws
 colcon build --symlink-install --packages-select inmoov_urdf lucy_ros2_control
 source install/setup.bash

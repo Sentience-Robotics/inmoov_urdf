@@ -72,7 +72,7 @@ With **SIMULATION ONLY** enabled in the activate workflow, `lucy_config_generato
 - One `<ros2_control>` block per board (`gz_ros2_control/GazeboSimSystem` when `use_gazebo_sim:=true`, otherwise `lucy_ros2_control/LucySystemHardware` with `publish_actuators:=false` for RViz/mock). URDF `min`/`max` on the command interface are enforced by **LucySystemHardware** only (real + mock), not by the stock Gazebo plugin.
 - `controllers.yaml` with `joint_state_broadcaster` + a single `lucy_sim_controller` listing every actuator `urdf_joint`.
 
-After generation, `lucy_config_pipeline` calls **`/lucy_control/restart`** so the running stack reloads without a full `lucy.launch.py` restart. Structural joint changes still require that restart (Humble does not hot-swap URDF hardware topology).
+After generation, `lucy_config_pipeline` calls **`/lucy_control/restart`** so the running stack reloads without a full `lucy.launch.py` restart. Structural joint changes still require that restart (ROS 2 does not hot-swap URDF hardware topology).
 
 ## Editing
 

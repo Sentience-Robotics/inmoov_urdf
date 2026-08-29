@@ -37,7 +37,7 @@ What this CANNOT do
 
 Usage
 -----
-    # pybullet ships with the lucy_ros2:humble image (Dockerfile: pip install pybullet);
+    # pybullet ships with the lucy_ros2:jazzy image (Dockerfile.jazzy: pip install pybullet);
     # host-side: pip install --user -r scripts/requirements.txt
     python3 scripts/autocalibrate_joint_limits.py                  # headless dry run
     python3 scripts/autocalibrate_joint_limits.py --apply          # write back
@@ -96,7 +96,7 @@ def expand_urdf() -> str:
     elif shutil.which("ros2"):
         cmd = ["ros2", "run", "xacro", "xacro"]
     else:
-        sys.exit("xacro not on PATH (source ROS Humble)")
+        sys.exit("xacro not on PATH (source ROS 2 Jazzy)")
     cmd += [
         str(URDF_XACRO),
         f"base_path:={BASE_PATH}",
@@ -178,7 +178,7 @@ class RvizVisualizer(Visualizer):
         except ImportError:
             sys.exit(
                 "[--view rviz] rclpy/sensor_msgs not importable. "
-                "Source ROS Humble first (e.g. `source install/setup.bash`)."
+                "Source ROS 2 Jazzy first (e.g. `source install/setup.bash`)."
             )
         if not rclpy.ok():
             rclpy.init()
