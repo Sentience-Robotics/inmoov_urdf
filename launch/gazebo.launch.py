@@ -24,8 +24,8 @@
 import os
 from pathlib import Path
 
-import yaml
 from ament_index_python.packages import get_package_prefix, get_package_share_directory
+from launch import LaunchDescription
 from launch.actions import (
     DeclareLaunchArgument,
     IncludeLaunchDescription,
@@ -40,8 +40,8 @@ from launch.substitutions import (
 )
 from launch_ros.actions import Node
 from lucy_control_supervisor.controllers_spawn import controllers_to_spawn
+import yaml
 
-from launch import LaunchDescription
 
 
 def _gz_ros2_control_plugin_path():
@@ -199,24 +199,23 @@ def generate_launch_description():
                 parameters=[{"use_sim_time": True}],
                 output="screen",
             )
-        else:
-            return Node(
-                package="image_transport",
-                executable="republish",
-                name="camera_compressor_" + safe,
-                remappings=[
-                    ("in", topic),
-                    ("out/compressed", compressed_topic),
-                ],
-                parameters=[
-                    {
-                        "use_sim_time": True,
-                        "in_transport": "raw",
-                        "out_transport": "compressed",
-                    }
-                ],
-                output="screen",
-            )
+        return Node(
+            package="image_transport",
+            executable="republish",
+            name="camera_compressor_" + safe,
+            remappings=[
+                ("in", topic),
+                ("out/compressed", compressed_topic),
+            ],
+            parameters=[
+                {
+                    "use_sim_time": True,
+                    "in_transport": "raw",
+                    "out_transport": "compressed",
+                }
+            ],
+            output="screen",
+        )
 
     camera_compressors = [
         _camera_compressor(topic, compressed_topic)
