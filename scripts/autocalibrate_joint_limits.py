@@ -191,7 +191,8 @@ class RvizVisualizer(Visualizer):
         self._idxs = [name_to_idx[n] for n in self._joint_names]
         print(
             f"[--view rviz] publishing /joint_states for {len(self._joint_names)} joints. "
-            "Make sure `ros2 launch inmoov_urdf joint_preview.launch.py jsp_gui:=false` is running."
+            "Make sure `ros2 launch inmoov_urdf joint_preview.launch.py "
+            "jsp_gui:=false` is running."
         )
 
     def step(self, p, body, name_to_idx, cid) -> None:

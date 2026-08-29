@@ -87,7 +87,8 @@ def _active_yaml_path() -> Path:
     try:
         from ament_index_python.packages import get_package_share_directory
 
-        p = Path(get_package_share_directory("inmoov_urdf")) / "config" / "hardware" / "active.yaml"
+        share = get_package_share_directory("inmoov_urdf")
+        p = Path(share) / "config" / "hardware" / "active.yaml"
         if p.is_file():
             return p
     except Exception:
