@@ -43,7 +43,6 @@ from lucy_control_supervisor.controllers_spawn import controllers_to_spawn
 import yaml
 
 
-
 def _gz_ros2_control_plugin_path():
     pkg_share = get_package_prefix("inmoov_urdf")
     plugin_path = os.path.join(pkg_share, "lib", "mock_sensor")
