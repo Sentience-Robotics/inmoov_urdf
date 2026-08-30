@@ -127,6 +127,41 @@ def _sim_camera_topics(pkg_share: str) -> list[tuple[str, str]]:
     return []
 
 
+def _gpu_env_actions(context, *args, **kwargs):
+    """Headless/Jetson EGL needs a writable runtime dir; GUI must keep the user session dir."""
+    headless = LaunchConfiguration("headless").perform(context).lower().strip()
+    gpu_mode = os.environ.get("LUCY_GPU_MODE", "").lower()
+    actions = []
+    if headless in ("true", "1", "yes") or gpu_mode in ("jetson", "nvidia"):
+        actions.append(
+            SetEnvironmentVariable(name="XDG_RUNTIME_DIR", value="/tmp/runtime-root")
+        )
+    if gpu_mode in ("jetson", "nvidia"):
+        actions.extend(
+            [
+                SetEnvironmentVariable(
+                    name="__EGL_VENDOR_LIBRARY_FILENAMES",
+                    value="/usr/share/glvnd/egl_vendor.d/10_nvidia.json",
+                ),
+                SetEnvironmentVariable(
+                    name="__GLX_VENDOR_LIBRARY_NAME", value="nvidia"
+                ),
+            ]
+        )
+    else:
+        # NixOS: Pixi OGRE needs host Mesa EGL (GLX fails on Wayland/XWayland).
+        nix_mesa = "/run/opengl-driver/share/glvnd/egl_vendor.d/50_mesa.json"
+        if os.path.isfile(nix_mesa):
+            actions.append(
+                SetEnvironmentVariable(
+                    name="__EGL_VENDOR_LIBRARY_FILENAMES", value=nix_mesa
+                )
+            )
+    if not os.environ.get("GZ_IP"):
+        actions.append(SetEnvironmentVariable(name="GZ_IP", value="127.0.0.1"))
+    return actions
+
+
 def generate_launch_description():
     ros_distro = os.environ.get("ROS_DISTRO", "jazzy").lower()
     pkg_share = get_package_share_directory("inmoov_urdf")
@@ -226,22 +261,6 @@ def generate_launch_description():
         [s for s in [os.environ.get("GZ_SIM_SYSTEM_PLUGIN_PATH", ""), ros_lib] if s]
     ).strip(os.pathsep)
 
-    gpu_env_actions = [
-        SetEnvironmentVariable(name="XDG_RUNTIME_DIR", value="/tmp/runtime-root"),
-    ]
-    if os.environ.get("LUCY_GPU_MODE", "").lower() in ("jetson", "nvidia"):
-        gpu_env_actions.extend(
-            [
-                SetEnvironmentVariable(
-                    name="__EGL_VENDOR_LIBRARY_FILENAMES",
-                    value="/usr/share/glvnd/egl_vendor.d/10_nvidia.json",
-                ),
-                SetEnvironmentVariable(
-                    name="__GLX_VENDOR_LIBRARY_NAME", value="nvidia"
-                ),
-            ]
-        )
-
     try:
         gz_sim_share = get_package_share_directory("ros_gz_sim")
         gz_sim_launch_path = os.path.join(gz_sim_share, "launch", "gz_sim.launch.py")
@@ -269,12 +288,17 @@ def generate_launch_description():
         launch_arguments={"gz_args": gz_args}.items(),
     )
 
-    spawn_robot = Node(
-        package="ros_gz_sim",
-        executable="create",
-        arguments=["-name", "lucy", "-topic", "robot_description", "-z", "0.5"],
-        output="screen",
-        parameters=[{"use_sim_time": True}],
+    spawn_robot = TimerAction(
+        period=8.0,
+        actions=[
+            Node(
+                package="ros_gz_sim",
+                executable="create",
+                arguments=["-name", "lucy", "-topic", "robot_description", "-z", "0.5"],
+                output="screen",
+                parameters=[{"use_sim_time": True}],
+            )
+        ],
     )
     mesh_dae = get_package_share_directory("inmoov_urdf")
 
@@ -322,15 +346,15 @@ def generate_launch_description():
             urdf_path_arg,
             ros2_control_file_arg,
             headless_arg,
-            *gpu_env_actions,
+            OpaqueFunction(function=_gpu_env_actions),
             SetEnvironmentVariable(name="GZ_SIM_RESOURCE_PATH", value=mesh_dae),
             SetEnvironmentVariable(
                 name="GZ_SIM_SYSTEM_PLUGIN_PATH", value=gz_plugin_path
             ),
             supervisor,
             OpaqueFunction(function=spawner_actions_from_yaml),
-            spawn_robot,
             gz_sim_launch,
+            spawn_robot,
             bridge,
             *camera_compressors,
         ]
