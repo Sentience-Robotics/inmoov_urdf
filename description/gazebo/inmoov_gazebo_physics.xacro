@@ -13,10 +13,20 @@
      self_collide on adjacent body meshes (avoids jitter), `gazebo_hand_link`
      enables it with friction tuned for grasping. -->
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-  <!-- Fix entire stand to the world so the robot does not fall (gz-sim may still move root; heavy mass in URDF is fallback). -->
-  <gazebo reference="base_node">
-    <static>true</static>
-  </gazebo>
+  <!-- Anchor the stand to the world so the robot does not fall over.
+       <gazebo reference="..."><static>true</static></gazebo> does not survive
+       urdf->sdf conversion: sdformat only honours <static> on the model, not on
+       a link, so the stand stayed dynamic and gravity toppled the robot. A fixed
+       joint to a `world` link is the conversion-stable way to pin the base, and
+       leaves every upper-body joint (torso, neck, arms, fingers) free to move.
+       This file is included only under use_gazebo_sim:=true, so the extra link
+       never reaches the real/mock-hardware description or its TF tree. -->
+  <link name="world"/>
+  <joint name="world_to_base_node" type="fixed">
+    <parent link="world"/>
+    <child link="base_node"/>
+    <origin xyz="0 0 0.02" rpy="0 0 0"/>
+  </joint>
   <gazebo reference="stand_link">
     <static>true</static>
   </gazebo>

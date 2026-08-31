@@ -22,17 +22,20 @@
 # frames without an X server — the ros_gz camera bridge stays functional.
 
 import os
+import sys
 from pathlib import Path
 
 from ament_index_python.packages import get_package_prefix, get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import (
     DeclareLaunchArgument,
+    ExecuteProcess,
     IncludeLaunchDescription,
     OpaqueFunction,
     SetEnvironmentVariable,
     TimerAction,
 )
+from launch.conditions import UnlessCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import (
     LaunchConfiguration,
@@ -41,6 +44,9 @@ from launch.substitutions import (
 from launch_ros.actions import Node
 from lucy_control_supervisor.controllers_spawn import controllers_to_spawn
 import yaml
+
+
+_IS_DARWIN = sys.platform == "darwin"
 
 
 def _gz_ros2_control_plugin_path():
@@ -270,6 +276,11 @@ def generate_launch_description():
     # When headless: server-only (-s) with EGL rendering (--headless-rendering)
     # so OGRE2 still renders camera sensors without an X display. Otherwise:
     # normal GUI launch.
+    # macOS cannot run the gz server and the Qt GUI in one process: Cocoa needs
+    # the GUI on the main thread, so `gz sim` refuses and exits(-1) unless given
+    # -s or -g (gazebosim/gz-sim#44, enforced in the ruby entry point). Run the
+    # server with -s here and start `gz sim -g` as a second process below.
+    gui_server_args = "-s -r " if _IS_DARWIN else "-r "
     gz_args = PythonExpression(
         [
             "'-s -r --headless-rendering ",
@@ -278,7 +289,8 @@ def generate_launch_description():
             " if '",
             LaunchConfiguration("headless"),
             "'.lower() in ('true', '1', 'yes') ",
-            "else '-r ",
+            "else '",
+            gui_server_args,
             default_world,
             "'",
         ]
@@ -288,13 +300,31 @@ def generate_launch_description():
         launch_arguments={"gz_args": gz_args}.items(),
     )
 
+    # Second process for the Qt GUI on macOS (see gz_args). Delayed so the
+    # server's transport is advertising before the GUI connects to it.
+    gazebo_gui_actions = []
+    if _IS_DARWIN:
+        gazebo_gui_actions.append(
+            TimerAction(
+                period=6.0,
+                actions=[
+                    ExecuteProcess(
+                        cmd=["gz", "sim", "-g"],
+                        name="gazebo_gui",
+                        output="screen",
+                        condition=UnlessCondition(LaunchConfiguration("headless")),
+                    )
+                ],
+            )
+        )
+
     spawn_robot = TimerAction(
         period=8.0,
         actions=[
             Node(
                 package="ros_gz_sim",
                 executable="create",
-                arguments=["-name", "lucy", "-topic", "robot_description", "-z", "0.5"],
+                arguments=["-name", "lucy", "-topic", "robot_description", "-z", "0.0"],
                 output="screen",
                 parameters=[{"use_sim_time": True}],
             )
@@ -354,6 +384,7 @@ def generate_launch_description():
             supervisor,
             OpaqueFunction(function=spawner_actions_from_yaml),
             gz_sim_launch,
+            *gazebo_gui_actions,
             spawn_robot,
             bridge,
             *camera_compressors,
