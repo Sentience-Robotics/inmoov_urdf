@@ -184,7 +184,8 @@ def _gpu_env_actions(context, *args, **kwargs):
 def generate_launch_description():
     ros_distro = os.environ.get("ROS_DISTRO", "jazzy").lower()
     pkg_share = get_package_share_directory("inmoov_urdf")
-    default_base = os.path.join(pkg_share, "description")
+    # Pasted into a file:// URI by the xacro, so posix even on Windows.
+    default_base = Path(pkg_share, "description").as_posix()
     generated = _active_generated_files(pkg_share)
     default_controllers = _default_controllers_yaml(
         pkg_share, generated["controllers_yaml"]
