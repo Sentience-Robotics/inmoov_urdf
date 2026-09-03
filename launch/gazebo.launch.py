@@ -54,7 +54,8 @@ _SPLIT_GZ_GUI = sys.platform in ("darwin", "win32")
 
 
 def _gz_gui_cmd():
-    """argv for the standalone GUI process.
+    """
+    Argv for the standalone GUI process.
 
     Resolved rather than named: on Windows gz is a .bat that ExecuteProcess
     will not find, because it does not search PATHEXT.
