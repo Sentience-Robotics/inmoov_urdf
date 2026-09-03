@@ -22,6 +22,7 @@
 # frames without an X server — the ros_gz camera bridge stays functional.
 
 import os
+import shutil
 import sys
 from pathlib import Path
 
@@ -46,7 +47,20 @@ from lucy_control_supervisor.controllers_spawn import controllers_to_spawn
 import yaml
 
 
-_IS_DARWIN = sys.platform == "darwin"
+# gz sim refuses to run the server and the Qt GUI in one process on macOS
+# (Cocoa wants the GUI on the main thread) and on Windows (gz-sim#168). Both
+# need -s for the server plus a second "gz sim -g" for the GUI.
+_SPLIT_GZ_GUI = sys.platform in ("darwin", "win32")
+
+
+def _gz_gui_cmd():
+    """
+    Argv for the standalone GUI process.
+
+    Resolved rather than named: on Windows gz is a .bat that ExecuteProcess
+    will not find, because it does not search PATHEXT.
+    """
+    return [shutil.which("gz") or "gz", "sim", "-g"]
 
 
 def _gz_ros2_control_plugin_path():
@@ -171,7 +185,8 @@ def _gpu_env_actions(context, *args, **kwargs):
 def generate_launch_description():
     ros_distro = os.environ.get("ROS_DISTRO", "jazzy").lower()
     pkg_share = get_package_share_directory("inmoov_urdf")
-    default_base = os.path.join(pkg_share, "description")
+    # Pasted into a file:// URI by the xacro, so posix even on Windows.
+    default_base = Path(pkg_share, "description").as_posix()
     generated = _active_generated_files(pkg_share)
     default_controllers = _default_controllers_yaml(
         pkg_share, generated["controllers_yaml"]
@@ -272,15 +287,17 @@ def generate_launch_description():
         gz_sim_launch_path = os.path.join(gz_sim_share, "launch", "gz_sim.launch.py")
     except Exception:
         gz_sim_launch_path = "/opt/ros/jazzy/share/ros_gz_sim/launch/gz_sim.launch.py"
-    default_world = os.path.join(pkg_share, "worlds", "default.sdf")
+    # Embedded in the PythonExpression string literal below, where a Windows
+    # path is read as escape sequences: the drive-relative part raises, and a
+    # folder starting with n would silently become a newline. Gazebo takes
+    # forward slashes on every platform.
+    default_world = Path(pkg_share, "worlds", "default.sdf").as_posix()
     # When headless: server-only (-s) with EGL rendering (--headless-rendering)
     # so OGRE2 still renders camera sensors without an X display. Otherwise:
     # normal GUI launch.
-    # macOS cannot run the gz server and the Qt GUI in one process: Cocoa needs
-    # the GUI on the main thread, so `gz sim` refuses and exits(-1) unless given
-    # -s or -g (gazebosim/gz-sim#44, enforced in the ruby entry point). Run the
-    # server with -s here and start `gz sim -g` as a second process below.
-    gui_server_args = "-s -r " if _IS_DARWIN else "-r "
+    # See _SPLIT_GZ_GUI: macOS and Windows both refuse a combined server+GUI
+    # process, so run the server with -s and start the GUI separately below.
+    gui_server_args = "-s -r " if _SPLIT_GZ_GUI else "-r "
     gz_args = PythonExpression(
         [
             "'-s -r --headless-rendering ",
@@ -303,13 +320,13 @@ def generate_launch_description():
     # Second process for the Qt GUI on macOS (see gz_args). Delayed so the
     # server's transport is advertising before the GUI connects to it.
     gazebo_gui_actions = []
-    if _IS_DARWIN:
+    if _SPLIT_GZ_GUI:
         gazebo_gui_actions.append(
             TimerAction(
                 period=6.0,
                 actions=[
                     ExecuteProcess(
-                        cmd=["gz", "sim", "-g"],
+                        cmd=_gz_gui_cmd(),
                         name="gazebo_gui",
                         output="screen",
                         condition=UnlessCondition(LaunchConfiguration("headless")),
