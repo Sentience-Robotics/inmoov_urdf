@@ -14,6 +14,14 @@ if(BUILD_TESTING)
   set(ament_cmake_flake8_CONFIG_FILE "${CMAKE_CURRENT_SOURCE_DIR}/ament_flake8.ini")
   find_package(ament_cmake_pytest REQUIRED)
   find_package(ament_lint_auto REQUIRED)
+  # uncrustify/cppcheck are often missing on RoboStack Windows runners
+  set(AMENT_LINT_AUTO_EXCLUDE
+    ament_cmake_uncrustify
+    ament_cmake_cppcheck
+  )
+  if(WIN32)
+    list(APPEND AMENT_LINT_AUTO_EXCLUDE ament_cmake_cpplint)
+  endif()
   ament_lint_auto_find_test_dependencies()
   ament_add_pytest_test(xacro_smoke test/test_xacro_smoke.py
     TIMEOUT 180
