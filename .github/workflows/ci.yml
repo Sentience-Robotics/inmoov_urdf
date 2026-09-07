@@ -10,10 +10,10 @@ on:
 
 jobs:
   build-and-test:
-    name: Build and test (thais_urdf)
+    name: Build and test (inmoov_urdf)
     runs-on: ubuntu-latest
     container:
-      image: osrf/ros:humble-desktop
+      image: osrf/ros:jazzy-desktop
     # Colcon tree must live next to the checkout, not under it: copying $GITHUB_WORKSPACE
     # into workspace/ws/... would copy a directory into its own subtree ("cannot copy into itself").
     # COLCON_WS must be canonical (no ..): upload-artifact@v4 rejects paths with relative segments.
@@ -36,7 +36,8 @@ jobs:
             build-essential \
             cmake \
             git \
-            gz-harmonic
+            ros-jazzy-ros-gz \
+            ros-jazzy-gz-ros2-control
           # Do not rm -rf /var/lib/apt/lists/* here; rosdep uses apt next and needs indexes.
           rosdep init || true
           rosdep update
@@ -48,7 +49,7 @@ jobs:
         run: |
           set -e
           mkdir -p "${COLCON_WS}/src"
-          cp -a "${GITHUB_WORKSPACE}" "${COLCON_WS}/src/thais_urdf"
+          cp -a "${GITHUB_WORKSPACE}" "${COLCON_WS}/src/inmoov_urdf"
 
       - name: rosdep install
         working-directory: ${{ env.COLCON_WS }}
@@ -56,26 +57,26 @@ jobs:
         run: |
           set -e
           apt-get update
-          source /opt/ros/humble/setup.bash
+          source /opt/ros/jazzy/setup.bash
           rosdep install --from-paths src --ignore-src -r -y
 
       - name: colcon build
         working-directory: ${{ env.COLCON_WS }}
         shell: bash
         run: |
-          source /opt/ros/humble/setup.bash
+          source /opt/ros/jazzy/setup.bash
           colcon build --symlink-install \
-            --packages-select thais_urdf \
+            --packages-select inmoov_urdf \
             --cmake-args -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON
 
       - name: colcon test
         working-directory: ${{ env.COLCON_WS }}
         shell: bash
         run: |
-          source /opt/ros/humble/setup.bash
+          source /opt/ros/jazzy/setup.bash
           source install/setup.bash
           colcon test \
-            --packages-select thais_urdf \
+            --packages-select inmoov_urdf \
             --event-handlers console_direct+ \
             --pytest-args "--tb=short -vv"
 
@@ -83,7 +84,7 @@ jobs:
         working-directory: ${{ env.COLCON_WS }}
         shell: bash
         run: |
-          source /opt/ros/humble/setup.bash
+          source /opt/ros/jazzy/setup.bash
           source install/setup.bash
           colcon test-result --verbose
 
@@ -93,14 +94,14 @@ jobs:
         if: success()
         run: |
           set -e
-          source /opt/ros/humble/setup.bash
+          source /opt/ros/jazzy/setup.bash
           source install/setup.bash
           mkdir -p build/coverage_reports
-          python3 -m pytest src/thais_urdf/test/ \
-            --cov=src/thais_urdf/launch \
-            --cov=src/thais_urdf/test \
-            --cov-report=xml:build/coverage_reports/thais_urdf.xml \
-            --cov-report=html:build/coverage_reports/html_thais_urdf \
+          python3 -m pytest src/inmoov_urdf/test/ \
+            --cov=src/inmoov_urdf/launch \
+            --cov=src/inmoov_urdf/test \
+            --cov-report=xml:build/coverage_reports/inmoov_urdf.xml \
+            --cov-report=html:build/coverage_reports/html_inmoov_urdf \
             --cov-report=term-missing \
             --cov-branch
 
@@ -109,15 +110,15 @@ jobs:
         if: success()
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ${{ env.COLCON_WS }}/build/coverage_reports/thais_urdf.xml
-          flags: thais_urdf
-          name: thais_urdf
+          files: ${{ env.COLCON_WS }}/build/coverage_reports/inmoov_urdf.xml
+          flags: inmoov_urdf
+          name: inmoov_urdf
           fail_ci_if_error: false
 
       - name: Upload coverage artifacts (XML + HTML)
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: coverage-thais_urdf
+          name: coverage-inmoov_urdf
           path: ${{ env.COLCON_WS }}/build/coverage_reports/
           retention-days: 14

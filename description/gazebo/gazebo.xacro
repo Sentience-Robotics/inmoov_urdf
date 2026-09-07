@@ -379,7 +379,7 @@
   </ros2_control>
 
   <gazebo>
-    <plugin filename="libmock_sensor.so" name="mock_sensor::MockSensorSystem">
+    <plugin filename="mock_sensor" name="mock_sensor::MockSensorSystem">
       <update_rate>10</update_rate>
       <topic_name>sensors/left_arm</topic_name>
         <sensor/>
@@ -390,7 +390,7 @@
     </plugin>
   </gazebo>
   <gazebo>
-    <plugin filename="libmock_sensor.so" name="mock_sensor::MockSensorSystem">
+    <plugin filename="mock_sensor" name="mock_sensor::MockSensorSystem">
       <update_rate>10</update_rate>
       <topic_name>sensors/right_arm</topic_name>
         <sensor/>

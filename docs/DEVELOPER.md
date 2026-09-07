@@ -1,6 +1,6 @@
 # Developer guide — `inmoov_urdf`
 
-ROS 2 **Humble**. For contributors who change URDF/xacro, meshes, RViz config, hardware YAML, or launch files. Bringup, hardware plugin, and cameras live in **`lucy_ros_packages`** ([Sentience-Robotics/lucy_ros_packages](https://github.com/Sentience-Robotics/lucy_ros_packages) → `docs/DEVELOPER.md`).
+ROS 2 **Jazzy** (Ubuntu 24.04). For contributors who change URDF/xacro, meshes, RViz config, hardware YAML, or launch files. Bringup, hardware plugin, and cameras live in **`lucy_ros_packages`** ([Sentience-Robotics/lucy_ros_packages](https://github.com/Sentience-Robotics/lucy_ros_packages) → `docs/DEVELOPER.md`).
 
 ---
 
@@ -228,7 +228,7 @@ Flags:
 - `--step-deg`, `--margin-deg` — sweep granularity / safety margin.
 - `--apply` — write the limits back to `robot_description.urdf.xacro`.
 
-PyBullet ships in the `lucy_ros2:humble` image via `Dockerfile.humble`; for host-side runs, see `scripts/requirements.txt`.
+PyBullet ships in the `lucy_ros2:jazzy` image via `Dockerfile.jazzy`; for host-side runs, see `scripts/requirements.txt`.
 
 Treat the result as an **upper bound on the kinematic envelope**, not the real end-stop. Override by hand for mechanical stops the URDF can't model (cable tension, gear stops), important poses outside the per-axis sweep from neutral, and finger meshes that overlap at the bind pose.
 
@@ -267,7 +267,7 @@ This restarts `robot_state_publisher` + `ros2_control` with the new URDF. **Cave
 | `scripts/autocalibrate_joint_limits.py` | Self-collision-bound joint-limit sweep in PyBullet. Optional `--apply` to write back. | `--apply` overwrites previous auto-cal values; manual values can be re-applied on top. |
 | `scripts/scale_xacro_origins.py` | One-shot maintenance: wrap raw `xyz` / primitive sizes with `${model_scale * N}`. | No — run once per migration; check the diff carefully. |
 
-`scripts/requirements.txt` is for host-side PyBullet runs only; CI / Docker image installs it via `Dockerfile.humble`.
+`scripts/requirements.txt` is for host-side PyBullet runs only; CI / Docker image installs it via `Dockerfile.jazzy`.
 
 ---
 

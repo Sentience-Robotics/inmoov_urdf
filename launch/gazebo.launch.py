@@ -22,17 +22,20 @@
 # frames without an X server — the ros_gz camera bridge stays functional.
 
 import os
+import sys
 from pathlib import Path
 
-import yaml
 from ament_index_python.packages import get_package_prefix, get_package_share_directory
+from launch import LaunchDescription
 from launch.actions import (
     DeclareLaunchArgument,
+    ExecuteProcess,
     IncludeLaunchDescription,
     OpaqueFunction,
     SetEnvironmentVariable,
     TimerAction,
 )
+from launch.conditions import UnlessCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import (
     LaunchConfiguration,
@@ -40,8 +43,10 @@ from launch.substitutions import (
 )
 from launch_ros.actions import Node
 from lucy_control_supervisor.controllers_spawn import controllers_to_spawn
+import yaml
 
-from launch import LaunchDescription
+
+_IS_DARWIN = sys.platform == "darwin"
 
 
 def _gz_ros2_control_plugin_path():
@@ -51,7 +56,7 @@ def _gz_ros2_control_plugin_path():
         share = get_package_share_directory("gz_ros2_control")
         return os.path.join(os.path.dirname(share), "lib") + os.pathsep + plugin_path
     except Exception:
-        return "/opt/ros/humble/lib" + os.pathsep + plugin_path
+        return "/opt/ros/jazzy/lib" + os.pathsep + plugin_path
 
 
 _DEFAULT_GENERATED_FILES = {
@@ -128,8 +133,43 @@ def _sim_camera_topics(pkg_share: str) -> list[tuple[str, str]]:
     return []
 
 
+def _gpu_env_actions(context, *args, **kwargs):
+    """Headless/Jetson EGL needs a writable runtime dir; GUI must keep the user session dir."""
+    headless = LaunchConfiguration("headless").perform(context).lower().strip()
+    gpu_mode = os.environ.get("LUCY_GPU_MODE", "").lower()
+    actions = []
+    if headless in ("true", "1", "yes") or gpu_mode in ("jetson", "nvidia"):
+        actions.append(
+            SetEnvironmentVariable(name="XDG_RUNTIME_DIR", value="/tmp/runtime-root")
+        )
+    if gpu_mode in ("jetson", "nvidia"):
+        actions.extend(
+            [
+                SetEnvironmentVariable(
+                    name="__EGL_VENDOR_LIBRARY_FILENAMES",
+                    value="/usr/share/glvnd/egl_vendor.d/10_nvidia.json",
+                ),
+                SetEnvironmentVariable(
+                    name="__GLX_VENDOR_LIBRARY_NAME", value="nvidia"
+                ),
+            ]
+        )
+    else:
+        # NixOS: Pixi OGRE needs host Mesa EGL (GLX fails on Wayland/XWayland).
+        nix_mesa = "/run/opengl-driver/share/glvnd/egl_vendor.d/50_mesa.json"
+        if os.path.isfile(nix_mesa):
+            actions.append(
+                SetEnvironmentVariable(
+                    name="__EGL_VENDOR_LIBRARY_FILENAMES", value=nix_mesa
+                )
+            )
+    if not os.environ.get("GZ_IP"):
+        actions.append(SetEnvironmentVariable(name="GZ_IP", value="127.0.0.1"))
+    return actions
+
+
 def generate_launch_description():
-    ros_distro = os.environ.get("ROS_DISTRO", "humble").lower()
+    ros_distro = os.environ.get("ROS_DISTRO", "jazzy").lower()
     pkg_share = get_package_share_directory("inmoov_urdf")
     default_base = os.path.join(pkg_share, "description")
     generated = _active_generated_files(pkg_share)
@@ -199,24 +239,23 @@ def generate_launch_description():
                 parameters=[{"use_sim_time": True}],
                 output="screen",
             )
-        else:
-            return Node(
-                package="image_transport",
-                executable="republish",
-                name="camera_compressor_" + safe,
-                remappings=[
-                    ("in", topic),
-                    ("out/compressed", compressed_topic),
-                ],
-                parameters=[
-                    {
-                        "use_sim_time": True,
-                        "in_transport": "raw",
-                        "out_transport": "compressed",
-                    }
-                ],
-                output="screen",
-            )
+        return Node(
+            package="image_transport",
+            executable="republish",
+            name="camera_compressor_" + safe,
+            remappings=[
+                ("in", topic),
+                ("out/compressed", compressed_topic),
+            ],
+            parameters=[
+                {
+                    "use_sim_time": True,
+                    "in_transport": "raw",
+                    "out_transport": "compressed",
+                }
+            ],
+            output="screen",
+        )
 
     camera_compressors = [
         _camera_compressor(topic, compressed_topic)
@@ -232,11 +271,16 @@ def generate_launch_description():
         gz_sim_share = get_package_share_directory("ros_gz_sim")
         gz_sim_launch_path = os.path.join(gz_sim_share, "launch", "gz_sim.launch.py")
     except Exception:
-        gz_sim_launch_path = "/opt/ros/humble/share/ros_gz_sim/launch/gz_sim.launch.py"
+        gz_sim_launch_path = "/opt/ros/jazzy/share/ros_gz_sim/launch/gz_sim.launch.py"
     default_world = os.path.join(pkg_share, "worlds", "default.sdf")
     # When headless: server-only (-s) with EGL rendering (--headless-rendering)
     # so OGRE2 still renders camera sensors without an X display. Otherwise:
     # normal GUI launch.
+    # macOS cannot run the gz server and the Qt GUI in one process: Cocoa needs
+    # the GUI on the main thread, so `gz sim` refuses and exits(-1) unless given
+    # -s or -g (gazebosim/gz-sim#44, enforced in the ruby entry point). Run the
+    # server with -s here and start `gz sim -g` as a second process below.
+    gui_server_args = "-s -r " if _IS_DARWIN else "-r "
     gz_args = PythonExpression(
         [
             "'-s -r --headless-rendering ",
@@ -245,7 +289,8 @@ def generate_launch_description():
             " if '",
             LaunchConfiguration("headless"),
             "'.lower() in ('true', '1', 'yes') ",
-            "else '-r ",
+            "else '",
+            gui_server_args,
             default_world,
             "'",
         ]
@@ -255,12 +300,35 @@ def generate_launch_description():
         launch_arguments={"gz_args": gz_args}.items(),
     )
 
-    spawn_robot = Node(
-        package="ros_gz_sim",
-        executable="create",
-        arguments=["-name", "lucy", "-topic", "robot_description", "-z", "0.5"],
-        output="screen",
-        parameters=[{"use_sim_time": True}],
+    # Second process for the Qt GUI on macOS (see gz_args). Delayed so the
+    # server's transport is advertising before the GUI connects to it.
+    gazebo_gui_actions = []
+    if _IS_DARWIN:
+        gazebo_gui_actions.append(
+            TimerAction(
+                period=6.0,
+                actions=[
+                    ExecuteProcess(
+                        cmd=["gz", "sim", "-g"],
+                        name="gazebo_gui",
+                        output="screen",
+                        condition=UnlessCondition(LaunchConfiguration("headless")),
+                    )
+                ],
+            )
+        )
+
+    spawn_robot = TimerAction(
+        period=8.0,
+        actions=[
+            Node(
+                package="ros_gz_sim",
+                executable="create",
+                arguments=["-name", "lucy", "-topic", "robot_description", "-z", "0.0"],
+                output="screen",
+                parameters=[{"use_sim_time": True}],
+            )
+        ],
     )
     mesh_dae = get_package_share_directory("inmoov_urdf")
 
@@ -308,14 +376,16 @@ def generate_launch_description():
             urdf_path_arg,
             ros2_control_file_arg,
             headless_arg,
+            OpaqueFunction(function=_gpu_env_actions),
             SetEnvironmentVariable(name="GZ_SIM_RESOURCE_PATH", value=mesh_dae),
             SetEnvironmentVariable(
                 name="GZ_SIM_SYSTEM_PLUGIN_PATH", value=gz_plugin_path
             ),
             supervisor,
             OpaqueFunction(function=spawner_actions_from_yaml),
-            spawn_robot,
             gz_sim_launch,
+            *gazebo_gui_actions,
+            spawn_robot,
             bridge,
             *camera_compressors,
         ]

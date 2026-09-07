@@ -35,5 +35,5 @@ def run_xacro(args: Sequence[str], *, timeout: int = 120) -> subprocess.Complete
     elif shutil.which("ros2"):
         cmd = ["ros2", "run", "xacro", "xacro", *args]
     else:
-        pytest.skip("xacro not on PATH (run inside lucy_ros2:humble image)")
+        pytest.skip("xacro not on PATH (run inside lucy_ros2:jazzy image)")
     return subprocess.run(cmd, capture_output=True, text=True, timeout=timeout, check=False)
