@@ -18,4 +18,14 @@ if the measured factor changes.
 
   <xacro:property name="model_scale" value="0.1196"/>
 
+  <!--
+  Tendon coupling for the fingers. Each finger is driven by one servo pulling a
+  single string through all its phalanges, so the middle and distal joints are
+  <mimic> joints following the proximal joint (index/majeure/ringFinger/pinky,
+  and thumb3 following thumb). 1.0 = every phalanx curls by the same angle.
+  Lower the distal ratio if the modelled fist curls tighter than the hardware.
+  -->
+  <xacro:property name="finger_mid_ratio" value="1.0"/>
+  <xacro:property name="finger_distal_ratio" value="1.0"/>
+
 </robot>
