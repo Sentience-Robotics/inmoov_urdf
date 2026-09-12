@@ -14,16 +14,39 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-# Real robot / RViz-only: lucy_control_supervisor owns RSP + ros2_control_node + spawners.
+# Real robot / RViz-only: lucy_control_supervisor owns RSP + ros2_control_node;
+# spawners are started here.
 
 from pathlib import Path
 
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, TimerAction
+from launch.actions import (
+    DeclareLaunchArgument,
+    IncludeLaunchDescription,
+    OpaqueFunction,
+    RegisterEventHandler,
+    TimerAction,
+)
+from launch.event_handlers import OnProcessExit
 from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch_ros.actions import Node
 from launch.substitutions import LaunchConfiguration
 import yaml
+
+
+def controllers_to_spawn(controllers_yaml_path: Path) -> list[str]:
+    """Return controller names under controller_manager.ros__parameters (except update_rate)."""
+    data = yaml.safe_load(controllers_yaml_path.read_text(encoding='utf-8')) or {}
+    cm_params = data.get('controller_manager', {}).get('ros__parameters', {})
+    if not isinstance(cm_params, dict):
+        return []
+    names = [name for name in cm_params.keys() if name != 'update_rate']
+    jsb = 'joint_state_broadcaster'
+    if jsb in names:
+        names.remove(jsb)
+        return [jsb, *names]
+    return names
 
 
 _DEFAULT_GENERATED_FILES = {
@@ -107,6 +130,41 @@ def generate_launch_description():
         description="Generated ros2_control xacro basename (generated_files in active.yaml)",
     )
 
+    def spawner_actions_from_yaml(context, *args, **kwargs):
+        """
+        Spawn controllers, chained so only one waits on controller_manager at a time.
+
+        A spawner holds a global lock while waiting for the controller_manager
+        services, so concurrent ones each burn a full 20s lock attempt. Chaining
+        on exit also avoids guessing how long the supervisor takes to bring the
+        manager up: the first spawner simply waits for the service.
+        """
+        yaml_path = LaunchConfiguration("controllers_yaml").perform(context)
+        names = controllers_to_spawn(Path(yaml_path))
+        if not names:
+            return []
+
+        def spawner(name: str) -> Node:
+            return Node(
+                package="controller_manager",
+                executable="spawner",
+                arguments=[name, "--switch-timeout", "10"],
+                output="screen",
+            )
+
+        first = spawner(names[0])
+        actions = [first]
+        previous = first
+        for name in names[1:]:
+            following = spawner(name)
+            actions.append(
+                RegisterEventHandler(
+                    OnProcessExit(target_action=previous, on_exit=[following])
+                )
+            )
+            previous = following
+        return actions
+
     supervisor_launch = TimerAction(
         period=2.0,
         actions=[
@@ -135,6 +193,7 @@ def generate_launch_description():
             base_path_arg,
             use_mock_hardware_arg,
             ros2_control_file_arg,
+            OpaqueFunction(function=spawner_actions_from_yaml),
             supervisor_launch,
         ]
     )

@@ -100,6 +100,7 @@
     <parent link="i01.leftHand.index_link"/>
     <child link="i01.leftHand.index2_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
+    <mimic joint="i01.leftHand.index_link_joint" multiplier="${finger_mid_ratio}" offset="0.0"/>
   </joint>
   <joint name="i01.torso.midStom_link_joint" type="revolute">
     <limit lower="-1.57080" upper="1.57080" effort="100.00000" velocity="0.78540"/><!-- hand-set: -90.0 deg .. 90.0 deg -->
@@ -116,6 +117,7 @@
     <parent link="i01.leftHand.index2_link"/>
     <child link="i01.leftHand.index3_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
+    <mimic joint="i01.leftHand.index_link_joint" multiplier="${finger_distal_ratio}" offset="0.0"/>
   </joint>
   <joint name="i01.leftHand.majeure_link_joint" type="revolute">
     <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/><!-- autocalibrated: 0.0 deg .. 90.0 deg (hit_lower=False, hit_upper=False) -->
@@ -132,6 +134,7 @@
     <parent link="i01.leftHand.majeure_link"/>
     <child link="i01.leftHand.majeure2_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
+    <mimic joint="i01.leftHand.majeure_link_joint" multiplier="${finger_mid_ratio}" offset="0.0"/>
   </joint>
   <joint name="i01.leftHand.majeure3_link_joint" type="revolute">
     <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
@@ -140,6 +143,7 @@
     <parent link="i01.leftHand.majeure2_link"/>
     <child link="i01.leftHand.majeure3_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
+    <mimic joint="i01.leftHand.majeure_link_joint" multiplier="${finger_distal_ratio}" offset="0.0"/>
   </joint>
   <joint name="i01.leftHand.pinky0_link_joint" type="revolute">
     <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
@@ -164,6 +168,7 @@
     <parent link="i01.leftHand.pinky_link"/>
     <child link="i01.leftHand.pinky2_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
+    <mimic joint="i01.leftHand.pinky_link_joint" multiplier="${finger_mid_ratio}" offset="0.0"/>
   </joint>
   <joint name="i01.leftHand.pinky3_link_joint" type="revolute">
     <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
@@ -172,6 +177,7 @@
     <parent link="i01.leftHand.pinky2_link"/>
     <child link="i01.leftHand.pinky3_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
+    <mimic joint="i01.leftHand.pinky_link_joint" multiplier="${finger_distal_ratio}" offset="0.0"/>
   </joint>
   <joint name="i01.leftHand.ringfinger0_link_joint" type="revolute">
     <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
@@ -204,6 +210,7 @@
     <parent link="i01.leftHand.ringFinger_link"/>
     <child link="i01.leftHand.ringfinger2_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
+    <mimic joint="i01.leftHand.ringFinger_link_joint" multiplier="${finger_mid_ratio}" offset="0.0"/>
   </joint>
   <joint name="i01.leftHand.ringfinger3_link_joint" type="revolute">
     <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
@@ -212,6 +219,7 @@
     <parent link="i01.leftHand.ringfinger2_link"/>
     <child link="i01.leftHand.ringfinger3_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
+    <mimic joint="i01.leftHand.ringFinger_link_joint" multiplier="${finger_distal_ratio}" offset="0.0"/>
   </joint>
   <joint name="i01.leftHand.thumb1_link_joint" type="revolute">
     <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
@@ -236,6 +244,7 @@
     <parent link="i01.leftHand.thumb_link"/>
     <child link="i01.leftHand.thumb3_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
+    <mimic joint="i01.leftHand.thumb_link_joint" multiplier="${finger_distal_ratio}" offset="0.0"/>
   </joint>
   <joint name="right_shoulder_y_link_joint" type="revolute">
     <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/><!-- autocalibrated: 0.0 deg .. 90.0 deg (hit_lower=False, hit_upper=False) -->
@@ -308,6 +317,7 @@
     <parent link="i01.rightHand.index_link"/>
     <child link="i01.rightHand.index2_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
+    <mimic joint="i01.rightHand.index_link_joint" multiplier="${finger_mid_ratio}" offset="0.0"/>
   </joint>
   <joint name="i01.rightHand.index3_link_joint" type="revolute">
     <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
@@ -316,6 +326,7 @@
     <parent link="i01.rightHand.index2_link"/>
     <child link="i01.rightHand.index3_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
+    <mimic joint="i01.rightHand.index_link_joint" multiplier="${finger_distal_ratio}" offset="0.0"/>
   </joint>
   <joint name="i01.rightHand.majeure_link_joint" type="revolute">
     <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/><!-- autocalibrated: 0.0 deg .. 90.0 deg (hit_lower=False, hit_upper=False) -->
@@ -332,6 +343,7 @@
     <parent link="i01.rightHand.majeure_link"/>
     <child link="i01.rightHand.majeure2_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
+    <mimic joint="i01.rightHand.majeure_link_joint" multiplier="${finger_mid_ratio}" offset="0.0"/>
   </joint>
   <joint name="i01.rightHand.majeure3_link_joint" type="revolute">
     <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
@@ -340,6 +352,7 @@
     <parent link="i01.rightHand.majeure2_link"/>
     <child link="i01.rightHand.majeure3_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
+    <mimic joint="i01.rightHand.majeure_link_joint" multiplier="${finger_distal_ratio}" offset="0.0"/>
   </joint>
   <joint name="i01.rightHand.pinky0_link_joint" type="revolute">
     <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
@@ -364,6 +377,7 @@
     <parent link="i01.rightHand.pinky_link"/>
     <child link="i01.rightHand.pinky2_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
+    <mimic joint="i01.rightHand.pinky_link_joint" multiplier="${finger_mid_ratio}" offset="0.0"/>
   </joint>
   <joint name="i01.head.rollNeck_link_joint" type="revolute">
     <limit lower="-0.34907" upper="0.34907" effort="100.00000" velocity="0.78540"/><!-- hand-set: -20.0 deg .. 20.0 deg -->
@@ -380,6 +394,7 @@
     <parent link="i01.rightHand.pinky2_link"/>
     <child link="i01.rightHand.pinky3_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
+    <mimic joint="i01.rightHand.pinky_link_joint" multiplier="${finger_distal_ratio}" offset="0.0"/>
   </joint>
   <joint name="i01.rightHand.ringfinger0_link_joint" type="revolute">
     <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
@@ -404,6 +419,7 @@
     <parent link="i01.rightHand.ringFinger_link"/>
     <child link="i01.rightHand.ringfinger2_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
+    <mimic joint="i01.rightHand.ringFinger_link_joint" multiplier="${finger_mid_ratio}" offset="0.0"/>
   </joint>
   <joint name="i01.rightHand.ringfinger3_link_joint" type="revolute">
     <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
@@ -412,6 +428,7 @@
     <parent link="i01.rightHand.ringfinger2_link"/>
     <child link="i01.rightHand.ringfinger3_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
+    <mimic joint="i01.rightHand.ringFinger_link_joint" multiplier="${finger_distal_ratio}" offset="0.0"/>
   </joint>
   <joint name="i01.rightHand.thumb1_link_joint" type="revolute">
     <limit lower="0.00000" upper="1.57080" effort="100.00000" velocity="0.78540"/>
@@ -436,6 +453,7 @@
     <parent link="i01.rightHand.thumb_link"/>
     <child link="i01.rightHand.thumb3_link"/>
     <axis xyz="-0.99994 0.00000 0.01111"/>
+    <mimic joint="i01.rightHand.thumb_link_joint" multiplier="${finger_distal_ratio}" offset="0.0"/>
   </joint>
   <joint name="i01.head.rothead_link_joint" type="revolute">
     <limit lower="-1.57080" upper="1.57080" effort="100.00000" velocity="0.78540"/><!-- hand-set: -90.0 deg .. 90.0 deg -->
