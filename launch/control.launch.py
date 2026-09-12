@@ -131,7 +131,8 @@ def generate_launch_description():
     )
 
     def spawner_actions_from_yaml(context, *args, **kwargs):
-        """Spawners, chained so only one waits on controller_manager at a time.
+        """
+        Spawn controllers, chained so only one waits on controller_manager at a time.
 
         A spawner holds a global lock while waiting for the controller_manager
         services, so concurrent ones each burn a full 20s lock attempt. Chaining
