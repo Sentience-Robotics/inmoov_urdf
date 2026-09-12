@@ -139,7 +139,7 @@
           <param name="servo_type">300</param>
           <param name="offset_deg">0</param>
           <param name="direction">1</param>
-          <param name="scale">0.25</param>
+          <param name="scale">1</param>
           <param name="servo_min_deg">0</param>
           <param name="servo_max_deg">180</param>
           <param name="servo_default_deg">0</param>

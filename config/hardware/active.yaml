@@ -253,7 +253,7 @@ actuators:
     servo_type: '300'
     offset_deg: 0
     direction: 1
-    scale: 0.25
+    scale: 1
     servo_min_deg: 0
     servo_max_deg: 180
     servo_default_deg: 0
