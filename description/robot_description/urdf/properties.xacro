@@ -19,9 +19,8 @@ if the measured factor changes.
   <xacro:property name="model_scale" value="0.1196"/>
 
   <!--
-  One servo pulls a single tendon through each finger, so the middle and distal
-  phalanges mimic the proximal joint. 1.0 curls every phalanx by the same angle;
-  lower the distal ratio if the model curls tighter than the hardware.
+  One servo pulls a single tendon through each finger, so the two last phalanges mimic the proximal joint.
+  1.0 curls every phalanx by the same angle.
   -->
   <xacro:property name="finger_mid_ratio" value="1.0"/>
   <xacro:property name="finger_distal_ratio" value="1.0"/>
