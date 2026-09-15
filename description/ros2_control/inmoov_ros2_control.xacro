@@ -11,7 +11,7 @@
       </xacro:if>
       <xacro:unless value="$(arg use_mock_hardware)">
         <param name="publisher_topic">actuators/left_arm</param>
-        <param name="node_name">lucy_hardware_interface_left_arm</param>
+        <param name="node_name">left_arm</param>
       </xacro:unless>
     </hardware>
       <joint name="left_shoulder_z_link_joint">
@@ -158,7 +158,7 @@
       </xacro:if>
       <xacro:unless value="$(arg use_mock_hardware)">
         <param name="publisher_topic">actuators/right_arm</param>
-        <param name="node_name">lucy_hardware_interface_right_arm</param>
+        <param name="node_name">right_arm</param>
       </xacro:unless>
     </hardware>
       <joint name="right_shoulder_z_link_joint">
@@ -305,7 +305,7 @@
       </xacro:if>
       <xacro:unless value="$(arg use_mock_hardware)">
         <param name="publisher_topic">actuators/torso</param>
-        <param name="node_name">lucy_hardware_interface_torso_head</param>
+        <param name="node_name">torso_head</param>
       </xacro:unless>
     </hardware>
       <joint name="left_shoulder_y_link_joint">
