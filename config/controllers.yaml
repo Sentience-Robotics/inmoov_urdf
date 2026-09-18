@@ -6,10 +6,6 @@ controller_manager:
       type: joint_state_broadcaster/JointStateBroadcaster
     left_arm_controller:
       type: joint_trajectory_controller/JointTrajectoryController
-    right_arm_controller:
-      type: joint_trajectory_controller/JointTrajectoryController
-    torso_head_controller:
-      type: joint_trajectory_controller/JointTrajectoryController
 
 joint_state_broadcaster:
   ros__parameters:
@@ -27,7 +23,6 @@ joint_state_broadcaster:
 
 left_arm_controller:
   ros__parameters:
-    # Position-only interfaces: interpolate from last command (no velocity state).
     interpolate_from_desired_state: true
     allow_nonzero_velocity_at_trajectory_end: false
     joints:
@@ -40,49 +35,6 @@ left_arm_controller:
       - i01.leftHand.majeure_link_joint
       - i01.leftHand.ringFinger_link_joint
       - i01.leftHand.pinky_link_joint
-    command_interfaces:
-      - position
-    state_interfaces:
-      - position
-
-right_arm_controller:
-  ros__parameters:
-    # Position-only interfaces: interpolate from last command (no velocity state).
-    interpolate_from_desired_state: true
-    allow_nonzero_velocity_at_trajectory_end: false
-    joints:
-      - right_shoulder_z_link_joint
-      - right_shoulder_x_link_joint
-      - right_elbow_x_link_joint
-      - right_wrist_z_link_joint
-      - i01.rightHand.thumb_link_joint
-      - i01.rightHand.index_link_joint
-      - i01.rightHand.majeure_link_joint
-      - i01.rightHand.ringFinger_link_joint
-      - i01.rightHand.pinky_link_joint
-    command_interfaces:
-      - position
-    state_interfaces:
-      - position
-
-torso_head_controller:
-  ros__parameters:
-    # Position-only interfaces: interpolate from last command (no velocity state).
-    interpolate_from_desired_state: true
-    allow_nonzero_velocity_at_trajectory_end: false
-    joints:
-      - left_shoulder_y_link_joint
-      - right_shoulder_y_link_joint
-      - i01.torso.midStom_link_joint
-      - i01.torso.topStom_link_joint
-      - i01.head.rothead_link_joint
-      - i01.head.rollNeck_link_joint
-      - i01.head.neck.001_link_joint
-      - i01.head.jaw_link_joint
-      - i01.head.eyeRight_link_joint
-      - i01.head.eyeRight.001_link_joint
-      - i01.head.eyeLeft_link_joint
-      - i01.head.eyeLeft.001_link_joint
     command_interfaces:
       - position
     state_interfaces:

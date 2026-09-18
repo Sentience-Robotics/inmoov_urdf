@@ -17,12 +17,12 @@
       <joint name="left_shoulder_z_link_joint">
           <param name="virtual_pin">0</param>
           <param name="servo_type">270</param>
-          <param name="offset_deg">90</param>
+          <param name="offset_rad">1.5708</param>
           <param name="direction">1</param>
           <param name="scale">1</param>
-          <param name="servo_min_deg">0</param>
-          <param name="servo_max_deg">180</param>
-          <param name="servo_default_deg">90</param>
+          <param name="servo_min_rad">0</param>
+          <param name="servo_max_rad">3.14159</param>
+          <param name="servo_default_rad">1.5708</param>
           <command_interface name="position">
             <param name="min">-0.9163</param>
             <param name="max">0.47124</param>
@@ -32,12 +32,12 @@
       <joint name="left_shoulder_x_link_joint">
           <param name="virtual_pin">1</param>
           <param name="servo_type">270</param>
-          <param name="offset_deg">0</param>
+          <param name="offset_rad">0</param>
           <param name="direction">1</param>
           <param name="scale">1</param>
-          <param name="servo_min_deg">0</param>
-          <param name="servo_max_deg">180</param>
-          <param name="servo_default_deg">0</param>
+          <param name="servo_min_rad">0</param>
+          <param name="servo_max_rad">3.14159</param>
+          <param name="servo_default_rad">0</param>
           <command_interface name="position">
             <param name="min">-1.5708</param>
             <param name="max">2.35619</param>
@@ -47,12 +47,12 @@
       <joint name="left_elbow_x_link_joint">
           <param name="virtual_pin">2</param>
           <param name="servo_type">270</param>
-          <param name="offset_deg">0</param>
+          <param name="offset_rad">0</param>
           <param name="direction">1</param>
           <param name="scale">1</param>
-          <param name="servo_min_deg">0</param>
-          <param name="servo_max_deg">180</param>
-          <param name="servo_default_deg">0</param>
+          <param name="servo_min_rad">0</param>
+          <param name="servo_max_rad">3.14159</param>
+          <param name="servo_default_rad">0</param>
           <command_interface name="position">
             <param name="min">0.0</param>
             <param name="max">1.5708</param>
@@ -62,12 +62,12 @@
       <joint name="left_wrist_z_link_joint">
           <param name="virtual_pin">3</param>
           <param name="servo_type">300</param>
-          <param name="offset_deg">150</param>
+          <param name="offset_rad">2.61799</param>
           <param name="direction">1</param>
           <param name="scale">1</param>
-          <param name="servo_min_deg">0</param>
-          <param name="servo_max_deg">300</param>
-          <param name="servo_default_deg">150</param>
+          <param name="servo_min_rad">0</param>
+          <param name="servo_max_rad">5.23599</param>
+          <param name="servo_default_rad">2.61799</param>
           <command_interface name="position">
             <param name="min">-1.5708</param>
             <param name="max">1.5708</param>
@@ -77,12 +77,12 @@
       <joint name="i01.leftHand.thumb_link_joint">
           <param name="virtual_pin">4</param>
           <param name="servo_type">300</param>
-          <param name="offset_deg">0</param>
+          <param name="offset_rad">0</param>
           <param name="direction">1</param>
           <param name="scale">1</param>
-          <param name="servo_min_deg">0</param>
-          <param name="servo_max_deg">180</param>
-          <param name="servo_default_deg">0</param>
+          <param name="servo_min_rad">0</param>
+          <param name="servo_max_rad">3.14159</param>
+          <param name="servo_default_rad">0</param>
           <command_interface name="position">
             <param name="min">0.0</param>
             <param name="max">1.5708</param>
@@ -92,12 +92,12 @@
       <joint name="i01.leftHand.index_link_joint">
           <param name="virtual_pin">5</param>
           <param name="servo_type">300</param>
-          <param name="offset_deg">0</param>
+          <param name="offset_rad">0</param>
           <param name="direction">1</param>
           <param name="scale">1</param>
-          <param name="servo_min_deg">0</param>
-          <param name="servo_max_deg">180</param>
-          <param name="servo_default_deg">0</param>
+          <param name="servo_min_rad">0</param>
+          <param name="servo_max_rad">3.14159</param>
+          <param name="servo_default_rad">0</param>
           <command_interface name="position">
             <param name="min">0.0</param>
             <param name="max">1.5708</param>
@@ -107,12 +107,12 @@
       <joint name="i01.leftHand.majeure_link_joint">
           <param name="virtual_pin">6</param>
           <param name="servo_type">300</param>
-          <param name="offset_deg">0</param>
+          <param name="offset_rad">0</param>
           <param name="direction">1</param>
           <param name="scale">1</param>
-          <param name="servo_min_deg">0</param>
-          <param name="servo_max_deg">180</param>
-          <param name="servo_default_deg">0</param>
+          <param name="servo_min_rad">0</param>
+          <param name="servo_max_rad">3.14159</param>
+          <param name="servo_default_rad">0</param>
           <command_interface name="position">
             <param name="min">0.0</param>
             <param name="max">1.5708</param>
@@ -122,12 +122,12 @@
       <joint name="i01.leftHand.ringFinger_link_joint">
           <param name="virtual_pin">7</param>
           <param name="servo_type">300</param>
-          <param name="offset_deg">0</param>
+          <param name="offset_rad">0</param>
           <param name="direction">1</param>
           <param name="scale">1</param>
-          <param name="servo_min_deg">0</param>
-          <param name="servo_max_deg">180</param>
-          <param name="servo_default_deg">0</param>
+          <param name="servo_min_rad">0</param>
+          <param name="servo_max_rad">3.14159</param>
+          <param name="servo_default_rad">0</param>
           <command_interface name="position">
             <param name="min">0.0</param>
             <param name="max">1.5708</param>
@@ -137,354 +137,15 @@
       <joint name="i01.leftHand.pinky_link_joint">
           <param name="virtual_pin">8</param>
           <param name="servo_type">300</param>
-          <param name="offset_deg">0</param>
+          <param name="offset_rad">0</param>
           <param name="direction">1</param>
           <param name="scale">1</param>
-          <param name="servo_min_deg">0</param>
-          <param name="servo_max_deg">180</param>
-          <param name="servo_default_deg">0</param>
+          <param name="servo_min_rad">0</param>
+          <param name="servo_max_rad">3.14159</param>
+          <param name="servo_default_rad">0</param>
           <command_interface name="position">
             <param name="min">0.0</param>
             <param name="max">1.5708</param>
-          </command_interface>
-          <state_interface name="position" />
-      </joint>
-  </ros2_control>
-  <ros2_control name="LucyHardwareRightArm" type="system">
-    <hardware>
-      <plugin>lucy_ros2_control/LucySystemHardware</plugin>
-      <xacro:if value="$(arg use_mock_hardware)">
-        <param name="publish_actuators">false</param>
-      </xacro:if>
-      <xacro:unless value="$(arg use_mock_hardware)">
-        <param name="publisher_topic">actuators/right_arm</param>
-        <param name="node_name">right_arm</param>
-      </xacro:unless>
-    </hardware>
-      <joint name="right_shoulder_z_link_joint">
-          <param name="virtual_pin">0</param>
-          <param name="servo_type">270</param>
-          <param name="offset_deg">90</param>
-          <param name="direction">-1</param>
-          <param name="scale">1</param>
-          <param name="servo_min_deg">0</param>
-          <param name="servo_max_deg">180</param>
-          <param name="servo_default_deg">90</param>
-          <command_interface name="position">
-            <param name="min">-0.42761</param>
-            <param name="max">0.83776</param>
-          </command_interface>
-          <state_interface name="position" />
-      </joint>
-      <joint name="right_shoulder_x_link_joint">
-          <param name="virtual_pin">1</param>
-          <param name="servo_type">270</param>
-          <param name="offset_deg">0</param>
-          <param name="direction">1</param>
-          <param name="scale">1</param>
-          <param name="servo_min_deg">0</param>
-          <param name="servo_max_deg">180</param>
-          <param name="servo_default_deg">0</param>
-          <command_interface name="position">
-            <param name="min">-1.5708</param>
-            <param name="max">2.35619</param>
-          </command_interface>
-          <state_interface name="position" />
-      </joint>
-      <joint name="right_elbow_x_link_joint">
-          <param name="virtual_pin">2</param>
-          <param name="servo_type">270</param>
-          <param name="offset_deg">0</param>
-          <param name="direction">1</param>
-          <param name="scale">1</param>
-          <param name="servo_min_deg">0</param>
-          <param name="servo_max_deg">180</param>
-          <param name="servo_default_deg">0</param>
-          <command_interface name="position">
-            <param name="min">0.0</param>
-            <param name="max">1.5708</param>
-          </command_interface>
-          <state_interface name="position" />
-      </joint>
-      <joint name="right_wrist_z_link_joint">
-          <param name="virtual_pin">3</param>
-          <param name="servo_type">300</param>
-          <param name="offset_deg">150</param>
-          <param name="direction">-1</param>
-          <param name="scale">1</param>
-          <param name="servo_min_deg">0</param>
-          <param name="servo_max_deg">300</param>
-          <param name="servo_default_deg">150</param>
-          <command_interface name="position">
-            <param name="min">-1.5708</param>
-            <param name="max">1.5708</param>
-          </command_interface>
-          <state_interface name="position" />
-      </joint>
-      <joint name="i01.rightHand.thumb_link_joint">
-          <param name="virtual_pin">4</param>
-          <param name="servo_type">300</param>
-          <param name="offset_deg">0</param>
-          <param name="direction">1</param>
-          <param name="scale">1</param>
-          <param name="servo_min_deg">0</param>
-          <param name="servo_max_deg">180</param>
-          <param name="servo_default_deg">0</param>
-          <command_interface name="position">
-            <param name="min">0.0</param>
-            <param name="max">1.5708</param>
-          </command_interface>
-          <state_interface name="position" />
-      </joint>
-      <joint name="i01.rightHand.index_link_joint">
-          <param name="virtual_pin">5</param>
-          <param name="servo_type">300</param>
-          <param name="offset_deg">0</param>
-          <param name="direction">1</param>
-          <param name="scale">1</param>
-          <param name="servo_min_deg">0</param>
-          <param name="servo_max_deg">180</param>
-          <param name="servo_default_deg">0</param>
-          <command_interface name="position">
-            <param name="min">0.0</param>
-            <param name="max">1.5708</param>
-          </command_interface>
-          <state_interface name="position" />
-      </joint>
-      <joint name="i01.rightHand.majeure_link_joint">
-          <param name="virtual_pin">6</param>
-          <param name="servo_type">300</param>
-          <param name="offset_deg">0</param>
-          <param name="direction">1</param>
-          <param name="scale">1</param>
-          <param name="servo_min_deg">0</param>
-          <param name="servo_max_deg">180</param>
-          <param name="servo_default_deg">0</param>
-          <command_interface name="position">
-            <param name="min">0.0</param>
-            <param name="max">1.5708</param>
-          </command_interface>
-          <state_interface name="position" />
-      </joint>
-      <joint name="i01.rightHand.ringFinger_link_joint">
-          <param name="virtual_pin">7</param>
-          <param name="servo_type">300</param>
-          <param name="offset_deg">0</param>
-          <param name="direction">1</param>
-          <param name="scale">1</param>
-          <param name="servo_min_deg">0</param>
-          <param name="servo_max_deg">180</param>
-          <param name="servo_default_deg">0</param>
-          <command_interface name="position">
-            <param name="min">0.0</param>
-            <param name="max">1.5708</param>
-          </command_interface>
-          <state_interface name="position" />
-      </joint>
-      <joint name="i01.rightHand.pinky_link_joint">
-          <param name="virtual_pin">8</param>
-          <param name="servo_type">300</param>
-          <param name="offset_deg">0</param>
-          <param name="direction">1</param>
-          <param name="scale">1</param>
-          <param name="servo_min_deg">0</param>
-          <param name="servo_max_deg">180</param>
-          <param name="servo_default_deg">0</param>
-          <command_interface name="position">
-            <param name="min">0.0</param>
-            <param name="max">1.5708</param>
-          </command_interface>
-          <state_interface name="position" />
-      </joint>
-  </ros2_control>
-  <ros2_control name="LucyHardwareTorsoHead" type="system">
-    <hardware>
-      <plugin>lucy_ros2_control/LucySystemHardware</plugin>
-      <xacro:if value="$(arg use_mock_hardware)">
-        <param name="publish_actuators">false</param>
-      </xacro:if>
-      <xacro:unless value="$(arg use_mock_hardware)">
-        <param name="publisher_topic">actuators/torso</param>
-        <param name="node_name">torso_head</param>
-      </xacro:unless>
-    </hardware>
-      <joint name="left_shoulder_y_link_joint">
-          <param name="virtual_pin">0</param>
-          <param name="servo_type">270</param>
-          <param name="offset_deg">0</param>
-          <param name="direction">1</param>
-          <param name="scale">1</param>
-          <param name="servo_min_deg">0</param>
-          <param name="servo_max_deg">180</param>
-          <param name="servo_default_deg">0</param>
-          <command_interface name="position">
-            <param name="min">0.0</param>
-            <param name="max">1.5708</param>
-          </command_interface>
-          <state_interface name="position" />
-      </joint>
-      <joint name="right_shoulder_y_link_joint">
-          <param name="virtual_pin">1</param>
-          <param name="servo_type">270</param>
-          <param name="offset_deg">0</param>
-          <param name="direction">1</param>
-          <param name="scale">1</param>
-          <param name="servo_min_deg">0</param>
-          <param name="servo_max_deg">180</param>
-          <param name="servo_default_deg">0</param>
-          <command_interface name="position">
-            <param name="min">0.0</param>
-            <param name="max">1.5708</param>
-          </command_interface>
-          <state_interface name="position" />
-      </joint>
-      <joint name="i01.torso.midStom_link_joint">
-          <param name="virtual_pin">2</param>
-          <param name="servo_type">270</param>
-          <param name="offset_deg">135</param>
-          <param name="direction">1</param>
-          <param name="scale">1</param>
-          <param name="servo_min_deg">0</param>
-          <param name="servo_max_deg">270</param>
-          <param name="servo_default_deg">135</param>
-          <command_interface name="position">
-            <param name="min">-1.5708</param>
-            <param name="max">1.5708</param>
-          </command_interface>
-          <state_interface name="position" />
-      </joint>
-      <joint name="i01.torso.topStom_link_joint">
-          <param name="virtual_pin">3</param>
-          <param name="servo_type">270</param>
-          <param name="offset_deg">90</param>
-          <param name="direction">1</param>
-          <param name="scale">1</param>
-          <param name="servo_min_deg">0</param>
-          <param name="servo_max_deg">180</param>
-          <param name="servo_default_deg">90</param>
-          <command_interface name="position">
-            <param name="min">-0.2618</param>
-            <param name="max">0.2618</param>
-          </command_interface>
-          <state_interface name="position" />
-      </joint>
-      <joint name="i01.head.rothead_link_joint">
-          <param name="virtual_pin">4</param>
-          <param name="servo_type">270</param>
-          <param name="offset_deg">90</param>
-          <param name="direction">1</param>
-          <param name="scale">1</param>
-          <param name="servo_min_deg">0</param>
-          <param name="servo_max_deg">180</param>
-          <param name="servo_default_deg">90</param>
-          <command_interface name="position">
-            <param name="min">-1.5708</param>
-            <param name="max">1.5708</param>
-          </command_interface>
-          <state_interface name="position" />
-      </joint>
-      <joint name="i01.head.rollNeck_link_joint">
-          <param name="virtual_pin">5</param>
-          <param name="servo_type">270</param>
-          <param name="offset_deg">90</param>
-          <param name="direction">1</param>
-          <param name="scale">1</param>
-          <param name="servo_min_deg">0</param>
-          <param name="servo_max_deg">180</param>
-          <param name="servo_default_deg">90</param>
-          <command_interface name="position">
-            <param name="min">-0.34907</param>
-            <param name="max">0.34907</param>
-          </command_interface>
-          <state_interface name="position" />
-      </joint>
-      <joint name="i01.head.neck.001_link_joint">
-          <param name="virtual_pin">6</param>
-          <param name="servo_type">300</param>
-          <param name="offset_deg">90</param>
-          <param name="direction">1</param>
-          <param name="scale">1</param>
-          <param name="servo_min_deg">0</param>
-          <param name="servo_max_deg">180</param>
-          <param name="servo_default_deg">90</param>
-          <command_interface name="position">
-            <param name="min">-0.34907</param>
-            <param name="max">0.34907</param>
-          </command_interface>
-          <state_interface name="position" />
-      </joint>
-      <joint name="i01.head.jaw_link_joint">
-          <param name="virtual_pin">7</param>
-          <param name="servo_type">300</param>
-          <param name="offset_deg">0</param>
-          <param name="direction">1</param>
-          <param name="scale">1</param>
-          <param name="servo_min_deg">0</param>
-          <param name="servo_max_deg">180</param>
-          <param name="servo_default_deg">0</param>
-          <command_interface name="position">
-            <param name="min">0.0</param>
-            <param name="max">0.17453</param>
-          </command_interface>
-          <state_interface name="position" />
-      </joint>
-      <joint name="i01.head.eyeRight_link_joint">
-          <param name="virtual_pin">8</param>
-          <param name="servo_type">180</param>
-          <param name="offset_deg">90</param>
-          <param name="direction">1</param>
-          <param name="scale">1</param>
-          <param name="servo_min_deg">0</param>
-          <param name="servo_max_deg">180</param>
-          <param name="servo_default_deg">90</param>
-          <command_interface name="position">
-            <param name="min">-0.7853</param>
-            <param name="max">0.7853</param>
-          </command_interface>
-          <state_interface name="position" />
-      </joint>
-      <joint name="i01.head.eyeRight.001_link_joint">
-          <param name="virtual_pin">9</param>
-          <param name="servo_type">180</param>
-          <param name="offset_deg">90</param>
-          <param name="direction">1</param>
-          <param name="scale">1</param>
-          <param name="servo_min_deg">0</param>
-          <param name="servo_max_deg">180</param>
-          <param name="servo_default_deg">90</param>
-          <command_interface name="position">
-            <param name="min">-0.34907</param>
-            <param name="max">0.34907</param>
-          </command_interface>
-          <state_interface name="position" />
-      </joint>
-      <joint name="i01.head.eyeLeft_link_joint">
-          <param name="virtual_pin">10</param>
-          <param name="servo_type">180</param>
-          <param name="offset_deg">90</param>
-          <param name="direction">1</param>
-          <param name="scale">1</param>
-          <param name="servo_min_deg">0</param>
-          <param name="servo_max_deg">180</param>
-          <param name="servo_default_deg">90</param>
-          <command_interface name="position">
-            <param name="min">-0.7853</param>
-            <param name="max">0.7853</param>
-          </command_interface>
-          <state_interface name="position" />
-      </joint>
-      <joint name="i01.head.eyeLeft.001_link_joint">
-          <param name="virtual_pin">11</param>
-          <param name="servo_type">180</param>
-          <param name="offset_deg">90</param>
-          <param name="direction">1</param>
-          <param name="scale">1</param>
-          <param name="servo_min_deg">0</param>
-          <param name="servo_max_deg">180</param>
-          <param name="servo_default_deg">90</param>
-          <command_interface name="position">
-            <param name="min">-0.34907</param>
-            <param name="max">0.34907</param>
           </command_interface>
           <state_interface name="position" />
       </joint>
