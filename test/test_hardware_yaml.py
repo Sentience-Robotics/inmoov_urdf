@@ -43,12 +43,12 @@ REQUIRED_ACTUATOR = (
     "virtual_pin",
     "physical_pin",
     "servo_type",
-    "offset_deg",
+    "offset_rad",
     "direction",
     "scale",
-    "servo_min_deg",
-    "servo_max_deg",
-    "servo_default_deg",
+    "servo_min_rad",
+    "servo_max_rad",
+    "servo_default_rad",
     "enabled",
 )
 REQUIRED_SENSOR = (
@@ -194,13 +194,13 @@ def validate_hardware_yaml(data: dict[str, Any], urdf_joints: set[str] | None = 
                 f"board {board_id}: virtual_pin must be contiguous from 0..N-1, got {vpins}"
             )
         for a in lst:
-            lo = a["servo_min_deg"]
-            hi = a["servo_max_deg"]
-            d = a["servo_default_deg"]
+            lo = a["servo_min_rad"]
+            hi = a["servo_max_rad"]
+            d = a["servo_default_rad"]
             if lo is not None and hi is not None and d is not None:
                 if float(d) < float(lo) or float(d) > float(hi):
                     raise ValueError(
-                        f"actuator {a['id']}: servo_default_deg out of [{lo}, {hi}]"
+                        f"actuator {a['id']}: servo_default_rad out of [{lo}, {hi}]"
                     )
 
     sensors: list[dict[str, Any]] = data["sensors"]
@@ -262,7 +262,7 @@ def test_active_yaml_validates():
     [
         ("invalid_duplicate_vpin.yaml", "duplicate virtual_pin"),
         ("invalid_missing_board.yaml", "unknown board"),
-        ("invalid_servo_default_out_of_range.yaml", "servo_default_deg"),
+        ("invalid_servo_default_out_of_range.yaml", "servo_default_rad"),
     ],
 )
 def test_invalid_fixture_rejected(name: str, msg: str):
